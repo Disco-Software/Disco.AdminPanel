@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router'
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavMenuComponent implements OnInit {
 
+  @Input() isExpanded: boolean = false;
+  @Output() toggleSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);
 }

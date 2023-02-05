@@ -7,6 +7,8 @@ import { PostListComponent } from './post-list/post-list.component';
 import { PostCardComponent } from './post-card/post-card.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { SharedComponent } from './shared/shared.component';
 
 
 
@@ -17,10 +19,12 @@ import { BrowserModule } from '@angular/platform-browser';
     AccountCardComponent,
     PostListComponent,
     PostCardComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    SharedComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     CommonModule
   ]
 })

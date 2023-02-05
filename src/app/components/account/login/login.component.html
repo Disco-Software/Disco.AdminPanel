@@ -4,7 +4,7 @@
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card shadow-2-strong text-center login-card">
-                        <ng-form class="card-body py-5 px-md-5 login-card__body">
+                        <ng-form [(ngModel)]="requestModel" class="card-body py-5 px-md-5 login-card__body">
                             <div class="form-outline mb-4 text-center">
                                 <h1 class="mb-5 login-card__h1">DISCO</h1>
                             </div>
@@ -13,14 +13,14 @@
                             </div>
                             <div class="form-outline mb-4 login-card__group">
                                 <label class="form-label login-card__label" for="login-email">Email</label>
-                                <input name="email" [(ngModel)]="requestModel.email" id="login-email" [ngClass]="'login-card__input form-control form-control-lg'" />
+                                <input name="email" [(ngModel)]="requestModel.email" [ngModelOptions]="{standalone: true}" id="login-email" [ngClass]="'login-card__input form-control form-control-lg'" />
                             </div>
                             <div class="form-outline mb-4 login-card__group">
                                 <label class="form-label login-card__label" for="login-password">Password</label>
-                                <input name="password" [(ngModel)]="requestModel.password" type="password" id="login-password" class="login-card__input form-control form-control-lg">
+                                <input name="password" [(ngModel)]="requestModel.password" [ngModelOptions]="{standalone: true}" type="password" id="login-password" class="login-card__input form-control form-control-lg">
                             </div>
                             <div class="form-outline mt-5 text-center">
-                                <button (click)="onSubmit()" class="login-body__submit" type="submit">Log In</button>
+                                <button (click)="onSubmit()" class="login-body__submit" type="button">Log In</button>
                             </div>
                             <div class="form-outline mt-5 text-center">
                                 <a class="login-card__a">Forgot your password?</a>
