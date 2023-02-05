@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/account/login/login.component';
@@ -9,21 +8,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccountService } from './services/account.service';
 import { BackendService } from './services/backend.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AccountModule } from './components/account/account.module';
+import { DashbordModule } from './components/dashbord/dashbord.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    ForgotPasswordComponent,
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
+    AccountModule,
+    DashbordModule
   ],
-  providers: [BackendService, AccountService, String],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

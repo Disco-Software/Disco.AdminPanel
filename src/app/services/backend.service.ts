@@ -8,43 +8,26 @@ import { Observable } from 'rxjs';
 })
 export class BackendService {
 
+  protected baseAddress: string = '';
+
   constructor(
-    private httpClient : HttpClient,
-    protected baseAddress : String) {
-    baseAddress = environment.baseAddress;
+    private httpClient: HttpClient,) {
+    this.baseAddress = environment.baseAddress;
   }
 
-  public async getAsync(url : string, args? : any) {
-    let json : string = "";
-
-    let response = await this.httpClient.get(`${this.baseAddress}/${url}`, args)
-        .subscribe((response : any) => json = response);
-
-    return json;
+  public get(url: string, args?: any): Observable<any> {
+    return this.httpClient.get(`${this.baseAddress}/${url}`, args);
   }
 
-  public async postAsync(url : string, args: any){
-    var json : string = "";
-
-    var response = await this.httpClient.post(`${this.baseAddress}/${url}`, args)
-        .subscribe((response : any) => json = response);
-
-    return json;
+  public postAsync(url: string, args: any): Observable<any> {
+    return this.httpClient.post(`${this.baseAddress}/${url}`, args);
   }
 
-  public async putAsync(url : string, args? : any){
-    var json : string = "";
-
-    var response = await this.httpClient.put(`${this.baseAddress}/${url}`, args)
-        .subscribe((response : any) => json = response);
-
-    return json;
+  public putAsync(url: string, args?: any): Observable<any> {
+    return this.httpClient.put(`${this.baseAddress}/${url}`, args)
   }
 
-  public async delete(url: string, args: any) {
-    var json : string = "";
-    var response = await this.httpClient.delete(`${this.baseAddress}/${url}`, args)
-      .subscribe((response : any) => json = response);
-    return json;
+  public delete(url: string, args: any): Observable<any> {
+    return this.httpClient.delete(`${this.baseAddress}/${url}`, args);
   }
 }

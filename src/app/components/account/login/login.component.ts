@@ -1,4 +1,3 @@
-import { IUserResonseModel } from './../../../models/user.response.model';
 import {Component, Input, OnInit} from '@angular/core';
 import { AccountService } from '../../../services/account.service';
 import { LogInRequestModel } from 'src/app/models/login.request.model';
@@ -11,21 +10,27 @@ import { UserResponseModel } from '../../../models/user.response.model';
 })
 export class LoginComponent implements OnInit {
 
-  @Input() public email : String = "";
-  @Input() public password : String = "";
+  public requestModel: LogInRequestModel = {
+    email: "",
+    password: "",
+  }
+  public disabled: boolean = false;
+  public userResponseDto: UserResponseModel = {}
 
   constructor(private accountService : AccountService) { }
 
-   ngOnInit(): void {
-     let model : LogInRequestModel = {
-       email: this.email,
-       password : this.password
-     };
+  ngOnInit(): void {
+    console.log(`email: ${this.requestModel.email}`);
+    console.log(`password: ${this.requestModel.password}`);
+  }
 
-     let response = this.accountService.loginAsync(model)
-       .then(response => response.)
+  public async onSubmit() {
+    this.accountService.loginAsync(this.requestModel)
+      .subscribe(value => this.userResponseDto = value, error => {
+        console.log(error);
+      });
 
-     console.log(response);
+    console.log(this.userResponseDto);
   }
 
 }
