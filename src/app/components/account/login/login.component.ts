@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { AccountService } from '../../../services/account.service';
-import { LogInRequestModel } from 'src/app/models/login.request.model';
-import { UserResponseModel } from '../../../models/user.response.model';
+import { LogInRequestModel } from '../../../models/account/login.request.model';
+import { UserResponseModel } from '../../../models/account/user.response.model';
 import { Router } from '@angular/router';
 
 @Component({
