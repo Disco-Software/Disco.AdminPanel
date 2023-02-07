@@ -11,6 +11,7 @@ import { NavMenuComponent } from './components/dashbord/nav-menu/nav-menu.compon
 import { PostCardComponent } from './components/dashbord/post-card/post-card.component';
 import { PostListComponent } from './components/dashbord/post-list/post-list.component';
 import { SharedComponent } from './components/dashbord/shared/shared.component';
+import { AuthenticationGuard } from './guards/authentication.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -18,7 +19,7 @@ const routes: Routes = [
   { path: 'password/forgot', component: ForgotPasswordComponent },
   { path: 'password/reset', component: ResetPasswordComponent },
   {
-    path: '', component: SharedComponent, pathMatch: 'full', children: [
+    path: '', component: SharedComponent, canActivate: [AuthenticationGuard], pathMatch: 'full', children: [
       { path: 'dashbord', component: DashbordComponent },
       { path: 'acccount/list', component: AccountsListComponent },
       { path: 'account/:id', component: AccountCardComponent },
