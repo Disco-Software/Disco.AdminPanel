@@ -20,14 +20,17 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    return this.chackAuthentication();
+  }
 
+  private chackAuthentication(): boolean {
     var token = this.localStorageService.getString('accessToken');
 
-    if (token !== null || token !== '' || token !== undefined) {
-      return of(true);
+    if (token) {
+      return true;
     }
 
-    return of(false);
+    return false;
   }
-  
+
 }

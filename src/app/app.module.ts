@@ -10,6 +10,7 @@ import { BackendService } from './services/backend.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountModule } from './components/account/account.module';
 import { DashbordModule } from './components/dashbord/dashbord.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DashbordModule } from './components/dashbord/dashbord.module';
     NgbModule,
     HttpClientModule,
     AccountModule,
-    DashbordModule
+    DashbordModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

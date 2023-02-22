@@ -1,6 +1,14 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\components",
+    "\\src\\app\\components\\account",
+    "\\src\\app\\components\\dashbord",
+    "\\src\\app\\components\\dashbord\\shared",
+    "\\src\\app\\guards"
   ],
+  "SelectedNode": "\\src\\app\\components\\dashbord\\shared\\shared.component.html",
   "PreviewInSolutionExplorer": false
 }
