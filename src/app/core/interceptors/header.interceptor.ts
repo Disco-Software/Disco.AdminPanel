@@ -21,7 +21,7 @@ export class HeaderInterceptor implements HttpInterceptor {
       req = this.addToken(req, token);
     }
 
-    return next.handle(req);      
+    return next.handle(req);
   }
 
   private handleUnauthorizedErrorResponse(request: HttpRequest<any>, next: HttpHandler) {

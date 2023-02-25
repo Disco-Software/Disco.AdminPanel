@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { User } from './models/account/user.response.model';
-import { EventBusService } from './services/event-bus.service';
-import { LocalStorageService } from './services/local-storage.service';
+import { User } from './core/models/account/user.response.model';
+import { EventBusService } from './core/services/event-bus.service';
+import { LocalStorageService } from './core/services/local-storage.service';
 
 @Component({
   selector: 'app-root',
