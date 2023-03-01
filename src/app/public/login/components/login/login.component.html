@@ -1,36 +1,29 @@
-<h1>Login works</h1>
-<!-- <body>
-    <section class="vh-100">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class="card shadow-2-strong text-center login-card">
-                        <ng-form [(ngModel)]="requestModel" class="card-body py-5 px-md-5 login-card__body">
-                            <div class="form-outline mb-4 text-center">
-                                <h1 class="mb-5 login-card__h1">DISCO</h1>
-                            </div>
-                            <div class="form-outline mb-4 text-center">
-                                <h3 class="mb-5 login-card__h3">Log In</h3>
-                            </div>
-                            <div class="form-outline mb-4 login-card__group">
-                                <label class="form-label login-card__label" for="login-email">Email</label>
-                                <input name="email" [(ngModel)]="requestModel.email" [ngModelOptions]="{standalone: true}" id="login-email" [ngClass]="'login-card__input form-control form-control-lg'" />
-                            </div>
-                            <div class="form-outline mb-4 login-card__group">
-                                <label class="form-label login-card__label" for="login-password">Password</label>
-                                <input name="password" [(ngModel)]="requestModel.password" [ngModelOptions]="{standalone: true}" type="password" id="login-password" class="login-card__input form-control form-control-lg">
-                            </div>
-                            <div class="form-outline mt-5 text-center">
-                                <button (click)="onSubmit()" class="login-body__submit" type="button">Log In</button>
-                            </div>
-                            <div class="form-outline mt-5 text-center">
-                                <a class="login-card__a">Forgot your password?</a>
-                            </div>
-                        </ng-form>
-                    </div>
-                </div>
+<div class="login login-container">
+  <div class="login-form form">
+      <div class="form-title title">
+        <h1>DISCO</h1>
+      </div>
+      <div class="form-login">
+         <h4>Log in</h4>
+      </div>
+      <div class="form-inputs inputs">
+          <form [formGroup]="loginForm" (submit)="onSubmit()">
+            <div class="inputs-email">
+              <label>E-mail</label>
+              <input type="email" formControlName="email">
             </div>
-        </div>
-    </section>
+            <div class="inputs-password">
+                <label>Password</label>
+                <input type="password" formControlName="password">
+            </div>
+          </form>
+      </div>
 
-</body> -->
+      <div class="form-button">
+          <button mat-button>Log in</button>
+      </div>
+      <div class="form-forgot">
+        <div>Forgot your password</div>
+      </div>
+  </div>
+</div>

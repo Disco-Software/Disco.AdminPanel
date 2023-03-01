@@ -3,6 +3,7 @@ import { AccountService } from '../../../../core/services/account.service';
 import { LogInRequestModel } from '../../../../core/models/account/login.request.model';
 import { UserResponseModel } from '../../../../core/models/account/user.response.model';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,39 +11,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  loginForm = new FormGroup({
+    email: new FormControl("", [
+      Validators.required,
+      Validators.email,
+    ]),
+    password: new FormControl("", [
+      Validators.minLength(6),
+      Validators.required
+    ]),
+  });
 
-  // public requestModel: LogInRequestModel = {
-  //   email: "",
-  //   password: "",
-  // }
 
-  // public disabled: boolean = false;
-  // public userResponseDto: UserResponseModel = {}
+  public onSubmit() {
 
-  // constructor(
-  //   private accountService: AccountService,
-  //   private router: Router) { }
-
-  // ngOnInit(): void {
-  //   console.log(`email: ${this.requestModel.email}`);
-  //   console.log(`password: ${this.requestModel.password}`);
-  // }
-
-  // public async onSubmit() {
-
-  //   this.accountService.loginAsync(this.requestModel)
-  //     .subscribe(value => this.userResponseDto = value, error => {
-  //       console.log(error);
-  //     });
-
-  //   console.log(this.userResponseDto);
-
-  //   localStorage.setItem("accessToken", this.userResponseDto.accessToken ?? '');
-  //   localStorage.setItem("refreshToken", this.userResponseDto.refreshToken ?? '');
-
-  //   debugger;
-
-  //   this.router.navigate(['']);
-  // }
+  }
 
 }
