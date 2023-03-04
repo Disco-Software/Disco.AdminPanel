@@ -126,13 +126,105 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  &-title, h1{
-    font-family: 'colonna-mt', sans-serif;
+  &-title {
+    font-family: 'Colonna MT', sans-serif;
     font-weight: 400;
-    font-size: 72px;
+    font-size: 50px;
     line-height: 76px;
+    background: linear-gradient(37.66deg, #FFF170 -1.12%, #DE871F 57.99%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+
+    text-shadow: 0px 4px 7px rgba(160, 68, 255, 0.7);
   }
-  padding: 90px 130px;
+
+  &-inputs :first-child{
+    margin-bottom: 24px;
+  }
+
+  &-login{
+    font-family: 'ABeeZee', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+
+    color: #E6E0D2;
+  }
+
+  &-button :only-child{
+    font-family: 'ABeeZee';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #E6E0D2;
+
+    background: #825DCD;
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+
+    padding: 10px 52px 9px 53px;
+    margin-bottom: 53px;
+  }
+
+  &-forgot :only-child{
+
+
+    border: none;
+    border-bottom: 2px solid white;
+    background: transparent;
+    color: white;
+
+    padding-bottom: 4px;
+  }
+
+  padding: 50px 70px;
 }
 
+.inputs{
+  &-input{
+    label{
+      font-family: 'ABeeZee';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
 
+      color: #E6E0D2;
+
+      margin-left: 13px;
+    }
+
+    input{
+      background: transparent !important;
+      border: 2px solid #E5E5E5 !important;
+      border-radius: 25px !important;
+      font-size: 16pt;
+      margin: 0, 0, 0, 63px;
+      color: white;
+      outline: none;
+
+      padding-left: 10px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    input :first{
+      margin-bottom: 24px;
+    }
+
+    input:-webkit-autofill {
+      -webkit-text-fill-color: white !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active  {
+          -webkit-box-shadow: 0 0 0 30px #271245 inset;
+    }
+  }
+}

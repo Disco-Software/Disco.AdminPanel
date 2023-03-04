@@ -1,29 +1,31 @@
 <div class="login login-container">
   <div class="login-form form">
       <div class="form-title title">
-        <h1>DISCO</h1>
+        DISCO
       </div>
       <div class="form-login">
          <h4>Log in</h4>
       </div>
       <div class="form-inputs inputs">
           <form [formGroup]="loginForm" (submit)="onSubmit()">
-            <div class="inputs-email">
-              <label>E-mail</label>
-              <input type="email" formControlName="email">
+            <div class="inputs-input d-flex flex-column">
+              <label class="mb-2" for="email">E-mail</label>
+              <input type="email" name="email" id="email" formControlName="email">
             </div>
-            <div class="inputs-password">
-                <label>Password</label>
-                <input type="password" formControlName="password">
+            <div class="inputs-input d-flex flex-column">
+              <label class="mb-2" for="password">Password</label>
+              <input type="password" name="password" id="password" formControlName="password">
             </div>
           </form>
       </div>
 
-      <div class="form-button">
+      <div class="form-button button">
           <button mat-button>Log in</button>
       </div>
-      <div class="form-forgot">
-        <div>Forgot your password</div>
+      <div class="form-forgot forgot">
+         <button>
+            <span>Forgot your password?</span>
+         </button>
       </div>
   </div>
 </div>
