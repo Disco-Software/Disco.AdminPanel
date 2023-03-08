@@ -1,9 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
+
+//Comment from Olena. Тут ми додаємо більше розмірів для класів відступів(padding, margin)
+$spacer: 1rem !default;
+$spacers: () !default;
+$spacers: map-merge(
+  (
+    0: 0,
+    1: ($spacer * .25),    //4px
+    2: ($spacer * .5),     //8px
+    3: $spacer,            //16px
+    4: ($spacer * 1.5),    //24px
+    5: ($spacer * 3),      //48px
+    6: ($spacer * 4),      //64px
+    7: ($spacer * 5),      //80px
+    8: ($spacer * 6.25),   //100px
+    9: ($spacer * 7.5),    //120px
+    10: ($spacer * 9.375)  //150px
+  ),
+  $spacers
+);
+
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.cdnfonts.com/css/colonna-mt');
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee&display=swap');
+
+//Comment from Olena. Тут ми додаємо дозволяємо писати респонсів класи і для width.
+//Тому що, без цього bootstrap не дозволяє писати w-sm-100, дозволяє лише w-100
+@import "bootstrap/scss/utilities";
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'width': (
+      property: width,
+      class: w,
+      responsive: true,
+      values: (
+        25: 25%,
+        33: 33%,
+        50: 50%,
+        66: 66%,
+        75: 75%,
+        100: 100%,
+        auto: auto,
+        fit-content: fit-content,
+      ),
+    ),
+  )
+);
+@import "bootstrap/scss/utilities/api";
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
@@ -607,9 +654,10 @@ template {
   width: 20% !important;
 }
 
-.w-25 {
-  width: 25% !important;
-}
+//Comment from Olena. Коментуємо цей клас, бо Bootstrap надає такий ж клас і виходять конфлікти стилів.
+// .w-25 {
+//   width: 25% !important;
+// }
 
 .w-30 {
   width: 30% !important;
@@ -635,9 +683,10 @@ template {
   width: 49% !important;
 }
 
-.w-50 {
-  width: 50% !important;
-}
+//Comment from Olena. Коментуємо цей клас, бо Bootstrap надає такий ж клас і виходять конфлікти стилів.
+// .w-50 {
+//   width: 50% !important;
+// }
 
 .w-60 {
   width: 60% !important;
@@ -647,17 +696,19 @@ template {
   width: 65% !important;
 }
 
-.w-75 {
-  width: 75% !important;
-}
+//Comment from Olena. Коментуємо цей клас, бо Bootstrap надає такий ж клас і виходять конфлікти стилів.
+// .w-75 {
+//   width: 75% !important;
+// }
 
 .w-85 {
   width: 85% !important;
 }
 
-.w-100 {
-  width: 100% !important;
-}
+//Comment from Olena. Коментуємо цей клас, бо Bootstrap надає такий ж клас і виходять конфлікти стилів.
+// .w-100 {
+//   width: 100% !important;
+// }
 
 .w-200 {
   width: 200% !important;
