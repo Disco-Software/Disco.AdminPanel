@@ -4,6 +4,8 @@ import { LogInRequestModel } from '../../../../core/models/account/login.request
 import { UserResponseModel } from '../../../../core/models/account/user.response.model';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { take, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +13,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
   loginForm = new FormGroup({
     email: new FormControl("", [
       Validators.required,
@@ -22,9 +26,25 @@ export class LoginComponent {
     ]),
   });
 
+  constructor(private _accountService: AccountService){}
 
   public onSubmit() {
+    console.log(this.loginForm);
 
+    console.log(typeof this.loginForm.value.email)
+    console.log(typeof this.loginForm.value.password)
+
+    this._accountService.loginAsync({
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password,
+    })
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(res => console.log(res));
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
 }
