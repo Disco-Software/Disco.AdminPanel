@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseAddress: "http://localhost:2339/api"
+  baseAddress: "https://devdiscoapi.azurewebsites.net/api"
 };
 
 /*

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,9 @@ export class LoginComponent {
     ]),
   });
 
-  constructor(private _accountService: AccountService){}
+  constructor(
+    private _accountService: AccountService,
+    private _modalService: NgbModal){}
 
   public onSubmit() {
     console.log(this.loginForm);
@@ -40,6 +44,10 @@ export class LoginComponent {
     })
     .pipe(takeUntil(this.destroy$))
     .subscribe(res => console.log(res));
+  }
+
+  public forgotPasswordOpen(){
+    this._modalService.open(ForgotPasswordComponent);
   }
 
   ngOnDestroy(): void {
