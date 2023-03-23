@@ -128,10 +128,6 @@
     text-shadow: 0px 4px 7px rgba(160, 68, 255, 0.7);
   }
 
-  &-inputs :first-child{
-    margin-bottom: 24px;
-  }
-
   &-login{
     font-family: 'ABeeZee', sans-serif;
     font-style: normal;
@@ -150,9 +146,6 @@
     background: #825DCD;
     box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
     border-radius: 25px;
-
-    padding: 10px 52px 9px 53px;
-    margin-bottom: 53px;
   }
 
   &-forgot :only-child{
@@ -161,15 +154,11 @@
     border: none;
     background: transparent;
     color: white;
-
-    padding-bottom: 4px;
   }
 
   &-forgot > button > span {
     border-bottom: 2px solid white;
   }
-
-  // padding: 50px 70px;
 }
 
 .inputs{
@@ -180,8 +169,6 @@
       line-height: 19px;
 
       color: #E6E0D2;
-
-      margin-left: 13px;
     }
 
     input{
@@ -192,10 +179,6 @@
       margin: 0, 0, 0, 63px;
       color: white;
       outline: none;
-
-      padding-left: 10px;
-      padding-top: 8px;
-      padding-bottom: 8px;
     }
 
     input :first{

@@ -10,6 +10,7 @@ import { LocalStorageService } from '../services/local-storage.service';
 export class AuthenticationGuard implements CanActivate, CanActivateChild {
 
   constructor(
+    private router: Router,
     private accountService: AccountService,
     private localStorageService: LocalStorageService
   ) { }
@@ -28,6 +29,10 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild {
 
     if (token) {
       return true;
+    }
+    else {
+      this.router.navigateByUrl('/public');
+      return false;
     }
 
     return false;

@@ -10,10 +10,11 @@
         <h4>Log in</h4>
       </div>
       <div class="mw-100 form-inputs inputs">
-        <form [formGroup]="loginForm" (submit)="onSubmit()">
-          <div class="inputs-input weight-4 size-16 d-flex flex-column">
-            <label class="mb-2" for="email">E-mail</label>
+        <form [formGroup]="loginForm" (submit)="onSubmit()" class="mb-5">
+          <div class="inputs-input weight-4 size-16 d-flex flex-column mb-4">
+            <label class="m-3 mb-2 mt-0" for="email">E-mail</label>
             <input
+              class=" p-2"
               type="email"
               name="email"
               id="email"
@@ -21,8 +22,9 @@
             />
           </div>
           <div class="inputs-input weight-4 size-16 d-flex flex-column">
-            <label class="mb-2" for="password">Password</label>
+            <label class="m-3 mb-2 mt-0" for="password">Password</label>
             <input
+              class=" p-2"
               type="password"
               name="password"
               id="password"
@@ -33,10 +35,12 @@
       </div>
 
       <div class="form-submit submit weight-4 size-24">
-        <button mat-button (click)="onSubmit()">Log in</button>
+        <button mat-button class="mb-5 py-2 px-5" (click)="onSubmit()">
+          Log in
+        </button>
       </div>
       <div class="form-forgot forgot">
-        <button (click)="forgotPasswordOpen()">
+        <button class="pb-1" (click)="forgotPasswordOpen()">
           <span>Forgot your password?</span>
         </button>
       </div>

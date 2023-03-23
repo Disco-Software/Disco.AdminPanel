@@ -23,22 +23,6 @@ export class AppComponent {
     private eventBusService: EventBusService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.localStorageService.getString('accessToken');
-
-    if (this.isLoggedIn) {
-      const user = this.localStorageService.getItem<User>('user');
-      this.role = user.roleName ?? '';
-
-      if (this.role !== 'Admin') {
-        console.log("user can't be hare");
-      }
-
-      this.username = user.userName;
-    }
-
-    this.eventBusSub = this.eventBusService.on('logout', () => {
-      this.logout();
-    });
   }
 
   ngOnDestroy(): void {

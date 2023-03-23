@@ -11,8 +11,11 @@ export class LocalStorageService {
 
   getItem<T>(key: string) {
     let json = localStorage.getItem(key);
+    let item : any;
 
-    let item = JSON.parse(json ?? '') as T
+    if(json){
+      item = JSON.parse(json) as T
+    }
 
     return item;
   }
@@ -22,13 +25,13 @@ export class LocalStorageService {
   }
 
   public setItem(key: string, value: any) {
-    var json = JSON.stringify(value);
+    const json = JSON.stringify(value);
 
-    localStorage.setItem(key, value);
+    localStorage.setItem(key, json);
   }
 
   public removeItem(key: string) {
     localStorage.removeItem(key);
-  } 
+  }
 
 }

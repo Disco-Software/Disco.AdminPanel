@@ -1,1 +1,163 @@
-<p>sidebar works!</p>
+<header>
+  <nav
+    id="main-navbar"
+    class="d-sm-block d-md-none navbar navbar-expand-lg navbar-dark w-100 fixed-top"
+  >
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <div class="navbar-brand navbar-title title size-50">DISCO</div>
+
+      <button
+        [attr.aria-expanded]="!isShowing"
+        aria-controls="responsiveNavBar"
+        (click)="toggleMenu()"
+        class="navbar-toggler"
+        type="button"
+      >
+        <svg
+          width="39"
+          height="27"
+          viewBox="0 0 39 27"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g filter="url(#filter0_d_3500_82)">
+            <path
+              d="M6.88889 3H5"
+              stroke="#E6E0D2"
+              stroke-width="2"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M33.3334 3H12.5557"
+              stroke="#E6E0D2"
+              stroke-width="2"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M6.88889 14.3335H5"
+              stroke="#E6E0D2"
+              stroke-width="2"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M33.3334 14.3335H12.5557"
+              stroke="#E6E0D2"
+              stroke-width="2"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M6.88889 8.6665H5"
+              stroke="#E6E0D2"
+              stroke-width="2"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M25.7779 8.6665H12.5557"
+              stroke="#E6E0D2"
+              stroke-width="2"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M6.88889 20H5"
+              stroke="#E6E0D2"
+              stroke-width="2"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M25.7779 20H12.5557"
+              stroke="#E6E0D2"
+              stroke-width="2"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+            />
+          </g>
+          <defs>
+            <filter
+              id="filter0_d_3500_82"
+              x="0"
+              y="0"
+              width="38.3335"
+              height="27"
+              filterUnits="userSpaceOnUse"
+              color-interpolation-filters="sRGB"
+            >
+              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feColorMatrix
+                in="SourceAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                result="hardAlpha"
+              />
+              <feOffset dy="2" />
+              <feGaussianBlur stdDeviation="2" />
+              <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0.627451 0 0 0 0 0.266667 0 0 0 0 1 0 0 0 0.7 0"
+              />
+              <feBlend
+                mode="normal"
+                in2="BackgroundImageFix"
+                result="effect1_dropShadow_3500_82"
+              />
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="effect1_dropShadow_3500_82"
+                result="shape"
+              />
+            </filter>
+          </defs>
+        </svg>
+      </button>
+    </div>
+
+    <div [ngbCollapse]="!isShowing" class=" collapse navbar-collapse" id="responsiveNavBar">
+      <ul class=" navbar-nav mr-auto">
+        <li
+        *ngFor="let route of routes"
+        [routerLink]="route.path"
+        class="sidenav-item item"
+        [class.active]="
+        route.path === router.url || router.url.includes(route.path)">
+        <fa-icon [icon]="route.icon"></fa-icon>
+        <span class=" m-3 size-25">{{route.title}}</span>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+
+  <div class="d-none d-md-flex justify-content-center align-items-center w-100">
+    <nav class="sidebar sidebar-container w-100 vh-100">
+      <div
+        class="sidebar-title title navbar-brand text-center weight-7 size-30"
+      >
+        <h1>DISCO</h1>
+      </div>
+
+      <ul
+        class="sidenav-nav nav d-flex justify-content-center align-items-start flex-column"
+      >
+        <li
+          *ngFor="let route of routes"
+          [routerLink]="route.path"
+          [class.active]="
+            route.path === router.url || router.url.includes(route.path)
+          "
+          class="sidenav-item item"
+        >
+          <fa-icon [icon]="route.icon"></fa-icon>
+          <span class="m-3 size-25">{{ route.title }}</span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

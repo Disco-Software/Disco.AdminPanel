@@ -8,27 +8,27 @@ import { Observable } from 'rxjs';
 })
 export class BackendService {
 
-  protected baseAddress: string = '';
+  protected serverUrl: string = '';
 
   constructor(
     private httpClient: HttpClient,) {
-    this.baseAddress = environment.baseAddress;
-    console.log(this.baseAddress);
+    this.serverUrl = environment.api;
+    console.log(this.serverUrl);
   }
 
   public get(url: string, args?: any): Observable<any> {
-    return this.httpClient.get(`${this.baseAddress}/${url}`, args);
+    return this.httpClient.get(`${this.serverUrl}/${url}`, args);
   }
 
   public postAsync(url: string, args: any): Observable<any> {
-    return this.httpClient.post(`${this.baseAddress}/${url}`, args);
+    return this.httpClient.post(`${this.serverUrl}/${url}`, args);
   }
 
   public putAsync(url: string, args?: any): Observable<any> {
-    return this.httpClient.put(`${this.baseAddress}/${url}`, args)
+    return this.httpClient.put(`${this.serverUrl}/${url}`, args)
   }
 
   public delete(url: string, args: any): Observable<any> {
-    return this.httpClient.delete(`${this.baseAddress}/${url}`, args);
+    return this.httpClient.delete(`${this.serverUrl}/${url}`, args);
   }
 }

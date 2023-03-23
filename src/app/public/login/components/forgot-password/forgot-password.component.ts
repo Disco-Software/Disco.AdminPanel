@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 @Component({
   selector: 'app-forgot-password',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _modalService: NgbModal) { }
 
   ngOnInit(): void {
+  }
+
+  public onSubmit(){
+    this._modalService.open(ResetPasswordComponent, {
+      modalDialogClass: 'd-flex justify-content-center align-items-center h-100'
+    })
   }
 
 }

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseAddress: "https://devdiscoapi.azurewebsites.net/api"
+  api: "https://localhost:5001/api",
+  url: 'http://localhost:4200/'
 };
 
 /*
