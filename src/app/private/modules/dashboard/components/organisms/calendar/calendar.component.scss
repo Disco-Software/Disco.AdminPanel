@@ -1,0 +1,41 @@
+.calendar{
+  &-container{
+    background: #29193E;
+    box-shadow: 0px 4px 7px rgba(160, 68, 255, 0.25);
+    border-radius: 10px;
+  }
+
+  &-button{
+    border: none;
+    background: none;
+  }
+
+  &-item{
+    background: none;
+    border: none;
+
+    font-family: 'ABeeZee';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #E6E0D2;
+  }
+
+  &-text{
+    font-family: 'ABeeZee';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+
+    text-align: center !important;
+
+    color: #FFFFFF;
+  }
+}
+
+.active{
+  border-bottom: 3px solid #E8AC35 !important;
+}

@@ -7,6 +7,7 @@ import { SidebarComponent } from './components/organisms/sidebar/sidebar.compone
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthenticationGuard } from '../core/guards/authentication.guard';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { TopbarComponent } from './components/organisms/topbar/topbar.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   declarations: [
     LayoutPrimaryComponent,
-    SidebarComponent
+    SidebarComponent,
+    TopbarComponent
   ],
   imports: [
     CommonModule,
