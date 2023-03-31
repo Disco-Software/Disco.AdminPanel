@@ -4,5 +4,5 @@ export interface  Routes
 {
   title: string,
   path: string,
-  icon: FaIcon
+  icon: string
 }

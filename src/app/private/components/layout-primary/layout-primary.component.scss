@@ -1,3 +1,13 @@
 .sidebar{
   width: 15%;
 }
+
+.page{
+  &-container{
+    @media (min-width: 768px){
+      padding-left: 120px !important;
+      padding-right: 120px !important;
+    }
+
+  }
+}

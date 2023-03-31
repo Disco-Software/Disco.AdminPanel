@@ -8,7 +8,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthenticationGuard } from '../core/guards/authentication.guard';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { TopbarComponent } from './components/organisms/topbar/topbar.component';
-
+import { MatIconModule } from '@angular/material/icon'
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   providers: [
@@ -21,7 +22,9 @@ import { TopbarComponent } from './components/organisms/topbar/topbar.component'
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     NgbCollapseModule,
+    MatIconModule,
     FontAwesomeModule,
     PrivateRoutingModule
   ]

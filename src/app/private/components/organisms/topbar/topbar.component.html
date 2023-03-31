@@ -127,7 +127,7 @@
       class="sidenav-item item"
       [class.active]="
       route.path === router.url || router.url.includes(route.path)">
-      <fa-icon [icon]="route.icon"></fa-icon>
+      <mat-icon [svgIcon]="route.icon"></mat-icon>
       <span class=" m-3 size-25">{{route.title}}</span>
       </li>
     </ul>
