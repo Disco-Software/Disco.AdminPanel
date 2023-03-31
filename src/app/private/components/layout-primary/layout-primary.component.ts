@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageService } from '../../../core/services/page.service';
 
 @Component({
   selector: 'app-layout-primary',

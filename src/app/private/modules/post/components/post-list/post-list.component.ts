@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageService } from '../../../../../core/services/page.service';
 
 @Component({
   selector: 'app-post-list',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _pageService: PageService) { }
 
   ngOnInit(): void {
+    this._pageService.setTitle({
+      pageName: 'Posts',
+      pageIcon: 'posts'
+    })
   }
 
 }
