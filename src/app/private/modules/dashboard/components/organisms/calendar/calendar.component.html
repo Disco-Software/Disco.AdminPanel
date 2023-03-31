@@ -1,0 +1,92 @@
+<div class="calendar calendar-container">
+  <div class=" row">
+    <div class=" d-flex d-md-none d-lg-none d-xl-none d-xxl-none justify-content-end ml-2 mt-2">
+      <button
+      class="calendar calendar-button"
+      >
+        <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g filter="url(#filter0_d_4105_104)">
+          <path d="M12 3.55469H6.45833C5.65292 3.55469 5 4.20761 5 5.01302H12H19C19 4.20761 18.3471 3.55469 17.5417 3.55469H12Z" fill="#E6E1D4"/>
+          <path d="M19 5.98524V5.01302M19 9.31858V13.9991C19 15.1037 18.1046 15.9991 17 15.9991H7C5.89543 15.9991 5 15.1037 5 13.9991V5.01302M5 5.01302V5.01302C5 4.20761 5.65292 3.55469 6.45833 3.55469H12H17.5417C18.3471 3.55469 19 4.20761 19 5.01302V5.01302M5 5.01302H12H19" stroke="#E6E1D4" stroke-linecap="round"/>
+          <rect x="7.625" y="2" width="1.75" height="2.625" rx="0.875" fill="#E6E1D4"/>
+          <rect x="15.5" y="2" width="1.75" height="2.625" rx="0.875" fill="#E6E1D4"/>
+          </g>
+          <defs>
+          <filter id="filter0_d_4105_104" x="0.5" y="0" width="23" height="22.499" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+          <feOffset dy="2"/>
+          <feGaussianBlur stdDeviation="2"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0.627451 0 0 0 0 0.266667 0 0 0 0 1 0 0 0 0.7 0"/>
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_4105_104"/>
+          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4105_104" result="shape"/>
+          </filter>
+          </defs>
+          </svg>
+      </button>
+    </div>
+  </div>
+  <div class=" row">
+     <div class=" d-flex justify-content-center align-items-center mt-sm-0 mt-md-4">
+      <button [class.active]="item === currentState || item.includes(currentState)" *ngFor="let item of state" (click)="setState(item)" class=" calendar calendar-item m-2 mt-0 mb-0 mr-md-4">{{item}}</button>
+    </div>
+  </div>
+  <div class=" row">
+    <div class=" w-100 d-flex d-md-none d-lg-none d-xl-none d-xxl-none flex-row justify-content-around mt-3 mb-3">
+      <button (click)="change('Back')" class="calendar calendar-item d-sm-block d-md-none">
+        <svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.46546 8.1136L11.6205 1.18678C12.326 0.705751 13.2881 1.20816 13.2881 2.07401V15.9277C13.2881 16.7828 12.326 17.2959 11.6205 16.8149L1.46546 9.88806C0.845465 9.46048 0.845465 8.54118 1.46546 8.1136Z" stroke="#E6E1D4" stroke-width="1.5" stroke-miterlimit="10"/>
+        </svg>
+      </button>
+
+      <p class="calendar calendar-text text-center m-0 p-0">{{selectedItem}}</p>
+
+      <button (click)="change('Next')" class="calendar calendar-item d-sm-block d-md-none">
+        <svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.8226 9.8864L2.66757 16.8132C1.96206 17.2942 1 16.7918 1 15.926L1 2.07235C1 1.21718 1.96206 0.704086 2.66757 1.18512L12.8226 8.11194C13.4426 8.53952 13.4426 9.45882 12.8226 9.8864Z" stroke="#E6E1D4" stroke-width="1.5" stroke-miterlimit="10"/>
+       </svg>
+      </button>
+    </div>
+    <div class=" w-100 d-none d-sm-none d-md-flex d-lg-flex d-xl-flex d-xxl-flex flex-row justify-content-between align-items-center px-7 mt-3 mb-3">
+      <button (click)="change('Back')" class="calendar calendar-item d-sm-none d-md-block">
+        <svg width="35" height="44" viewBox="0 0 35 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g filter="url(#filter0_d_4113_101)">
+          <path d="M5.93092 18.2272L26.241 4.37356C27.6521 3.4115 29.5762 4.41632 29.5762 6.14802V33.8553C29.5762 35.5656 27.6521 36.5918 26.241 35.6298L5.93092 21.7761C4.69093 20.921 4.69093 19.0824 5.93092 18.2272Z" stroke="#E6E1D4" stroke-width="2" stroke-miterlimit="10"/>
+          </g>
+          <defs>
+          <filter id="filter0_d_4113_101" x="0" y="0.998047" width="34.5762" height="42.0049" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+          <feOffset dy="2"/>
+          <feGaussianBlur stdDeviation="2"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0.627451 0 0 0 0 0.266667 0 0 0 0 1 0 0 0 0.7 0"/>
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_4113_101"/>
+          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4113_101" result="shape"/>
+          </filter>
+          </defs>
+          </svg>
+      </button>
+
+      <p class="calendar calendar-text text-center m-0 p-0">{{selectedItem}}</p>
+
+      <button (click)="change('Next')" class="calendar calendar-item d-sm-none d-md-block">
+        <svg width="36" height="44" viewBox="0 0 36 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g filter="url(#filter0_d_4113_103)">
+          <path d="M29.2214 21.7728L8.9113 35.6264C7.50028 36.5885 5.57617 35.5837 5.57617 33.852L5.57617 6.14469C5.57617 4.43437 7.50028 3.40817 8.9113 4.37023L29.2214 18.2239C30.4614 19.079 30.4614 20.9176 29.2214 21.7728Z" stroke="#E6E1D4" stroke-width="2" stroke-miterlimit="10"/>
+          </g>
+          <defs>
+          <filter id="filter0_d_4113_103" x="0.576172" y="0.99707" width="34.5762" height="42.0049" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+          <feOffset dy="2"/>
+          <feGaussianBlur stdDeviation="2"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0.627451 0 0 0 0 0.266667 0 0 0 0 1 0 0 0 0.7 0"/>
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_4113_103"/>
+          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4113_103" result="shape"/>
+          </filter>
+          </defs>
+      </svg>
+     </button>
+    </div>
+  </div>
+</div>

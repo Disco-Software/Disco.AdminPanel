@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/account/login/login.component';
-import { ForgotPasswordComponent } from './components/account/forgot-password/forgot-password.component';
+import { ForgotPasswordComponent } from './public/login/components/forgot-password/forgot-password.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AccountService } from './services/account.service';
-import { BackendService } from './services/backend.service';
+import { AccountService } from './core/services/account.service';
+import { BackendService } from './core/services/backend.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AccountModule } from './components/account/account.module';
-import { DashbordModule } from './components/dashbord/dashbord.module';
+import { DashbordModule } from './private/dashbord/dashbord.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CoreModule } from './core/core.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,10 +18,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   imports: [
     BrowserModule,
+    CoreModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    AccountModule,
     DashbordModule,
     FontAwesomeModule
   ],

@@ -1,3 +1,4 @@
 export const environmentProd = {
-  production: true
+  production: true,
+  baseUrl: 'https://devdisco'
 };

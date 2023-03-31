@@ -1,0 +1,49 @@
+<div
+  class="container-fluid login login-container d-flex justify-content-center align-items-center w-100 h-vh-100"
+>
+  <div class="w-sm-fit-content w-100 mw-100 row">
+    <div
+      class="login-form form d-flex justify-content-center flex-column align-items-center py-6 px-3 py-sm-7 px-sm-8"
+    >
+      <div class="form-title title weight-4 size-50">DISCO</div>
+      <div class="form-login weight-4 size-32">
+        <h4>Log in</h4>
+      </div>
+      <div class="mw-100 form-inputs inputs">
+        <form [formGroup]="loginForm" (submit)="onSubmit()" class="mb-5">
+          <div class="inputs-input weight-4 size-16 d-flex flex-column mb-4">
+            <label class="m-3 mb-2 mt-0" for="email">E-mail</label>
+            <input
+              class=" p-2"
+              type="email"
+              name="email"
+              id="email"
+              formControlName="email"
+            />
+          </div>
+          <div class="inputs-input weight-4 size-16 d-flex flex-column">
+            <label class="m-3 mb-2 mt-0" for="password">Password</label>
+            <input
+              class=" p-2"
+              type="password"
+              name="password"
+              id="password"
+              formControlName="password"
+            />
+          </div>
+        </form>
+      </div>
+
+      <div class="form-submit submit weight-4 size-24">
+        <button mat-button class="mb-5 py-2 px-5" (click)="onSubmit()">
+          Log in
+        </button>
+      </div>
+      <div class="form-forgot forgot">
+        <button class="pb-1" (click)="forgotPasswordOpen()">
+          <span>Forgot your password?</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

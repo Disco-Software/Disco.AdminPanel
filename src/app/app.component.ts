@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { User } from './models/account/user.response.model';
-import { EventBusService } from './services/event-bus.service';
-import { LocalStorageService } from './services/local-storage.service';
+import { User } from './core/models/account/user.response.model';
+import { EventBusService } from './core/services/event-bus.service';
+import { LocalStorageService } from './core/services/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -23,22 +23,6 @@ export class AppComponent {
     private eventBusService: EventBusService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.localStorageService.getString('accessToken');
-
-    if (this.isLoggedIn) {
-      const user = this.localStorageService.getItem<User>('user');
-      this.role = user.roleName ?? '';
-
-      if (this.role !== 'Admin') {
-        console.log("user can't be hare");
-      }
-
-      this.username = user.userName;
-    }
-
-    this.eventBusSub = this.eventBusService.on('logout', () => {
-      this.logout();
-    });
   }
 
   ngOnDestroy(): void {

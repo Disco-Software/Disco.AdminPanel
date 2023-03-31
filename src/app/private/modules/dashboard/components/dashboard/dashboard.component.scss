@@ -1,0 +1,46 @@
+$breakPointTablet: 768px;
+
+.dashboard{
+  &-container{
+    background: #1B1628;
+  }
+
+  &-statistics{
+    box-shadow: 0px 4px 7px rgba(160, 68, 255, 0.25);
+    border-radius: 10px;
+  }
+}
+
+.statistics{
+  &-title{
+    font-family: 'ABeeZee';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #E6E0D2;
+  }
+
+  &-count{
+    font-family: 'ABeeZee';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #E6E0D2;
+  }
+
+}
+
+#users{
+  background: #3481CD;
+}
+#newUsers{
+  background-color: #784AB4;
+}
+
+#posts{
+  background-color: #19A3A3;
+}

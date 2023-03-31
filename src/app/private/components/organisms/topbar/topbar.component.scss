@@ -1,0 +1,68 @@
+.sidebar{
+  &-container{
+    background: radial-gradient(101.53% 101.28% at 100% 0%, #2E1257 0%, #221338 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+  }
+
+  &-title :only-child{
+    font-family: 'Colonna MT', sans-serif;
+    line-height: 76px;
+    background: white;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+
+    text-shadow: 0px 4px 7px rgba(160, 68, 255, 0.7);
+  }
+}
+
+ul > li{
+  list-style-type: none;
+}
+
+.active{
+  opacity: 1 !important;
+  background: rgb(43,18,81, .9) !important;
+  border-left: 2px solid white !important;
+}
+
+.sidenav{
+
+  &-item ::before{
+    opacity: 0.1;
+    background: orange;
+  }
+
+  &-item{
+    width: 100%;
+    padding: 1.5rem 3rem;
+    cursor: pointer;
+    line-height: normal;
+    opacity: 0.5;
+    color: white !important;
+    text-decoration: none !important;
+    border: none;
+  }
+
+  &-item ::after{
+    opacity: 0.1;
+    background: orange;
+  }
+}
+
+.navbar{
+  background: radial-gradient(101.53% 101.28% at 100% 0%, #2E1257 0%, #221338 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+
+  &-title{
+    font-family: 'Colonna MT', sans-serif;
+    line-height: 76px;
+    background: white;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+
+    text-shadow: 0px 4px 7px rgba(160, 68, 255, 0.7);
+  }
+}
+
