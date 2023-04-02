@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarComponent } from '../organisms/calendar/calendar.component';
+import { PageService } from '../../../../../core/services/page.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,9 +9,15 @@ import { CalendarComponent } from '../organisms/calendar/calendar.component';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  public title : String;
+
+  constructor(private _pageService: PageService) { }
 
   ngOnInit(): void {
+    this._pageService.setTitle({
+      pageName : 'Overview',
+      pageIcon : 'dashboard',
+    });
   }
 
 }

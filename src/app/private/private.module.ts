@@ -10,6 +10,7 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { TopbarComponent } from './components/organisms/topbar/topbar.component';
 import { MatIconModule } from '@angular/material/icon'
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './components/organisms/header/header.component';
 
 @NgModule({
   providers: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     LayoutPrimaryComponent,
     SidebarComponent,
-    TopbarComponent
+    TopbarComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
