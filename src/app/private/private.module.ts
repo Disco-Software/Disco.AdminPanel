@@ -12,6 +12,10 @@ import { MatIconModule } from '@angular/material/icon'
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/organisms/header/header.component';
 
+const MODULES = [
+    
+]
+
 @NgModule({
   providers: [
     AuthenticationGuard
@@ -27,7 +31,6 @@ import { HeaderComponent } from './components/organisms/header/header.component'
     HttpClientModule,
     NgbCollapseModule,
     MatIconModule,
-    FontAwesomeModule,
     PrivateRoutingModule
   ]
 })

@@ -1,70 +1,17 @@
-<div class=" dashboard dashboard-container container-fluid w-100 vh-100 justify-content-end">
-  <div class=" row pt-0 pt-md-5">
-     <app-calendar></app-calendar>
+<div
+  class="dashboard dashboard-container container-fluid w-100 justify-content-end"
+>
+  <div class="row pt-0 pt-md-5">
+    <disco-calendar></disco-calendar>
   </div>
-  <div class=" mt-3 d-flex d-md-none d-lg-none d-xl-none d-xxl-none justify-content-around align-items-center">
-    <div class=" col-sm-4">
-       <div class="dashboard dashboard-statistics d-flex flex-column justify-content-around p-px-x-24 p-px-y-15" id="users">
-          <span class="statistics statistics-count text-center">130</span>
-          <span class="statistics statistics-title text-center">Users</span>
-       </div>
-    </div>
-    <div class=" col-sm-4">
-      <div class="dashboard dashboard-statistics d-flex flex-column justify-content-between p-px-x-25 p-px-y-15" id="newUsers">
-        <span class="statistics statistics-count text-center">600</span>
-        <span class="statistics statistics-title text-center">New users</span>
-      </div>
-   </div>
-   <div class=" col-sm-4">
-      <div class="dashboard dashboard-statistics d-flex flex-column justify-content-between  p-px-x-24 p-px-y-15" id="posts">
-        <span class="statistics statistics-count text-center">1k</span>
-        <span class="statistics statistics-title text-center">Posts</span>
-      </div>
-   </div>
-
-  </div>
-  <div class=" mt-3 d-none d-sm-none d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-around align-items-center">
-    <div class=" col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-       <div class="dashboard dashboard-statistics d-flex flex-row justify-content-center p-px-x-24 p-px-y-15 py-5" id="users">
-        <svg width="64" height="48" viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M46.5471 22.8294C52.2372 22.8294 56.85 18.1666 56.85 12.4147C56.85 6.66282 52.2372 2 46.5471 2C40.8569 2 36.2441 6.66282 36.2441 12.4147C36.2441 18.1666 40.8569 22.8294 46.5471 22.8294Z" stroke="#F3FEFF" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
-          <path d="M55.817 19.1123C59.5565 21.6005 61.9987 25.57 61.9987 30.1203V39.2852C61.9987 40.535 61.1745 41.3682 59.9382 41.3682H41.0898" stroke="#F3FEFF" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
-          <path d="M19.2748 25.2799C25.6344 25.2799 30.7899 20.0685 30.7899 13.64C30.7899 7.21139 25.6344 2 19.2748 2C12.9152 2 7.75977 7.21139 7.75977 13.64C7.75977 20.0685 12.9152 25.2799 19.2748 25.2799Z" stroke="#F3FEFF" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
-          <path d="M6.37572 23.1859C3.61211 25.9795 2 29.4714 2 33.429V43.6722C2 45.069 2.9212 46.0002 4.30301 46.0002H34.2421C35.6239 46.0002 36.5451 45.069 36.5451 43.6722V33.429C36.5451 28.3434 33.8155 23.907 29.6361 21.126" stroke="#F3FEFF" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
-         </svg>
-         <div class=" d-flex flex-column mx-3">
-          <span class="statistics statistics-count text-center">130</span>
-          <span class="statistics statistics-title text-center">Users</span>
-         </div>
-       </div>
-    </div>
-    <div class=" col-md-4 col-lg-4 col-xl-4 col-xxl-3">
-      <div class="dashboard dashboard-statistics d-flex flex-row justify-content-center p-px-x-25 p-px-y-15 py-5" id="newUsers">
-        <svg width="66" height="56" viewBox="0 0 66 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M60.955 25.6736L55.9551 37.0914C55.6249 37.8463 54.5776 38.0306 54.1399 37.4066L46.6702 26.759C46.2325 26.135 46.7659 25.2183 47.5909 25.1687L60.0701 24.4121C60.7715 24.3476 61.2473 25.0258 60.955 25.6736Z" stroke="#F3FEFF" stroke-width="3" stroke-miterlimit="10"/>
-          <path d="M1.99984 51.8313L22.6028 38.5476L29.8745 44.5857L51.6894 30.985" stroke="#F3FEFF" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
-          <path d="M22.4271 22.7015C28.1643 22.7015 32.8152 18.0673 32.8152 12.3508C32.8152 6.63419 28.1643 2 22.4271 2C16.69 2 12.0391 6.63419 12.0391 12.3508C12.0391 18.0673 16.69 22.7015 22.4271 22.7015Z" stroke="#F3FEFF" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
-          <path d="M11.8539 21.9021C12.4407 21.3174 12.4424 20.3676 11.8577 19.7808C11.273 19.194 10.3232 19.1923 9.73638 19.777L11.8539 21.9021ZM5.34766 48.7176C5.34766 49.546 6.01923 50.2176 6.84766 50.2176C7.67608 50.2176 8.34766 49.546 8.34766 48.7176H5.34766ZM36.5119 39.0569V40.5569H39.5119V39.0569H36.5119ZM32.6017 17.7535C31.909 17.2992 30.9791 17.4924 30.5248 18.1851C30.0704 18.8779 30.2637 19.8077 30.9564 20.2621L32.6017 17.7535ZM9.73638 19.777C6.99671 22.5068 5.34766 25.9822 5.34766 29.9482H8.34766C8.34766 26.8757 9.60727 24.1407 11.8539 21.9021L9.73638 19.777ZM5.34766 29.9482V48.7176H8.34766V29.9482H5.34766ZM39.5119 39.0569V29.9482H36.5119V39.0569H39.5119ZM39.5119 29.9482C39.5119 24.8465 36.7291 20.4606 32.6017 17.7535L30.9564 20.2621C34.3698 22.5009 36.5119 26.0052 36.5119 29.9482H39.5119Z" fill="#F3FEFF"/>
-        </svg>
-         <div class=" d-flex flex-column">
-          <span class="statistics statistics-count text-center">600</span>
-          <span class="statistics statistics-title text-center">New users</span>
-         </div>
-      </div>
-   </div>
-    <div class=" col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-      <div class="dashboard dashboard-statistics d-flex flex-row justify-content-center  p-px-x-24 p-px-y-15 py-5" id="posts">
-        <svg width="54" height="48" viewBox="0 0 54 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M46 36.9412V5C46 3.34315 44.6569 2 43 2H5C3.34315 2 2 3.34315 2 5V43C2 44.6569 3.34315 46 5 46H49.4706C51.1274 46 52.4706 44.6569 52.4706 43V12.3529" stroke="#F3FEFF" stroke-width="3" stroke-linecap="round"/>
-          <line x1="12.5586" y1="18.6172" x2="35.4409" y2="18.6172" stroke="#F3FEFF" stroke-width="3" stroke-linecap="round"/>
-          <line x1="12.5586" y1="28.9707" x2="35.4409" y2="28.9707" stroke="#F3FEFF" stroke-width="3" stroke-linecap="round"/>
-        </svg>
-        <div class=" d-flex flex-column mx-3">
-          <span class="statistics statistics-count text-center">1k</span>
-          <span class="statistics statistics-title text-center">Posts</span>
-         </div>
-      </div>
-   </div>
-
+  <div class="d-none d-sm-flex justify-content-between align-items-center mt-4">
+    <disco-statistic-card
+      [title]="statisticCard.title"
+      [count]="statisticCard.count"
+      [icon]="statisticCard.icon"
+      [backgroundColor]="statisticCard.backgroundColor"
+      [textColor]="statisticCard.textColor"
+      *ngFor="let statisticCard of statisticCards"
+    ></disco-statistic-card>
   </div>
 </div>
