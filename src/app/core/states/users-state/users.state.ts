@@ -20,18 +20,6 @@ export class UsersState {
     return result.userInfo;
   }
 
-  @Action(Loading)
-  loading(
-    { patchState }: StateContext<{ isLoading: boolean}>,
-    {isLoading}: Loading
-  ) {
-    patchState({isLoading: true})
-    setTimeout(() => {
-      patchState({isLoading: false});
-    },3000);
-  }
-
-
   @Action(UserLogin)
   getUserInfo(
     { patchState }: StateContext<{ userInfo: UserResponseModel }>,
@@ -40,11 +28,9 @@ export class UsersState {
     return this._userService.loginAsync(payload)
       .pipe(
         catchError((err: HttpErrorResponse) => {
-          console.log(`${err}`);
           return EMPTY;
         }),
         tap((response: UserResponseModel) => {
-          console.log(response);
           patchState({ userInfo: response});
         })
       );

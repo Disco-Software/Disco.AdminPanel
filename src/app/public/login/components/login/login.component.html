@@ -37,7 +37,7 @@
       <div *ngIf="(loadingState$ |async)?.isLoading else submit" class=" d-flex justify-content-center align-items-center">
         <img width="110" height="100" src="../../../../../assets/gifs/gif_public.gif">
       </div>
-    <<ng-template #submit>
+    <ng-template #submit>
         <div class=" form-submit submit weight-4 size-24">
           <button mat-button class=" mb-5 py-2 px-5" (click)="onSubmit()">
             Log in

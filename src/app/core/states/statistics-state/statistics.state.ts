@@ -28,11 +28,9 @@ export class StatisticsState {
     return this._statisticsService.getStatistics(payload.fromDate, payload.toDate, payload.statisticsBy.toString())
       .pipe(
         catchError((err: HttpErrorResponse) => {
-          console.log(`${err}`);
           return EMPTY;
         }),
         tap((response: StatisticsResponseModel) => {
-          console.log(response);
           patchState({ statistics: response});
         })
       );

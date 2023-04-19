@@ -64,8 +64,6 @@ export class LoginComponent {
   ngOnInit(): void {
     this.isLoggedIn = !!this._storageService.getString('accessToken');
 
-    console.log(`isLoading: ${this.isLoading}`);
-
     if (this.isLoggedIn) {
       const user = this._storageService.getItem<User>('user');
       this.role = user.roleName ?? '';
