@@ -5,7 +5,7 @@ import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepickerDayView } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-day-view';
 
 @Component({
-  selector: 'app-calendar',
+  selector: 'disco-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
 })

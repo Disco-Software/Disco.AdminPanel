@@ -1,4 +1,4 @@
 export const environmentProd = {
   production: true,
-  baseUrl: 'https://devdisco'
+  api: 'https://devdiscoapi.azurewebsites.net/'
 };

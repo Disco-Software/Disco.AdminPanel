@@ -1,13 +1,24 @@
 .sidebar{
-  width: 15%;
+  width: 25%;
+  position: fixed;
 }
 
 .page{
   &-container{
-    @media (min-width: 768px){
-      padding-left: 120px !important;
-      padding-right: 120px !important;
+    @media (min-width: 360px){
+      margin-left: 0;
     }
 
+    @media (min-width: 768px){
+      margin-left: 25%;
+      min-height: 100vh;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    @media (min-width: 1280px){
+      padding-left: 113px;
+      padding-right: 100px;
+    }
   }
 }
