@@ -2,15 +2,11 @@ $breakPointTablet: 768px;
 $breakPointDesktop: 1500px;
 
 .statistics{
-
   &-container{
-    width: 100%;
-    height: 100%;
-
+    height: 8vw;
     padding-top: 28px;
-    padding-bottom: 25px;
-    padding-left: 44px;
-    padding-right: 44px;
+    padding-bottom: 28px;
+
     font-size: 40px;
 
     box-shadow: 0px 4px 7px rgba(160, 68, 255, 0.25);
@@ -23,6 +19,11 @@ $breakPointDesktop: 1500px;
     // @media (min-width: $breakPointDesktop){
     //   height: 200px;
     // }
+  }
+
+  &-icon{
+    width: 60px;
+    height: 44px;
   }
 
   &-title{

@@ -4,13 +4,14 @@
   <div class="row pt-0 pt-md-5">
     <disco-calendar></disco-calendar>
   </div>
-  <div class="d-none d-sm-flex justify-content-between align-items-center mt-4">
+  <div class=" d-flex flex-nowrap justify-content-between mt-4">
     <disco-statistic-card
       [title]="statisticCard.title"
       [count]="statisticCard.count"
       [icon]="statisticCard.icon"
       [backgroundColor]="statisticCard.backgroundColor"
       [textColor]="statisticCard.textColor"
+      class=" w-30"
       *ngFor="let statisticCard of statisticCards"
     ></disco-statistic-card>
   </div>

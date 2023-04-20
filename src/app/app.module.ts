@@ -7,7 +7,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccountService } from './core/services/account.service';
 import { BackendService } from './core/services/backend.service';
 import { HttpClientModule } from '@angular/common/http';
-import { DashbordModule } from './private/dashbord/dashbord.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CoreModule } from './core/core.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -35,7 +34,6 @@ const MODULES = [
   AppRoutingModule,
   NgbModule,
   HttpClientModule,
-  DashbordModule,
 ];
 
 const NGXS_MODULES = [

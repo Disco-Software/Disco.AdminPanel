@@ -1,5 +1,6 @@
 $breakPointTablet: 768px;
 $breakPointDesktop: 1500px;
+$breakPointBigDesktop: 2560px;
 
 .dashboard{
   &-container{
@@ -9,14 +10,19 @@ $breakPointDesktop: 1500px;
   &-statistics{
     box-shadow: 0px 4px 7px rgba(160, 68, 255, 0.25);
     border-radius: 10px;
+    width: 252px;
+    height: 128px;
 
     @media (min-width: $breakPointTablet){
-       width: 252px;
        height: 128px;
     }
 
     @media (min-width: $breakPointDesktop){
-      height: 200px;
+      height: 180px !important;
+    }
+
+    @media (min-width: $breakPointBigDesktop) {
+      height: 180px !important;
     }
   }
 }
