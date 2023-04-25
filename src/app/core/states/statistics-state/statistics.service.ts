@@ -5,14 +5,15 @@ import { RestService } from '../../services/rest.service';
 @Injectable({
   providedIn: 'root'
 })
-export class StatisticsService extends RestService {
+export class StatisticsService {
 
   public getStatistics(fromDate : string, toDate : string, statistics : string) : Observable<any> {
-    return this.request("GET", 'admin/statistics', {
-      fromDate : fromDate,
-      toDate : toDate,
-      statistics : statistics,
-     });
+    return null
+    // return this.request("GET", 'admin/statistics', {
+    //   fromDate : fromDate,
+    //   toDate : toDate,
+    //   statistics : statistics,
+    //  });
   }
 
 }
