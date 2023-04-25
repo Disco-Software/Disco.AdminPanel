@@ -18,12 +18,14 @@ import { LoadingState } from './core/states/loading-state/loading.state';
 import { UsersState } from './core/states/users-state/users.state';
 import { UsersService } from './core/states/users-state/users.service';
 import { PageService } from './core/services/page.service';
+import { RestService } from './core/services/rest.service';
 
 const LOGGERS = [
   NgxsReduxDevtoolsPluginModule.forRoot({ disabled: environment.production }),
 ];
 
 const SERVICES = [
+  RestService,
   UsersService
 ]
 

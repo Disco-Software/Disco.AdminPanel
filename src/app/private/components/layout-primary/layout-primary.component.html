@@ -1,3 +1,4 @@
+<div *ngIf="isLoading$ | async" class="loading-bar"></div>
 <div>
   <app-topbar></app-topbar>
   <div class="sidebar">
@@ -5,7 +6,7 @@
   </div>
   <div class="page page-container bg-dark-violet pt-9 pt-md-0">
     <app-header></app-header>
-    <div class=" vh-100">
+    <div class="vh-100">
       <router-outlet></router-outlet>
     </div>
   </div>

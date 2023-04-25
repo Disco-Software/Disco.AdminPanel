@@ -7,8 +7,8 @@ import {
 } from '../../../../core/models/account/user.response.model';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { finalize, take, takeUntil, tap, switchMap } from 'rxjs/operators';
-import { Subject, Subscription, Observable, map, pipe } from 'rxjs';
+import { finalize, take, takeUntil, tap, switchMap, subscribeOn, catchError } from 'rxjs/operators';
+import { Subject, Subscription, Observable, map, pipe, EMPTY } from 'rxjs';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { LocalStorageService } from '../../../../core/services/local-storage.service';
@@ -84,34 +84,22 @@ export class LoginComponent {
     });
   }
 
-  public createRequest() : Observable<any> {
-    return this._store.dispatch(new AddLoading()).pipe(
-      switchMap(() =>
-         this._store
-          .dispatch(
-            new UserLogin({
-              email: this.loginForm.value.email,
-              password: this.loginForm.value.password,
-            })
-          )
-          .pipe(map((state) => state.UsersState.userInfo), takeUntil(this.destroy$), finalize(() => this._store.dispatch(new RemoveLoading()).pipe(takeUntil(this.destroy$))))
-      ), takeUntil(this.destroy$)
-    );
-  }
-
   public onSubmit() {
-       this.createRequest()
-      .subscribe((res) => {
-        if (!res) {
-          console.error('Ups, sumsing wrong');
-        }
+    this._store.dispatch(new UserLogin({
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    })).pipe(map(state => state.UsersState.userInfo), takeUntil(this.destroy$), catchError((error) => {
+      console.log(error);
 
-        this._storageService.setItem('user', res.user);
-        this._storageService.setString('accessToken', res.accessToken);
-        this._storageService.setString('refreshToken', res.refreshToken);
+      return EMPTY;
+    }))
+    .subscribe((response: UserResponseModel) => {
+      this._storageService.setItem('user', response.user);
+      this._storageService.setString('accessToken', response.accessToken);
+      this._storageService.setString('refreshToken', response.refreshToken);
 
-        this._router.navigateByUrl('private/dashboard');
-      });
+      this._router.navigateByUrl('private/dashboard');
+    })
   }
 
   public forgotPasswordOpen() {

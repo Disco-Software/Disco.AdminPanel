@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { PageService } from '../../../core/services/page.service';
+import { Component } from '@angular/core';
+import { Select } from '@ngxs/store';
+import { LoadingState } from 'src/app/core/states';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-layout-primary',
   templateUrl: './layout-primary.component.html',
   styleUrls: ['./layout-primary.component.scss']
 })
-export class LayoutPrimaryComponent implements OnInit {
+export class LayoutPrimaryComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Select(LoadingState.isLoading) public isLoading$ : Observable<boolean>;
 
 }
