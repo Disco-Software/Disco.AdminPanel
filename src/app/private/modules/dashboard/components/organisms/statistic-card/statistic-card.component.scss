@@ -1,49 +1,61 @@
+$breakPointExtraSmall: 344px;
+$breakPointPhone: 576px;
 $breakPointTablet: 768px;
 $breakPointDesktop: 1500px;
 
-.statistics{
-  &-container{
-    height: 8vw;
-    padding-top: 28px;
-    padding-bottom: 28px;
-
-    font-size: 40px;
-
+.statistics {
+  &-container {
     box-shadow: 0px 4px 7px rgba(160, 68, 255, 0.25);
     border-radius: 10px;
-    // @media (min-width: $breakPointTablet){
-    //    width: 252px;
-    //    height: 128px;
-    // }
-
-    // @media (min-width: $breakPointDesktop){
-    //   height: 200px;
-    // }
+    min-height: 8vw;
   }
 
-  &-icon{
-    width: 60px;
-    height: 44px;
+  &-icon {
+    width: 4vw;
+    height: 4vw;
+    margin-right: 2rem;
+    @media (max-width: 1200px) {
+      margin-right: 1rem;
+    }
+    @media (max-width: $breakPointTablet) {
+      width: 5vw;
+      height: 5vw;
+    }
   }
 
-  &-title{
-    font-family: 'ABeeZee';
+  &-title {
+    font-family: "ABeeZee";
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 2vw;
     line-height: 17px;
-
-    color: #E6E0D2;
+    color: #e6e0d2;
+    @media (max-width: $breakPointTablet) {
+      font-size: 3vw;
+    }
+    @media (max-width: $breakPointPhone) {
+      font-size: 4vw;
+    }
+    @media (max-width: $breakPointExtraSmall) {
+      font-size: 5vw;
+    }
   }
 
-  &-count{
-    font-family: 'ABeeZee';
+  &-count {
+    font-family: "ABeeZee";
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
+    font-size: 3vw;
     line-height: 28px;
-
-    color: #E6E0D2;
+    color: #e6e0d2;
+    @media (max-width: $breakPointTablet) {
+      font-size: 4vw;
+    }
+    @media (max-width: $breakPointPhone) {
+      font-size: 5vw;
+    }
+    @media (max-width: $breakPointExtraSmall) {
+      font-size: 6vw;
+    }
   }
-
 }
