@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<router-outlet *ngIf="!siteLoader; else loading"></router-outlet>
+
+<ng-template #loading>
+  <div class="site-loading">
+
+  </div>
+</ng-template>

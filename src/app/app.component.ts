@@ -16,6 +16,8 @@ export class AppComponent {
   showModeratorBoard = false;
   username?: string;
 
+  public siteLoader : boolean = true;
+
   eventBusSub?: Subscription;
 
   constructor(
@@ -23,6 +25,9 @@ export class AppComponent {
     private eventBusService: EventBusService) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.siteLoader = false;
+    }, 2000);
   }
 
   ngOnDestroy(): void {
