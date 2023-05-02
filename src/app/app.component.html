@@ -1,7 +1,8 @@
 <router-outlet *ngIf="!siteLoader; else loading"></router-outlet>
-
 <ng-template #loading>
   <div class="site-loading">
 
   </div>
 </ng-template>
+
+<p-toast position="bottom-right"></p-toast>

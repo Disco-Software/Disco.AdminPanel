@@ -19,6 +19,7 @@ import { UsersState } from './core/states/users-state/users.state';
 import { UsersService } from './core/states/users-state/users.service';
 import { PageService } from './core/services/page.service';
 import { RestService } from './core/services/rest.service';
+import { SharedModule } from './shared';
 
 const LOGGERS = [
   NgxsReduxDevtoolsPluginModule.forRoot({ disabled: environment.production }),
@@ -36,6 +37,7 @@ const MODULES = [
   AppRoutingModule,
   NgbModule,
   HttpClientModule,
+  SharedModule,
 ];
 
 const NGXS_MODULES = [
