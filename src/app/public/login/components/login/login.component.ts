@@ -88,11 +88,7 @@ export class LoginComponent {
     this._store.dispatch(new UserLogin({
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
-    })).pipe(map(state => state.UsersState.userInfo), takeUntil(this.destroy$), catchError((error) => {
-      console.log(error);
-
-      return EMPTY;
-    }))
+    })).pipe(map(state => state.UsersState.userInfo), takeUntil(this.destroy$))
     .subscribe((response: UserResponseModel) => {
       this._storageService.setItem('user', response.user);
       this._storageService.setString('accessToken', response.accessToken);
