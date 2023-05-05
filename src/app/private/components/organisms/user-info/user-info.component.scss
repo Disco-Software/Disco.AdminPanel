@@ -1,0 +1,66 @@
+.dropdown-toggle::after{
+  display: none;
+}
+
+.dropdown-menu {
+
+  transition: all 1s;
+}
+
+.dropdown-open{
+  transform: rotate(90deg);
+  transition: transform 1s;
+}
+
+.dropdown-close{
+  transform: rotate(0deg);
+  transition: transform 1s;
+}
+
+.user-open-dropdown{
+  transform: translateY(-30px);
+  transition: transform 1s;
+}
+
+.user-close-dropdown{
+  transform: translateY(30px);
+  transition: transform 1s;
+}
+
+.user {
+  width: 80%;
+  &-photo{
+    border-radius: 360px;
+  }
+
+  &-name {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+    color: #E6E0D2;
+  }
+
+  &-role{
+    font-family: 'ABeeZee';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #E6E0D2;
+  }
+}
+
+.action {
+  &-span {
+    font-family: 'ABeeZee';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #E6E0D2;
+  }
+}

@@ -44,21 +44,6 @@
         />
       </svg>
     </button>
-    <div ngbDropdown class=" header-dropdown dropdown m-5 mt-0 mb-0">
-      <label (click)="isShowing = !isShowing"  class=" dropdown-title title dropdown-toggle" id="dropdownMenu1">Eng</label>
-      <div [ngbCollapse]="isShowing" ngbDropdownMenu class=" dropdown-menu menu" aria-labelledby="dropdownMenu1">
-        <div *ngFor="let language of languages" class=" dropdown-item d-flex justify-content-between flex-row align-items-center">
-          <ng-container class=" item-container container d-flex flex-row justify-content-between m-0 p-0" *ngIf="!language.isActive; else elseTemplate">
-            <label (click)="switchLanguage(language)" class=" dropdown-item-text">{{language.name}}</label>
-          </ng-container>
-          <ng-template class=" item-container container[[ p-0 m-0 text-start" #elseTemplate>
-            <label class=" dropdown-item-text">{{language.name}}</label>
-            <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 4L3.5 8L8 1" stroke="#F3FEFF" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-          </ng-template>
-        </div>
-      </div>
-    </div>
+    <app-language-dropdown></app-language-dropdown>
   </div>
 </div>

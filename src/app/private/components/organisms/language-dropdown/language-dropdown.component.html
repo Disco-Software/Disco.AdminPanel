@@ -1,0 +1,21 @@
+<div ngbDropdown class=" lenguage lenguage -container dropdown m-5 mt-0 mb-0">
+
+  <div class=" d-flex flex-row dropdown-toggle">
+    <label (click)="isShowing = !isShowing"  class=" dropdown-title title dropdown-toggle m-2 mt-0 mb-0" id="dropdownMenu1">Eng</label>
+    <img class="lenguage-icon icon" src="../../../../../assets/images/ic_sm_dropdown.svg">
+  </div>
+
+  <div [ngbCollapse]="isShowing" ngbDropdownMenu class=" lenguage-menu menu dropdown-menu" aria-labelledby="dropdownMenu1">
+    <div *ngFor="let language of languages" class=" lenguage-item item d-flex justify-content-between flex-row align-items-center">
+      <ng-container class=" item-container container d-flex flex-row justify-content-between m-0 p-0" *ngIf="!language.isActive; else elseTemplate">
+        <label (click)="switchLanguage(language)" class=" lenguage-span">{{language.name}}</label>
+      </ng-container>
+      <ng-template class=" item-container container[[ p-0 m-0 text-start" #elseTemplate>
+        <label class=" lenguage-span">{{language.name}}</label>
+        <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 4L3.5 8L8 1" stroke="#F3FEFF" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+      </ng-template>
+    </div>
+  </div>
+</div>
