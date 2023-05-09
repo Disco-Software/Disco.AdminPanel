@@ -1,20 +1,32 @@
-<div ngbDropdown class=" lenguage lenguage -container dropdown m-5 mt-0 mb-0">
+<div ngbDropdown (click)="toggleDropDownMenu()" class=" lenguage lenguage-container dropdown dropdown-toggle  m-5 mt-0 mb-0">
 
-  <div class=" d-flex flex-row dropdown-toggle">
-    <label (click)="isShowing = !isShowing"  class=" dropdown-title title dropdown-toggle m-2 mt-0 mb-0" id="dropdownMenu1">Eng</label>
-    <img class="lenguage-icon icon" src="../../../../../assets/images/ic_sm_dropdown.svg">
+  <div role="button"   class=" d-flex flex-row justify-content-center align-items-center text-center  bg-transparent border-0">
+    <label  class=" lenguage-span span dropdown-toggle m-2 mt-0 mb-0" id="dropdownMenu1">Eng</label>
+    <img
+    [class.lenguage-icon-open]="!isShowing"
+    [class.lenguage-icon-close]="isShowing"
+    class="lenguage-icon icon" src="../../../../../assets/images/ic_sm_dropdown.svg">
   </div>
 
-  <div [ngbCollapse]="isShowing" ngbDropdownMenu class=" lenguage-menu menu dropdown-menu" aria-labelledby="dropdownMenu1">
+  <div
+    [class.lenguage-menu-open]="!isShowing"
+    [class.lenguage-menu-close]="isShowing"
+    [ngbCollapse]="isShowing"
+    ngbDropdownMenu
+    class=" lenguage-menu menu dropdown-menu" aria-labelledby="dropdownMenu1">
     <div *ngFor="let language of languages" class=" lenguage-item item d-flex justify-content-between flex-row align-items-center">
-      <ng-container class=" item-container container d-flex flex-row justify-content-between m-0 p-0" *ngIf="!language.isActive; else elseTemplate">
-        <label (click)="switchLanguage(language)" class=" lenguage-span">{{language.name}}</label>
+      <ng-container *ngIf="!language.isActive; else elseTemplate">
+        <div (click)="switchLanguage(language)" class=" item item-container w-100 d-flex flex-row align-items-center m-0 pt-2 pb-2">
+          <label class=" lenguage-span span p-3 pt-0 pb-0 size-12">{{language.name}}</label>
+        </div>
       </ng-container>
-      <ng-template class=" item-container container[[ p-0 m-0 text-start" #elseTemplate>
-        <label class=" lenguage-span">{{language.name}}</label>
-        <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 4L3.5 8L8 1" stroke="#F3FEFF" stroke-linecap="round" stroke-linejoin="round"/>
+      <ng-template #elseTemplate>
+        <div class=" w-100 d-flex justify-content-between align-items-center p-3 pt-2 pb-2 size-12">
+          <label class=" lenguage-span">{{language.name}}</label>
+          <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 4L3.5 8L8 1" stroke="#F3FEFF" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+        </div>
       </ng-template>
     </div>
   </div>

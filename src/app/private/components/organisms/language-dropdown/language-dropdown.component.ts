@@ -36,5 +36,10 @@ export class LanguageDropdownComponent implements OnInit {
     }
   }
 
+  public toggleDropDownMenu() {
+    this.isShowing = !this.isShowing;
+
+    console.log(this.isShowing);
+  }
 
 }

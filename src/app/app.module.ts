@@ -37,6 +37,7 @@ const MODULES = [
   AppRoutingModule,
   NgbModule,
   HttpClientModule,
+  CoreModule,
   SharedModule,
 ];
 
