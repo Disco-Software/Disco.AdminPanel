@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, switchMap, take, pipe, catchError, EMPTY, throwError } from 'rxjs';
+import { Observable, switchMap, take, pipe, catchError, EMPTY, throwError, mergeMap, of, finalize } from 'rxjs';
 import { Rest } from '../models';
 import { Store } from '@ngxs/store';
 import { AddLoading, RemoveLoading } from '../states';
@@ -23,15 +23,18 @@ export class RestService {
      const req = new HttpRequest(method, `${this.serverUrl}${url}`, request);
 
      return this._store.dispatch(new AddLoading()).pipe(take(1),switchMap(() => {
-        return this.http.request(req).pipe(take(1), switchMap(() => {
-          return this._store.dispatch(new RemoveLoading()).pipe(take(1));
+        return this.http[method](`${this.serverUrl}${url}`, request).pipe(take(1), mergeMap((response) => {
+          console.log(response);
+          this._store.dispatch(new RemoveLoading()).pipe(take(1));
+
+          return of(response);
         }), catchError((error) => {
           console.error(error);
 
-          this._messageService.add({severity: "error", summary: 'Api Error', detail: error})
+          this._messageService.add({severity: "error", summary: 'Api Error', detail: error.statusText})
 
           return throwError(() => error);
-        }))
+        }), finalize(() => this._store.dispatch(new RemoveLoading())))
      }));
    }
 }

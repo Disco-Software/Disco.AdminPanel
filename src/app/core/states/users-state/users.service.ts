@@ -11,7 +11,7 @@ import { RestService } from '../../services/rest.service';
 export class UsersService extends RestService {
 
   public loginAsync(loginRequestModel: LogInRequestModel): Observable<UserResponseModel> {
-    return this.request("POST", 'admin/account/log-in', loginRequestModel);
+    return this.request("post", 'admin/account/log-in', loginRequestModel);
   }
 
   public refreshToken(model: RefreshTokenModel): Observable<UserResponseModel> {

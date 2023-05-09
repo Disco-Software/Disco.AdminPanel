@@ -11,6 +11,8 @@ import { TopbarComponent } from './components/organisms/topbar/topbar.component'
 import { MatIconModule } from '@angular/material/icon'
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/organisms/header/header.component';
+import { UserInfoComponent } from './components/organisms/user-info/user-info.component';
+import { LanguageDropdownComponent } from './components/organisms/language-dropdown/language-dropdown.component';
 
 const MODULES = [
     
@@ -24,7 +26,9 @@ const MODULES = [
     LayoutPrimaryComponent,
     SidebarComponent,
     TopbarComponent,
-    HeaderComponent
+    HeaderComponent,
+    UserInfoComponent,
+    LanguageDropdownComponent
   ],
   imports: [
     CommonModule,

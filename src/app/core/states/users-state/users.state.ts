@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { catchError, EMPTY, take, tap } from 'rxjs';
+import { catchError, EMPTY, take, tap, throwError } from 'rxjs';
 import { UserResponseModel } from '../../models/account/user.response.model';
 import { UserLogin, Loading } from './users.actions';
 import { UsersService } from './users.service';
@@ -28,9 +28,10 @@ export class UsersState {
     return this._userService.loginAsync(payload)
       .pipe(
         catchError((err: HttpErrorResponse) => {
-          return EMPTY;
+          return throwError(() => err);
         }),
         tap((response: UserResponseModel) => {
+          console.log(response);
           patchState({ userInfo: response});
         })
       );

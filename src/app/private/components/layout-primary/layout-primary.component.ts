@@ -10,6 +10,6 @@ import { Observable } from 'rxjs';
 })
 export class LayoutPrimaryComponent {
 
-  @Select(LoadingState.isLoading) public isLoading$ : Observable<boolean>;
+  @Select(LoadingState.isLoading) public isLoading$ : Observable<{isLoading: boolean}>;
 
 }

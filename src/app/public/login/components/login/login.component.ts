@@ -90,11 +90,16 @@ export class LoginComponent {
       password: this.loginForm.value.password
     })).pipe(map(state => state.UsersState.userInfo), takeUntil(this.destroy$))
     .subscribe((response: UserResponseModel) => {
-      this._storageService.setItem('user', response.user);
-      this._storageService.setString('accessToken', response.accessToken);
-      this._storageService.setString('refreshToken', response.refreshToken);
+      console.log(response);
 
-      this._router.navigateByUrl('private/dashboard');
+      if(response.user){
+        this._storageService.setItem('user', response.user);
+        this._storageService.setString('accessToken', response.accessToken);
+        this._storageService.setString('refreshToken', response.refreshToken);
+
+        this._router.navigateByUrl('private/dashboard');
+      }
+
     })
   }
 
