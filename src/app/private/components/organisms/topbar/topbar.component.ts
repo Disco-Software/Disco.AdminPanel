@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes } from 'src/app/core/models';
+import { Routes, User } from 'src/app/core/models';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faClock, faUsers, faImages, faInfoCircle, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FaIcon } from '@fortawesome/fontawesome-free';
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-topbar',
@@ -23,9 +24,12 @@ export class TopbarComponent implements OnInit {
 
   ]
 
+  public user : User;
+
   isShowing : boolean = false;
 
   constructor(
+    protected _localStorageService : LocalStorageService,
     protected router : Router,
     protected _matIconRegistry : MatIconRegistry,
     protected _domSanitizer : DomSanitizer) {
@@ -37,6 +41,7 @@ export class TopbarComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.user = this._localStorageService.getItem<User>('user');
   }
 
   public toggleMenu() {

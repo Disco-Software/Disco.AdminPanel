@@ -15,6 +15,7 @@ export class UserInfoComponent implements OnInit {
   @Input() public userName : String;
   @Input() public userRole : String;
   @Input() public userPhoto : String;
+  @Input() public width : String;
 
   public isOpen : boolean = false;
 

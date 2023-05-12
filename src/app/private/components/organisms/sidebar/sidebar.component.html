@@ -25,9 +25,10 @@
 
       <app-user-info
         class="sidebar-info info w-100"
-        userName="Alex_Kotaev"
-        userRole="Administrator"
-        userPhoto="../../../../../assets/images/ic_test.png"></app-user-info>
+        width="80"
+        [userName]="user.userName"
+        [userRole]="user.roleName"
+        [userPhoto]="user.account.photo"></app-user-info>
 
 
     </nav>
