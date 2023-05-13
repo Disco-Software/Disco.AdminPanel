@@ -1,4 +1,5 @@
-export const environmentProd = {
+export const environment = {
   production: true,
-  api: 'https://devdiscoapi.azurewebsites.net/'
+  api: 'https://devdiscoapi.azurewebsites.net/api/',
+  url: 'https://devdiscoapi.azurewebsites.net/'
 };

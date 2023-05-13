@@ -1,5 +1,11 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Angular
+.angular
+
+#Github
+.github
+
 # Compiled output
 /dist
 /tmp
