@@ -1,18 +1,21 @@
-<div ngbDropdown (click)="toggleDropDownMenu()" class=" lenguage lenguage-container dropdown dropdown-toggle  m-5 mt-0 mb-0">
+<div
+  ngbDropdown
+  class=" lenguage lenguage-container dropdown dropdown-toggle  m-5 mt-0 mb-0">
 
   <div role="button"   class=" d-flex flex-row justify-content-center align-items-center text-center  bg-transparent border-0">
     <label  class=" lenguage-span span dropdown-toggle m-2 mt-0 mb-0" id="dropdownMenu1">Eng</label>
     <img
-    [class.lenguage-icon-open]="!isShowing"
-    [class.lenguage-icon-close]="isShowing"
+    (click)="toggleDropDownMenu()"
+    [class.lenguage-icon-open]="isShowing"
+    [class.lenguage-icon-close]="!isShowing"
     class="lenguage-icon icon" src="../../../../../assets/images/ic_sm_dropdown.svg">
   </div>
 
   <div
-    [class.lenguage-menu-open]="!isShowing"
-    [class.lenguage-menu-close]="isShowing"
-    [ngbCollapse]="isShowing"
-    ngbDropdownMenu
+    [class.lenguage-menu-open]="isShowing"
+    [class.lenguage-menu-close]="!isShowing"
+    [ngbCollapse]="!isShowing"
+
     class=" lenguage-menu menu dropdown-menu" aria-labelledby="dropdownMenu1">
     <div *ngFor="let language of languages" class=" lenguage-item item d-flex justify-content-between flex-row align-items-center">
       <ng-container *ngIf="!language.isActive; else elseTemplate">
