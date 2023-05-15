@@ -18,39 +18,34 @@
 }
 
 .user-open-dropdown{
-  transform: translateY(-30px);
+  // transform: translateY(-30px);
   transition: transform 1s;
 }
 
 .user-close-dropdown{
-  transform: translateY(30px);
+  // transform: translateY(30px);
   transition: transform 1s;
 }
 
 .user {
-  width: 80%;
   &-photo{
-    width: 79px;
-    height: 79px;
+    width: 60px;
+    height: 60px;
 
     border-radius: 360px;
   }
 
   &-name {
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    font-size: 32px;
-    line-height: 38px;
+    font-size: 1rem;
     color: #E6E0D2;
   }
 
   &-role{
-    font-family: 'ABeeZee';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 1rem;
 
     color: #E6E0D2;
   }
@@ -58,11 +53,9 @@
 
 .action {
   &-span {
-    font-family: 'ABeeZee';
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 1rem;
 
     color: #E6E0D2;
   }

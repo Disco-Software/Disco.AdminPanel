@@ -1,36 +1,34 @@
 <header>
   <div class="d-none d-md-flex justify-content-center align-items-center w-100">
-    <nav class="sidebar sidebar-container w-100 vh-100">
-      <div
-        class="sidebar-title title navbar-brand text-center weight-7 size-30"
-      >
-        <h1>DISCO</h1>
-      </div>
-
-      <ul
-        class="sidenav-nav nav d-flex justify-content-center align-items-start flex-column"
-      >
-        <li
-          *ngFor="let route of routes"
-          [routerLink]="route.path"
-          [class.active]="
-            route.path === _router.url || _router.url.includes(route.path)
-          "
-          class="sidenav-item item"
+    <nav class="sidebar sidebar-container w-100 vh-100 d-flex flex-column justify-content-between">
+      <div>
+        <div
+          class="sidebar-title title navbar-brand text-center weight-7 size-30"
         >
-          <mat-icon [svgIcon]="route.icon" color="#E6E0D2"></mat-icon>
-          <span class="m-3 size-25">{{ route.title }}</span>
-        </li>
-      </ul>
-
+          <h1>DISCO</h1>
+        </div>
+        <ul
+          class="sidenav-nav nav d-flex justify-content-center align-items-start flex-column"
+        >
+          <li
+            *ngFor="let route of routes"
+            [routerLink]="route.path"
+            [class.active]="
+              route.path === _router.url || _router.url.includes(route.path)
+            "
+            class="sidenav-item item"
+          >
+            <mat-icon [svgIcon]="route.icon" color="#E6E0D2"></mat-icon>
+            <span class="m-3 size-25">{{ route.title }}</span>
+          </li>
+        </ul>
+      </div>
       <app-user-info
         class="sidebar-info info w-100"
-        width="80"
         [userName]="user.userName"
         [userRole]="user.roleName"
-        [userPhoto]="user.account.photo"></app-user-info>
-
-
+        [userPhoto]="user.account.photo"
+      ></app-user-info>
     </nav>
   </div>
 </header>

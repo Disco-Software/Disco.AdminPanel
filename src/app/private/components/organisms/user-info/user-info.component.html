@@ -2,18 +2,21 @@
   [style.width.%]="width"
   [class.user-open-dropdown]="isOpen"
   [class.user-close-dropdown]="!isOpen"
-  class=" user user-container dropdown dropdown-toggle d-flex justify-content-between align-items-center mt-sm-auto ms-auto ms-sm-0  flex-shrink-1">
-  <div class=" d-flex flex-row">
+  class="user user-container dropdown dropdown-toggle d-flex justify-content-between align-items-center p-3 p-xl-4">
+  <div class=" d-flex flex-column flex-xl-row w-100">
     <img [src]="userPhoto" class="user-photo photo">
-    <div class=" d-flex flex-column m-3 mb-0 mt-0">
-       <span class="user-name name size-25">{{userName}}</span>
-       <span class="user-role role size-25">{{userRole}}</span>
+    <div class="d-flex flex-row justify-content-between w-100">
+      <div class=" d-flex flex-column ml-0 mt-3 mx-xl-3 mb-xl-0 mt-xl-0">
+        <span class="user-name name size-25">{{userName}}</span>
+        <span class="user-role role size-25">{{userRole}}</span>
+     </div>
+     <img
+     style="width:10px"
+     [class.dropdown-open]="isOpen"
+     [class.dropdown-close]="!isOpen"
+     (click)="toggleDropdown()" src="../../../../../assets/images/ic_dropdown.svg">
     </div>
   </div>
-  <img
-    [class.dropdown-open]="isOpen"
-    [class.dropdown-close]="!isOpen"
-    (click)="toggleDropdown()" src="../../../../../assets/images/ic_dropdown.svg">
 </div>
 <div [ngbCollapse]="!isOpen" class=" collapse m-5 mb-0 mt-0">
   <ul class=" user-actions actions bg-transparent">

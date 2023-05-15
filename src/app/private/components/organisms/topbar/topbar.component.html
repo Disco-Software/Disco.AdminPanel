@@ -1,7 +1,7 @@
 <header>
   <nav
     id="main-navbar"
-    class="d-sm-block d-md-none navbar navbar-expand-lg navbar-dark w-100 fixed-top"
+    class="d-block d-md-none navbar navbar-expand-lg navbar-dark w-100 fixed-top"
   >
     <!-- Container wrapper -->
     <div class="container-fluid">
@@ -120,6 +120,7 @@
     </div>
 
     <div
+      *ngIf="isShowing"
       [ngbCollapse]="!isShowing"
       class="collapse navbar-collapse d-flex justify-content-around flex-column"
       id="responsiveNavBar"
