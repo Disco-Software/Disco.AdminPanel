@@ -3,7 +3,7 @@
   class=" lenguage lenguage-container dropdown dropdown-toggle  m-5 mt-0 mb-0">
 
   <div role="button"   class=" d-flex flex-row justify-content-center align-items-center text-center  bg-transparent border-0">
-    <label  class=" lenguage-span span dropdown-toggle m-2 mt-0 mb-0" id="dropdownMenu1">{{currentLanguage.name}}</label>
+    <label  class=" lenguage-span span dropdown-toggle m-2 mt-0 mb-0" id="dropdownMenu1">{{currentLanguage?.name}}</label>
     <img
     (click)="toggleDropDownMenu()"
     [class.lenguage-icon-open]="isShowing"
