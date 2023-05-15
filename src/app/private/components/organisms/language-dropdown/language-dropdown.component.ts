@@ -9,7 +9,7 @@ import { LanguageModel } from 'src/app/core/models';
 export class LanguageDropdownComponent implements OnInit {
 
   public currentLanguage : LanguageModel;
-  public isShowing : boolean = false;
+  public isShowing : boolean = true;
   public languages: LanguageModel[] = [
     {name: 'English', isActive: true},
     {name: 'Ukranian', isActive: false},
@@ -20,6 +20,7 @@ export class LanguageDropdownComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.currentLanguage.name)
   }
 
   public switchLanguage(languageModel: LanguageModel){
@@ -28,12 +29,14 @@ export class LanguageDropdownComponent implements OnInit {
         language.isActive = !language.isActive;
     }
 
-    if(languageModel != this.currentLanguage){
+    if(languageModel !== this.currentLanguage){
       this.currentLanguage = languageModel;
       this.currentLanguage.isActive = true;
 
       console.log(this.currentLanguage);
     }
+
+    console.log(this.currentLanguage.name);
   }
 
   public toggleDropDownMenu() {
