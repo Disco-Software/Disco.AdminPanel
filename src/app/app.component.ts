@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { User } from './core/models/account/user.response.model';
-import { EventBusService } from './core/services/event-bus.service';
-import { LocalStorageService } from './core/services/local-storage.service';
+import { LocalStorageService } from '@core/services';
 
 @Component({
   selector: 'app-root',
@@ -18,21 +15,13 @@ export class AppComponent {
 
   public siteLoader : boolean = true;
 
-  eventBusSub?: Subscription;
-
   constructor(
-    private localStorageService: LocalStorageService,
-    private eventBusService: EventBusService) { }
+    private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
       this.siteLoader = false;
     }, 2000);
-  }
-
-  ngOnDestroy(): void {
-    if (this.eventBusSub)
-      this.eventBusSub.unsubscribe();
   }
 
   logout(): void {

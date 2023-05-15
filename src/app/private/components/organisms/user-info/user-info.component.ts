@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserActionModel } from '../../../../core/models/user-actions/user-action.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { LocalStorageService } from '@core/services';
+import { UserActionModel } from '@core/models';
 
 @Component({
   selector: 'app-user-info',

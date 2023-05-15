@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CalendarComponent, StatisticCardComponent, StatisticSmallCardComponent} from '../organisms'
-import { PageService } from '../../../../../core/services/page.service';
-import { StatisticModel } from 'src/app/core/models/statistics/statistic.model';
+import { PageService } from '@core/services';
+import { StatisticModel } from '@core/models';
 
 @Component({
   selector: 'app-dashboard',

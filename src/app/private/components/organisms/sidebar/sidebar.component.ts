@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faClock, faUsers, faImages, faInfoCircle, faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import { FaIcon } from '@fortawesome/fontawesome-free';
-import { Routes, User } from 'src/app/core/models';
+import { Routes, User } from '@core/models';
 import { Router } from '@angular/router';
-import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { LocalStorageService } from '@core/services';
 
 @Component({
   selector: 'app-sidebar',
@@ -45,7 +41,6 @@ export class SidebarComponent implements OnInit {
 
   public toggleMenu() {
      this.isShowing = !this.isShowing;
-     console.log(this.isShowing);
   }
 
 }

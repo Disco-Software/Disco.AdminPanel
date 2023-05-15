@@ -31,7 +31,6 @@ export class UsersState {
           return throwError(() => err);
         }),
         tap((response: UserResponseModel) => {
-          console.log(response);
           patchState({ userInfo: response});
         })
       );

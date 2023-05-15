@@ -1,3 +1,3 @@
-export * from '../organisms/calendar/calendar.component'
-export * from '../organisms/statistic-card/statistic-card.component'
-export * from '../organisms/statistic-small-card/statistic-small-card.component'
+export * from './calendar/calendar.component'
+export * from './statistic-card/statistic-card.component'
+export * from './statistic-small-card/statistic-small-card.component'

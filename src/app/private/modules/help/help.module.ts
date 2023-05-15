@@ -2,18 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HelpRoutingModule } from './help-routing.module';
-import { HelpListComponent } from './components/help-list/help-list.component';
-import { HelpComponent } from './components/help/help.component';
+import * as _components from './components';
 
+const COMPONENTS = [_components.HelpListComponent, _components.HelpComponent];
+
+const MODULES = [CommonModule, HelpRoutingModule];
 
 @NgModule({
-  declarations: [
-    HelpListComponent,
-    HelpComponent
-  ],
-  imports: [
-    CommonModule,
-    HelpRoutingModule
-  ]
+  declarations: [...COMPONENTS],
+  imports: [...MODULES],
 })
-export class HelpModule { }
+export class HelpModule {}

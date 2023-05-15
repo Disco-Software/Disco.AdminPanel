@@ -13,7 +13,6 @@ export class BackendService {
   constructor(
     private httpClient: HttpClient,) {
     this.serverUrl = environment.api;
-    console.log(this.serverUrl);
   }
 
   public get(url: string, args?: any): Observable<any> {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LanguageModel } from 'src/app/core/models';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { LanguageModel } from '@core/models';
+import { LocalStorageService } from '@core/services';
 
 @Component({
   selector: 'app-language-dropdown',
@@ -54,7 +54,5 @@ export class LanguageDropdownComponent implements OnInit {
 
   public toggleDropDownMenu() {
     this.isShowing = !this.isShowing;
-
-    console.log(this.isShowing);
   }
 }

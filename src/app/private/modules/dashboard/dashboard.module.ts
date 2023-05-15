@@ -1,24 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { DashboardComponent } from './components';
-import { CalendarComponent } from './components/organisms/calendar/calendar.component';
-import { MatIconModule } from '@angular/material/icon';
-import { StatisticCardComponent } from './components/organisms/statistic-card/statistic-card.component';
-import { StatisticSmallCardComponent } from './components/organisms/statistic-small-card/statistic-small-card.component';
+import * as _components from './components';
+
+const COMPONENTS = [
+  _components.DashboardComponent,
+  _components.CalendarComponent,
+  _components.StatisticCardComponent,
+  _components.StatisticSmallCardComponent,
+];
+
+const MODULES = [CommonModule, MatIconModule, DashboardRoutingModule];
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    CalendarComponent,
-    StatisticCardComponent,
-    StatisticSmallCardComponent,
-  ],
-  imports: [
-    CommonModule,
-    MatIconModule,
-    DashboardRoutingModule
-  ]
+  declarations: [...COMPONENTS],
+  imports: [...MODULES],
 })
-export class DashboardModule { }
+export class DashboardModule {}

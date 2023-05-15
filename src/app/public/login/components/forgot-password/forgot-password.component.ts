@@ -1,18 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ResetPasswordComponent } from '../reset-password/reset-password.component';
+
+import { ResetPasswordComponent } from '../reset-password/reset-password.component'
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent {
 
   constructor(private _modalService: NgbModal) { }
-
-  ngOnInit(): void {
-  }
 
   public onSubmit(){
     this._modalService.open(ResetPasswordComponent, {

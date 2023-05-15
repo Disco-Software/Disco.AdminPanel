@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '@shared';
+import { CoreModule } from '@core';
 
 import { LoginRoutingModule } from './login-routing.module';
-import { CoreModule } from '../../core/core.module';
-import { LoginComponent, ForgotPasswordComponent, ResetPasswordComponent } from './components';
+import * as _components from './components';
 
+const COMPONENTS = [
+  _components.LoginComponent,
+  _components.ForgotPasswordComponent,
+  _components.ResetPasswordComponent,
+];
 
+const MODULES = [CommonModule, CoreModule, LoginRoutingModule, SharedModule];
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    ForgotPasswordComponent,
-    ResetPasswordComponent,
-  ],
-  imports: [
-    CommonModule,
-    CoreModule,
-    LoginRoutingModule
-  ]
+  declarations: [...COMPONENTS],
+  imports: [...MODULES],
 })
-export class LoginModule { }
+export class LoginModule {}

@@ -21,7 +21,16 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@core": ["./src/app/core/index.ts"],
+      "@core/models": ["./src/app/core/models/index.ts"],
+      "@core/services": ["./src/app/core/services/index.ts"],
+      "@core/states": ["./src/app/core/states/index.ts"],
+      "@core/guards": ["./src/app/core/guards/index.ts"],
+      "@core/interceptors": ["./src/app/core/interceptors/index.ts"],
+      "@shared": ["./src/app/shared"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

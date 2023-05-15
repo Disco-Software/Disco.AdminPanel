@@ -19,18 +19,16 @@ export class RestService {
      this.serverUrl = environment.api;
    }
 
-  protected request(method: string, url: string, request?: any ) : Observable<any>{
+  public request(method: string, url: string, request?: any ) : Observable<any>{
      const req = new HttpRequest(method, `${this.serverUrl}${url}`, request);
 
      return this._store.dispatch(new AddLoading()).pipe(take(1),switchMap(() => {
         return this.http[method](`${this.serverUrl}${url}`, request).pipe(take(1), mergeMap((response) => {
-          console.log(response);
           this._store.dispatch(new RemoveLoading()).pipe(take(1));
 
           return of(response);
         }), catchError((error) => {
           console.error(error);
-
           this._messageService.add({severity: "error", summary: 'Api Error', detail: error.statusText})
 
           return throwError(() => error);

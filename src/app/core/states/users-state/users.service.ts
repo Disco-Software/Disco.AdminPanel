@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LogInRequestModel } from '../../models/account/login.request.model';
-import { RefreshTokenModel } from '../../models/account/refresh-token.model';
-import { UserResponseModel } from '../../models/account/user.response.model';
-import { RestService } from '../../services/rest.service';
+import { LogInRequestModel, RefreshTokenModel, UserResponseModel } from '@core/models';
+import { RestService } from '@core/services';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService extends RestService {
+export class UsersService  {
+  constructor(private rest: RestService){}
 
   public loginAsync(loginRequestModel: LogInRequestModel): Observable<UserResponseModel> {
-    return this.request("post", 'admin/account/log-in', loginRequestModel);
+    return this.rest.request("post", 'admin/account/log-in', loginRequestModel);
   }
 
   public refreshToken(model: RefreshTokenModel): Observable<UserResponseModel> {
-    return this.request('PUT', 'admin/account/refresh', model);
+    return this.rest.request('PUT', 'admin/account/refresh', model);
   }
 }

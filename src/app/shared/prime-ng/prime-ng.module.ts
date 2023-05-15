@@ -1,27 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ToastModule} from 'primeng/toast'
+import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 
-const MODULES = [
-  ToastModule
-]
+const MODULES = [ToastModule];
 
-const PROVIDERS = [
-  MessageService,
-]
+const PROVIDERS = [MessageService];
 
 @NgModule({
-  declarations: [],
-  providers: [
-    ...PROVIDERS,
-  ],
-  imports: [
-    ...MODULES,
-    CommonModule
-  ],
-  exports: [
-    ...MODULES
-  ]
+  imports: [CommonModule, ...MODULES],
+  exports: [...MODULES],
+  providers: [...PROVIDERS],
 })
-export class PrimeNgModule { }
+export class PrimeNgModule {}

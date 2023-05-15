@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
-import { StatisticsBy } from '../../../../../../core/models/enums/statistics.enum';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepickerDayView } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-day-view';
+import { StatisticsBy } from '@core/models';
 
 @Component({
   selector: 'disco-calendar',
@@ -49,7 +49,6 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     let days = this.ngbCalendar.getMonths();
-    console.log(days);
   }
 
   change(value: 'Next' | 'Back') {
@@ -57,13 +56,10 @@ export class CalendarComponent implements OnInit {
   }
 
   setState(item: string) {
-    console.log(item);
     this.currentState = item;
     switch (this.currentState) {
       case 'Day':
-        console.log(this.ngbCalendar.getWeekday(this.ngbCalendar.getToday()));
         this.selectedItem = this.day[this.ngbCalendar.getWeekday(this.ngbCalendar.getToday())]
-        console.log(this.selectedItem);
         break;
       case 'Week':
         break;

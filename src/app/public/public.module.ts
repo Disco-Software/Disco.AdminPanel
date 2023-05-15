@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CoreModule } from '@core';
+import { SharedModule } from '@shared';
 
 import { PublicRoutingModule } from './public-routing.module';
-import { CoreModule } from '../core/core.module';
-import { SharedModule } from '../shared';
 
 const MODULES = [
+  PublicRoutingModule,
   CommonModule,
   CoreModule,
   SharedModule,
-  PublicRoutingModule,
 ]
 
 @NgModule({
-  declarations: [],
   imports: [
     ...MODULES
   ]

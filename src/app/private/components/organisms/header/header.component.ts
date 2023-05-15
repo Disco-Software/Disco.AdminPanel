@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PageService } from '../../../../core/services/page.service';
-import { PageModel } from '../../../../core/models/page/page.model';
-import { LanguageModel } from '../../../../core/models/language/language.model';
+import { PageService } from '@core/services';
+import { PageModel } from '@core/models';
 
 @Component({
   selector: 'app-header',

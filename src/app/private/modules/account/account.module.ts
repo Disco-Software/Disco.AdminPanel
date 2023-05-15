@@ -2,17 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AccountRoutingModule } from './account-routing.module';
-import { AccountsListComponent, AccountComponent } from './components';
+import * as _components from './components';
 
+const COMPONENTS = [
+  _components.AccountsListComponent,
+  _components.AccountComponent,
+];
+
+const MODULES = [CommonModule, AccountRoutingModule];
 
 @NgModule({
-  declarations: [
-    AccountsListComponent,
-    AccountComponent,
-  ],
-  imports: [
-    CommonModule,
-    AccountRoutingModule
-  ]
+  declarations: [...COMPONENTS],
+  imports: [...MODULES],
 })
-export class AccountModule { }
+export class AccountModule {}

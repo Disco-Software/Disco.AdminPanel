@@ -1,29 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AccountService } from '../../../../core/services/account.service';
-import { LogInRequestModel } from '../../../../core/models/account/login.request.model';
-import {
-  UserResponseModel,
-  User,
-} from '../../../../core/models/account/user.response.model';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { finalize, take, takeUntil, tap, switchMap, subscribeOn, catchError } from 'rxjs/operators';
-import { Subject, Subscription, Observable, map, pipe, EMPTY } from 'rxjs';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
-import { LocalStorageService } from '../../../../core/services/local-storage.service';
-import { EventBusService } from '../../../../core/services/event-bus.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject, Subscription, Observable, map } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Select, Store } from '@ngxs/store';
-import { UsersState } from '../../../../core/states/users-state/users.state';
 import {
-  UserLogin,
-  Loading,
-} from '../../../../core/states/users-state/users.actions';
-import { LoadingState } from '../../../../core/states/loading-state/loading.state';
-import {
-  AddLoading,
-  RemoveLoading,
-} from '../../../../core/states/loading-state/loading.action';
+  EventBusService,
+  LocalStorageService,
+} from '@core/services';
+import { LoadingState, UsersState, UserLogin } from '@core/states';
+import { User, UserResponseModel } from '@core/models';
+
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 
 @Component({
   selector: 'app-login',
@@ -53,7 +42,6 @@ export class LoginComponent {
   });
 
   constructor(
-    private _accountService: AccountService,
     private _storageService: LocalStorageService,
     private _modalService: NgbModal,
     private _eventBusService: EventBusService,
@@ -69,7 +57,7 @@ export class LoginComponent {
       this.role = user.roleName ?? '';
 
       if (this.role !== 'Admin') {
-        console.log("user can't be hare");
+
       }
 
       this.username = user.userName;
@@ -85,22 +73,26 @@ export class LoginComponent {
   }
 
   public onSubmit() {
-    this._store.dispatch(new UserLogin({
-      email: this.loginForm.value.email,
-      password: this.loginForm.value.password
-    })).pipe(map(state => state.UsersState.userInfo), takeUntil(this.destroy$))
-    .subscribe((response: UserResponseModel) => {
-      console.log(response);
+    this._store
+      .dispatch(
+        new UserLogin({
+          email: this.loginForm.value.email,
+          password: this.loginForm.value.password,
+        })
+      )
+      .pipe(
+        map((state) => state.UsersState.userInfo),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((response: UserResponseModel) => {
+        if (response.user) {
+          this._storageService.setItem('user', response.user);
+          this._storageService.setString('accessToken', response.accessToken);
+          this._storageService.setString('refreshToken', response.refreshToken);
 
-      if(response.user){
-        this._storageService.setItem('user', response.user);
-        this._storageService.setString('accessToken', response.accessToken);
-        this._storageService.setString('refreshToken', response.refreshToken);
-
-        this._router.navigateByUrl('private/dashboard');
-      }
-
-    })
+          this._router.navigateByUrl('private/dashboard');
+        }
+      });
   }
 
   public forgotPasswordOpen() {

@@ -1,67 +1,46 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ForgotPasswordComponent } from './public/login/components/forgot-password/forgot-password.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AccountService } from './core/services/account.service';
-import { BackendService } from './core/services/backend.service';
-import { HttpClientModule } from '@angular/common/http';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CoreModule } from './core/core.module';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SharedModule } from '@shared'
+import { CoreModule } from '@core';
+
 import { environment } from '../environments/environment';
-import { LoadingState } from './core/states/loading-state/loading.state';
-import { UsersState } from './core/states/users-state/users.state';
-import { UsersService } from './core/states/users-state/users.service';
-import { PageService } from './core/services/page.service';
-import { RestService } from './core/services/rest.service';
-import { SharedModule } from './shared';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
+const COMPONENTS = [AppComponent];
 
 const LOGGERS = [
   NgxsReduxDevtoolsPluginModule.forRoot({ disabled: environment.production }),
 ];
 
-const SERVICES = [
-  RestService,
-  UsersService
-]
-
 const MODULES = [
   BrowserModule,
   CoreModule,
-  ReactiveFormsModule,
+  SharedModule,
   AppRoutingModule,
   NgbModule,
-  HttpClientModule,
-  CoreModule,
-  SharedModule,
+  BrowserAnimationsModule
 ];
 
 const NGXS_MODULES = [
-  NgxsModule.forRoot([
-    LoadingState,
-    UsersState,
-  ], { developmentMode: !environment.production }),
+  NgxsModule.forRoot([], {
+    developmentMode: !environment.production,
+  }),
   NgxsRouterPluginModule.forRoot(),
 ];
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [...COMPONENTS],
   imports: [
     ...NGXS_MODULES,
     ...MODULES,
     ...(!environment.production ? LOGGERS : []),
   ],
-  providers: [
-    ...SERVICES,
-  ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
