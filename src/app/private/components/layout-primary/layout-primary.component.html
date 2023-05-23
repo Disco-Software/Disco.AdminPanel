@@ -1,14 +1,14 @@
 <div *ngIf="(isLoading$ | async).isLoading" class="loading-bar">
   <span style="color: white">{{isLoading$ | async | json}}</span>
 </div>
-<div>
+<div class="h-vh-100">
   <app-topbar></app-topbar>
   <div class="sidebar">
     <app-sidebar></app-sidebar>
   </div>
-  <div class="page page-container bg-dark-violet pt-9 pt-md-0">
+  <div  class="h-100 page page-container bg-dark-violet pt-9 pt-md-0">
     <app-header></app-header>
-    <div class="vh-100">
+    <div>
       <router-outlet></router-outlet>
     </div>
   </div>
