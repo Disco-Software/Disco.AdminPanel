@@ -2,6 +2,7 @@
   <nav
     id="main-navbar"
     class="d-block d-md-none navbar navbar-expand-lg navbar-dark w-100 fixed-top"
+    [ngStyle]="{'height': isShowing ? '100%' : 'auto' }"
   >
     <!-- Container wrapper -->
     <div class="container-fluid">
@@ -122,7 +123,7 @@
     <div
       *ngIf="isShowing"
       [ngbCollapse]="!isShowing"
-      class="collapse navbar-collapse d-flex justify-content-around flex-column"
+      class="h-100 collapse navbar-collapse d-flex flex-column"
       id="responsiveNavBar"
     >
       <ul class=" w-100 navbar-nav mr-auto">
@@ -139,7 +140,7 @@
         </li>
       </ul>
       <app-user-info
-        class="w-auto"
+        class="w-100 p-4"
         width="100"
         [userName]="user.userName"
         [userRole]="user.roleName"
