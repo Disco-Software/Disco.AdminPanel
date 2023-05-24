@@ -14,6 +14,8 @@ const COMPONENTS = [
   _components.HeaderComponent,
   _components.UserInfoComponent,
   _components.LanguageDropdownComponent,
+  _components.NotificationComponent,
+  _components.LangualeFullDropdownComponent,
 ];
 
 const MODULES = [

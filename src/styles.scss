@@ -788,6 +788,11 @@ template {
   overflow: hidden;
 }
 
+.overflow-auto {
+  overflow: auto;
+}
+
+
 // COLORS
 .color-white {
   color: white;
@@ -823,4 +828,8 @@ template {
 .p-px-y-15{
   padding-top: 15px;
   padding-bottom: 7px;
+}
+
+.list-style-type-none {
+  list-style-type: none !important;
 }

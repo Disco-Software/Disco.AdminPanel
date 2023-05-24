@@ -1,0 +1,22 @@
+<div
+  class="w-100 py-4 px-5 color-white d-flex justify-content-between align-items-center"
+>
+  <div>
+    <mat-icon [svgIcon]="'language'"></mat-icon
+    ><span class="m-3 size-25">{{ currentLanguage?.name }}</span>
+  </div>
+  <img
+  [@openClose]="isShowing ? 'open' : 'closed'"
+    style="width: 15px"
+    (click)="toggleDropDownMenu()"
+    class="lenguage-icon icon cursor-pointer"
+    src="../../../../../assets/images/ic_sm_dropdown.svg"
+  />
+</div>
+<div [ngbCollapse]="!isShowing" class="collapse mx-8 mr-0 mb-0 mt-0 color-white">
+  <ul class="list-style-type-none mb-0">
+    <li *ngFor="let language of languages">
+      {{language?.name}}
+    </li>
+  </ul>
+</div>
