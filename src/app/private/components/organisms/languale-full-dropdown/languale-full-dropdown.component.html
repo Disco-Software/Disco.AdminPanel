@@ -6,17 +6,21 @@
     ><span class="m-3 size-25">{{ currentLanguage?.name }}</span>
   </div>
   <img
-  [@openClose]="isShowing ? 'open' : 'closed'"
+    [@openClose]="isShowing ? 'open' : 'closed'"
     style="width: 15px"
     (click)="toggleDropDownMenu()"
     class="lenguage-icon icon cursor-pointer"
     src="../../../../../assets/images/ic_sm_dropdown.svg"
   />
 </div>
-<div [ngbCollapse]="!isShowing" class="collapse mx-8 mr-0 mb-0 mt-0 color-white">
-  <ul class="list-style-type-none mb-0">
-    <li *ngFor="let language of languages">
-      {{language?.name}}
+<div [ngbCollapse]="!isShowing" class="ml-5 collapse color-white">
+  <ul class="list-style-type-none full-dropdown-list">
+    <li
+      *ngFor="let language of languages"
+      (click)="switchLanguage(language)"
+      [class.active]="language.isActive"
+    >
+      {{ language?.name }}
     </li>
   </ul>
 </div>
