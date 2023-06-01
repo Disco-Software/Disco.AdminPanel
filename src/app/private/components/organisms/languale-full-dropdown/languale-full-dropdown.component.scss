@@ -1,0 +1,13 @@
+.full-dropdown-list {
+  margin-left: 3rem;
+  li {
+    opacity: 0.5;
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+    &.active {
+      opacity: 1;
+      border-left: 1px solid white;
+      background: rgba(43, 18, 81, 0.9) !important;
+    }
+  }
+}

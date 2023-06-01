@@ -29,7 +29,12 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+<<<<<<< HEAD
               "web.config"
+=======
+              "src/WEB-INF",
+              "src/META-INF"
+>>>>>>> b70a006531ec270590c6aacd3891707a48557c34
             ],
             "styles": [
               "src/styles.scss"
