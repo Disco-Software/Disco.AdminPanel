@@ -15,7 +15,7 @@
     [class.lenguage-menu-open]="isShowing"
     [class.lenguage-menu-close]="!isShowing"
     [ngbCollapse]="!isShowing"
-
+    
     class=" lenguage-menu menu dropdown-menu" aria-labelledby="dropdownMenu1">
     <div *ngFor="let language of languages" class=" lenguage-item item d-flex justify-content-between flex-row align-items-center">
       <ng-container *ngIf="!language.isActive; else elseTemplate">
