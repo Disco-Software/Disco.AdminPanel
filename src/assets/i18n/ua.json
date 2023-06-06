@@ -1,0 +1,9 @@
+{
+  "authentication" : {
+    "title" : "Вхід",
+    "email" : "Ел.пошта",
+    "password" : "Пароль",
+    "submit" : "Увійти",
+    "forgot" : "Забули пароль?"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "authentication" : {
+    "title" : "Iniciar sesión",
+    "email" : "Correo electrónico",
+    "password" : "Contraseña",
+    "submit" : "Iniciar",
+    "forgot" : "¿Olvidaste tu contraseña?"
+  }
+}

@@ -13,6 +13,7 @@ import { LoadingState, UsersState, UserLogin } from '@core/states';
 import { User, UserResponseModel } from '@core/models';
 
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -42,12 +43,16 @@ export class LoginComponent {
   });
 
   constructor(
+    private translate : TranslateService,
     private _storageService: LocalStorageService,
     private _modalService: NgbModal,
     private _eventBusService: EventBusService,
     private _store: Store,
     private _router: Router
-  ) {}
+  ) {
+    translate.addLangs(['en', 'ua', 'sp']);
+    translate.setDefaultLang('en');
+    translate.use('en');  }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this._storageService.getString('accessToken');
