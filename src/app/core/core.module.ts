@@ -9,7 +9,6 @@ import * as _interceptors from './interceptors';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-
 const SERVICES = [
   _services.AccountService,
   _services.EventBusService,
@@ -31,16 +30,19 @@ export function httpLoaderFactory(http: HttpClient) {
 const MODULES = [NgxsModule, HttpClientModule];
 
 @NgModule({
-  imports: [CommonModule, ...MODULES, ...NGXS_MODULES, TranslateModule.forRoot({
-    loader: {
-      provide: TranslateLoader,
-      useFactory: httpLoaderFactory,
-      deps: [
-        HttpClient,
-      ],
-    }
-  })],
-  exports: [...MODULES],
+  imports: [
+    CommonModule,
+    ...MODULES,
+    ...NGXS_MODULES,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
+  ],
+  exports: [...MODULES, TranslateModule],
   providers: [...SERVICES],
 })
 export class CoreModule {}
