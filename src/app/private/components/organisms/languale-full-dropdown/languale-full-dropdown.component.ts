@@ -4,6 +4,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LanguageModel } from '@core/models';
 import { LocalStorageService } from '@core/services';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-languale-full-dropdown',
@@ -32,12 +33,12 @@ export class LangualeFullDropdownComponent implements OnInit {
   public currentLanguage: LanguageModel;
   public isShowing: boolean;
   public languages: LanguageModel[] = [
-    { name: 'English', isActive: false },
-    { name: 'Ukranian', isActive: false },
-    { name: 'Spanish', isActive: false },
+    { name: 'English', isActive: false, shortCode: 'en' },
+    { name: 'Ukranian', isActive: false, shortCode: 'ua' },
+    { name: 'Spanish', isActive: false, shortCode: 'sp' },
   ];
 
-  constructor(private _lsService: LocalStorageService, private cdr: ChangeDetectorRef, protected _domSanitizer : DomSanitizer, protected _matIconRegistry : MatIconRegistry,) {
+  constructor(private _lsService: LocalStorageService, private cdr: ChangeDetectorRef, protected _domSanitizer : DomSanitizer, protected _matIconRegistry : MatIconRegistry, private _translate: TranslateService) {
     this._matIconRegistry.addSvgIcon('language', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_language.svg'))
   }
 
@@ -74,6 +75,7 @@ export class LangualeFullDropdownComponent implements OnInit {
       this.currentLanguage.isActive = true;
       this._lsService.setItem('language', languageModel);
     }
+    this._translate.use(languageModel.shortCode)
   }
 
   public toggleDropDownMenu() {
