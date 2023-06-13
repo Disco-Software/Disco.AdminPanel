@@ -12,9 +12,9 @@ export class DashboardComponent implements OnInit {
   public title : String;
 
   public statisticCards : StatisticModel[] = [
-    {title : 'Users', count : 600, icon: 'ic_users', backgroundColor: '#3481CD', textColor: '#F3FEFF'},
-    {title : 'New users', count : 600, icon: 'ic_newUsers', backgroundColor: '#5D2AC0', textColor: '#F3FEFF'},
-    {title : 'Posts', count : 600, icon: 'ic_posts', backgroundColor: '#2CCBCB', textColor: '#F3FEFF'}
+    {title : 'statisticsCard.users', count : 600, icon: 'ic_users', backgroundColor: '#3481CD', textColor: '#F3FEFF'},
+    {title : 'statisticsCard.newUsers', count : 600, icon: 'ic_newUsers', backgroundColor: '#5D2AC0', textColor: '#F3FEFF'},
+    {title : 'statisticsCard.posts', count : 600, icon: 'ic_posts', backgroundColor: '#2CCBCB', textColor: '#F3FEFF'}
   ]
 
   constructor(private _pageService: PageService) { }

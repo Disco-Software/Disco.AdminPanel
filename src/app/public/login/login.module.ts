@@ -6,13 +6,19 @@ import { CoreModule } from '@core';
 import { LoginRoutingModule } from './login-routing.module';
 import * as _components from './components';
 
+
 const COMPONENTS = [
   _components.LoginComponent,
   _components.ForgotPasswordComponent,
   _components.ResetPasswordComponent,
 ];
 
-const MODULES = [CommonModule, CoreModule, LoginRoutingModule, SharedModule];
+const MODULES = [
+  CommonModule,
+  CoreModule,
+  LoginRoutingModule,
+  SharedModule,
+];
 
 @NgModule({
   declarations: [...COMPONENTS],

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LanguageModel } from '@core/models';
 import { LocalStorageService } from '@core/services';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-language-dropdown',
@@ -11,12 +12,14 @@ export class LanguageDropdownComponent implements OnInit {
   public currentLanguage: LanguageModel;
   public isShowing: boolean = false;
   public languages: LanguageModel[] = [
-    { name: 'English', isActive: false },
-    { name: 'Ukranian', isActive: false },
-    { name: 'Spanish', isActive: false },
+    { name: 'language.english', isActive: false, shortCode: 'en' },
+    { name: 'language.ukrainian', isActive: false , shortCode: 'ua'},
+    { name: 'language.spanish', isActive: false, shortCode: 'sp' },
   ];
 
-  constructor(private _lsService: LocalStorageService) {}
+  constructor(
+    private _lsService: LocalStorageService,
+    private _translate: TranslateService) {}
 
   ngOnInit(): void {
     const item = this._lsService.getItem('language');
@@ -38,6 +41,8 @@ export class LanguageDropdownComponent implements OnInit {
       }
       return lang;
     });
+    const shortCode : string = this._lsService.getItem('language').shortCode;
+    this._translate.use(shortCode);
   }
 
   public switchLanguage(languageModel: LanguageModel) {
@@ -50,6 +55,7 @@ export class LanguageDropdownComponent implements OnInit {
       this.currentLanguage.isActive = true;
       this._lsService.setItem('language', languageModel);
     }
+    this._translate.use(languageModel.shortCode)
   }
 
   public toggleDropDownMenu() {

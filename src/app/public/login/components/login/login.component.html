@@ -7,12 +7,12 @@
     >
       <div class="form-title title weight-4 size-50">DISCO</div>
       <div class="form-login weight-4 size-32">
-        <h4>Log in</h4>
+        <h4>{{'authentication.title' | translate}}</h4>
       </div>
       <div class="mw-100 form-inputs inputs">
         <form [formGroup]="loginForm" (submit)="onSubmit()" class="mb-5">
           <div class="inputs-input weight-4 size-16 d-flex flex-column mb-4">
-            <label class="m-3 mb-2 mt-0" for="email">E-mail</label>
+            <label class="m-3 mb-2 mt-0" for="email">{{'authentication.email' | translate}}</label>
             <input
               class=" p-2"
               type="email"
@@ -22,7 +22,7 @@
             />
           </div>
           <div class="inputs-input weight-4 size-16 d-flex flex-column">
-            <label class="m-3 mb-2 mt-0" for="password">Password</label>
+            <label class="m-3 mb-2 mt-0" for="password">{{'authentication.password' | translate}}</label>
             <input
               class=" p-2"
               type="password"
@@ -40,14 +40,14 @@
     <ng-template #submit>
         <div class=" form-submit submit weight-4 size-24">
           <button mat-button class=" mb-5 py-2 px-5" (click)="onSubmit()">
-            Log in
+            {{'authentication.submit' | translate}}
           </button>
         </div>
       </ng-template>
 
       <div class="form-forgot forgot">
         <button class="pb-1" (click)="forgotPasswordOpen()">
-          <span>Forgot your password?</span>
+          <span>{{'authentication.forgot' | translate}}</span>
         </button>
       </div>
     </div>

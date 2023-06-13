@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LocalStorageService } from '@core/services';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,10 +15,10 @@ export class SidebarComponent implements OnInit {
 
   public user : User;
   public routes : Routes[] = [
-    { path: 'dashboard', title: 'Overview', icon: 'dashboard'},
-    { path: 'accounts', title: 'Accounts', icon: 'accounts'},
-    { path: 'post', title: 'Posts', icon: 'posts'},
-    { path: 'help', title: 'Help', icon: 'help'},
+    { path: 'dashboard', title: 'sidebar.overview', icon: 'dashboard'},
+    { path: 'accounts', title: 'sidebar.accounts', icon: 'accounts'},
+    { path: 'post', title: 'sidebar.posts', icon: 'posts'},
+    { path: 'help', title: 'sidebar.help', icon: 'help'},
   ]
 
   isShowing : boolean = false;
@@ -27,7 +28,8 @@ export class SidebarComponent implements OnInit {
     protected _localStorageService: LocalStorageService,
     protected _router : Router,
     protected _matIconRegistry : MatIconRegistry,
-    protected _domSanitizer : DomSanitizer
+    protected _domSanitizer : DomSanitizer,
+    private _translate: TranslateService
     ) {
       this._matIconRegistry.addSvgIcon('dashboard', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_dashboard.svg'))
       this._matIconRegistry.addSvgIcon('accounts', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_accounts.svg'))
@@ -37,6 +39,9 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this._localStorageService.getItem<User>("user");
+    const shortCode : string = this._localStorageService.getItem('language').shortCode;
+
+    this._translate.use(shortCode);
   }
 
   public toggleMenu() {

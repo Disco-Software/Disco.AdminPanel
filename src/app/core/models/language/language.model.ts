@@ -1,4 +1,5 @@
 export interface LanguageModel{
-  name: String;
-  isActive: Boolean;
+  name: string;
+  isActive: boolean;
+  shortCode: string;
 }

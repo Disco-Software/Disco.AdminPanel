@@ -6,6 +6,7 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { PrivateRoutingModule } from './private-routing.module';
 import * as _components from './components';
+import { CoreModule } from '../core/core.module';
 
 const COMPONENTS = [
   _components.LayoutPrimaryComponent,
@@ -20,6 +21,7 @@ const COMPONENTS = [
 
 const MODULES = [
   CommonModule,
+  CoreModule,
   HttpClientModule,
   NgbCollapseModule,
   MatIconModule,

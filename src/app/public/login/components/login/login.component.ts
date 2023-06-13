@@ -5,14 +5,12 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription, Observable, map } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Select, Store } from '@ngxs/store';
-import {
-  EventBusService,
-  LocalStorageService,
-} from '@core/services';
+import { EventBusService, LocalStorageService } from '@core/services';
 import { LoadingState, UsersState, UserLogin } from '@core/states';
-import { User, UserResponseModel } from '@core/models';
+import { LanguageModel, User, UserResponseModel } from '@core/models';
 
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -42,12 +40,17 @@ export class LoginComponent {
   });
 
   constructor(
+    private translate: TranslateService,
     private _storageService: LocalStorageService,
     private _modalService: NgbModal,
     private _eventBusService: EventBusService,
     private _store: Store,
     private _router: Router
-  ) {}
+  ) {
+    const language : LanguageModel = this._storageService.getItem('language');
+
+    translate.use(language.shortCode);
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this._storageService.getString('accessToken');
@@ -57,7 +60,6 @@ export class LoginComponent {
       this.role = user.roleName ?? '';
 
       if (this.role !== 'Admin') {
-
       }
 
       this.username = user.userName;

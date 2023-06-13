@@ -1,0 +1,37 @@
+{
+  "authentication" : {
+    "title" : "Iniciar sesión",
+    "email" : "Correo electrónico",
+    "password" : "Contraseña",
+    "submit" : "Iniciar",
+    "forgot" : "¿Olvidaste tu contraseña?"
+  },
+
+  "sidebar" : {
+    "overview" : "Visión general",
+    "accounts" : "Cuentas",
+    "posts" : "Puestos",
+    "help" : "Comentario"
+  },
+
+  "language" : {
+    "english" : "Inglés",
+    "spanish" : "Español",
+    "ukrainian" : "Ucranio"
+  },
+
+  "statisticsCard" : {
+    "users" : "Користувачі",
+    "newUsers" : "Нові користувачі",
+    "posts" : "Публікації"
+  },
+
+  "overview" : {
+    "day" : "День",
+    "week" : "Тиждень",
+    "month" : "Місяць",
+    "year" : "Рік"
+  }
+
+
+}

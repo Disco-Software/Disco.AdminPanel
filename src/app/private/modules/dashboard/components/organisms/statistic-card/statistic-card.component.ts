@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'disco-statistic-card',
@@ -16,6 +17,7 @@ export class StatisticCardComponent implements OnInit {
   @Input() public textColor : string;
 
   constructor(
+    private _translate : TranslateService,
     private _matIconRegistry : MatIconRegistry,
     private _domSanitizer : DomSanitizer) {
       this._matIconRegistry.addSvgIcon('ic_users', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_users.svg'))
@@ -24,6 +26,8 @@ export class StatisticCardComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this._translate.use('en');
+    
   }
 
 }
