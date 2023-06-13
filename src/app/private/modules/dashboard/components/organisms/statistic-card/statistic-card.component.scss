@@ -30,6 +30,12 @@ $breakPointDesktop: 1500px;
     font-size: 2vw;
     line-height: 17px;
     color: #e6e0d2;
+    @media (min-width: 1250px) {
+      line-height: 1.5rem;
+    }
+    @media (min-width: 1800px) {
+      line-height: 2.5rem;
+    }
     @media (max-width: $breakPointTablet) {
       font-size: 3vw;
     }

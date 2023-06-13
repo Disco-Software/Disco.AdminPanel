@@ -64,5 +64,10 @@ ul > li{
 
     text-shadow: 0px 4px 7px rgba(160, 68, 255, 0.7);
   }
+  &-brand {
+    @media(max-width: 315px) {
+      font-size: 35px !important;
+    }
+  }
 }
 

@@ -41,6 +41,8 @@ export class LanguageDropdownComponent implements OnInit {
       }
       return lang;
     });
+    const shortCode : string = this._lsService.getItem('language').shortCode;
+    this._translate.use(shortCode);
   }
 
   public switchLanguage(languageModel: LanguageModel) {

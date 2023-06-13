@@ -62,7 +62,9 @@ export class LangualeFullDropdownComponent implements OnInit {
       }
       return lang;
     });
-    console.log(this.currentLanguage);
+    const shortCode : string = this._lsService.getItem('language').shortCode;
+
+    this._translate.use(shortCode);
   }
 
   public switchLanguage(languageModel: LanguageModel) {
