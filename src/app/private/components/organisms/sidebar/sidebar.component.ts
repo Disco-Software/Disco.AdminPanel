@@ -14,10 +14,10 @@ export class SidebarComponent implements OnInit {
 
   public user : User;
   public routes : Routes[] = [
-    { path: 'dashboard', title: 'Overview', icon: 'dashboard'},
-    { path: 'accounts', title: 'Accounts', icon: 'accounts'},
-    { path: 'post', title: 'Posts', icon: 'posts'},
-    { path: 'help', title: 'Help', icon: 'help'},
+    { path: 'dashboard', title: 'sidebar.overview', icon: 'dashboard'},
+    { path: 'accounts', title: 'sidebar.accounts', icon: 'accounts'},
+    { path: 'post', title: 'sidebar.posts', icon: 'posts'},
+    { path: 'help', title: 'sidebar.help', icon: 'help'},
   ]
 
   isShowing : boolean = false;

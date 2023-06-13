@@ -7,7 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Select, Store } from '@ngxs/store';
 import { EventBusService, LocalStorageService } from '@core/services';
 import { LoadingState, UsersState, UserLogin } from '@core/states';
-import { User, UserResponseModel } from '@core/models';
+import { LanguageModel, User, UserResponseModel } from '@core/models';
 
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -47,9 +47,9 @@ export class LoginComponent {
     private _store: Store,
     private _router: Router
   ) {
-    translate.addLangs(['en', 'ua', 'sp']);
-    translate.setDefaultLang('en');
-    translate.use('en');
+    const language : LanguageModel = this._storageService.getItem('language');
+
+    translate.use(language.shortCode);
   }
 
   ngOnInit(): void {

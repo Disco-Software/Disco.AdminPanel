@@ -12,12 +12,14 @@ export class LanguageDropdownComponent implements OnInit {
   public currentLanguage: LanguageModel;
   public isShowing: boolean = false;
   public languages: LanguageModel[] = [
-    { name: 'English', isActive: false, shortCode: 'en' },
-    { name: 'Ukranian', isActive: false , shortCode: 'ua'},
-    { name: 'Spanish', isActive: false, shortCode: 'sp' },
+    { name: 'language.english', isActive: false, shortCode: 'en' },
+    { name: 'language.ukrainian', isActive: false , shortCode: 'ua'},
+    { name: 'language.spanish', isActive: false, shortCode: 'sp' },
   ];
 
-  constructor(private _lsService: LocalStorageService, private _translate: TranslateService) {}
+  constructor(
+    private _lsService: LocalStorageService,
+    private _translate: TranslateService) {}
 
   ngOnInit(): void {
     const item = this._lsService.getItem('language');

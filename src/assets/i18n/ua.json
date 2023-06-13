@@ -5,5 +5,32 @@
     "password" : "Пароль",
     "submit" : "Увійти",
     "forgot" : "Забули пароль?"
+  },
+
+  "sidebar" : {
+    "overview" : "Огляд",
+    "accounts" : "Облікові записи",
+    "posts" : "Публікації",
+    "help" : "Зворотній зв'язок"
+  },
+
+  "language" : {
+    "english" : "Англійська",
+    "spanish" : "Іспаньська",
+    "ukrainian" : "Україньська"
+  },
+
+  "statisticsCard" : {
+    "users" : "Користувачі",
+    "newUsers" : "Нові користувачі",
+    "posts" : "Публікації"
+  },
+
+  "overview" : {
+    "day" : "День",
+    "week" : "Тиждень",
+    "month" : "Місяць",
+    "year" : "Рік"
   }
+
 }
