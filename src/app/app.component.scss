@@ -17,5 +17,9 @@
   background: url(../assets/gifs/gif_siteloader.gif) no-repeat center center !important;
 
   content: "";
+
+  @media (max-width: 614.4px) {
+    background-size: 90% !important;
+  }
 }
 
