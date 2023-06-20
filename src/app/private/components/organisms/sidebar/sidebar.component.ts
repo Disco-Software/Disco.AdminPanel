@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
 
   public user : User;
   public routes : Routes[] = [
-    { path: 'overview', title: 'sidebar.overview', icon: 'dashboard'},
+    { path: 'overview', title: 'sidebar.overview', icon: 'overview'},
     { path: 'accounts', title: 'sidebar.accounts', icon: 'accounts'},
     { path: 'post', title: 'sidebar.posts', icon: 'posts'},
     { path: 'help', title: 'sidebar.help', icon: 'help'},
@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit {
     protected _domSanitizer : DomSanitizer,
     private _translate: TranslateService
     ) {
-      this._matIconRegistry.addSvgIcon('dashboard', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_dashboard.svg'))
+      this._matIconRegistry.addSvgIcon('overview', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_dashboard.svg'))
       this._matIconRegistry.addSvgIcon('accounts', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_accounts.svg'))
       this._matIconRegistry.addSvgIcon('posts', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_posts.svg'))
       this._matIconRegistry.addSvgIcon('help', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_help.svg'))

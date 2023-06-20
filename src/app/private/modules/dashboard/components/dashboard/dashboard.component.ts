@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this._pageService.setTitle({
       pageName : 'Overview',
-      pageIcon : 'dashboard',
+      pageIcon : 'overview',
     });
   }
 

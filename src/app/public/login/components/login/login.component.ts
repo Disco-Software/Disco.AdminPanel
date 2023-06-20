@@ -92,7 +92,7 @@ export class LoginComponent {
           this._storageService.setString('accessToken', response.accessToken);
           this._storageService.setString('refreshToken', response.refreshToken);
 
-          this._router.navigateByUrl('private/dashboard');
+          this._router.navigateByUrl('private/overview');
         }
       });
   }
