@@ -13,7 +13,7 @@ import { Routes, User } from '@core/models';
 export class TopbarComponent implements OnInit {
 
   public routes : Routes[] = [
-    { path: 'dashboard', title: 'Overview', icon: 'dashboard'},
+    { path: 'overview', title: 'Overview', icon: 'dashboard'},
     { path: 'accounts', title: 'Accounts', icon: 'accounts'},
     { path: 'post', title: 'Posts', icon: 'posts'},
     { path: 'help', title: 'Help', icon: 'help'},

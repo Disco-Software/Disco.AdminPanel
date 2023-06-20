@@ -1,4 +1,4 @@
 export interface PageModel {
-  pageName : String;
+  pageName : string;
   pageIcon : string;
 }
