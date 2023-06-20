@@ -3,13 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutPrimaryComponent } from './components';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+  { path: '', pathMatch: 'full', redirectTo: 'overview' },
   {
     path: '',
     component: LayoutPrimaryComponent,
     children: [
       {
-        path: 'dashboard',
+        path: 'overview',
         loadChildren: () =>
           import('../private/modules/dashboard/dashboard.module').then(
             (m) => m.DashboardModule
