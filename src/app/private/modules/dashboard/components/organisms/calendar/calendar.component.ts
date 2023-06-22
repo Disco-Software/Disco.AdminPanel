@@ -3,6 +3,7 @@ import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepickerDayView } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-day-view';
 import { StatisticsBy } from '@core/models';
+import { LocalStorageService } from '@core/services';
 
 @Component({
   selector: 'disco-calendar',
@@ -17,56 +18,95 @@ export class CalendarComponent implements OnInit {
   public currentState: string;
 
   public selectedItem: string;
+  public selectedType: string;
 
-  public state: Array<string> = ['Day', 'Week', 'Month', 'Year'];
+  public state: Array<string> = ['Day', 'Month', 'Year'];
 
-  public Months: any = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+  public Month: any = [
+    { label: 'January' },
+    { label: 'February' },
+    { label: 'March' },
+    { label: 'April' },
+    { label: 'May' },
+    { label: 'June' },
+    { label: 'July' },
+    { label: 'August' },
+    { label: 'September' },
+    { label: 'October' },
+    { label: 'November' },
+    { label: 'December' },
   ];
 
-  public day: any = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
+  public Day: any = [
+    { label: 'Sunday' },
+    { label: 'Monday' },
+    { label: 'Tuesday' },
+    { label: 'Wednesday' },
+    { label: 'Thursday' },
+    { label: 'Friday' },
+    { label: 'Saturday' },
   ];
 
-  constructor(protected ngbCalendar: NgbCalendar) {}
+  public Year: any = [];
+
+  constructor(
+    protected ngbCalendar: NgbCalendar,
+    private _lsService: LocalStorageService
+  ) {}
 
   ngOnInit(): void {
-    let days = this.ngbCalendar.getMonths();
+    this.getYearRange();
+    const date: Date = new Date();
+
+    this.state.forEach((s) => {
+      this[s].forEach((item, i) => {
+        if (i === date['get' + s]()) {
+          item.selected = true;
+        }
+      });
+    });
+    this.currentState = 'Day'
+  }
+
+  getYearRange(): void {
+    const yearOfRegistration = new Date(
+      this._lsService.getItem('user').dateOfRegister
+    ).getFullYear();
+    const yearOfNow = new Date().getFullYear();
+    for (let i = yearOfRegistration; i <= yearOfNow; i++) {
+      this.Year = [
+        ...this.Year,
+        { label: i, selected: i === yearOfNow ? true : false },
+      ];
+    }
   }
 
   change(value: 'Next' | 'Back') {
+    let array = this[this.currentState];
+    let selectedIndex = array.findIndex((s) => s.selected);
+    //Make circle array start
+    array[selectedIndex].selected = false;
+    if (value === 'Next') {
+      if (array.length - 1 !== selectedIndex) {
+        ++selectedIndex;
+      } else {
+        selectedIndex = 0;
+      }
+    } else {
+      if (selectedIndex !== 0) {
+        --selectedIndex;
+      } else {
+        selectedIndex = array.length - 1;
+      }
+    }
+    array[selectedIndex].selected = true;
+  }
 
+  getArray(string) {
+    return this[string];
   }
 
   setState(item: string) {
     this.currentState = item;
-    switch (this.currentState) {
-      case 'Day':
-        this.selectedItem = this.day[this.ngbCalendar.getWeekday(this.ngbCalendar.getToday())]
-        break;
-      case 'Week':
-        break;
-      case 'Month':
-        break;
-      case 'Year':
-        break;
-    }
   }
 }
