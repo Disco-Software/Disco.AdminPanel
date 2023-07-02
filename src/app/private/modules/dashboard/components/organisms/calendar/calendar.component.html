@@ -203,7 +203,15 @@
 
       <p class="calendar calendar-text text-center m-0 p-0">
         <ng-container *ngFor="let item of getArray(currentState)">
-          <span *ngIf="item.selected">{{ item.label }}</span>
+          <span *ngIf="item.selected">
+            {{ item.label }} 
+            <ng-container [ngSwitch]="currentState">
+              <span *ngSwitchCase="'Month'"> {{ getCurrent('Year')}} </span>
+              <span *ngSwitchCase="'Day'"> d</span>
+            </ng-container>
+          
+          
+          </span>
         </ng-container>
       </p>
 

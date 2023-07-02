@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
-import { NgbDatepickerDayView } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-day-view';
 import { StatisticsBy } from '@core/models';
 import { LocalStorageService } from '@core/services';
 
@@ -20,7 +19,7 @@ export class CalendarComponent implements OnInit {
   public selectedItem: string;
   public selectedType: string;
 
-  public state: Array<string> = ['Day', 'Month', 'Year'];
+  public state: Array<string> = ['Day', 'Week', 'Month', 'Year'];
 
   public Month: any = [
     { label: 'January' },
@@ -49,13 +48,16 @@ export class CalendarComponent implements OnInit {
 
   public Year: any = [];
 
+  public Week: any = [];
+
   constructor(
     protected ngbCalendar: NgbCalendar,
     private _lsService: LocalStorageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.getYearRange();
+    this.setYearRange();
+    this.setWeekData()
     const date: Date = new Date();
 
     this.state.forEach((s) => {
@@ -65,10 +67,72 @@ export class CalendarComponent implements OnInit {
         }
       });
     });
+    // console.log(this.Day)
+    // console.log(this.Month)
+    // console.log(this.Year)
     this.currentState = 'Day'
   }
 
-  getYearRange(): void {
+  setDayData() {
+
+  }
+
+  setWeekData() {
+    const year = new Date().getFullYear()
+    const month = new Date().getMonth()
+    const day = new Date()
+    let array = []
+
+    // console.log(day.getDay())
+
+    var firstOfMonth = new Date(year, month, 1);
+    // console.log(firstOfMonth.getDay())
+
+    var lastOfMonth = new Date(year, month + 1, 0);
+    // console.log(lastOfMonth.getDate())
+    // console.log(year, ' ', month, ' ', day)
+    // for(let i = 1; i <= )
+
+    // console.log(firstOfMonth, firstOfMonth.getDay());
+
+    let tempArray = []
+
+    for(let i = firstOfMonth.getDate(); i <= lastOfMonth.getDate(); i++) {
+      const dayInfo = new Date(year, month, i)
+      // console.log(dayInfo)
+        if(dayInfo.getDay() !== 1) {
+          // не понеділок
+          const day = {
+            label: dayInfo.getDate() + '.' + dayInfo.getMonth() + '.' + dayInfo.getFullYear()
+          }
+          tempArray = [...tempArray, day]
+          // console.log(dayInfo)
+        } else {
+          //понеділок
+          array = [...array, tempArray]
+          tempArray = []
+          const day = {
+            label: dayInfo.getDate() + '.' + dayInfo.getMonth() + '.' + dayInfo.getFullYear()
+          }
+          tempArray = [...tempArray, day]
+          if(i === lastOfMonth.getDate()) {
+            array = [...array, tempArray]
+          }
+          // console.log(dayInfo)
+        }
+
+      
+      
+    }
+console.log(array)
+
+    //ініт:
+    // зробити масив об'єктів, а не масив масивів({label, selected})
+    // визначити selected тиждень
+    // протестити з іншими місяцями
+  }
+
+  setYearRange(): void {
     const yearOfRegistration = new Date(
       this._lsService.getItem('user').dateOfRegister
     ).getFullYear();
@@ -81,7 +145,7 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  change(value: 'Next' | 'Back') {
+  change(value: 'Next' | 'Back'): void {
     let array = this[this.currentState];
     let selectedIndex = array.findIndex((s) => s.selected);
     //Make circle array start
@@ -102,11 +166,21 @@ export class CalendarComponent implements OnInit {
     array[selectedIndex].selected = true;
   }
 
-  getArray(string) {
+  getArray(string): Array<any> {
     return this[string];
   }
 
   setState(item: string) {
     this.currentState = item;
+    // if (item === 'Week' && this.Week.length === 0) {
+    //   console.log(this.setWeekData());
+
+    // }
+  }
+
+
+
+  getCurrent(state: string): string {
+    return this[state].find(el => el.selected).label;
   }
 }
