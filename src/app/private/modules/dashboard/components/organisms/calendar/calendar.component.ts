@@ -57,19 +57,19 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.setYearRange();
-    this.setWeekData()
+    this.setWeekData(new Date().getFullYear(), new Date().getMonth(), new Date())
     const date: Date = new Date();
 
     this.state.forEach((s) => {
-      this[s].forEach((item, i) => {
-        if (i === date['get' + s]()) {
-          item.selected = true;
-        }
-      });
+      if (s !== 'Week') {
+        this[s].forEach((item, i) => {
+          if (i === date['get' + s]()) {
+            item.selected = true;
+          }
+        });
+      }
+
     });
-    // console.log(this.Day)
-    // console.log(this.Month)
-    // console.log(this.Year)
     this.currentState = 'Day'
   }
 
@@ -77,59 +77,85 @@ export class CalendarComponent implements OnInit {
 
   }
 
-  setWeekData() {
-    const year = new Date().getFullYear()
-    const month = new Date().getMonth()
-    const day = new Date()
-    let array = []
-
-    // console.log(day.getDay())
+  setWeekData(year: number, month: number, day?: Date): void {
+    let monthData = [];
 
     var firstOfMonth = new Date(year, month, 1);
-    // console.log(firstOfMonth.getDay())
 
     var lastOfMonth = new Date(year, month + 1, 0);
-    // console.log(lastOfMonth.getDate())
-    // console.log(year, ' ', month, ' ', day)
-    // for(let i = 1; i <= )
 
-    // console.log(firstOfMonth, firstOfMonth.getDay());
+    let weekData = []
 
-    let tempArray = []
-
-    for(let i = firstOfMonth.getDate(); i <= lastOfMonth.getDate(); i++) {
+    for (let i = firstOfMonth.getDate(); i <= lastOfMonth.getDate(); i++) {
       const dayInfo = new Date(year, month, i)
-      // console.log(dayInfo)
-        if(dayInfo.getDay() !== 1) {
-          // не понеділок
-          const day = {
-            label: dayInfo.getDate() + '.' + dayInfo.getMonth() + '.' + dayInfo.getFullYear()
-          }
-          tempArray = [...tempArray, day]
-          // console.log(dayInfo)
-        } else {
-          //понеділок
-          array = [...array, tempArray]
-          tempArray = []
-          const day = {
-            label: dayInfo.getDate() + '.' + dayInfo.getMonth() + '.' + dayInfo.getFullYear()
-          }
-          tempArray = [...tempArray, day]
-          if(i === lastOfMonth.getDate()) {
-            array = [...array, tempArray]
-          }
-          // console.log(dayInfo)
+      if (dayInfo.getDay() !== 1) {
+        // не понеділок
+
+        //створюємо інформацію про день
+        let labelInfo = {
+          label: dayInfo.getDate() + '.' + dayInfo.getMonth() + '.' + dayInfo.getFullYear(),
+          selected: false
         }
 
-      
-      
-    }
-console.log(array)
+        // перевіряємо чи ітерабельний день - це сьогодні
+        if (day && day.getDate() === dayInfo.getDate()) {
+          labelInfo.selected = true;
+        }
 
-    //ініт:
-    // зробити масив об'єктів, а не масив масивів({label, selected})
-    // визначити selected тиждень
-    // протестити з іншими місяцями
+        // додаємо інформацію про день в масив тижня
+        weekData = [...weekData, labelInfo]
+
+        // додати тиждень в загальний масив, якщо зараз останній день місяця
+        if(i === lastOfMonth.getDate()) {
+          monthData = [...monthData, {
+            label: weekData.length !== 1 ? weekData[0].label + ' - ' + weekData.at(-1).label : weekData[0].label,
+            selected: !!weekData.find(el => el.selected)
+          }]
+        }
+      } else {
+        //понеділок
+
+        // коли наступає понеділок - додаємо інформацію зі всього минулого тижня в загальний масив місяця
+        monthData = [...monthData, {
+          label: weekData.length !== 1 ? weekData[0].label + ' - ' + weekData.at(-1).label : weekData[0].label,
+          selected: !!weekData.find(el => el.selected)
+        }]
+
+        // після того, як додали інформацію про минулий тиждень, очищуємо масив тижня, щоб створювати в ньому наступний масив тижня
+        weekData = []
+
+        //створюємо інформацію про день
+        const labelInfo = {
+          label: dayInfo.getDate() + '.' + dayInfo.getMonth() + '.' + dayInfo.getFullYear(),
+          selected: false
+        }
+
+        // перевіряємо чи ітерабельний день - це сьогодні
+        if (day && day.getDate() === dayInfo.getDate()) {
+          labelInfo.selected = true;
+        }
+
+        // додаємо інформацію про день в масив тижня
+        weekData = [...weekData, labelInfo]
+
+        // перевіряємо чи цей понеділок - це не останній день місяця. якщо останній, то додаємо про нього інформацію в загальний масив
+        if (i === lastOfMonth.getDate()) {
+          monthData = [...monthData, {
+            label: weekData.length !== 1 ? weekData[0].label + ' - ' + weekData.at(-1).label : weekData[0].label,
+            selected: !!weekData.find(el => el.selected)
+          }]
+        }
+      }
+
+
+
+    }
+    // якщо ми не передали день як аргумент, це означає, що ми перегенеровуємо масив тижнів і ми маємо задати selected тиждень як перший
+    if(!day) {
+      monthData[0].selected = true
+    }
+    console.log(monthData)
+    this.Week = monthData;
   }
 
   setYearRange(): void {
@@ -164,6 +190,17 @@ console.log(array)
       }
     }
     array[selectedIndex].selected = true;
+
+
+    // перегенерація даних, якщо ми змінюємо інший стейт
+    switch (this.currentState) {
+      case 'Month':
+      case 'Year': 
+        const year = this.Year.find(el=>el.selected).label
+        const month = this.Month.findIndex(el=>el.selected)
+        this.setWeekData(year, month);
+        break;
+    }
   }
 
   getArray(string): Array<any> {
