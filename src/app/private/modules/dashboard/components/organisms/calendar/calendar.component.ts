@@ -19,6 +19,16 @@ export class CalendarComponent implements OnInit {
   public selectedItem: string;
   public selectedType: string;
 
+  public dayEnum: any = [
+    { label: 'Monday' },
+    { label: 'Tuesday' },
+    { label: 'Wednesday' },
+    { label: 'Thursday' },
+    { label: 'Friday' },
+    { label: 'Saturday' },
+    { label: 'Sunday' },
+  ];
+
   public state: Array<string> = ['Day', 'Week', 'Month', 'Year'];
 
   public Month: any = [
@@ -36,15 +46,7 @@ export class CalendarComponent implements OnInit {
     { label: 'December' },
   ];
 
-  public Day: any = [
-    { label: 'Sunday' },
-    { label: 'Monday' },
-    { label: 'Tuesday' },
-    { label: 'Wednesday' },
-    { label: 'Thursday' },
-    { label: 'Friday' },
-    { label: 'Saturday' },
-  ];
+  public Day: any = []
 
   public Year: any = [];
 
@@ -56,12 +58,13 @@ export class CalendarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const date: Date = new Date();
     this.setYearRange();
     this.setWeekData(new Date().getFullYear(), new Date().getMonth(), new Date())
-    const date: Date = new Date();
+    this.setDayData(this.Week.find((el) => el.selected), true);
 
     this.state.forEach((s) => {
-      if (s !== 'Week') {
+      if (s !== 'Week' && s !== 'Day') {
         this[s].forEach((item, i) => {
           if (i === date['get' + s]()) {
             item.selected = true;
@@ -73,8 +76,37 @@ export class CalendarComponent implements OnInit {
     this.currentState = 'Day'
   }
 
-  setDayData() {
+  setDayData(week: { label: string, selected?: boolean }, isInit?: boolean): void {
+    this.Day = []
+    const selectedWeek = week;
+    const firstDayOfTheWeek = selectedWeek.label.split(' - ')[0]
+    const lastDayOfTheWeek = selectedWeek.label.split(' - ')[1]
+    let firstDay = new Date(firstDayOfTheWeek.split('.').reverse().join(', ')).getDay()
+    let lastDay = new Date(lastDayOfTheWeek.split('.').reverse().join(', ')).getDay()
+    firstDay = this.changeDayNumber(firstDay)
+    lastDay = this.changeDayNumber(lastDay)
+    for (let i = firstDay; i <= lastDay; i++) {
+      let dayInfo = this.dayEnum[i]
+      if (isInit) {
+        let today: number = new Date().getDay()
+        today = this.changeDayNumber(today)
+        if (today === i) {
+          dayInfo.selected = true
+        }
 
+      } else {
+        this.dayEnum.forEach(el => el.selected = false)
+      }
+      this.Day = [...this.Day, dayInfo]
+    }
+    if (!isInit) {
+      this.Day[0].selected = true
+    }
+    console.log(this.Day)
+  }
+
+  changeDayNumber(day: number): number {
+    return day === 0 ? day = 6 : --day;
   }
 
   setWeekData(year: number, month: number, day?: Date): void {
@@ -93,7 +125,7 @@ export class CalendarComponent implements OnInit {
 
         //створюємо інформацію про день
         let labelInfo = {
-          label: dayInfo.getDate() + '.' + dayInfo.getMonth() + '.' + dayInfo.getFullYear(),
+          label: dayInfo.getDate() + '.' + (dayInfo.getMonth() + 1) + '.' + dayInfo.getFullYear(),
           selected: false
         }
 
@@ -106,7 +138,7 @@ export class CalendarComponent implements OnInit {
         weekData = [...weekData, labelInfo]
 
         // додати тиждень в загальний масив, якщо зараз останній день місяця
-        if(i === lastOfMonth.getDate()) {
+        if (i === lastOfMonth.getDate()) {
           monthData = [...monthData, {
             label: weekData.length !== 1 ? weekData[0].label + ' - ' + weekData.at(-1).label : weekData[0].label,
             selected: !!weekData.find(el => el.selected)
@@ -126,7 +158,7 @@ export class CalendarComponent implements OnInit {
 
         //створюємо інформацію про день
         const labelInfo = {
-          label: dayInfo.getDate() + '.' + dayInfo.getMonth() + '.' + dayInfo.getFullYear(),
+          label: dayInfo.getDate() + '.' + (dayInfo.getMonth() + 1) + '.' + dayInfo.getFullYear(),
           selected: false
         }
 
@@ -151,11 +183,13 @@ export class CalendarComponent implements OnInit {
 
     }
     // якщо ми не передали день як аргумент, це означає, що ми перегенеровуємо масив тижнів і ми маємо задати selected тиждень як перший
-    if(!day) {
+    if (!day) {
       monthData[0].selected = true
     }
-    console.log(monthData)
+
     this.Week = monthData;
+    // this.setDayData(this.Week.find(el => el.selected));
+    console.log(this.Week)
   }
 
   setYearRange(): void {
@@ -195,10 +229,12 @@ export class CalendarComponent implements OnInit {
     // перегенерація даних, якщо ми змінюємо інший стейт
     switch (this.currentState) {
       case 'Month':
-      case 'Year': 
-        const year = this.Year.find(el=>el.selected).label
-        const month = this.Month.findIndex(el=>el.selected)
-        this.setWeekData(year, month);
+      case 'Year':
+        this.setWeekData(this.Year.find(el => el.selected).label, this.Month.findIndex(el => el.selected));
+        this.setDayData(this.Week.find((el) => el.selected));
+        break;
+      case 'Week':
+        this.setDayData(this.Week.find((el)=>el.selected))
         break;
     }
   }
@@ -209,10 +245,6 @@ export class CalendarComponent implements OnInit {
 
   setState(item: string) {
     this.currentState = item;
-    // if (item === 'Week' && this.Week.length === 0) {
-    //   console.log(this.setWeekData());
-
-    // }
   }
 
 

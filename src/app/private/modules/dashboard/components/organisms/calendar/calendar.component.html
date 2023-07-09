@@ -207,7 +207,7 @@
             {{ item.label }} 
             <ng-container [ngSwitch]="currentState">
               <span *ngSwitchCase="'Month'"> {{ getCurrent('Year')}} </span>
-              <span *ngSwitchCase="'Day'"> d</span>
+              <span *ngSwitchCase="'Day'"> {{ getCurrent('Week') }} </span>
             </ng-container>
           
           
