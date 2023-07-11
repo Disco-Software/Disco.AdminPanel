@@ -15,13 +15,20 @@ export class HeaderInterceptor implements HttpInterceptor {
   constructor(private accountService: AccountService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log('works')
     const token = localStorage.getItem('accessToken');
 
     if (token !== null) {
       req = this.addToken(req, token);
     }
 
-    return next.handle(req);
+    return next.handle(req).pipe(catchError(error => {
+      if (error instanceof HttpErrorResponse && error.status === 401) {
+        return this.handleUnauthorizedErrorResponse(req, next);
+      }
+
+      return throwError(() => error);
+    }));
   }
 
   private handleUnauthorizedErrorResponse(request: HttpRequest<any>, next: HttpHandler) {
@@ -50,7 +57,7 @@ export class HeaderInterceptor implements HttpInterceptor {
           catchError((err) => {
             this.isRefreshing = false;
 
-            return throwError(err);
+            return throwError(() => err);
           })
         );
     }
@@ -62,6 +69,7 @@ export class HeaderInterceptor implements HttpInterceptor {
   }
 
   private addToken(request: HttpRequest<any>, token: string) {
-    return request.clone({ headers: request.headers.set('Authorization', token) });
+    console.log(token)
+    return request.clone({ headers: request.headers.set('Authorization', `Bearer ${token}`) });
   }
 }

@@ -25,7 +25,7 @@ export class StatisticsState {
     { patchState }: StateContext<{ statistics: StatisticsResponseModel }>,
     { payload }: StatisticsAction
   ) {
-    return this._statisticsService.getStatistics(payload.fromDate, payload.toDate, payload.statisticsBy.toString())
+    return this._statisticsService.getStatistics(payload.fromDate, payload.toDate, payload.statisticsBy.toString(), StatisticsAction.description)
       .pipe(
         catchError((err: HttpErrorResponse) => {
           return EMPTY;

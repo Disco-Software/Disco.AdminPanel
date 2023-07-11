@@ -7,10 +7,12 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SharedModule } from '@shared'
 import { CoreModule } from '@core';
+import { HeaderInterceptor } from "@core/interceptors";
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const COMPONENTS = [AppComponent];
 
@@ -42,5 +44,12 @@ const NGXS_MODULES = [
     ...(!environment.production ? LOGGERS : []),
   ],
   bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptor,
+      multi: true,
+  },
+  ]
 })
 export class AppModule {}

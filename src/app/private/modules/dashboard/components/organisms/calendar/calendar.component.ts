@@ -3,6 +3,8 @@ import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { StatisticsBy } from '@core/models';
 import { LocalStorageService } from '@core/services';
+import { Store } from '@ngxs/store';
+import { StatisticsAction } from '@core/states';
 
 @Component({
   selector: 'disco-calendar',
@@ -54,7 +56,8 @@ export class CalendarComponent implements OnInit {
 
   constructor(
     protected ngbCalendar: NgbCalendar,
-    private _lsService: LocalStorageService
+    private _lsService: LocalStorageService,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -89,6 +92,7 @@ export class CalendarComponent implements OnInit {
       let dayInfo = this.dayEnum[i]
       if (isInit) {
         let today: number = new Date().getDay()
+
         today = this.changeDayNumber(today)
         if (today === i) {
           dayInfo.selected = true
@@ -97,12 +101,12 @@ export class CalendarComponent implements OnInit {
       } else {
         this.dayEnum.forEach(el => el.selected = false)
       }
+
       this.Day = [...this.Day, dayInfo]
     }
     if (!isInit) {
       this.Day[0].selected = true
     }
-    console.log(this.Day)
   }
 
   changeDayNumber(day: number): number {
@@ -189,7 +193,6 @@ export class CalendarComponent implements OnInit {
 
     this.Week = monthData;
     // this.setDayData(this.Week.find(el => el.selected));
-    console.log(this.Week)
   }
 
   setYearRange(): void {
@@ -237,6 +240,31 @@ export class CalendarComponent implements OnInit {
         this.setDayData(this.Week.find((el)=>el.selected))
         break;
     }
+
+let req = {
+  fromDate: '1234',
+  toDate: '12345',
+  statisticsBy: ''
+}
+    switch (this.currentState) {
+      case 'Day':
+        console.log(this[this.currentState])
+        console.log(this.Week)
+        break;
+      case 'Week':
+        break;
+      case 'Month':
+        break;
+      case 'Year':
+        console.log(this.Year)
+        const from = new Date(this.Year.find(y=>y.selected).label, 0, 1);
+        const to = new Date(this.Year.find(y=>y.selected).label, 11, 31)
+        
+        break
+    }
+    req.statisticsBy = this.currentState
+    console.log(req)
+    this.store.dispatch(new StatisticsAction({...req})).subscribe(res=>console.log(res))
   }
 
   getArray(string): Array<any> {
