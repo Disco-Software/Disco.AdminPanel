@@ -237,34 +237,36 @@ export class CalendarComponent implements OnInit {
         this.setDayData(this.Week.find((el) => el.selected));
         break;
       case 'Week':
-        this.setDayData(this.Week.find((el)=>el.selected))
+        this.setDayData(this.Week.find((el) => el.selected))
         break;
     }
 
-let req = {
-  fromDate: '1234',
-  toDate: '12345',
-  statisticsBy: ''
-}
+    let req = {
+      fromDate: '1234',
+      toDate: '12345',
+      statisticsBy: ''
+    }
     switch (this.currentState) {
       case 'Day':
-        console.log(this[this.currentState])
-        console.log(this.Week)
+
         break;
       case 'Week':
         break;
       case 'Month':
         break;
       case 'Year':
-        console.log(this.Year)
-        const from = new Date(this.Year.find(y=>y.selected).label, 0, 1);
-        const to = new Date(this.Year.find(y=>y.selected).label, 11, 31)
-        
+        const from = new Date(this.Year.find(y => y.selected).label, 0, 1).toISOString();
+        const to = new Date(this.Year.find(y => y.selected).label, 11, 31).toISOString()
+        req = {
+          fromDate: from,
+          toDate: to,
+          statisticsBy: this.currentState
+        }
         break
     }
-    req.statisticsBy = this.currentState
+    // req.statisticsBy = this.currentState
     console.log(req)
-    this.store.dispatch(new StatisticsAction({...req})).subscribe(res=>console.log(res))
+    this.store.dispatch(new StatisticsAction({ ...req })).subscribe(res => console.log(res))
   }
 
   getArray(string): Array<any> {

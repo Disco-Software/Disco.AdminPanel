@@ -10,11 +10,7 @@ export class StatisticsService {
   constructor(private rest: RestService) { }
 
   public getStatistics(fromDate: string, toDate: string, statistics: string, description: string): Observable<any> {
-    return this.rest.request("get", 'admin/statistics', description, {
-      fromDate: fromDate,
-      toDate: toDate,
-      statistics: statistics,
-    });
+    return this.rest.request("get", `admin/statistics?from=${fromDate}&to=${toDate}&statistics=${statistics}`, description);
   }
 
 }
