@@ -22,13 +22,13 @@ export class CalendarComponent implements OnInit {
   public selectedType: string;
 
   public dayEnum: any = [
-    { label: 'Monday' },
-    { label: 'Tuesday' },
-    { label: 'Wednesday' },
-    { label: 'Thursday' },
-    { label: 'Friday' },
-    { label: 'Saturday' },
-    { label: 'Sunday' },
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
   ];
 
   public state: Array<string> = ['Day', 'Week', 'Month', 'Year'];
@@ -79,61 +79,43 @@ export class CalendarComponent implements OnInit {
     this.currentState = 'Day'
   }
 
+  dateList(start, end) {
+    for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
+      arr.push(new Date(dt));
+    }
+    return arr;
+
+  }
+
   setDayData(week: { label: string, selected?: boolean }, isInit?: boolean): void {
-    this.Day = [];
-    const selectedWeek = week;
-    if(selectedWeek.label.includes(' - ')) {
-      const firstDayOfTheWeek = selectedWeek.label.split(' - ')[0]
-      const lastDayOfTheWeek = selectedWeek.label.split(' - ')[1]
-      let firstDay = new Date(firstDayOfTheWeek.split('.').reverse().join(', ')).getDay()
-      let lastDay = new Date(lastDayOfTheWeek.split('.').reverse().join(', ')).getDay()
-      firstDay = this.changeDayNumber(firstDay)
-      lastDay = this.changeDayNumber(lastDay)
-      for (let i = firstDay; i <= lastDay; i++) {
-        let dayInfo = this.dayEnum[i]
-        if (isInit) {
-          let today: number = new Date().getDay()
-  
-          today = this.changeDayNumber(today)
-          if (today === i) {
-            dayInfo.selected = true
-          }
-  
-        } else {
-          this.dayEnum.forEach(el => el.selected = false)
-        }
-  
-        this.Day = [...this.Day, dayInfo]
-      }
+    const selectedWeek = week.label
+    if (selectedWeek.includes(' - ')) {
+      //set day array if we have more than one day in the week
+      this.Day = []
+      const firstDayOfTheWeek = selectedWeek.split(' - ')[0]
+      const lastDayOfTheWeek = selectedWeek.split(' - ')[1]
+      var daylist = this.dateList(new Date(firstDayOfTheWeek.split('.').reverse().join(', ')), new Date(lastDayOfTheWeek.split('.').reverse().join(', ')));
+      daylist.forEach((d) => {
+        const dayIndex = this.changeDayNumber(d.getDay())
+        this.Day = [...this.Day, {
+          date: d.toLocaleDateString(),
+          selected: isInit && dayIndex === this.changeDayNumber(new Date().getDay()),
+          label: this.dayEnum[dayIndex]
+        }]
+      })
       if (!isInit) {
+        //set monday as selected day
         this.Day[0].selected = true
-      }
+      } 
     } else {
-      let dayOfTheWeek = new Date(selectedWeek.label.split('.').reverse().join(', ')).getDay();
-      dayOfTheWeek = this.changeDayNumber(dayOfTheWeek)
-      let dayInfo = this.dayEnum[dayOfTheWeek]
-        if (isInit) {
-          let today: number = new Date().getDay()
-            today = this.changeDayNumber(today)
-          if (today === dayOfTheWeek) {
-            dayInfo.selected = true
-          }
-  
-        } else {
-          this.dayEnum.forEach(el => el.selected = false)
-        }
-  
-        this.Day = [...this.Day, dayInfo];
-        if (!isInit) {
-          this.Day.map(d=> {
-            if(d.label === dayInfo.label) {
-              d.selected = true
-              return d
-            } else {
-              return d
-            }
-          })
-        }
+      //set day array if we have only one day in the week
+      const dayOfTheWeek = selectedWeek
+      const dayIndex = this.changeDayNumber(new Date(dayOfTheWeek.split('.').reverse().join(', ')).getDay())
+      this.Day = [{
+        date: dayOfTheWeek,
+        selected: true,
+        label: this.dayEnum[dayIndex]
+      }]
     }
   }
 
@@ -157,7 +139,7 @@ export class CalendarComponent implements OnInit {
 
         //створюємо інформацію про день
         let labelInfo = {
-          label: dayInfo.getDate() + '.' + (dayInfo.getMonth() + 1) + '.' + dayInfo.getFullYear(),
+          label: dayInfo.toLocaleDateString(),
           selected: false
         }
 
@@ -190,7 +172,7 @@ export class CalendarComponent implements OnInit {
 
         //створюємо інформацію про день
         const labelInfo = {
-          label: dayInfo.getDate() + '.' + (dayInfo.getMonth() + 1) + '.' + dayInfo.getFullYear(),
+          label: dayInfo.toLocaleDateString(),
           selected: false
         }
 
@@ -276,10 +258,16 @@ export class CalendarComponent implements OnInit {
     }
     switch (this.currentState) {
       case 'Day':
+        const day = new Date(this.Day.find(d=>d.selected).date.split('.').reverse().join(', '))
+        req = {
+          fromDate: new Date(day.setHours(0, 0, 0, 0)).toISOString(),
+          toDate: new Date(day.setHours(23, 59, 59, 999)).toISOString(),
+          statisticsBy: this.currentState
+        }
         break;
       case 'Week':
-        const week = this.Week.find(w=> w.selected).label
-        if(week.includes(' - ')) {
+        const week = this.Week.find(w => w.selected).label
+        if (week.includes(' - ')) {
           const firstDayOfTheWeek = week.split(' - ')[0]
           const lastDayOfTheWeek = week.split(' - ')[1]
           req = {
@@ -290,15 +278,15 @@ export class CalendarComponent implements OnInit {
         } else {
           const day = new Date(week.split('.').reverse());
           req = {
-            fromDate: new Date(day.setHours(0,0,0,0)).toISOString(),
-            toDate: new Date(day.setHours(23,59,59,999)).toISOString(),
+            fromDate: new Date(day.setHours(0, 0, 0, 0)).toISOString(),
+            toDate: new Date(day.setHours(23, 59, 59, 999)).toISOString(),
             statisticsBy: this.currentState
           }
         }
         break;
       case 'Month':
-        const year = this.Year.find(y=>y.selected).label
-        const month = this.Month.findIndex(m=>m.selected)
+        const year = this.Year.find(y => y.selected).label
+        const month = this.Month.findIndex(m => m.selected)
         req = {
           fromDate: new Date(year, month, 1).toISOString(),
           toDate: new Date(year, month + 1, 1).toISOString(),
