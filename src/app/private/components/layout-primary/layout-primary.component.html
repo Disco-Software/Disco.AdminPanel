@@ -1,5 +1,5 @@
-<div *ngIf="(isLoading$ | async).isLoading" class="loading-bar">
-  <span style="color: white">{{isLoading$ | async | json}}</span>
+<div *ngIf="(loadingBarStatus$ | async)?.length > 0" class="loading-bar">
+  <span style="color: white">{{(loadingBarStatus$ | async)?.length}}</span>
 </div>
 <div class="h-vh-100">
   <app-topbar></app-topbar>

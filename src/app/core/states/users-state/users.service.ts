@@ -9,11 +9,11 @@ import { RestService } from '@core/services';
 export class UsersService  {
   constructor(private rest: RestService){}
 
-  public loginAsync(loginRequestModel: LogInRequestModel): Observable<UserResponseModel> {
-    return this.rest.request("post", 'admin/account/log-in', loginRequestModel);
+  public loginAsync(loginRequestModel: LogInRequestModel, description): Observable<UserResponseModel> {
+    return this.rest.request("post", 'admin/account/log-in',description, loginRequestModel);
   }
 
-  public refreshToken(model: RefreshTokenModel): Observable<UserResponseModel> {
-    return this.rest.request('PUT', 'admin/account/refresh', model);
+  public refreshToken(model: RefreshTokenModel, description): Observable<UserResponseModel> {
+    return this.rest.request('PUT', 'admin/account/refresh',description,  model);
   }
 }

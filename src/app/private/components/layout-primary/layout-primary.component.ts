@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Select } from '@ngxs/store';
-import { LoadingState } from '@core/states';
-import { Observable } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+import { LoaderState, LoadingState } from '@core/states';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -13,8 +13,15 @@ export class LayoutPrimaryComponent {
 
   isOverview: boolean;
 
-  @Select(LoadingState.isLoading) public isLoading$ : Observable<{isLoading: boolean}>;
-  constructor(private router: Router) {
+  loadingBarStatus$: Observable<Array<string>>;
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
+  // @Select(LoadingState.isLoading) public isLoading$ : Observable<{isLoading: boolean}>;
+  constructor(private router: Router, private _store: Store) {
+    this.loadingBarStatus$ = this._store
+    .select(LoaderState.getList)
+    .pipe(takeUntil(this.destroy$)); //TODO delete after @Select fixed
     router.events.subscribe((val) => {
       if(val instanceof NavigationEnd && val.url.includes('overview')) {
         this.isOverview = true
