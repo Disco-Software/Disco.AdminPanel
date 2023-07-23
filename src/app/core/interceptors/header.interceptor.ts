@@ -5,7 +5,7 @@ import { Observable } from "rxjs/internal/Observable";
 import { catchError, filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { AccountService } from "../services/account.service";
 import { Store } from "@ngxs/store";
-import { RefreshToken } from "../states/users-state";
+import { RefreshToken, UsersService } from "../states/users-state";
 import { LocalStorageService } from "../services/local-storage.service";
 
 @Injectable()
@@ -15,7 +15,7 @@ export class HeaderInterceptor implements HttpInterceptor {
   private accessToken: string = '';
   private refreshToken: string = '';
 
-  constructor(private accountService: AccountService, private _store: Store, private _lsService: LocalStorageService) { }
+  constructor(private accountService: AccountService, private _store: Store, private _lsService: LocalStorageService, private _userService: UsersService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -43,10 +43,10 @@ export class HeaderInterceptor implements HttpInterceptor {
   }
 
   private handleUnauthorizedErrorResponse(request: HttpRequest<any>, next: HttpHandler) {
-    this.accountService.refreshToken({
+    this._userService.refreshToken({
       accessToken: localStorage.getItem('accessToken') ?? '',
       refreshToken: localStorage.getItem('refreshToken') ?? '',
-    }).pipe(switchMap((accessData: any) => {
+    }, 'refresh').pipe(switchMap((accessData: any) => {
       this._lsService.setItem('user', accessData.user);
       this._lsService.setString('accessToken', accessData.accessToken);
       this._lsService.setString('refreshToken', accessData.refreshToken);

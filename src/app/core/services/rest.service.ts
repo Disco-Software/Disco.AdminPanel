@@ -22,7 +22,7 @@ export class RestService {
   public request(method: string, url: string, description: string, request?: any) : Observable<any>{
      const req = new HttpRequest(method, `${this.serverUrl}${url}`, request);
      return this._store.dispatch(new LoaderAdd(description)).pipe(take(1),switchMap(() => {
-        return this.http[method](`${this.serverUrl}${url}`, request).pipe(take(1), mergeMap((response) => {
+        return this.http[method](`${this.serverUrl}/${url}`, request).pipe(take(1), mergeMap((response) => {
           this._store.dispatch(new LoaderRemove(description)).pipe(take(1));
 
           return of(response);

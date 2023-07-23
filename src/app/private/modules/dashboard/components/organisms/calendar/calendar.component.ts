@@ -80,32 +80,60 @@ export class CalendarComponent implements OnInit {
   }
 
   setDayData(week: { label: string, selected?: boolean }, isInit?: boolean): void {
-    this.Day = []
+    this.Day = [];
     const selectedWeek = week;
-    const firstDayOfTheWeek = selectedWeek.label.split(' - ')[0]
-    const lastDayOfTheWeek = selectedWeek.label.split(' - ')[1]
-    let firstDay = new Date(firstDayOfTheWeek.split('.').reverse().join(', ')).getDay()
-    let lastDay = new Date(lastDayOfTheWeek.split('.').reverse().join(', ')).getDay()
-    firstDay = this.changeDayNumber(firstDay)
-    lastDay = this.changeDayNumber(lastDay)
-    for (let i = firstDay; i <= lastDay; i++) {
-      let dayInfo = this.dayEnum[i]
-      if (isInit) {
-        let today: number = new Date().getDay()
-
-        today = this.changeDayNumber(today)
-        if (today === i) {
-          dayInfo.selected = true
+    if(selectedWeek.label.includes(' - ')) {
+      const firstDayOfTheWeek = selectedWeek.label.split(' - ')[0]
+      const lastDayOfTheWeek = selectedWeek.label.split(' - ')[1]
+      let firstDay = new Date(firstDayOfTheWeek.split('.').reverse().join(', ')).getDay()
+      let lastDay = new Date(lastDayOfTheWeek.split('.').reverse().join(', ')).getDay()
+      firstDay = this.changeDayNumber(firstDay)
+      lastDay = this.changeDayNumber(lastDay)
+      for (let i = firstDay; i <= lastDay; i++) {
+        let dayInfo = this.dayEnum[i]
+        if (isInit) {
+          let today: number = new Date().getDay()
+  
+          today = this.changeDayNumber(today)
+          if (today === i) {
+            dayInfo.selected = true
+          }
+  
+        } else {
+          this.dayEnum.forEach(el => el.selected = false)
         }
-
-      } else {
-        this.dayEnum.forEach(el => el.selected = false)
+  
+        this.Day = [...this.Day, dayInfo]
       }
-
-      this.Day = [...this.Day, dayInfo]
-    }
-    if (!isInit) {
-      this.Day[0].selected = true
+      if (!isInit) {
+        this.Day[0].selected = true
+      }
+    } else {
+      let dayOfTheWeek = new Date(selectedWeek.label.split('.').reverse().join(', ')).getDay();
+      dayOfTheWeek = this.changeDayNumber(dayOfTheWeek)
+      let dayInfo = this.dayEnum[dayOfTheWeek]
+        if (isInit) {
+          let today: number = new Date().getDay()
+            today = this.changeDayNumber(today)
+          if (today === dayOfTheWeek) {
+            dayInfo.selected = true
+          }
+  
+        } else {
+          this.dayEnum.forEach(el => el.selected = false)
+        }
+  
+        this.Day = [...this.Day, dayInfo];
+        if (!isInit) {
+          this.Day.map(d=> {
+            if(d.label === dayInfo.label) {
+              d.selected = true
+              return d
+            } else {
+              return d
+            }
+          })
+        }
     }
   }
 
@@ -248,25 +276,44 @@ export class CalendarComponent implements OnInit {
     }
     switch (this.currentState) {
       case 'Day':
-
         break;
       case 'Week':
+        const week = this.Week.find(w=> w.selected).label
+        if(week.includes(' - ')) {
+          const firstDayOfTheWeek = week.split(' - ')[0]
+          const lastDayOfTheWeek = week.split(' - ')[1]
+          req = {
+            fromDate: new Date(firstDayOfTheWeek.split('.').reverse()).toISOString(),
+            toDate: new Date(lastDayOfTheWeek.split('.').reverse()).toISOString(),
+            statisticsBy: this.currentState
+          }
+        } else {
+          const day = new Date(week.split('.').reverse());
+          req = {
+            fromDate: new Date(day.setHours(0,0,0,0)).toISOString(),
+            toDate: new Date(day.setHours(23,59,59,999)).toISOString(),
+            statisticsBy: this.currentState
+          }
+        }
         break;
       case 'Month':
-        break;
-      case 'Year':
-        const from = new Date(this.Year.find(y => y.selected).label, 0, 1).toISOString();
-        const to = new Date(this.Year.find(y => y.selected).label, 11, 31).toISOString()
+        const year = this.Year.find(y=>y.selected).label
+        const month = this.Month.findIndex(m=>m.selected)
         req = {
-          fromDate: from,
-          toDate: to,
+          fromDate: new Date(year, month, 1).toISOString(),
+          toDate: new Date(year, month + 1, 1).toISOString(),
           statisticsBy: this.currentState
         }
-        break
+        break;
+      case 'Year':
+        req = {
+          fromDate: new Date(this.Year.find(y => y.selected).label, 0, 1).toISOString(),
+          toDate: new Date(this.Year.find(y => y.selected).label + 1, 0, 1).toISOString(),
+          statisticsBy: this.currentState
+        }
+        break;
     }
-    // req.statisticsBy = this.currentState
-    console.log(req)
-    this.store.dispatch(new StatisticsAction({ ...req })).subscribe(res => console.log(res))
+    this.store.dispatch(new StatisticsAction({ ...req })).subscribe()
   }
 
   getArray(string): Array<any> {
