@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { LoaderState, LoadingState } from '@core/states';
 import { Observable, Subject, takeUntil } from 'rxjs';
@@ -9,7 +9,7 @@ import { NavigationEnd, Router } from '@angular/router';
   templateUrl: './layout-primary.component.html',
   styleUrls: ['./layout-primary.component.scss']
 })
-export class LayoutPrimaryComponent {
+export class LayoutPrimaryComponent implements AfterContentChecked {
 
   isOverview: boolean;
 
@@ -18,7 +18,10 @@ export class LayoutPrimaryComponent {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   // @Select(LoadingState.isLoading) public isLoading$ : Observable<{isLoading: boolean}>;
-  constructor(private router: Router, private _store: Store) {
+  constructor(
+    private router: Router,
+    private chageDetectionRef : ChangeDetectorRef,
+    private _store: Store) {
     this.loadingBarStatus$ = this._store
     .select(LoaderState.getList)
     .pipe(takeUntil(this.destroy$)); //TODO delete after @Select fixed
@@ -31,4 +34,7 @@ export class LayoutPrimaryComponent {
   });
   }
 
+  ngAfterContentChecked(): void {
+      this.chageDetectionRef.detectChanges();
+  }
 }
