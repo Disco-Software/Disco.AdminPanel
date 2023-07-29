@@ -77,6 +77,14 @@ export class CalendarComponent implements OnInit {
 
     });
     this.currentState = 'Day'
+    const day = new Date(this.Day.find(d=>d.selected).date.split('.').reverse().join(', '))
+    const req = {
+      fromDate: new Date(day.setHours(0, 0, 0, 0)).toISOString(),
+      toDate: new Date(day.setHours(23, 59, 59, 999)).toISOString(),
+      statisticsBy: this.currentState
+    }
+
+    this.store.dispatch(new StatisticsAction(req));
   }
 
   dateList(start, end) {
@@ -106,7 +114,7 @@ export class CalendarComponent implements OnInit {
       if (!isInit) {
         //set monday as selected day
         this.Day[0].selected = true
-      } 
+      }
     } else {
       //set day array if we have only one day in the week
       const dayOfTheWeek = selectedWeek
@@ -252,8 +260,8 @@ export class CalendarComponent implements OnInit {
     }
 
     let req = {
-      fromDate: '1234',
-      toDate: '12345',
+      fromDate: '',
+      toDate: '',
       statisticsBy: ''
     }
     switch (this.currentState) {
@@ -301,7 +309,7 @@ export class CalendarComponent implements OnInit {
         }
         break;
     }
-    this.store.dispatch(new StatisticsAction({ ...req })).subscribe()
+    this.store.dispatch(new StatisticsAction({ ...req }))
   }
 
   getArray(string): Array<any> {
