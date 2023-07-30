@@ -1,7 +1,7 @@
 <div *ngIf="(loadingBarStatus$ | async)?.length > 0" class="loading-bar">
   <span style="color: white">{{(loadingBarStatus$ | async)?.length}}</span>
 </div>
-<div class="h-vh-100">
+<div class="min-vh-100">
   <app-topbar></app-topbar>
   <div class="sidebar">
     <app-sidebar></app-sidebar>
