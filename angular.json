@@ -31,7 +31,8 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {
@@ -67,7 +68,7 @@
           },
           "defaultConfiguration": "development"
         },
-        
+
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
