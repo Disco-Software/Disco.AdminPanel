@@ -12,3 +12,4 @@ export * from './statistics/statistics.request.model'
 export * from './rest'
 export * from './user-actions'
 export * from './loader';
+export * from './graph';
