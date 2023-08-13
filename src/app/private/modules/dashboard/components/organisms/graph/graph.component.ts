@@ -13,7 +13,7 @@ export class GraphComponent implements OnInit {
 
   options: any;
 
-  ngOnInit() {    
+  ngOnInit() {
     this.data = {
       labels: ['1', '2', '3', '4', '5', '6', '7'],
       datasets: [
@@ -41,6 +41,32 @@ export class GraphComponent implements OnInit {
       plugins: {
         legend: {
           display: false,
+        },
+        tooltip: {
+          bodyFont: {
+            size: 24
+          },
+          padding: {
+            left: 20,
+            right: 20,
+            top: 0,
+            bottom: 0
+        },
+          displayColors: false,
+          events: ['click'],
+          yAlign: 'bottom',
+          backgroundColor: 'rgba(194, 125, 41, 1)',
+          callbacks: {
+            title: function (tooltipItem) {
+              return '';
+            },
+            label: function (tooltipItem) {
+              var tooltipText = '';
+              if (tooltipItem.dataset.data[tooltipItem.dataIndex] != null)
+                tooltipText = tooltipItem.dataset.data[tooltipItem.dataIndex]!.toString();
+              return tooltipText;
+            }
+          }
         },
         title: {
           display: true,
