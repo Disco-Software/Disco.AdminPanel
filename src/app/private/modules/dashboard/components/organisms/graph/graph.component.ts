@@ -51,7 +51,7 @@ export class GraphComponent implements OnInit {
             right: 20,
             top: 0,
             bottom: 0
-        },
+          },
           displayColors: false,
           events: ['click'],
           yAlign: 'bottom',
@@ -105,5 +105,21 @@ export class GraphComponent implements OnInit {
         },
       }
     };
+  }
+  
+  selectData(event) {
+    
+    let dataset = event.dataset
+
+    dataset.map((data)=>{
+      if(data.index === event.element.index) {
+        data.element.options.backgroundColor = 'red'
+      }
+      return data
+    })
+
+    // set background and make it stay
+    // set color
+    // remove background when we click on another elements, missclicked
   }
 }
