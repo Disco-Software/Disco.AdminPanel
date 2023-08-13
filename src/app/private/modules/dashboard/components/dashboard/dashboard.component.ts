@@ -1,8 +1,8 @@
-import { AfterContentChecked, Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageService } from '@core/services';
-import { StatisticModel } from '@core/models';
+import { GraphSettings, StatisticModel } from '@core/models';
 import { Select, Store } from '@ngxs/store';
-import { StatisticsAction, StatisticsState } from '@core';
+import { StatisticsState } from '@core';
 import { StatisticsResponseModel } from '../../../../../core/models/statistics/statistics.model';
 import { Observable, takeUntil } from 'rxjs';
 import { Subject } from 'rxjs/internal/Subject';
@@ -22,6 +22,37 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public statisticCards : StatisticModel[] = []
 
   public sub : Subject<boolean> = new Subject();
+
+  public usersGraphSetting: GraphSettings = {
+    title: 'Users',
+    color: [
+      'rgba(68, 108, 209, 0)',
+      'rgba(52, 129, 205, 1)'
+    ],
+    hoverColor: 'rgba(52, 129, 205, 1)',
+    clickColor: ['rgba(194, 125, 41, 1)', 'rgba(52, 129, 205, 0)']
+  }
+
+  public newUsersGraphSettings: GraphSettings = {
+    title: 'New Users',
+    color:[
+      'rgba(129, 32, 226, 0)',
+      'rgba(120, 74, 180, 1)'
+    ],
+    hoverColor: 'rgba(120, 74, 180, 1)',
+    clickColor: ['rgba(194, 125, 41, 1)', 'rgba(129, 32, 226, 0)']
+  }
+
+  public postsGraphSettings: GraphSettings = 
+  {
+    title: 'Posts',
+    color:[
+      'rgba(44, 203, 203, 0)',
+      'rgba(25, 163, 163, 1)'
+    ],
+    hoverColor: 'rgba(25, 163, 163, 1)',
+    clickColor: ['rgba(194, 125, 41, 1)', 'rgba(44, 203, 203, 0)']
+  }
 
   constructor(private _pageService: PageService, private _store : Store) { }
 

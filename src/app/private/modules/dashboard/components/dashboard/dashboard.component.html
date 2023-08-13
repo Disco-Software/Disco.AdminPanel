@@ -15,9 +15,15 @@
       *ngFor="let statisticCard of statisticCards"
     ></disco-statistic-card>
   </div>
-  <app-graph></app-graph>
-  <div class="d-flex flex-nowrap w-100">
-    <app-graph class="w-50"></app-graph>
-    <app-graph  class="w-50"></app-graph>
+  <div class="container my-4 py-4 px-4 px-lg-8">
+    <app-graph [graphSettings]="usersGraphSetting"></app-graph>
+  </div>
+  <div class="d-flex flex-column flex-lg-row  justify-content-between pb-4">
+    <div class="container w-100 w-lg-48 py-4 px-4 mb-4 mb-lg-0">
+      <app-graph [graphSettings]="newUsersGraphSettings"></app-graph>
+    </div>
+    <div class="container w-100 w-lg-48 py-4 px-4">
+      <app-graph [graphSettings]="postsGraphSettings"></app-graph>
+    </div>
   </div>
 </div>

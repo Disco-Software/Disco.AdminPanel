@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { GraphSettings } from '@core/models';
 
 @Component({
   selector: 'app-graph',
@@ -6,25 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./graph.component.scss'],
 })
 export class GraphComponent implements OnInit {
+  @Input() graphSettings: GraphSettings;
+
   data: any;
 
   options: any;
 
-  ngOnInit() {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('#FFFFFF');
-    const textColorSecondary = documentStyle.getPropertyValue(
-      '--text-color-secondary'
-    );
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
+  ngOnInit() {    
     this.data = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: ['1', '2', '3', '4', '5', '6', '7'],
       datasets: [
         {
-          label: 'My First dataset',
-          backgroundColor: documentStyle.getPropertyValue('--blue-500'),
-          borderColor: documentStyle.getPropertyValue('--blue-500'),
+          backgroundColor: (context) => {
+            if (!context.chart.chartArea) {
+              return
+            }
+
+            const { ctx, data, chartArea: { top, bottom } } = context.chart
+            const gradientBg = ctx.createLinearGradient(0, top, 0, bottom)
+            gradientBg.addColorStop(1, this.graphSettings.color[0])
+            gradientBg.addColorStop(0, this.graphSettings.color[1])
+            return gradientBg;
+          },
+          hoverBackgroundColor: this.graphSettings.hoverColor,
           data: [65, 59, 80, 81, 56, 55, 40],
         },
       ],
@@ -36,33 +41,43 @@ export class GraphComponent implements OnInit {
       plugins: {
         legend: {
           display: false,
-          labels: {
-            color: textColor,
-          },
         },
+        title: {
+          display: true,
+          text: this.graphSettings.title,
+          color: '#fff',
+          font: {
+            weight: 'normal',
+            size: '20px',
+          }
+        }
       },
       scales: {
-        x: {
-          display: true,
-        },
         y: {
           display: false,
-          gridLines: {
-            //display: false,
-            lineWidth: 0
+          border: {
+            display: false
           },
-          // gridLines: {
-          //   display : false,
-          //   ticks: {
-          //     display: false,
-          //   }
-          // }
         },
-        // yAxes:
-        //   {
-        //     display: false,
-        //   },
-      },
+        x: {
+          ticks: {
+            color: "white",
+            font: {
+              size: 16,
+            },
+            padding: 10
+          },
+          grid: {
+            display: true,
+          },
+          border: {
+            display: true,
+            color: 'white',
+            width: 2,
+            z: 1
+          }
+        },
+      }
     };
   }
 }
