@@ -26,32 +26,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public usersGraphSetting: GraphSettings = {
     title: 'Users',
     color: [
-      'rgba(68, 108, 209, 0)',
-      'rgba(52, 129, 205, 1)'
+      'rgba(52, 129, 205, 1)',
+      'rgba(52, 129, 205, 0)'
     ],
-    hoverColor: 'rgba(52, 129, 205, 1)',
-    clickColor: ['rgba(194, 125, 41, 1)', 'rgba(52, 129, 205, 0)']
+    hoverColor: ['rgba(194, 125, 41, 1)', 'rgba(52, 129, 205, 0)']
   }
 
   public newUsersGraphSettings: GraphSettings = {
     title: 'New Users',
-    color:[
-      'rgba(129, 32, 226, 0)',
-      'rgba(120, 74, 180, 1)'
+    color: [
+      'rgba(129, 32, 226, 1)',
+      'rgba(120, 74, 180, 0)',
+      
     ],
-    hoverColor: 'rgba(120, 74, 180, 1)',
-    clickColor: ['rgba(194, 125, 41, 1)', 'rgba(129, 32, 226, 0)']
+    hoverColor: ['rgba(194, 125, 41, 1)', 'rgba(129, 32, 226, 0)']
   }
 
   public postsGraphSettings: GraphSettings = 
   {
     title: 'Posts',
-    color:[
-      'rgba(44, 203, 203, 0)',
-      'rgba(25, 163, 163, 1)'
+    color: [
+      'rgba(25, 163, 163, 1)',
+      'rgba(44, 203, 203, 0)'
     ],
-    hoverColor: 'rgba(25, 163, 163, 1)',
-    clickColor: ['rgba(194, 125, 41, 1)', 'rgba(44, 203, 203, 0)']
+    hoverColor: ['rgba(194, 125, 41, 1)', 'rgba(44, 203, 203, 0)']
   }
 
   constructor(private _pageService: PageService, private _store : Store) { }
