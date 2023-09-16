@@ -28,7 +28,7 @@ export class GraphComponent implements AfterViewInit {
           {
             backgroundColor: this.createGradientColor(this.ctx, this.graphSettings.color, 200),
             hoverBackgroundColor: this.createGradientColor(this.ctx, this.graphSettings.hoverColor, 400),
-            data: [ 80, 150, 100, 120, 90, 80, 150, 100, 120, 90, 80, 150],
+            data: this.graphSettings?.data,
           },
         ],
       },
@@ -68,7 +68,7 @@ export class GraphComponent implements AfterViewInit {
           text: this.graphSettings.title,
           fontColor: '#fff',
           fontSize: 20,
-  
+
         },
         scales: {
           yAxes: [
