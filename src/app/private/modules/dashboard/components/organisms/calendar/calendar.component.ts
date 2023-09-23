@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
-import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
-import { StatisticsBy } from '@core/models';
-import { LocalStorageService } from '@core/services';
-import { Store } from '@ngxs/store';
-import { StatisticsAction } from '@core/states';
+import {Component, OnInit} from '@angular/core';
+import {LocalStorageService} from '@core/services';
+import {Store} from '@ngxs/store';
+import {StatisticsAction} from '@core/states';
 
 @Component({
   selector: 'disco-calendar',
@@ -12,14 +9,9 @@ import { StatisticsAction } from '@core/states';
   styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent implements OnInit {
-  public statisticsBy: StatisticsBy = StatisticsBy.Year;
-  public ngbDatePicker: NgbDatepicker;
-  public fromDate: Date;
-  public toDate: Date;
   public currentState: string;
 
   public selectedItem: string;
-  public selectedType: string;
 
   public dayEnum: any = [
     'Monday',
@@ -55,7 +47,6 @@ export class CalendarComponent implements OnInit {
   public Week: any = [];
 
   constructor(
-    protected ngbCalendar: NgbCalendar,
     private _lsService: LocalStorageService,
     private store: Store
   ) { }
@@ -245,8 +236,10 @@ export class CalendarComponent implements OnInit {
       }
     }
     array[selectedIndex].selected = true;
+    this.getStatistics()
+  }
 
-
+  getStatistics() {
     // перегенерація даних, якщо ми змінюємо інший стейт
     switch (this.currentState) {
       case 'Month':
@@ -266,7 +259,7 @@ export class CalendarComponent implements OnInit {
     }
     switch (this.currentState) {
       case 'Day':
-        const day = new Date(this.Day.find(d=>d.selected).date.split('.').reverse().join(', '))
+        const day = new Date(this.Day.find(d => d.selected).date.split('.').reverse().join(', '))
         req = {
           fromDate: new Date(day.setHours(0, 0, 0, 0)).toISOString(),
           toDate: new Date(day.setHours(23, 59, 59, 999)).toISOString(),
@@ -309,7 +302,7 @@ export class CalendarComponent implements OnInit {
         }
         break;
     }
-    this.store.dispatch(new StatisticsAction({ ...req }))
+    this.store.dispatch(new StatisticsAction({...req}))
   }
 
   getArray(string): Array<any> {
@@ -318,6 +311,7 @@ export class CalendarComponent implements OnInit {
 
   setState(item: string) {
     this.currentState = item;
+    this.getStatistics()
   }
 
 
