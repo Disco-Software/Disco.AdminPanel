@@ -5,6 +5,8 @@ import { StatisticsBy } from '@core/models';
 import { LocalStorageService } from '@core/services';
 import { Store } from '@ngxs/store';
 import { StatisticsAction } from '@core/states';
+import { TranslateService } from '@ngx-translate/core';
+import { SearchType } from 'src/app/core/models/calendar/search-type.model';
 
 @Component({
   selector: 'disco-calendar',
@@ -22,16 +24,21 @@ export class CalendarComponent implements OnInit {
   public selectedType: string;
 
   public dayEnum: any = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
+    'dayEnum.Monday',
+    'dayEnum.Tuesday',
+    'dayEnum.Wednesday',
+    'dayEnum.Thursday',
+    'dayEnum.Friday',
+    'dayEnum.Saturday',
+    'dayEnum.Sunday',
   ];
 
-  public state: Array<string> = ['Day', 'Week', 'Month', 'Year'];
+  public state : SearchType[] = [
+    {name: 'Day', title : 'calendar.day'},
+    {name: 'Week', title : 'calendar.week'},
+    {name: 'Month', title : 'calendar.month'},
+    {name: 'Year', title : 'calendar.year'}
+  ];
 
   public Month: any = [
     { label: 'January' },
@@ -56,20 +63,28 @@ export class CalendarComponent implements OnInit {
 
   constructor(
     protected ngbCalendar: NgbCalendar,
+    private _translate: TranslateService,
     private _lsService: LocalStorageService,
     private store: Store
   ) { }
 
   ngOnInit(): void {
+    const shortCode : string = this._lsService.getItem('language').shortCode;
+
+    this._translate.use(shortCode);
+
     const date: Date = new Date();
     this.setYearRange();
     this.setWeekData(new Date().getFullYear(), new Date().getMonth(), new Date())
     this.setDayData(this.Week.find((el) => el.selected), true);
 
+    console.log("before ForEach mothed");
+
     this.state.forEach((s) => {
-      if (s !== 'Week' && s !== 'Day') {
-        this[s].forEach((item, i) => {
-          if (i === date['get' + s]()) {
+      console.log(s);
+      if (s.name !== 'Week' && s.name !== 'Day') {
+        this[s.name].forEach((item : {selected : boolean}, i : Number) => {
+          if (i === date['get' + s.name]()) {
             item.selected = true;
           }
         });
@@ -322,7 +337,7 @@ export class CalendarComponent implements OnInit {
 
 
 
-  getCurrent(state: string): string {
+  getCurrent(state: string): SearchType {
     return this[state].find(el => el.selected).label;
   }
 }

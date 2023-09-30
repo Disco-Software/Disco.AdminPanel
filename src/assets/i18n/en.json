@@ -26,10 +26,21 @@
     "posts" : "Публікації"
   },
 
-  "overview" : {
-    "day" : "День",
-    "week" : "Тиждень",
-    "month" : "Місяць",
-    "year" : "Рік"
+  "calendar" : {
+    "day" : "Day",
+    "week" : "Week",
+    "month" : "Month",
+    "year" : "Year"
+  },
+
+  "dayEnum" : {
+    "Monday" : "Monday",
+    "Tuesday" : "Tuesday",
+    "Wednesday" : "Wednesday",
+    "Thursday" : "Thursday",
+    "Friday" : "Friday",
+    "Saturday" : "Saturday",
+    "Sunday" : "Sunday"
   }
+
 }

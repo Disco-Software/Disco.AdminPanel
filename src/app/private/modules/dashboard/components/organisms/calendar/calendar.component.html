@@ -83,12 +83,12 @@
       class="d-flex justify-content-center align-items-center mt-sm-0 mt-md-4"
     >
       <button
-        [class.active]="item === currentState || item.includes(currentState)"
+        [class.active]="item.name === currentState"
         *ngFor="let item of state"
-        (click)="setState(item)"
+        (click)="setState(item.name)"
         class="calendar calendar-item m-2 mt-0 mb-0 mr-md-4"
       >
-        {{ item }}
+        {{ item.title | translate }}
       </button>
     </div>
   </div>
@@ -117,7 +117,7 @@
       </button>
 
       <p class="calendar calendar-text text-center m-0 p-0">
-        {{ selectedItem }}
+        {{ selectedItem | translate }}
       </p>
 
       <button
@@ -204,13 +204,13 @@
       <p class="calendar calendar-text text-center m-0 p-0">
         <ng-container *ngFor="let item of getArray(currentState)">
           <span *ngIf="item.selected">
-            {{ item.label }} 
+            {{ item.label | translate }}
             <ng-container [ngSwitch]="currentState">
-              <span *ngSwitchCase="'Month'"> {{ getCurrent('Year')}} </span>
+              <span *ngSwitchCase="'Month'"> {{ getCurrent("Year")}} </span>
               <span *ngSwitchCase="'Day'"> {{ getCurrent('Week') }} </span>
             </ng-container>
-          
-          
+
+
           </span>
         </ng-container>
       </p>
