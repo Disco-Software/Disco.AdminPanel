@@ -12,7 +12,6 @@ const COMPONENTS = [
   _components.DashboardComponent,
   _components.CalendarComponent,
   _components.StatisticCardComponent,
-  _components.StatisticSmallCardComponent,
 ];
 
 const MODULES = [

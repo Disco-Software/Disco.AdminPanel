@@ -6,7 +6,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import * as _states from './states';
 import * as _services from './services';
 import * as _interceptors from './interceptors';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {LangChangeEvent, TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const SERVICES = [
@@ -27,7 +27,8 @@ export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
-const MODULES = [NgxsModule, HttpClientModule];
+const MODULES = [
+  NgxsModule, HttpClientModule];
 
 @NgModule({
   imports: [
@@ -45,4 +46,11 @@ const MODULES = [NgxsModule, HttpClientModule];
   exports: [...MODULES, TranslateModule],
   providers: [...SERVICES],
 })
-export class CoreModule {}
+export class CoreModule {
+  constructor(public translationService: TranslateService) {
+    this.translationService.store.onLangChange
+      .subscribe((lang: LangChangeEvent) => {
+        this.translationService.use(lang.lang);
+      });
+  }
+}

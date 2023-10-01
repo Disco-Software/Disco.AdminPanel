@@ -25,12 +25,21 @@
     "newUsers" : "Нові користувачі",
     "posts" : "Публікації"
   },
-
-  "overview" : {
+  "calendar" : {
     "day" : "День",
     "week" : "Тиждень",
     "month" : "Місяць",
     "year" : "Рік"
+  },
+
+  "dayEnum" : {
+    "Monday" : "Понеділок",
+    "Tuesday" : "Вівторок",
+    "Wednesday" : "Середа",
+    "Thursday" : "Четверг",
+    "Friday" : "П'ятнеця",
+    "Saturday" : "Субота",
+    "Sunday" : "Неділя"
   }
 
 

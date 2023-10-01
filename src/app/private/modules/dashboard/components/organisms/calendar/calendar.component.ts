@@ -1,16 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {LocalStorageService} from '@core/services';
 import {Store} from '@ngxs/store';
 import {StatisticsAction} from '@core/states';
 import { TranslateService } from '@ngx-translate/core';
 import { SearchType } from 'src/app/core/models/calendar/search-type.model';
+import {end, start} from "@popperjs/core";
+import {state} from "@angular/animations";
 
 @Component({
   selector: 'disco-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnChanges {
   public currentState: string;
 
   public selectedItem: string;
@@ -54,25 +56,16 @@ export class CalendarComponent implements OnInit {
   public Week: any = [];
 
   constructor(
-    private _translate: TranslateService,
     private _lsService: LocalStorageService,
     private store: Store
   ) { }
-
   ngOnInit(): void {
-    const shortCode : string = this._lsService.getItem('language').shortCode;
-
-    this._translate.use(shortCode);
-
     const date: Date = new Date();
     this.setYearRange();
     this.setWeekData(new Date().getFullYear(), new Date().getMonth(), new Date())
     this.setDayData(this.Week.find((el) => el.selected), true);
 
-    console.log("before ForEach mothed");
-
     this.state.forEach((s) => {
-      console.log(s);
       if (s.name !== 'Week' && s.name !== 'Day') {
         this[s.name].forEach((item : {selected : boolean}, i : Number) => {
           if (i === date['get' + s.name]()) {
@@ -333,5 +326,9 @@ export class CalendarComponent implements OnInit {
 
   getCurrent(state: string): SearchType {
     return this[state].find(el => el.selected).label;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('on changes')
   }
 }

@@ -16,15 +16,10 @@ export class HeaderComponent implements OnInit, OnChanges {
   constructor(
     private _localStorageService: LocalStorageService,
     private _router: Router,
-    protected _translateService: TranslateService,
-
     protected _pageService: PageService
   ) {}
 
   ngOnInit(): void {
-    this._translateService.use(
-      this._localStorageService.getItem('language').shortCode
-    );
 
     this.setTitle();
   }

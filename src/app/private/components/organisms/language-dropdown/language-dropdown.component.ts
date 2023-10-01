@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { LanguageModel } from '@core/models';
 import { LocalStorageService } from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
+import {SetSelectedLanguageAction} from "../../../../core/states/app-config-state/app-config.actions";
+import {Store} from "@ngxs/store";
+import {AppConfigState} from "../../../../core/states/app-config-state/app-config.state";
 
 @Component({
   selector: 'app-language-dropdown',
@@ -17,45 +20,35 @@ export class LanguageDropdownComponent implements OnInit {
     { name: 'language.spanish', isActive: false, shortCode: 'sp' },
   ];
 
+
   constructor(
     private _lsService: LocalStorageService,
-    private _translate: TranslateService) {}
+    private _translate: TranslateService,
+    private _store: Store
+    ) {}
 
   ngOnInit(): void {
-    const item = this._lsService.getItem('language');
-    if (!item) {
-      this.languages.map((lang) => {
-        if (lang.name === 'English') {
-          lang.isActive = !lang.isActive;
-          this.currentLanguage = lang;
-          this._lsService.setItem('language', lang);
-        }
-        return lang;
-      });
-    } else {
-      this.currentLanguage = item;
-    }
+    this.currentLanguage =  this._store.selectSnapshot(AppConfigState.selectedLanguageSelector)
+    this.setActiveLanguage()
+  }
+
+  setActiveLanguage() {
     this.languages.map((lang) => {
       if (lang.name === this.currentLanguage.name) {
-        lang.isActive = !lang.isActive;
+        lang.isActive = true;
       }
       return lang;
     });
-    const shortCode : string = this._lsService.getItem('language').shortCode;
-    this._translate.use(shortCode);
   }
 
   public switchLanguage(languageModel: LanguageModel) {
-    for (let language of this.languages) {
-      if (language.isActive) language.isActive = !language.isActive;
-    }
+    this.languages = this.languages.map((lang) => {
+      return { ...lang, isActive: false };
+    });
 
-    if (languageModel !== this.currentLanguage) {
-      this.currentLanguage = languageModel;
-      this.currentLanguage.isActive = true;
-      this._lsService.setItem('language', languageModel);
-    }
-    this._translate.use(languageModel.shortCode)
+    this.currentLanguage = languageModel;
+    this.setActiveLanguage();
+    this._store.dispatch(new SetSelectedLanguageAction(this.currentLanguage));
   }
 
   public toggleDropDownMenu() {

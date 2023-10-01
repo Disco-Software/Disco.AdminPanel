@@ -13,3 +13,4 @@ export * from './rest'
 export * from './user-actions'
 export * from './loader';
 export * from './graph';
+export * from './app-config'
