@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { PageService } from '@core/services';
 import {GraphSettings, LanguageModel, StatisticModel} from '@core/models';
 import { Select, Store } from '@ngxs/store';
@@ -26,8 +26,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public sub : Subject<boolean> = new Subject();
 
+  public usersTitle = 'graphs.users';
+  public newUsersTitle = 'graphs.newUsers';
+  public postsTitle = 'graphs.posts';
+
   public usersGraphSetting: GraphSettings = {
-    title: 'Users',
+    title: '',
     data: [],
     color: [
       'rgba(52, 129, 205, 1)',
@@ -61,12 +65,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private _pageService: PageService, private _store : Store, private _translate: TranslateService
   ) {
     this.language$.subscribe(res=>{
-      this._translate.use(res.shortCode)
-    })
+      this._translate.use(res.shortCode);
+    });
   }
 
   ngOnInit(): void {
-
     this._pageService.setTitle({
       pageName : 'Overview',
       pageIcon : 'overview',

@@ -10,6 +10,8 @@ import * as Chart from 'chart.js'; // Використовуємо * as Chart д
 export class GraphComponent implements AfterViewInit, OnChanges {
   @Input() height = 250;
   @Input() graphSettings: GraphSettings;
+  @Input() title : String;
+
   canvas: any;
   ctx: any;
   @ViewChild('mychart') mychart;
@@ -69,7 +71,7 @@ export class GraphComponent implements AfterViewInit, OnChanges {
           },
           title: {
             display: true,
-            text: this.graphSettings.title,
+            text: this.title,
             fontColor: '#fff',
             fontSize: 20,
 

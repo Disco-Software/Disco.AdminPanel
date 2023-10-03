@@ -35,18 +35,18 @@ export class CalendarComponent implements OnInit, OnChanges {
   ];
 
   public Month: any = [
-    { label: 'January' },
-    { label: 'February' },
-    { label: 'March' },
-    { label: 'April' },
-    { label: 'May' },
-    { label: 'June' },
-    { label: 'July' },
-    { label: 'August' },
-    { label: 'September' },
-    { label: 'October' },
-    { label: 'November' },
-    { label: 'December' },
+    { label: 'monthes.January' },
+    { label: 'monthes.February' },
+    { label: 'monthes.March' },
+    { label: 'monthes.April' },
+    { label: 'monthes.May' },
+    { label: 'monthes.June' },
+    { label: 'monthes.July' },
+    { label: 'monthes.August' },
+    { label: 'monthes.September' },
+    { label: 'monthes.October' },
+    { label: 'monthes.November' },
+    { label: 'monthes.December' },
   ];
 
   public Day: any = []

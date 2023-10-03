@@ -1,6 +1,6 @@
 {
   "authentication" : {
-    "title" : "Iniciar sesión",
+    "title" : "Salida",
     "email" : "Correo electrónico",
     "password" : "Contraseña",
     "submit" : "Iniciar",
@@ -21,26 +21,46 @@
   },
 
   "statisticsCard" : {
-    "users" : "Користувачі",
-    "newUsers" : "Нові користувачі",
-    "posts" : "Публікації"
+    "users" : "Usuarios",
+    "newUsers" : "Usuarios nuevos",
+    "posts" : "Publicaciones"
   },
   "calendar" : {
-    "day" : "День",
-    "week" : "Тиждень",
-    "month" : "Місяць",
-    "year" : "Рік"
+    "day" : "Día",
+    "week" : "Semana",
+    "month" : "Mes",
+    "year" : "Año"
   },
 
   "dayEnum" : {
-    "Monday" : "Понеділок",
-    "Tuesday" : "Вівторок",
-    "Wednesday" : "Середа",
-    "Thursday" : "Четверг",
-    "Friday" : "П'ятнеця",
-    "Saturday" : "Субота",
-    "Sunday" : "Неділя"
-  }
+    "Monday" : "Lunes",
+    "Tuesday" : "Martes",
+    "Wednesday" : "Miércoles",
+    "Thursday" : "Jueves",
+    "Friday" : "Viernes",
+    "Saturday" : "Sábado",
+    "Sunday" : "Domingo"
+  },
 
+  "monthes" : {
+    "January" : "Enero",
+    "February" : "Febrero",
+    "March" : "Marzo",
+    "April" : "Abril",
+    "May" : "Puede",
+    "June" : "Junio",
+    "July" : "Julio",
+    "August" : "Agosto",
+    "September" : "Septiembre",
+    "October" : "Octubre",
+    "November" : "Noviembre",
+    "December" : "Diciembre"
+  },
+
+  "graphs" : {
+    "users" : "Usuarios",
+    "newUsers" : "Usuarios nuevos",
+    "posts" : "Publicaciones"
+  }
 
 }
