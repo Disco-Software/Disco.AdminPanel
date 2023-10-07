@@ -12,7 +12,14 @@ import { HeaderInterceptor } from "@core/interceptors";
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
+import {AppConfigState} from "./core/states/app-config-state/app-config.state";
+import {LangChangeEvent, TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 const COMPONENTS = [AppComponent];
 
@@ -26,11 +33,12 @@ const MODULES = [
   SharedModule,
   AppRoutingModule,
   NgbModule,
-  BrowserAnimationsModule
+  BrowserAnimationsModule,
+
 ];
 
 const NGXS_MODULES = [
-  NgxsModule.forRoot([], {
+  NgxsModule.forRoot([AppConfigState], {
     developmentMode: !environment.production,
   }),
   NgxsRouterPluginModule.forRoot(),
@@ -45,6 +53,7 @@ const NGXS_MODULES = [
   ],
   bootstrap: [AppComponent],
   providers: [
+    TranslateService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor,

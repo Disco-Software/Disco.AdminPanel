@@ -26,11 +26,41 @@
     "posts" : "Публікації"
   },
 
-  "overview" : {
+  "calendar" : {
     "day" : "День",
     "week" : "Тиждень",
     "month" : "Місяць",
     "year" : "Рік"
-  }
+  },
 
+  "dayEnum" : {
+    "Monday" : "Понеділок",
+    "Tuesday" : "Вівторок",
+    "Wednesday" : "Середа",
+    "Thursday" : "Четверг",
+    "Friday" : "П'ятнеця",
+    "Saturday" : "Субота",
+    "Sunday" : "Неділя"
+  },
+
+  "monthes" : {
+    "January" : "Січень",
+    "February" : "Лютий",
+    "March" : "Березень",
+    "April" : "Квітень",
+    "May" : "Травень",
+    "June" : "Червень",
+    "July" : "Липень",
+    "August" : "Серпень",
+    "September" : "Вересень",
+    "October" : "Жовтень",
+    "November" : "Листопад",
+    "December" : "Грудень"
+  },
+
+  "graphs" : {
+    "users" : "Користувачі",
+    "newUsers" : "Нові Користувачі",
+    "posts" : "Публікаціі"
+  }
 }

@@ -3,9 +3,9 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { catchError, EMPTY, take, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { StatisticsService } from './statistics.service';
-import { StatisticsResponseModel } from '../../models/statistics/statistics.model';
 import { StatisticsAction } from './statistics.action';
-@State<StatisticsResponseModel>({
+import { StatisticsModel } from '../../models/statistics/statistics.model';
+@State<StatisticsModel>({
   name: "StatisticsState",
   defaults: null,
 })
@@ -15,14 +15,14 @@ export class StatisticsState {
 
   @Selector()
   static getStatistics(result: {
-     statistics : StatisticsResponseModel;
-  }): StatisticsResponseModel {
+     statistics : StatisticsModel;
+  }): StatisticsModel {
     return result.statistics;
   }
 
   @Action(StatisticsAction)
   getUserInfo(
-    { patchState }: StateContext<{ statistics: StatisticsResponseModel }>,
+    { patchState }: StateContext<{ statistics: StatisticsModel }>,
     { payload }: StatisticsAction
   ) {
     return this._statisticsService.getStatistics(payload.fromDate, payload.toDate, payload.statisticsBy.toString(), StatisticsAction.description)
@@ -30,7 +30,7 @@ export class StatisticsState {
         catchError((err: HttpErrorResponse) => {
           return EMPTY;
         }),
-        tap((response: StatisticsResponseModel) => {
+        tap((response: StatisticsModel) => {
           patchState({ statistics: response});
         })
       );

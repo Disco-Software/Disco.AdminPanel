@@ -1,51 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
-import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
-import { StatisticsBy } from '@core/models';
-import { LocalStorageService } from '@core/services';
-import { Store } from '@ngxs/store';
-import { StatisticsAction } from '@core/states';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {LocalStorageService} from '@core/services';
+import {Store} from '@ngxs/store';
+import {StatisticsAction} from '@core/states';
+import { TranslateService } from '@ngx-translate/core';
+import { SearchType } from 'src/app/core/models/calendar/search-type.model';
+import {end, start} from "@popperjs/core";
+import {state} from "@angular/animations";
 
 @Component({
   selector: 'disco-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
 })
-export class CalendarComponent implements OnInit {
-  public statisticsBy: StatisticsBy = StatisticsBy.Year;
-  public ngbDatePicker: NgbDatepicker;
-  public fromDate: Date;
-  public toDate: Date;
+export class CalendarComponent implements OnInit, OnChanges {
   public currentState: string;
 
   public selectedItem: string;
-  public selectedType: string;
 
   public dayEnum: any = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
+    'dayEnum.Monday',
+    'dayEnum.Tuesday',
+    'dayEnum.Wednesday',
+    'dayEnum.Thursday',
+    'dayEnum.Friday',
+    'dayEnum.Saturday',
+    'dayEnum.Sunday',
   ];
 
-  public state: Array<string> = ['Day', 'Week', 'Month', 'Year'];
+  public state : SearchType[] = [
+    {name: 'Day', title : 'calendar.day'},
+    {name: 'Week', title : 'calendar.week'},
+    {name: 'Month', title : 'calendar.month'},
+    {name: 'Year', title : 'calendar.year'}
+  ];
 
   public Month: any = [
-    { label: 'January' },
-    { label: 'February' },
-    { label: 'March' },
-    { label: 'April' },
-    { label: 'May' },
-    { label: 'June' },
-    { label: 'July' },
-    { label: 'August' },
-    { label: 'September' },
-    { label: 'October' },
-    { label: 'November' },
-    { label: 'December' },
+    { label: 'monthes.January' },
+    { label: 'monthes.February' },
+    { label: 'monthes.March' },
+    { label: 'monthes.April' },
+    { label: 'monthes.May' },
+    { label: 'monthes.June' },
+    { label: 'monthes.July' },
+    { label: 'monthes.August' },
+    { label: 'monthes.September' },
+    { label: 'monthes.October' },
+    { label: 'monthes.November' },
+    { label: 'monthes.December' },
   ];
 
   public Day: any = []
@@ -55,11 +56,9 @@ export class CalendarComponent implements OnInit {
   public Week: any = [];
 
   constructor(
-    protected ngbCalendar: NgbCalendar,
     private _lsService: LocalStorageService,
     private store: Store
   ) { }
-
   ngOnInit(): void {
     const date: Date = new Date();
     this.setYearRange();
@@ -67,9 +66,9 @@ export class CalendarComponent implements OnInit {
     this.setDayData(this.Week.find((el) => el.selected), true);
 
     this.state.forEach((s) => {
-      if (s !== 'Week' && s !== 'Day') {
-        this[s].forEach((item, i) => {
-          if (i === date['get' + s]()) {
+      if (s.name !== 'Week' && s.name !== 'Day') {
+        this[s.name].forEach((item : {selected : boolean}, i : Number) => {
+          if (i === date['get' + s.name]()) {
             item.selected = true;
           }
         });
@@ -245,8 +244,10 @@ export class CalendarComponent implements OnInit {
       }
     }
     array[selectedIndex].selected = true;
+    this.getStatistics()
+  }
 
-
+  getStatistics() {
     // перегенерація даних, якщо ми змінюємо інший стейт
     switch (this.currentState) {
       case 'Month':
@@ -266,7 +267,7 @@ export class CalendarComponent implements OnInit {
     }
     switch (this.currentState) {
       case 'Day':
-        const day = new Date(this.Day.find(d=>d.selected).date.split('.').reverse().join(', '))
+        const day = new Date(this.Day.find(d => d.selected).date.split('.').reverse().join(', '))
         req = {
           fromDate: new Date(day.setHours(0, 0, 0, 0)).toISOString(),
           toDate: new Date(day.setHours(23, 59, 59, 999)).toISOString(),
@@ -309,7 +310,7 @@ export class CalendarComponent implements OnInit {
         }
         break;
     }
-    this.store.dispatch(new StatisticsAction({ ...req }))
+    this.store.dispatch(new StatisticsAction({...req}))
   }
 
   getArray(string): Array<any> {
@@ -318,11 +319,16 @@ export class CalendarComponent implements OnInit {
 
   setState(item: string) {
     this.currentState = item;
+    this.getStatistics()
   }
 
 
 
-  getCurrent(state: string): string {
+  getCurrent(state: string): SearchType {
     return this[state].find(el => el.selected).label;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('on changes')
   }
 }

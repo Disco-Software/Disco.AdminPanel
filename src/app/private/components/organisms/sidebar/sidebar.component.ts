@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes, User } from '@core/models';
+import {LanguageModel, Routes, User} from '@core/models';
 import { Router } from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LocalStorageService } from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
+import {Select} from "@ngxs/store";
+import {AppConfigState} from "../../../../core/states/app-config-state/app-config.state";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-sidebar',
@@ -39,9 +42,6 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this._localStorageService.getItem<User>("user");
-    const shortCode : string = this._localStorageService.getItem('language').shortCode;
-
-    this._translate.use(shortCode);
   }
 
   public toggleMenu() {

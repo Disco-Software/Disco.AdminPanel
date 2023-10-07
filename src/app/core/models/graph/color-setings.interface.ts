@@ -1,5 +1,6 @@
 export interface GraphSettings {
     title: string,
     color: string[],
-    hoverColor: string[]
+    hoverColor: string[],
+    data: number[],
 }
