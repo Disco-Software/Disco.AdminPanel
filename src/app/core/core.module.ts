@@ -10,17 +10,14 @@ import {LangChangeEvent, TranslateLoader, TranslateModule, TranslateService} fro
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const SERVICES = [
-  _services.AccountService,
-  _services.EventBusService,
   _services.LocalStorageService,
-  _services.PageService,
   _services.RestService,
   _states.StatisticsService,
   _states.UsersService,
 ];
 
 const NGXS_MODULES = [
-  NgxsModule.forFeature([_states.LoadingState, _states.UsersState, _states.StatisticsState, _states.LoaderState]),
+  NgxsModule.forFeature([_states.AppConfigState ,_states.UsersState, _states.LoaderState, _states.StatisticsState]),
 ];
 
 export function httpLoaderFactory(http: HttpClient) {

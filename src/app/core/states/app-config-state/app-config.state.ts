@@ -18,7 +18,6 @@ export class AppConfigState implements NgxsOnInit {
   }
 
   ngxsOnInit(ctx: StateContext<AppConfigStateInterface>) {
-    // this._translateService.setDefaultLang('en');
     this._translateService.addLangs(['en', 'ua', 'sp']);
     let language: LanguageModel = this._lsService.getItem("language");
 
@@ -37,7 +36,6 @@ export class AppConfigState implements NgxsOnInit {
   setSelectedLanguage({patchState}: StateContext<AppConfigStateInterface>, {selectedLanguage}: SetSelectedLanguageAction) {
     patchState({selectedLanguage})
     this._lsService.setItem('language', selectedLanguage);
-    // this._translateService.use(selectedLanguage.shortCode)
   }
 
   @Selector()

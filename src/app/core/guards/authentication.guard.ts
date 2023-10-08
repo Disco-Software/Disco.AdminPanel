@@ -1,7 +1,14 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { LocalStorageService } from '../services/local-storage.service';
+import {Injectable} from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  CanActivateChild,
+  Router,
+  RouterStateSnapshot,
+  UrlTree
+} from '@angular/router';
+import {Observable} from 'rxjs';
+import {LocalStorageService} from '@core/services';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +26,10 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.chackAuthentication();
+    return this.checkAuthentication();
   }
 
-  private chackAuthentication(): boolean {
+  private checkAuthentication(): boolean {
     var token = this.localStorageService.getString('accessToken');
 
     if (token) {

@@ -14,6 +14,6 @@ export class UsersService  {
   }
 
   public refreshToken(model: RefreshTokenModel, description): Observable<UserResponseModel> {
-    return this.rest.request('PUT', 'admin/account/refresh',description,  model);
+    return this.rest.request('put', 'admin/account/refresh',description,  model);
   }
 }

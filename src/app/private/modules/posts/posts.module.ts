@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PostRoutingModule } from './post-routing.module';
 import * as _components from './components';
 
-const COMPONENTS = [_components.PostListComponent, _components.PostComponent];
+const COMPONENTS = [_components.PostsListComponent, _components.PostComponent];
 
 const MODULES = [CommonModule, PostRoutingModule];
 
@@ -12,4 +12,4 @@ const MODULES = [CommonModule, PostRoutingModule];
   declarations: [...COMPONENTS],
   imports: [...MODULES],
 })
-export class PostModule {}
+export class PostsModule {}

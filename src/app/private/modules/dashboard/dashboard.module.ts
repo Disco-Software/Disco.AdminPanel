@@ -1,17 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MatIconModule} from '@angular/material/icon';
 
-import { DashboardRoutingModule } from './dashboard-routing.module';
+import {DashboardRoutingModule} from './dashboard-routing.module';
 import * as _components from './components';
-import { CoreModule } from '@core';
-import { GraphComponent } from './components/organisms/graph/graph.component';
-import { SharedModule } from '@shared';
+import {CoreModule} from '@core';
+import {SharedModule} from '@shared';
 
 const COMPONENTS = [
   _components.DashboardComponent,
   _components.CalendarComponent,
   _components.StatisticCardComponent,
+  _components.GraphComponent,
 ];
 
 const MODULES = [
@@ -23,7 +23,7 @@ const MODULES = [
   ];
 
 @NgModule({
-  declarations: [...COMPONENTS, GraphComponent],
+  declarations: [...COMPONENTS],
   imports: [...MODULES],
 })
 export class DashboardModule {}

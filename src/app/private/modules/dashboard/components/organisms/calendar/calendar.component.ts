@@ -1,11 +1,8 @@
 import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {LocalStorageService} from '@core/services';
 import {Store} from '@ngxs/store';
-import {StatisticsAction} from '@core/states';
-import { TranslateService } from '@ngx-translate/core';
-import { SearchType } from 'src/app/core/models/calendar/search-type.model';
-import {end, start} from "@popperjs/core";
-import {state} from "@angular/animations";
+import {GetStatisticsAction} from '@core/states';
+import {SearchType} from 'src/app/core/models/calendar/search-type.model';
 
 @Component({
   selector: 'disco-calendar',
@@ -73,8 +70,8 @@ export class CalendarComponent implements OnInit, OnChanges {
           }
         });
       }
-
     });
+
     this.currentState = 'Day'
     const day = new Date(this.Day.find(d=>d.selected).date.split('.').reverse().join(', '))
     const req = {
@@ -83,7 +80,7 @@ export class CalendarComponent implements OnInit, OnChanges {
       statisticsBy: this.currentState
     }
 
-    this.store.dispatch(new StatisticsAction(req));
+    this.store.dispatch(new GetStatisticsAction(req));
   }
 
   dateList(start, end) {
@@ -310,7 +307,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         }
         break;
     }
-    this.store.dispatch(new StatisticsAction({...req}))
+    this.store.dispatch(new GetStatisticsAction({...req}))
   }
 
   getArray(string): Array<any> {

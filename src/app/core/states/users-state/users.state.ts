@@ -1,12 +1,12 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { catchError, EMPTY, take, tap, throwError } from 'rxjs';
-import { UserResponseModel } from '../../models/account/user.response.model';
-import { UserLogin, Loading, RefreshToken } from './users.actions';
-import { UsersService } from './users.service';
-import { Injectable } from '@angular/core';
-import { RefreshTokenModel } from '@core/models';
-import { LocalStorageService } from '@core/services';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Action, Selector, State, StateContext} from '@ngxs/store';
+import {catchError, tap, throwError} from 'rxjs';
+import {UserResponseModel} from '@core/models';
+import {UsersService} from './users.service';
+import {Injectable} from '@angular/core';
+import {RefreshTokenModel} from '@core/models';
+import {LocalStorageService} from '@core/services';
+import {RefreshTokenAction, UserLoginAction} from "./users.actions";
 
 @State<UserResponseModel>({
   name: "UsersState",
@@ -23,12 +23,12 @@ export class UsersState {
     return result.userInfo;
   }
 
-  @Action(UserLogin)
+  @Action(UserLoginAction)
   getUserInfo(
     { patchState }: StateContext<{ userInfo: UserResponseModel }>,
-    { payload }: UserLogin
+    { payload }: UserLoginAction
   ) {
-    return this._userService.loginAsync(payload, UserLogin.description)
+    return this._userService.loginAsync(payload, UserLoginAction.type)
       .pipe(
         catchError((err: HttpErrorResponse) => {
           return throwError(() => err);
@@ -39,12 +39,12 @@ export class UsersState {
       );
   }
 
-  @Action(RefreshToken)
+  @Action(RefreshTokenAction)
   refreshToken(
     { patchState }: StateContext<any /*TODO*/>,
-     payload : RefreshTokenModel
+    { payload } : RefreshTokenAction
   ) {
-    return this._userService.refreshToken(payload, RefreshToken.description)
+    return this._userService.refreshToken(payload, RefreshTokenAction.type)
       .pipe(
         catchError((err: HttpErrorResponse) => {
           return throwError(() => err);
