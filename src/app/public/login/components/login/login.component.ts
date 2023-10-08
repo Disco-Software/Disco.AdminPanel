@@ -6,7 +6,7 @@ import {map, Observable, Subject, Subscription} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Select, Store} from '@ngxs/store';
 import {LocalStorageService} from '@core/services';
-import {LoadingState, UserLogin, UsersState} from '@core/states';
+import {LoaderState, UserLoginAction, UsersState} from '@core/states';
 import {LanguageModel, User, UserResponseModel} from '@core/models';
 
 import {ForgotPasswordComponent} from '../forgot-password/forgot-password.component';
@@ -19,7 +19,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class LoginComponent {
   @Select(UsersState) userResponseModel$: Observable<UserResponseModel>;
-  @Select(LoadingState.isLoading) loadingState$: Observable<any>;
+  @Select(LoaderState.isLoadingSelector) loadingState$: Observable<boolean>;
 
   private role: string = '';
   isLoggedIn = false;
@@ -70,7 +70,7 @@ export class LoginComponent {
   public onSubmit() {
     this._store
       .dispatch(
-        new UserLogin({
+        new UserLoginAction({
           email: this.loginForm.value.email,
           password: this.loginForm.value.password,
         })

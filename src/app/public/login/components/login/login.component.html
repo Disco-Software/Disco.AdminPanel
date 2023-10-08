@@ -33,17 +33,16 @@
           </div>
         </form>
       </div>
-
-      <div *ngIf="(loadingState$ |async)?.isLoading else submit" class=" d-flex justify-content-center align-items-center">
-        <img width="110" height="100" src="../../../../../assets/gifs/gif_public.gif">
-      </div>
-    <ng-template #submit>
-        <div class=" form-submit submit weight-4 size-24">
-          <button mat-button class=" mb-5 py-2 px-5" (click)="onSubmit()">
+      <div class="mb-5 position-relative">
+        <div [class.invisible]="loadingState$ | async" class=" form-submit submit weight-4 size-24">
+          <button mat-button class=" py-2 px-5" (click)="onSubmit()">
             {{'authentication.submit' | translate}}
           </button>
         </div>
-      </ng-template>
+        <div *ngIf="(loadingState$ | async)" style="top: 0; left: 35px" class="position-absolute">
+          <img width="100" src="../../../../../assets/gifs/gif_public.gif">
+        </div>
+      </div>
 
       <div class="form-forgot forgot">
         <button class="pb-1" (click)="forgotPasswordOpen()">

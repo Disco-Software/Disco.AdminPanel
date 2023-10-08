@@ -1,8 +1,7 @@
 import { StatisticsRequestModel } from '@core/models';
 
-export class StatisticsAction{
-  static readonly type = "[Statistics State] statistics state";
-  static readonly description = "statistics state";
+export class GetStatisticsAction {
+  static readonly type = "[Statistics State] get statistics";
 
   constructor(public payload: StatisticsRequestModel) {
 

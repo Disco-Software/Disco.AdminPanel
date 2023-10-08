@@ -17,7 +17,7 @@ const SERVICES = [
 ];
 
 const NGXS_MODULES = [
-  NgxsModule.forFeature([_states.LoadingState, _states.UsersState, _states.StatisticsState, _states.LoaderState]),
+  NgxsModule.forFeature([_states.AppConfigState ,_states.UsersState, _states.LoaderState, _states.StatisticsState]),
 ];
 
 export function httpLoaderFactory(http: HttpClient) {

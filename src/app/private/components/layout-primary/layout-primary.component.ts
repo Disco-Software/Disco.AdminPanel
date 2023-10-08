@@ -1,9 +1,9 @@
-import {Component, ChangeDetectorRef, AfterContentChecked, OnInit} from '@angular/core';
-import { Select, Store } from '@ngxs/store';
-import { LoaderState, LoadingState } from '@core/states';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { NavigationEnd, Router } from '@angular/router';
-import {AppConfigState} from "../../../core/states/app-config-state/app-config.state";
+import {AfterContentChecked, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Select, Store} from '@ngxs/store';
+import {LoaderState} from '@core/states';
+import {Observable, Subject, takeUntil} from 'rxjs';
+import {Router} from '@angular/router';
+import {AppConfigState} from "@core";
 import {LanguageModel} from "@core";
 import {TranslateService} from "@ngx-translate/core";
 
@@ -29,7 +29,7 @@ export class LayoutPrimaryComponent implements AfterContentChecked, OnInit {
 
   ) {
     this.loadingBarStatus$ = this._store
-    .select(LoaderState.getList)
+    .select(LoaderState.getListSelector)
     .pipe(takeUntil(this.destroy$)); //TODO delete after @Select fixed
   }
 

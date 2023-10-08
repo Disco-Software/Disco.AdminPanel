@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public title : String;
 
-  @Select(StatisticsState.getStatistics)
+  @Select(StatisticsState.getStatisticsSelector)
   public statisticsModel$ : Observable<StatisticsModel>;
 
   public statisticCards : DashboardStatisticCardModel[] = []

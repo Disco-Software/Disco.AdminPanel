@@ -1,15 +1,13 @@
-import { Loader } from "@core/models";
-
-export class LoaderAdd {
-  static readonly desc = "adding loader";
+export class LoaderAddAction {
   static readonly type = "[Loader] Add";
 
-  constructor(public payload: Loader.Item[] | Loader.Item) {}
+  constructor(public payload: string[] | string) {
+  }
 }
 
-export class LoaderRemove {
-  static readonly desc = "removing loader";
+export class LoaderRemoveAction {
   static readonly type = "[Loader] Remove";
 
-  constructor(public payload: Loader.Item[] | Loader.Item) {}
+  constructor(public payload: string[] | string) {
+  }
 }

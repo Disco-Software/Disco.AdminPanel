@@ -1,59 +1,62 @@
-import {
-  Action,
-  createSelector,
-  Selector,
-  State,
-  StateContext,
-} from "@ngxs/store";
-import { LoaderAdd, LoaderRemove } from "./loader.actions";
-import { LOADER_DEFAULTS as defaults } from "./loader.defaults";
-import { Injectable } from "@angular/core";
-import { Loader } from "@core/models";
+import {Action, createSelector, Selector, State, StateContext,} from "@ngxs/store";
+import {LoaderAddAction, LoaderRemoveAction} from "./loader.actions";
+import {Injectable} from "@angular/core";
+import {Loader} from "@core/models";
 
 @State<Loader.State>({
   name: "LoaderState",
-  defaults,
+  defaults: {
+    list: [],
+    isLoading: false,
+  },
 })
 @Injectable()
 export class LoaderState {
+
   @Selector()
-  static getList({ list }: Loader.State) {
+  static isLoadingSelector({isLoading}: Loader.State) {
+    return isLoading;
+  }
+  @Selector()
+  static getListSelector({ list }: Loader.State) {
     return list;
   }
 
-  static getAny(items: Loader.Item[]) {
+  static getAny(items: string[]) {
     return createSelector(
       [LoaderState],
       ({ list }: Loader.State) => !!list.find((key) => items.indexOf(key) >= 0)
     );
   }
 
-  @Action(LoaderAdd)
+  @Action(LoaderAddAction)
   addItem(
     { getState, patchState }: StateContext<Loader.State>,
-    { payload }: LoaderAdd
+    { payload }: LoaderAddAction
   ) {
     const { list } = getState();
 
     patchState({
       list: filterList(list, payload).concat(payload),
+      isLoading: true
     });
   }
 
-  @Action(LoaderRemove)
+  @Action(LoaderRemoveAction)
   removeItem(
     { getState, patchState }: StateContext<Loader.State>,
-    { payload }: LoaderRemove
+    { payload }: LoaderRemoveAction
   ) {
     const { list } = getState();
 
     patchState({
       list: filterList(list, payload),
+      isLoading: false
     });
   }
 }
 
-function filterList(list: Loader.Item[], payload: Loader.Item[] | Loader.Item) {
+function filterList(list: string[], payload: string[] | string) {
   if (Array.isArray(payload)) {
     return list.filter((name) => payload.indexOf(name) < 0);
   }
