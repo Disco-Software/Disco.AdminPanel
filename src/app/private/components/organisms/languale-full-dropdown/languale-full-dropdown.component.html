@@ -3,7 +3,7 @@
 >
   <div>
     <mat-icon [svgIcon]="'language'"></mat-icon
-    ><span class="m-3 size-25">{{ currentLanguage?.name }}</span>
+    ><span class="m-3 size-25">{{ currentLanguage?.name | translate }}</span>
   </div>
   <img
     [@openClose]="isShowing ? 'open' : 'closed'"
@@ -20,7 +20,7 @@
       (click)="switchLanguage(language)"
       [class.active]="language.isActive"
     >
-      {{ language?.name }}
+      {{ language?.name | translate }}
     </li>
   </ul>
 </div>

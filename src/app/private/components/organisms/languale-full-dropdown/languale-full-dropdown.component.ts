@@ -33,9 +33,9 @@ export class LangualeFullDropdownComponent implements OnInit {
   public currentLanguage: LanguageModel;
   public isShowing: boolean;
   public languages: LanguageModel[] = [
-    { name: 'English', isActive: false, shortCode: 'en' },
-    { name: 'Ukranian', isActive: false, shortCode: 'ua' },
-    { name: 'Spanish', isActive: false, shortCode: 'sp' },
+    { name: 'language.english', isActive: false, shortCode: 'en' },
+    { name: 'language.ukrainian', isActive: false, shortCode: 'ua' },
+    { name: 'language.spanish', isActive: false, shortCode: 'sp' },
   ];
 
   constructor(private _lsService: LocalStorageService, private cdr: ChangeDetectorRef, protected _domSanitizer : DomSanitizer, protected _matIconRegistry : MatIconRegistry, private _translate: TranslateService) {
