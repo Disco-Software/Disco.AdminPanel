@@ -1,4 +1,4 @@
-export class StatisticModel {
+export class DashboardStatisticCardModel {
    title: string;
    count: number;
    icon: string;

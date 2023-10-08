@@ -1,12 +1,10 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
-import { inject, Injectable } from "@angular/core";
-import { BehaviorSubject, EMPTY, of, throwError } from "rxjs";
-import { Observable } from "rxjs/internal/Observable";
-import { catchError, filter, map, switchMap, take, tap } from 'rxjs/operators';
-import { AccountService } from "../services/account.service";
-import { Store } from "@ngxs/store";
-import { RefreshToken, UsersService } from "../states/users-state";
-import { LocalStorageService } from "../services/local-storage.service";
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {BehaviorSubject, EMPTY} from "rxjs";
+import {Observable} from "rxjs/internal/Observable";
+import {catchError, switchMap} from 'rxjs/operators';
+import {UsersService} from "@core/states";
+import {LocalStorageService} from "@core/services";
 
 @Injectable()
 export class HeaderInterceptor implements HttpInterceptor {
@@ -15,7 +13,8 @@ export class HeaderInterceptor implements HttpInterceptor {
   private accessToken: string = '';
   private refreshToken: string = '';
 
-  constructor(private accountService: AccountService, private _store: Store, private _lsService: LocalStorageService, private _userService: UsersService) { }
+  constructor(private _lsService: LocalStorageService, private _userService: UsersService) {
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -26,12 +25,12 @@ export class HeaderInterceptor implements HttpInterceptor {
     }
 
     // return next.handle(req)
-    // return next.handle(req).pipe( catchError(err => { 
+    // return next.handle(req).pipe( catchError(err => {
     //   if(err.status === 401) {
     //     this.handleUnauthorizedErrorResponse(req, next)
     //   }
-    //   console.log(err); 
-    //   return EMPTY 
+    //   console.log(err);
+    //   return EMPTY
     // }))
 
     return next.handle(req).pipe(catchError(error => {

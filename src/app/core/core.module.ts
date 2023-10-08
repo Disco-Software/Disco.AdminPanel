@@ -10,10 +10,7 @@ import {LangChangeEvent, TranslateLoader, TranslateModule, TranslateService} fro
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const SERVICES = [
-  _services.AccountService,
-  _services.EventBusService,
   _services.LocalStorageService,
-  _services.PageService,
   _services.RestService,
   _states.StatisticsService,
   _states.UsersService,

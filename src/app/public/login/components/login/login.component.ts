@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
-import { Subject, Subscription, Observable, map } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Select, Store } from '@ngxs/store';
-import { EventBusService, LocalStorageService } from '@core/services';
-import { LoadingState, UsersState, UserLogin } from '@core/states';
-import { LanguageModel, User, UserResponseModel } from '@core/models';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {takeUntil} from 'rxjs/operators';
+import {map, Observable, Subject, Subscription} from 'rxjs';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Select, Store} from '@ngxs/store';
+import {LocalStorageService} from '@core/services';
+import {LoadingState, UserLogin, UsersState} from '@core/states';
+import {LanguageModel, User, UserResponseModel} from '@core/models';
 
-import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
-import { TranslateService } from '@ngx-translate/core';
+import {ForgotPasswordComponent} from '../forgot-password/forgot-password.component';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -43,7 +43,6 @@ export class LoginComponent {
     private translate: TranslateService,
     private _storageService: LocalStorageService,
     private _modalService: NgbModal,
-    private _eventBusService: EventBusService,
     private _store: Store,
     private _router: Router
   ) {
@@ -66,12 +65,6 @@ export class LoginComponent {
 
       this._router.navigateByUrl('/private');
     }
-
-    this.eventBus$ = this._eventBusService.on('logout', () => {
-      this._storageService.removeItem('accessToken');
-      this._storageService.removeItem('refreshToken');
-      this._storageService.removeItem('user');
-    });
   }
 
   public onSubmit() {

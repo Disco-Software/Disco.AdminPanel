@@ -15,4 +15,4 @@ const MODULES = [CommonModule, AccountRoutingModule];
   declarations: [...COMPONENTS],
   imports: [...MODULES],
 })
-export class AccountModule {}
+export class AccountsModule {}

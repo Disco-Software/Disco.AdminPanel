@@ -18,8 +18,8 @@ const routes: Routes = [
       {
         path: 'accounts',
         loadChildren: () =>
-          import('../private/modules/account/account.module').then(
-            (m) => m.AccountModule
+          import('./modules/accounts/accounts.module').then(
+            (m) => m.AccountsModule
           ),
       },
       {
@@ -30,10 +30,10 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'post',
+        path: 'posts',
         loadChildren: () =>
-          import('../private/modules/post/post.module').then(
-            (m) => m.PostModule
+          import('./modules/posts/posts.module').then(
+            (m) => m.PostsModule
           ),
       },
     ],

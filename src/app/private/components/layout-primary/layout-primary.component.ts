@@ -31,13 +31,6 @@ export class LayoutPrimaryComponent implements AfterContentChecked, OnInit {
     this.loadingBarStatus$ = this._store
     .select(LoaderState.getList)
     .pipe(takeUntil(this.destroy$)); //TODO delete after @Select fixed
-    router.events.subscribe((val) => {
-      if(val instanceof NavigationEnd && val.url.includes('overview')) {
-        this.isOverview = true
-      } else {
-        this.isOverview = false
-      }
-  });
   }
 
   ngAfterContentChecked(): void {
