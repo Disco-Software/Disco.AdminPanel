@@ -42,7 +42,7 @@ export class UsersState {
   @Action(RefreshTokenAction)
   refreshToken(
     { patchState }: StateContext<any /*TODO*/>,
-     payload : RefreshTokenModel
+    { payload } : RefreshTokenAction
   ) {
     return this._userService.refreshToken(payload, RefreshTokenAction.type)
       .pipe(

@@ -19,9 +19,10 @@ export class RestService {
    }
 
   public request(method: string, url: string, description: string, request?: any) : Observable<any>{
+    console.log(method, url, description, request)
      const req = new HttpRequest(method, `${this.serverUrl}${url}`, request);
      return this._store.dispatch(new LoaderAddAction(description)).pipe(take(1),switchMap(() => {
-        return this.http[method](`${this.serverUrl}/${url}`, request).pipe(take(1), mergeMap((response) => {
+        return this.http[(method).toLowerCase()](`${this.serverUrl}/${url}`, request).pipe(take(1), mergeMap((response) => {
           this._store.dispatch(new LoaderRemoveAction(description)).pipe(take(1));
 
           return of(response);
