@@ -20,7 +20,9 @@ export class UserInfoComponent implements OnInit {
   public isOpen : boolean = false;
 
   userActions : UserActionModel[] = [
-    {name: 'Log out', icon: 'logout', onClickEvent: this.logout}
+    {name: 'userInfo.logout', icon: 'logout', onClickEvent: () => {
+      this.logout();
+    }}
   ]
 
   constructor(

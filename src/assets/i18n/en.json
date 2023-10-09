@@ -62,6 +62,10 @@
     "users" : "Users",
     "newUsers" : "New Users",
     "posts" : "Posts"
+  },
+
+  "userInfo" : {
+    "logout" : "Log out"
   }
 
 }

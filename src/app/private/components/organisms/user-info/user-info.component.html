@@ -23,10 +23,10 @@
   <ul class=" user-actions actions bg-transparent">
     <li
        *ngFor="let userAction of userActions"
-       (click)="userAction.onClickEvent"
+       (click)="userAction.onClickEvent()"
        class="user-action action bg-transparent">
        <mat-icon [svgIcon]="userAction.icon" class=" m-3 mb-0 mt-0"></mat-icon>
-       <span class=" action-span span">{{userAction.name}}</span>
+       <span class=" action-span span">{{userAction.name | translate}}</span>
     </li>
   </ul>
 </div>
