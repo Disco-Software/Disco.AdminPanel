@@ -61,6 +61,9 @@
     "users" : "Usuarios",
     "newUsers" : "Usuarios nuevos",
     "posts" : "Publicaciones"
-  }
+  },
 
+  "userInfo" : {
+    "logout" : "Salida"
+  }
 }
