@@ -10,7 +10,7 @@
         <h4>{{'authentication.title' | translate}}</h4>
       </div>
       <div class="mw-100 form-inputs inputs">
-        <form (keydown)="onSubmit()"
+        <form (keydown)="onEnterSubmit($event)"
           [formGroup]="loginForm" (submit)="onSubmit()" class="mb-5">
           <div class="inputs-input weight-4 size-16 d-flex flex-column mb-4">
             <label class="m-3 mb-2 mt-0" for="email">{{'authentication.email' | translate}}</label>

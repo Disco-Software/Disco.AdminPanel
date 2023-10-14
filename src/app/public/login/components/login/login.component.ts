@@ -90,6 +90,31 @@ export class LoginComponent {
       });
   }
 
+  public onEnterSubmit(e){
+    if(e.keyCode === 13) {
+      this._store
+      .dispatch(
+        new UserLoginAction({
+          email: this.loginForm.value.email,
+          password: this.loginForm.value.password,
+        })
+      )
+      .pipe(
+        map((state) => state.UsersState.userInfo),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((response: UserResponseModel) => {
+        if (response.user) {
+          this._storageService.setItem('user', response.user);
+          this._storageService.setString('accessToken', response.accessToken);
+          this._storageService.setString('refreshToken', response.refreshToken);
+
+          this._router.navigateByUrl('private/overview');
+        }
+      });
+    }
+  }
+
   public forgotPasswordOpen() {
     this._modalService.open(ForgotPasswordComponent, {
       modalDialogClass:
