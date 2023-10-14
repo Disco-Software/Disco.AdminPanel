@@ -22,10 +22,41 @@ export class AppConfigState implements NgxsOnInit {
     let language: LanguageModel = this._lsService.getItem("language");
 
     if (!language) {
-      language = {
-        name: 'English',
-        isActive: true,
-        shortCode: 'en'
+      const browserLanguage: string = navigator.language
+
+      switch (browserLanguage) {
+        case 'en-US':
+        case 'en-GB':
+          language = {
+            name: 'English',
+            isActive: true,
+            shortCode: 'en'
+          }
+          break;
+        case 'ca':
+        case 'es':
+        case 'es-ES':
+        case 'es-US':
+        case 'es-MX':
+          language = {
+            name: 'Spanish',
+            isActive: true,
+            shortCode: 'sp'
+          }
+          break;
+        case 'uk':
+          language = {
+            name: 'Ukrainian',
+            isActive: true,
+            shortCode: 'ua'
+          }
+          break;
+        default:
+          language = {
+            name: 'English',
+            isActive: true,
+            shortCode: 'en'
+          }
       }
     }
 
