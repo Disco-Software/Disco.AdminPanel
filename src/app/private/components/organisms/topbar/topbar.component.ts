@@ -15,7 +15,7 @@ export class TopbarComponent implements OnInit {
   public routes : Routes[] = [
     { path: 'overview', title: 'sidebar.overview', icon: 'overview'},
     { path: 'accounts', title: 'sidebar.accounts', icon: 'accounts'},
-    { path: 'post', title: 'sidebar.posts', icon: 'posts'},
+    { path: 'posts', title: 'sidebar.posts', icon: 'posts'},
     { path: 'help', title: 'sidebar.help', icon: 'help'},
 
   ]
