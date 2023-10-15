@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {takeUntil} from 'rxjs/operators';
-import {map, Observable, Subject, Subscription} from 'rxjs';
+import {map, Observable, Subject} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Select, Store} from '@ngxs/store';
 import {LocalStorageService} from '@core/services';
@@ -17,19 +17,15 @@ import {TranslateService} from '@ngx-translate/core';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   @Select(UsersState) userResponseModel$: Observable<UserResponseModel>;
   @Select(LoaderState.isLoadingSelector) loadingState$: Observable<boolean>;
 
   private role: string = '';
   isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
   username?: string;
-  isLoading: boolean = false;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
-  eventBus$: Subscription;
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -67,7 +63,17 @@ export class LoginComponent {
     }
   }
 
-  public onSubmit() {
+  public onSubmit(): void {
+    this.userLogin();
+  }
+
+  public onEnterSubmit(e: KeyboardEvent): void {
+    if (e.key === 'Enter') {
+      this.userLogin()
+    }
+  }
+
+  private userLogin(): void {
     this._store
       .dispatch(
         new UserLoginAction({
@@ -90,32 +96,7 @@ export class LoginComponent {
       });
   }
 
-  public onEnterSubmit(e){
-    if(e.keyCode === 13) {
-      this._store
-      .dispatch(
-        new UserLoginAction({
-          email: this.loginForm.value.email,
-          password: this.loginForm.value.password,
-        })
-      )
-      .pipe(
-        map((state) => state.UsersState.userInfo),
-        takeUntil(this.destroy$)
-      )
-      .subscribe((response: UserResponseModel) => {
-        if (response.user) {
-          this._storageService.setItem('user', response.user);
-          this._storageService.setString('accessToken', response.accessToken);
-          this._storageService.setString('refreshToken', response.refreshToken);
-
-          this._router.navigateByUrl('private/overview');
-        }
-      });
-    }
-  }
-
-  public forgotPasswordOpen() {
+  public forgotPasswordOpen(): void {
     this._modalService.open(ForgotPasswordComponent, {
       modalDialogClass:
         'd-flex justify-content-center align-items-center h-100',
