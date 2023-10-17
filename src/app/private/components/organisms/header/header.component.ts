@@ -11,6 +11,7 @@ import {takeUntil} from "rxjs";
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   pageModel: PageModel;
+  
 
   onDestroy$: Subject<void> = new Subject();
 
