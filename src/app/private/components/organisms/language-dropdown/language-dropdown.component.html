@@ -8,7 +8,7 @@
     (click)="toggleDropDownMenu()"
     [class.lenguage-icon-open]="isShowing"
     [class.lenguage-icon-close]="!isShowing"
-    class="lenguage-icon icon" src="../../../../../assets/images/ic_sm_dropdown.svg">
+    class="lenguage-icon icon" [src]="'/assets/images/ic_sm_dropdown.svg'">
   </div>
 
   <div
@@ -26,7 +26,7 @@
       <ng-template #elseTemplate>
         <div class="cursor-pointer w-100 d-flex justify-content-between align-items-center p-3 pt-2 pb-2 size-12">
           <label class="cursor-pointer lenguage-span">{{language.name | translate}}</label>
-          <img src="../../../../../assets/images/ic_active.svg">
+          <img [src]="'/assets/images/ic_active.svg'">
         </div>
       </ng-template>
     </div>
