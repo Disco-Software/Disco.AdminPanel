@@ -10,7 +10,7 @@
     style="width: 15px"
     (click)="toggleDropDownMenu()"
     class="lenguage-icon icon cursor-pointer"
-    src="../../../../../assets/images/ic_sm_dropdown.svg"
+    [src]="'/assets/images/ic_sm_dropdown.svg'"
   />
 </div>
 <div [ngbCollapse]="!isShowing" class="ml-5 collapse color-white">
