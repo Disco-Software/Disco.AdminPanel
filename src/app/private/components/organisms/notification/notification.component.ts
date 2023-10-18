@@ -3,42 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-notification',
   template: `<button class="bg-transparent border-0">
-  <svg
-    width="31"
-    height="33"
-    viewBox="0 0 31 33"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M11.3433 20.4277H27.1185C28.5171 20.4277 29.646 21.5567 29.646 22.9553C29.646 24.3539 28.5171 25.4829 27.1185 25.4829H3.52759C2.12899 25.4829 1 24.3539 1 22.9553C1 21.5567 2.12899 20.4277 3.52759 20.4277H6.60134"
-      stroke="#E6E1D4"
-      stroke-width="2"
-      stroke-miterlimit="10"
-      stroke-linecap="round"
-    />
-    <path
-      d="M5.21289 20.3445V11.1104C5.21289 5.53281 9.74571 1 15.3233 1C20.9008 1 25.4336 5.53281 25.4336 11.1104V20.4625"
-      stroke="#E6E1D4"
-      stroke-width="2"
-      stroke-miterlimit="10"
-      stroke-linecap="round"
-    />
-    <path
-      d="M8.58398 10.9912C8.58398 7.26724 11.6002 4.25098 15.3242 4.25098"
-      stroke="#E6E1D4"
-      stroke-width="2"
-      stroke-miterlimit="10"
-      stroke-linecap="round"
-    />
-    <path
-      d="M12.7949 28.9727C12.7949 30.3039 13.9239 31.3654 15.3225 31.3654C16.7211 31.3654 17.8501 30.287 17.8501 28.9727"
-      stroke="#E6E1D4"
-      stroke-width="2"
-      stroke-miterlimit="10"
-      stroke-linecap="round"
-    />
-  </svg>
+  <img src="../../../../../assets/images/ic_notifications.svg">
 </button>
 `
 })
