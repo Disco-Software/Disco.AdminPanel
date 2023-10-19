@@ -21,6 +21,13 @@
     "formSubmit" : "Send"
   },
 
+  "reset" : {
+    "title" : "Restore password",
+    "newPassword" : "New password",
+    "confirm" : "Confirm password",
+    "submit" : "Send"
+  },
+
   "language" : {
     "english" : "English",
     "spanish" : "Spanish",

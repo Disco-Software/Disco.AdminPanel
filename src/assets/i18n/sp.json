@@ -14,6 +14,14 @@
     "formSubmit" : "Enviar"
   },
 
+  "reset" : {
+    "title" : "Restaurar contraseña",
+    "newPassword" : "Nueva contraseña",
+    "confirm" : "Confirmar contraseña",
+    "submit" : "Enviar"
+  },
+
+
   "sidebar" : {
     "overview" : "Visión general",
     "accounts" : "Cuentas",
