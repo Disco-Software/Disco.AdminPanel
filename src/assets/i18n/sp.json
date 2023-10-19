@@ -7,6 +7,13 @@
     "forgot" : "¿Olvidaste tu contraseña?"
   },
 
+  "forgot" : {
+    "title" : "Contraseña",
+    "description" : "Ingresa tu correo electrónico y recibirás un enlace para crear una nueva contraseña",
+    "formTitle" : "Correo electrónico",
+    "formSubmit" : "Enviar"
+  },
+
   "sidebar" : {
     "overview" : "Visión general",
     "accounts" : "Cuentas",
