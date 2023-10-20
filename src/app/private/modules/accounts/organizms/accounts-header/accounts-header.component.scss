@@ -1,0 +1,25 @@
+.header {
+  &-newUser{
+    background: #29193E;
+    border-radius: 10px;
+  }
+
+  &-search{
+    background: #29193E;
+    border-radius: 10px;
+  }
+}
+
+.search{
+  &-wrapper{
+    border: solid 2px white;
+    border-radius: 365px;
+  }
+
+  &-input{
+    width: 90%;
+    outline: none;
+    border: none;
+    color: white;
+  }
+}
