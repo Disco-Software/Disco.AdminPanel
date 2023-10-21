@@ -1,0 +1,25 @@
+.button {
+  background: inherit;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: inherit;
+  &_blue-hover {
+    &:hover {
+      background: linear-gradient(90deg, #1887D7 0%, #1887D7 0.01%, rgba(24, 133, 212, 0.00) 96.67%);
+    }
+  }
+  &_violet-hover {
+    &:hover {
+      background: linear-gradient(90deg, rgba(160, 68, 255, 0.70) 0%, rgba(160, 68, 255, 0.00) 100%);
+    }
+  }
+  &_orange {
+    background: #C26929;
+    border-color: #C26929;
+    &:hover {
+      border-color: rgba(194, 59, 41, 1);
+      background: rgba(194, 59, 41, 1);
+    }
+  }
+}
