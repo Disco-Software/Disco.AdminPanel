@@ -77,6 +77,7 @@ html {
 
 body {
   margin: 0;
+  color: white;
 }
 
 /**
@@ -91,6 +92,11 @@ main {
  * Correct the font size and margin on `h1` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari.
  */
+
+p {
+  margin: 0;
+  padding: 0;
+}
 
 h1 {
   font-size: 2em;

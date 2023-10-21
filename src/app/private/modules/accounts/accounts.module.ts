@@ -3,16 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { AccountRoutingModule } from './account-routing.module';
 import * as _components from './components';
+import * as _organizms from './organizms'
+import { AccountsHeaderComponent } from './organizms/accounts-header/accounts-header.component';
+import { AccountItemComponent } from './components/accounts-list/organisms/account-item/account-item.component';
 
 const COMPONENTS = [
   _components.AccountsListComponent,
-  _components.AccountComponent,
+  _organizms.AccountModalComponent,
+  _organizms.AccountsHeaderComponent
 ];
 
 const MODULES = [CommonModule, AccountRoutingModule];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, AccountsHeaderComponent, AccountItemComponent],
   imports: [...MODULES],
 })
 export class AccountsModule {}
