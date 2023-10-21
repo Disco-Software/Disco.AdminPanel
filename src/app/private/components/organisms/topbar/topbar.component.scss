@@ -51,7 +51,7 @@ ul > li{
 }
 
 .navbar{
-  background: radial-gradient(101.53% 101.28% at 100% 0%, #2E1257 0%, #221338 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+  background: radial-gradient(101.53% 101.28% at 100% 100%, #2E1257 0%, #221338 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
 
   &-title{
     font-family: 'Colonna MT', sans-serif;
@@ -71,3 +71,26 @@ ul > li{
   }
 }
 
+.show-menu {
+  position: fixed;
+  transform: translateY(100);
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background: radial-gradient(101.53% 101.28% at 100% 0%, #2E1257 0%, #221338 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+  width: 100%;
+}
+
+.hide-menu {
+  position: fixed;
+  transform: translateY(-1000);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
