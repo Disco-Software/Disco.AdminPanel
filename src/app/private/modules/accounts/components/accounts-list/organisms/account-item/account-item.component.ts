@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-account-item',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account-item.component.scss']
 })
 export class AccountItemComponent implements OnInit {
+
+  @Input() public name : String;
+  @Input() public email : String;
+  @Input() public photo : String;
 
   constructor() { }
 

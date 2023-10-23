@@ -1,3 +1,11 @@
 .accounts-list {
   background: #29193E;
 }
+
+.paginator{
+  &-container{
+    background-color: #29193E !important;
+    color: white !important
+  }
+}
+
