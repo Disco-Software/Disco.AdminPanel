@@ -1,6 +1,10 @@
 <div class="d-flex">
   <div class="d-flex align-items-center w-50 cursor-pointer">
-    <img height="70px" width="70px" [src]="photo" class="item-photo photo me-3">
+    <img *ngIf="photo; else elseImage" height="70px" width="70px" [src]="photo" class="item-photo photo me-3">
+    <ng-template #elseImage>
+       <img width="70px" height="70px" class="photo photo-default me-3" [src]="'/assets/images/ic_user-default.png'">
+    </ng-template>
+
     <div class="d-flex flex-column">
       <p class="fs-4">{{name}}</p>
       <p>{{email}}</p>
