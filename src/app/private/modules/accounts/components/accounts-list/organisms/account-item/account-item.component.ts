@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
-import { DeleteModalComponent } from '../../../../organizms/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-account-item',
@@ -9,6 +6,10 @@ import { DeleteModalComponent } from '../../../../organizms/delete-modal/delete-
   styleUrls: ['./account-item.component.scss']
 })
 export class AccountItemComponent implements OnInit {
+
+  @Input() public name : String;
+  @Input() public email : String;
+  @Input() public photo : String;
 
   constructor(private _modalService : NgbModal) { }
 

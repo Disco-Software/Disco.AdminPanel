@@ -7,17 +7,19 @@ import * as _organizms from './organizms'
 import { AccountsHeaderComponent } from './organizms/accounts-header/accounts-header.component';
 import { AccountItemComponent } from './components/accounts-list/organisms/account-item/account-item.component';
 import { DeleteModalComponent } from './organizms/delete-modal/delete-modal.component';
+import { PrimeNgModule } from '@shared';
 
 const COMPONENTS = [
   _components.AccountsListComponent,
   _organizms.AccountModalComponent,
-  _organizms.AccountsHeaderComponent
+  _organizms.AccountsHeaderComponent,
+  _organizms.DeleteModalComponent
 ];
 
-const MODULES = [CommonModule, AccountRoutingModule];
+const MODULES = [CommonModule, AccountRoutingModule, PrimeNgModule];
 
 @NgModule({
-  declarations: [...COMPONENTS, AccountsHeaderComponent, AccountItemComponent, DeleteModalComponent],
+  declarations: [...COMPONENTS],
   imports: [...MODULES],
 })
 export class AccountsModule {}
