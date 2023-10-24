@@ -4,6 +4,7 @@ import { Paginator } from 'primeng/paginator';
 import { GetAllAccountsAction } from 'src/app/core/states/accounts-state/account.action';
 import { take, map } from 'rxjs';
 import { GetAllAccountsModel } from 'src/app/core/models/account/getaccounts.model';
+import { AccountItemComponent } from './organisms';
 @Component({
   selector: 'app-accounts-list',
   templateUrl: './accounts-list.component.html',
