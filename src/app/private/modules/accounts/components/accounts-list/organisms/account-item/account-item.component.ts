@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
+import { DeleteModalComponent } from '../../../../organizms/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-account-item',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountItemComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _modalService : NgbModal) { }
 
   ngOnInit(): void {
+  }
+
+  public onDelete() : void {
+    this._modalService.open(DeleteModalComponent, {
+      modalDialogClass: 'd-flex justify-content-center align-items-center h-100'
+    });
   }
 
 }

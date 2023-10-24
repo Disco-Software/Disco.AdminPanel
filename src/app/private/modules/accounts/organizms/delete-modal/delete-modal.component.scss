@@ -1,0 +1,64 @@
+.modal{
+  &-dialog{
+    border-radius: 10px;
+  }
+  &-body{
+    border-radius: 10px;
+    background: #2D1848;
+  }
+
+  &-cansal{
+    width: 144px;
+    height: 43px;
+
+    border-radius: 30px;
+    border: 1px solid white;
+    padding: 47px, 12px;
+  }
+
+  &-cansal:hover{
+    background: linear-gradient(90deg, #1887D7 0%, #1887D7 0%, rgba(23.80, 132.71, 211.57, 0) 100%);
+    transition: all 0.2s;
+  }
+
+  &-submit {
+    width: 144px;
+    height: 43px;
+
+    border-radius: 30px;
+    border: 1px solid white;
+    padding: 47px, 12px;
+  }
+
+  &-submit :hover{
+    background: #C23B29 !important;
+    transition: all 0.2s;
+  }
+
+  &-span{
+    font-size: 16px;
+    color: white;
+  }
+}
+
+.button {
+  background: inherit;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 12px 47px 12px 47px;
+  color: inherit;
+  &_violet-hover {
+    &:hover {
+      background: linear-gradient(90deg, rgba(160, 68, 255, 0.70) 0%, rgba(160, 68, 255, 0.00) 100%);
+    }
+  }
+  &_orange {
+    background: transparent;
+    border-color: white;
+    &:hover {
+      background: #C23B29;
+      border-color: #C23B29;
+
+    }
+  }
+}

@@ -6,6 +6,7 @@ import * as _components from './components';
 import * as _organizms from './organizms'
 import { AccountsHeaderComponent } from './organizms/accounts-header/accounts-header.component';
 import { AccountItemComponent } from './components/accounts-list/organisms/account-item/account-item.component';
+import { DeleteModalComponent } from './organizms/delete-modal/delete-modal.component';
 
 const COMPONENTS = [
   _components.AccountsListComponent,
@@ -16,7 +17,7 @@ const COMPONENTS = [
 const MODULES = [CommonModule, AccountRoutingModule];
 
 @NgModule({
-  declarations: [...COMPONENTS, AccountsHeaderComponent, AccountItemComponent],
+  declarations: [...COMPONENTS, AccountsHeaderComponent, AccountItemComponent, DeleteModalComponent],
   imports: [...MODULES],
 })
 export class AccountsModule {}
