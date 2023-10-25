@@ -23,3 +23,16 @@
     }
   }
 }
+
+.item{
+  &-photo{
+    border-radius: 360px;
+  }
+}
+
+.photo{
+  &-default{
+    border-radius: 360px;
+    background-color: white;
+  }
+}

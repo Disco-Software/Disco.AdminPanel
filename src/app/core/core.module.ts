@@ -8,8 +8,11 @@ import * as _services from './services';
 import * as _interceptors from './interceptors';
 import {LangChangeEvent, TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AccountService } from './states/accounts-state/account.service';
+import { AccountsState } from './states/accounts-state/account.state';
 
 const SERVICES = [
+  AccountService,
   _services.LocalStorageService,
   _services.RestService,
   _states.StatisticsService,
@@ -17,7 +20,7 @@ const SERVICES = [
 ];
 
 const NGXS_MODULES = [
-  NgxsModule.forFeature([_states.AppConfigState ,_states.UsersState, _states.LoaderState, _states.StatisticsState]),
+  NgxsModule.forFeature([_states.AppConfigState ,_states.UsersState, _states.LoaderState, _states.StatisticsState, AccountsState]),
 ];
 
 export function httpLoaderFactory(http: HttpClient) {
