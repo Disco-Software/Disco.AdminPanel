@@ -37,6 +37,7 @@
     "bootstrap": "^5.2.0",
     "chart.js": "^2.9.4",
     "json2typescript": "^1.5.1",
+    "primeicons": "^6.0.1",
     "primeng": "^14.2.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
