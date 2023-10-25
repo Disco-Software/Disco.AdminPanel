@@ -13,7 +13,8 @@ const COMPONENTS = [
   _components.AccountsListComponent,
   _organizms.AccountModalComponent,
   _organizms.AccountsHeaderComponent,
-  _organizms.DeleteModalComponent
+  _organizms.DeleteModalComponent,
+  AccountItemComponent
 ];
 
 const MODULES = [CommonModule, AccountRoutingModule, PrimeNgModule];

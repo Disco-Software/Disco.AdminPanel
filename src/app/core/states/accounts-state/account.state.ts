@@ -5,6 +5,7 @@ import {Injectable} from '@angular/core';
 import { AccountService } from './account.service';
 import {GetAllAccountsAction} from './account.action';
 import { GetAllAccountsModel } from '../../models/account/getaccounts.model';
+import { RemoveAccountAction } from './remove.action';
 
 @State<GetAllAccountsModel>({
   name: "AccountsState",
@@ -36,4 +37,14 @@ export class AccountsState {
         })
       );
   }
+
+  @Action(GetAllAccountsAction)
+  public deleteAccount(
+    { patchState }: StateContext<{ }>,
+    { payload }: RemoveAccountAction
+  ) {
+    return this._accountService.deleteAccount(payload, RemoveAccountAction.type);
+  }
+
+
 }
