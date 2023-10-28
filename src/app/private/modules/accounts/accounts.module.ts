@@ -8,6 +8,7 @@ import { AccountsHeaderComponent } from './organizms/accounts-header/accounts-he
 import { AccountItemComponent } from './components/accounts-list/organisms/account-item/account-item.component';
 import { DeleteModalComponent } from './organizms/delete-modal/delete-modal.component';
 import { PrimeNgModule } from '@shared';
+import { CreateUserModalComponent } from './organizms/create-user-modal/create-user-modal.component';
 
 const COMPONENTS = [
   _components.AccountsListComponent,
@@ -20,7 +21,7 @@ const COMPONENTS = [
 const MODULES = [CommonModule, AccountRoutingModule, PrimeNgModule];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, CreateUserModalComponent],
   imports: [...MODULES],
 })
 export class AccountsModule {}

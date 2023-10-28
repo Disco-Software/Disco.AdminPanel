@@ -1,0 +1,68 @@
+<div class="modal-body body">
+  <div class="row mb-4">
+    <div class="d-flex justify-content-between">
+      <span class="modal-title title">Add user</span>
+      <button (click)="onCloseClick()" class="bg-transparent border-0">
+        <img [src]="'../../../../../../assets/images/ic_close.svg'" />
+      </button>
+    </div>
+  </div>
+  <form (submit)="onSubmit()">
+    <div class="row">
+      <div class="d-flex justify-content-around align-items-center mb-3">
+        <button
+          *ngFor="let state of states"
+          [class.active]="currentState === state.name"
+          [(ngModel)]="form.value.role"
+          [ngModelOptions]="{standalone : true}"
+          (click)="setState(state.name)"
+          class="modal-role role"
+        >
+          {{ state.title }}
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="d-flex justify-content-around align-items-center mb-3">
+        <div class="form-group">
+          <label class="form-label label mx-2">User name</label>
+          <input
+            [(ngModel)]="form.value.userName"
+            [ngModelOptions]="{standalone : true}"
+            type="text" class="form-control control" />
+        </div>
+        <div class="form-group">
+          <label class="form-label label mx-2">E-mail</label>
+          <input
+            [(ngModel)]="form.value.email"
+            [ngModelOptions]="{standalone: true}"
+            type="email"
+            class="form-control control" />
+        </div>
+      </div>
+      <div class="d-flex justify-content-around align-items-center mb-3">
+        <div class="form-group">
+          <label class="form-label label mx-2">Password</label>
+          <input
+          [(ngModel)]="form.value.password"
+          [ngModelOptions]="{standalone : true}"
+          type="password"
+          class="form-control control" />
+        </div>
+        <div class="form-group">
+          <label class="form-label label mx-2">Confirm password</label>
+          <input
+            [(ngModel)]="form.value.confirmPassword"
+            [ngModelOptions]="{standalone : true}"
+            type="password"
+            class="form-control control" />
+        </div>
+      </div>
+      <div class="d-flex justify-content-center align-items-center mt-2">
+        <button class="form-submit submit px-4 py-2" type="submit">
+          Add user
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

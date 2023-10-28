@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateUserModalComponent } from '../create-user-modal/create-user-modal.component';
 
 @Component({
   selector: 'app-accounts-header',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountsHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _modalService : NgbModal) { }
 
   ngOnInit(): void {
+  }
+
+  public createUser() : void {
+    this._modalService.open(CreateUserModalComponent, {
+      modalDialogClass: 'd-flex justify-content-center align-items-center h-100'
+    });
   }
 
 }

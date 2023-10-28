@@ -6,6 +6,9 @@ import { AccountService } from './account.service';
 import {GetAllAccountsAction} from './account.action';
 import { GetAllAccountsModel } from '../../models/account/getaccounts.model';
 import { RemoveAccountAction } from './remove.action';
+import { CreateAccountAction } from './create.action';
+import { CreateUserResponseModel } from '../../models/account/create-account-response.model';
+import { patch } from '@ngxs/store/operators';
 
 @State<GetAllAccountsModel>({
   name: "AccountsState",
@@ -38,7 +41,7 @@ export class AccountsState {
       );
   }
 
-  @Action(GetAllAccountsAction)
+  @Action(RemoveAccountAction)
   public deleteAccount(
     { patchState }: StateContext<{ }>,
     { payload }: RemoveAccountAction
@@ -46,5 +49,19 @@ export class AccountsState {
     return this._accountService.deleteAccount(payload, RemoveAccountAction.type);
   }
 
+  public createAccount(
+    {patchState } : StateContext<{ }>,
+    {payload} : CreateAccountAction
+  ){
+    return this._accountService.createAccount(payload, '[Create account] create account action')
+          .pipe(
+            catchError((error : HttpErrorResponse) => {
+              return EMPTY;
+          }),
+          tap((response : CreateUserResponseModel) => {
+            console.log(response);
+            patchState({account: response});
+          }))
+  }
 
 }

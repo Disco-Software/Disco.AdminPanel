@@ -1,0 +1,34 @@
+.modal{
+  &-body{
+    background: #29193E;
+    border-radius: 5px;
+  }
+
+  &-role{
+    background: transparent;
+    color: white;
+    border: transparent;
+  }
+}
+
+.form{
+  &-control{
+    border: solid white 2px;
+    border-radius: 15px;
+
+    background: transparent;
+  }
+
+  &-submit{
+    border-radius: 15px;
+
+    background: #825DCD;
+    color: #E6E0D2;
+
+    font-size: 16px;
+  }
+}
+
+.active {
+  border-bottom: solid orange 2px;
+}
