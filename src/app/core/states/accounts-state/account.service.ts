@@ -21,10 +21,8 @@ export class AccountService {
     return this._restService.request("GET", `admin/users?pageNumber=${request.pageNumber}&pageSize=${request.pageSize}`, description);
   }
 
-  public deleteAccount(id : number, description : string) : void {
-    console.log(id);
-    console.log(    this._restService.request("DELETE", `admin/users/${id}`, description));
-    this._restService.request("DELETE", `admin/users/${id}`, description);
+  public deleteAccount(id : number, description : string) : Observable<void> {
+    return this._restService.request("DELETE", `admin/users/${id}`, description);
   }
 
 }

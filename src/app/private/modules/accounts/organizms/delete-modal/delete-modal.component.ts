@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngxs/store';
 import { RemoveAccountAction } from 'src/app/core/states/accounts-state/remove.action';
+import {switchMap} from "rxjs";
+import {GetAllAccountsAction} from "../../../../../core/states/accounts-state/account.action";
 
 @Component({
   selector: 'app-delete-modal',
@@ -22,8 +24,12 @@ export class DeleteModalComponent implements OnInit {
   }
 
   public deleteUser() : void {
-    this._store.dispatch(new RemoveAccountAction(this.id))
-      .subscribe(x => this._modal.close());
+    this._store.dispatch(new RemoveAccountAction(this.id)).pipe(
+      switchMap(res=> this._store.dispatch(new GetAllAccountsAction({ pageNumber: 1, pageSize: 5})))
+    )
+      .subscribe(x => {
+        this._modal.close()
+      });
   }
 
 
