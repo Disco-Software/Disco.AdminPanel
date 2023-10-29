@@ -16,3 +16,9 @@ export class CreateAccountAction{
   constructor(public payload : CreateAccountInterface) {
   }
 }
+
+export class GetAccountsCountAction{
+  static readonly type = '[Get accounts count] get accounts count';
+
+  constructor() {}
+}

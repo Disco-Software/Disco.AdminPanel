@@ -25,4 +25,7 @@ export class AccountService {
     return this._restService.request("DELETE", `admin/users/${id}`, description);
   }
 
+  public getAccountsCount(description : string) : Observable<number>{
+    return this._restService.request('GET', 'admin/users/count', description);
+  }
 }
