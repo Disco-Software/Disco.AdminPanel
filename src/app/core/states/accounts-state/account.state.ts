@@ -49,11 +49,12 @@ export class AccountsState {
     return this._accountService.deleteAccount(payload, RemoveAccountAction.type);
   }
 
+  @Action(CreateAccountAction)
   public createAccount(
-    {patchState } : StateContext<{ }>,
+    {patchState } : StateContext<{ account: CreateUserResponseModel }>,
     {payload} : CreateAccountAction
   ){
-    return this._accountService.createAccount(payload, '[Create account] create account action')
+    return this._accountService.createAccount(payload, CreateAccountAction.type)
           .pipe(
             catchError((error : HttpErrorResponse) => {
               return EMPTY;

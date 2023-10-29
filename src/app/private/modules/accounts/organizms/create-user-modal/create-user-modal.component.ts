@@ -7,6 +7,7 @@ import { SearchType } from 'src/app/core/models/calendar';
 import { BooleanLiteral } from 'typescript/lib/tsserverlibrary';
 import { CreateAccountAction } from '../../../../../core/states/accounts-state/create.action';
 import { CreateUserResponseModel } from 'src/app/core/models/account/create-account-response.model';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-create-user-modal',
@@ -58,6 +59,7 @@ export class CreateUserModalComponent implements OnInit {
     };
 
     this._store.dispatch(new CreateAccountAction(req))
+         .pipe()
          .subscribe((res : CreateUserResponseModel) => {
             console.log(res);
             this._activeModal.close();
