@@ -3,11 +3,11 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {catchError, EMPTY, tap} from 'rxjs';
 import {Injectable} from '@angular/core';
 import { AccountService } from './account.service';
-import {GetAllAccountsAction} from './account.action';
+import {CreateAccountAction, GetAllAccountsAction} from './account.action';
 import { GetAllAccountsModel } from '../../models/account/getaccounts.model';
 import { RemoveAccountAction } from './remove.action';
 
-@State<GetAllAccountsModel>({
+@State<any>({
   name: "AccountsState",
   defaults: null,
 })
@@ -38,13 +38,20 @@ export class AccountsState {
       );
   }
 
-  @Action(GetAllAccountsAction)
+  @Action(CreateAccountAction)
+  public createAccount(
+    { patchState }: StateContext<{ }>,
+    { payload }: CreateAccountAction
+  ) {
+    return this._accountService.createAccount(payload, CreateAccountAction.type);
+  }
+
+  @Action(RemoveAccountAction)
   public deleteAccount(
     { patchState }: StateContext<{ }>,
     { payload }: RemoveAccountAction
   ) {
     return this._accountService.deleteAccount(payload, RemoveAccountAction.type);
   }
-
 
 }
