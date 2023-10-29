@@ -1,5 +1,5 @@
-export interface CreateAccountModel {
-  role : string;
+export interface CreateAccountInterface {
+  roleName : string;
   userName : string;
   email : string;
   password: string;

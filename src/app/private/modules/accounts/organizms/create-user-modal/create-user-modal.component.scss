@@ -25,8 +25,12 @@
 
     background: #825DCD;
     color: #E6E0D2;
-
+    cursor: pointer;
     font-size: 16px;
+    &_disabled {
+      background: gray !important;
+      cursor: default !important;
+    }
   }
 }
 

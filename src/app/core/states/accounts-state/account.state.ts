@@ -3,14 +3,11 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {catchError, EMPTY, tap} from 'rxjs';
 import {Injectable} from '@angular/core';
 import { AccountService } from './account.service';
-import {GetAllAccountsAction} from './account.action';
+import {CreateAccountAction, GetAllAccountsAction} from './account.action';
 import { GetAllAccountsModel } from '../../models/account/getaccounts.model';
 import { RemoveAccountAction } from './remove.action';
-import { CreateAccountAction } from './create.action';
-import { CreateUserResponseModel } from '../../models/account/create-account-response.model';
-import { patch } from '@ngxs/store/operators';
 
-@State<GetAllAccountsModel>({
+@State<any>({
   name: "AccountsState",
   defaults: null,
 })
@@ -41,28 +38,20 @@ export class AccountsState {
       );
   }
 
+  @Action(CreateAccountAction)
+  public createAccount(
+    { patchState }: StateContext<{ }>,
+    { payload }: CreateAccountAction
+  ) {
+    return this._accountService.createAccount(payload, CreateAccountAction.type);
+  }
+
   @Action(RemoveAccountAction)
   public deleteAccount(
     { patchState }: StateContext<{ }>,
     { payload }: RemoveAccountAction
   ) {
     return this._accountService.deleteAccount(payload, RemoveAccountAction.type);
-  }
-
-  @Action(CreateAccountAction)
-  public createAccount(
-    {patchState } : StateContext<{ account: CreateUserResponseModel }>,
-    {payload} : CreateAccountAction
-  ){
-    return this._accountService.createAccount(payload, CreateAccountAction.type)
-          .pipe(
-            catchError((error : HttpErrorResponse) => {
-              return EMPTY;
-          }),
-          tap((response : CreateUserResponseModel) => {
-            console.log(response);
-            patchState({account: response});
-          }))
   }
 
 }

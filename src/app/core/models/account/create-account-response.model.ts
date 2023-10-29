@@ -2,7 +2,7 @@ export interface CreateUserResponseModel {
   user: User
   accessToken: string
   refreshToken: string
-  accessTokenExpirce: number
+  accessTokenExpire: number
 }
 
 export interface User {
