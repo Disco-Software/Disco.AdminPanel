@@ -12,12 +12,20 @@
 }
 
 .form{
+  &-group {
+    color: red;
+  }
+
   &-control{
     border: solid white 2px;
     border-radius: 15px;
 
     color: white;
     background: transparent;
+  }
+
+  &-label {
+    color: white
   }
 
   &-submit{
@@ -36,4 +44,8 @@
 
 .active {
   border-bottom: solid orange 2px;
+}
+
+.invalid{
+  border-color: red !important;
 }
