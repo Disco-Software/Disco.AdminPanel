@@ -3,8 +3,8 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {catchError, EMPTY, tap} from 'rxjs';
 import {Injectable} from '@angular/core';
 import { AccountService } from './account.service';
-import {CreateAccountAction, GetAllAccountsAction} from './account.action';
-import { GetAllAccountsModel } from '../../models/account/getaccounts.model';
+import {CreateAccountAction, GetAllAccountsAction, SearchAccountsAction} from './account.action';
+import { AccountModel } from '../../models/account/getaccounts.model';
 import { RemoveAccountAction } from './remove.action';
 
 @State<any>({
@@ -17,14 +17,21 @@ export class AccountsState {
 
   @Selector()
   static getAllAccountsSelector(result: {
-     allAccounts : GetAllAccountsModel;
-  }): GetAllAccountsModel {
+     allAccounts : AccountModel;
+  }): AccountModel {
     return result.allAccounts;
+  }
+
+  @Selector()
+  static searchSelector(result: {
+    accounts: AccountModel[]
+  }) : AccountModel[] {
+    return result.accounts;
   }
 
   @Action(GetAllAccountsAction)
   getAllAccounts(
-    { patchState }: StateContext<{ allAccounts: GetAllAccountsModel[] }>,
+    { patchState }: StateContext<{ allAccounts: AccountModel[] }>,
     { payload }: GetAllAccountsAction
   ) {
     return this._accountService.getAllAccounts(payload, GetAllAccountsAction.type)
@@ -32,7 +39,7 @@ export class AccountsState {
         catchError((err: HttpErrorResponse) => {
           return EMPTY;
         }),
-        tap((response: GetAllAccountsModel[]) => {
+        tap((response: AccountModel[]) => {
           patchState({ allAccounts: response});
         })
       );
@@ -54,4 +61,10 @@ export class AccountsState {
     return this._accountService.deleteAccount(payload, RemoveAccountAction.type);
   }
 
+  @Action(SearchAccountsAction)
+  public searchAccounts(
+    { patchState } : StateContext<{accounts : AccountModel[]}>,
+    { payload } : SearchAccountsAction) {
+      return this._accountService.searchAccounts(payload, SearchAccountsAction.type);
+    }
 }

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Select, Store} from '@ngxs/store';
+import {Select, Selector, Store} from '@ngxs/store';
 import { GetAllAccountsAction } from 'src/app/core/states/accounts-state/account.action';
 import {take, map, Observable, takeUntil, Subject} from 'rxjs';
-import { GetAllAccountsModel } from 'src/app/core/models/account/getaccounts.model';
+import { AccountModel } from 'src/app/core/models/account/getaccounts.model';
 import {AccountsState} from "../../../../../core/states/accounts-state/account.state";
 
 @Component({
@@ -11,8 +11,10 @@ import {AccountsState} from "../../../../../core/states/accounts-state/account.s
   styleUrls: ['./accounts-list.component.scss']
 })
 export class AccountsListComponent implements OnInit, OnDestroy {
-  @Select(AccountsState.getAllAccountsSelector) accounts$: Observable<GetAllAccountsModel[]>
-  accounts : GetAllAccountsModel[];
+  @Select(AccountsState.getAllAccountsSelector) accounts$: Observable<AccountModel[]>
+  @Select(AccountsState.searchSelector) searchedAccounts$: Observable<AccountModel[]>
+
+  accounts : AccountModel[];
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -38,5 +40,13 @@ export class AccountsListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
+  }
+
+  public onSearchHasChanged() {
+    console.log('hello');
+    this.searchedAccounts$.pipe(takeUntil(this.destroy$))
+         .subscribe((searchResult : AccountModel[]) => {
+            this.accounts = searchResult;
+         })
   }
 }

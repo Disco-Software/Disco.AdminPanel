@@ -16,3 +16,11 @@ export class CreateAccountAction{
   constructor(public payload : CreateAccountInterface) {
   }
 }
+
+export class SearchAccountsAction{
+  static readonly type : string = '[Search account] search account';
+
+  constructor(public payload: string) {
+
+  }
+}
