@@ -17,17 +17,17 @@ export class AccountsState {
 
   @Selector()
   static getAllAccountsSelector(result: {
-     allAccounts : AccountModel;
-  }): AccountModel {
+     allAccounts : AccountModel[];
+  }): AccountModel[] {
     return result.allAccounts;
   }
 
-  @Selector()
-  static searchSelector(result: {
-    accounts: AccountModel[]
-  }) : AccountModel[] {
-    return result.accounts;
-  }
+  // @Selector()
+  // static searchSelector(result: {
+  //   accounts: AccountModel[]
+  // }) : AccountModel[] {
+  //   return result.accounts;
+  // }
 
   @Action(GetAllAccountsAction)
   getAllAccounts(
@@ -63,8 +63,15 @@ export class AccountsState {
 
   @Action(SearchAccountsAction)
   public searchAccounts(
-    { patchState } : StateContext<{accounts : AccountModel[]}>,
+    { patchState } : StateContext<{allAccounts : AccountModel[]}>,
     { payload } : SearchAccountsAction) {
-      return this._accountService.searchAccounts(payload, SearchAccountsAction.type);
+      return this._accountService.searchAccounts(payload, SearchAccountsAction.type).pipe(
+        catchError((err: HttpErrorResponse) => {
+          return EMPTY;
+        }),
+        tap((response: AccountModel[]) => {
+          patchState({ allAccounts: response});
+        })
+      );
     }
 }

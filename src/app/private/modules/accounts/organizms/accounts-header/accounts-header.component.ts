@@ -10,9 +10,6 @@ import { SearchAccountsAction } from 'src/app/core/states/accounts-state/account
   styleUrls: ['./accounts-header.component.scss']
 })
 export class AccountsHeaderComponent implements OnInit {
-
-  @Output() onSearchHasChanged : EventEmitter<string> = new EventEmitter<string>();
-
   public search : string;
 
   constructor(
@@ -34,10 +31,6 @@ export class AccountsHeaderComponent implements OnInit {
 
   public onEnterButtonClick(event : KeyboardEvent){
     this.getData();
-  }
-
-  public onSearchChanged() {
-    this.onSearchHasChanged.emit(this.search);
   }
 
   private getData() {

@@ -12,7 +12,7 @@ import {AccountsState} from "../../../../../core/states/accounts-state/account.s
 })
 export class AccountsListComponent implements OnInit, OnDestroy {
   @Select(AccountsState.getAllAccountsSelector) accounts$: Observable<AccountModel[]>
-  @Select(AccountsState.searchSelector) searchedAccounts$: Observable<AccountModel[]>
+  // @Select(AccountsState.searchSelector) searchedAccounts$: Observable<AccountModel[]>
 
   accounts : AccountModel[];
 
@@ -25,6 +25,7 @@ export class AccountsListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getData(1, 5);
     this.accounts$.pipe(takeUntil(this.destroy$)).subscribe(res=>{
+      console.log(res)
       this.accounts = res
     })
   }
@@ -42,11 +43,11 @@ export class AccountsListComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  public onSearchHasChanged() {
-    console.log('hello');
-    this.searchedAccounts$.pipe(takeUntil(this.destroy$))
-         .subscribe((searchResult : AccountModel[]) => {
-            this.accounts = searchResult;
-         })
-  }
+  // public onSearchHasChanged() {
+  //   console.log('hello');
+  //   this.searchedAccounts$.pipe(takeUntil(this.destroy$))
+  //        .subscribe((searchResult : AccountModel[]) => {
+  //           this.accounts = searchResult;
+  //        })
+  // }
 }
