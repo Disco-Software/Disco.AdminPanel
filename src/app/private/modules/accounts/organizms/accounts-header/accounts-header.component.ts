@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateUserModalComponent } from '../create-user-modal/create-user-modal.component';
 import { Store } from '@ngxs/store';
-import { SearchAccountsAction } from 'src/app/core/states/accounts-state/account.action';
+import { GetAllAccountsAction, SearchAccountsAction } from 'src/app/core/states/accounts-state/account.action';
 
 @Component({
   selector: 'app-accounts-header',
@@ -34,6 +34,11 @@ export class AccountsHeaderComponent implements OnInit {
   }
 
   private getData() {
-    return this._store.dispatch(new SearchAccountsAction(this.search));
+    if(!this.search) {
+      this._store.dispatch(new GetAllAccountsAction({ pageNumber: 1, pageSize: 5}));
+    }
+    else {
+      this._store.dispatch(new SearchAccountsAction(this.search));
+    }
   }
 }
