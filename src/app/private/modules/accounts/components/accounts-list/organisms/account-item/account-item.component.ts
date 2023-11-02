@@ -1,5 +1,5 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
-import { DeleteModalComponent } from '../../../../organizms';
+import { AccountModalComponent, DeleteModalComponent } from '../../../../organizms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -23,6 +23,14 @@ export class AccountItemComponent implements OnInit {
     const ref =  this._modalService.open(DeleteModalComponent, {
       modalDialogClass: 'd-flex justify-content-center align-items-center h-100'
     });
+    ref.componentInstance.id = this.id;
+  }
+
+  public onUserInfoClick() : void{
+    const ref = this._modalService.open(AccountModalComponent, {
+      modalDialogClass: 'd-flex justify-content-center align-items-center h-100'
+    });
+
     ref.componentInstance.id = this.id;
   }
 

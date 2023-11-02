@@ -1,4 +1,4 @@
-<div class="d-flex">
+<div (click)="onUserInfoClick()" class="d-flex">
   <div class="d-flex align-items-center w-50 cursor-pointer">
     <img *ngIf="photo; else elseImage" height="70px" width="70px" [src]="photo" class="item-photo photo me-3">
     <ng-template #elseImage>

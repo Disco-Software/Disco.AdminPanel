@@ -7,4 +7,24 @@
   &-content{
     margin-left: 16px;
   }
+
+  &-input{
+    &:hover{
+      outline : none;
+    }
+    &:active {
+     outline: none;
+    }
+    &:focus-visible{
+      outline: none;
+    }
+  }
+}
+
+.span-display-none{
+  display: none;
+}
+
+.span-display-block{
+  display: block;
 }

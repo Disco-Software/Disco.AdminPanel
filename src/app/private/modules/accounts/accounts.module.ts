@@ -9,11 +9,15 @@ import { AccountItemComponent } from './components/accounts-list/organisms/accou
 import { DeleteModalComponent } from './organizms/delete-modal/delete-modal.component';
 import {PrimeNgModule, SharedModule} from '@shared';
 import { CreateUserModalComponent } from './organizms/create-user-modal/create-user-modal.component';
+import { AccountModalComponent } from './organizms/account-modal/account-modal.component';
+import { UserInfoCardComponent } from './organizms/account-modal/organisms/user-info-card/user-info-card.component';
+import { TicketComponent } from './organizms/account-modal/organisms/ticket/ticket.component';
 
 const COMPONENTS = [
   _components.AccountsListComponent,
   _organizms.AccountModalComponent,
   _organizms.AccountsHeaderComponent,
+  _organizms.CreateUserModalComponent,
   _organizms.DeleteModalComponent,
   AccountItemComponent
 ];
@@ -21,7 +25,7 @@ const COMPONENTS = [
 const MODULES = [CommonModule, AccountRoutingModule, SharedModule];
 
 @NgModule({
-  declarations: [...COMPONENTS, CreateUserModalComponent],
+  declarations: [...COMPONENTS, UserInfoCardComponent, TicketComponent],
   imports: [...MODULES],
 })
 export class AccountsModule {}

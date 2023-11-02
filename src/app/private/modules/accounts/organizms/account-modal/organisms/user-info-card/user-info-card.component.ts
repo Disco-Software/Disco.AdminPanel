@@ -10,16 +10,17 @@ export class UserInfoCardComponent implements OnInit {
   @Input() public title: string;
   @Input() public content : string;
   @Input() public isEditable : boolean = true;
+  @Input() public inputType : string;
 
-  @Output() public onEdit = new EventEmitter<void>();
+  public isEdit : boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  public eventEmit(){
-    this.onEdit.emit();
+  public onEditClick() {
+    this.isEdit = !this.isEdit;
   }
 
 }

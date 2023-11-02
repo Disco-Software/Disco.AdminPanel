@@ -16,3 +16,10 @@ export class CreateAccountAction{
   constructor(public payload : CreateAccountInterface) {
   }
 }
+
+export class AccountAction {
+  static readonly type = "[Account state] get account";
+
+  constructor(public payload : number) {
+  }
+}

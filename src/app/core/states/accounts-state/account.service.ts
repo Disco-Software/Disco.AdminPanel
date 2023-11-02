@@ -5,6 +5,7 @@ import {RequestDataModel} from '../../models/request.interface';
 import {Observable} from 'rxjs';
 import {CreateAccountInterface} from "@core";
 import {CreateUserResponseModel} from "../../models/account/create-account-response.model";
+import { Account } from '../../models/account/account.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,4 +26,7 @@ export class AccountService {
     return this._restService.request("DELETE", `admin/users/${id}`, description);
   }
 
+  public getAccount(id: number, description : string) : Observable<Account> {
+     return this._restService.request("GET", `admin/users/${id}`, description);
+  }
 }
