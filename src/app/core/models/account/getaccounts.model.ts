@@ -1,4 +1,4 @@
-export interface GetAllAccountsModel {
+export interface AccountModel {
   accountStatus: any
   cread: string
   photo: string

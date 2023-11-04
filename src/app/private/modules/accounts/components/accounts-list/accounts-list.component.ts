@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Select, Store} from '@ngxs/store';
-import { GetAccountsCountAction, GetAllAccountsAction } from 'src/app/core/states/accounts-state/account.action';
+import {Select, Selector, Store} from '@ngxs/store';
+import {GetAccountsCountAction, GetAllAccountsAction} from 'src/app/core/states/accounts-state/account.action';
 import {take, map, Observable, takeUntil, Subject} from 'rxjs';
-import { GetAllAccountsModel } from 'src/app/core/models/account/getaccounts.model';
+import { AccountModel } from 'src/app/core/models/account/getaccounts.model';
 import {AccountsState} from "../../../../../core/states/accounts-state/account.state";
 
 @Component({
@@ -11,10 +11,10 @@ import {AccountsState} from "../../../../../core/states/accounts-state/account.s
   styleUrls: ['./accounts-list.component.scss']
 })
 export class AccountsListComponent implements OnInit, OnDestroy {
-  @Select(AccountsState.getAllAccountsSelector) accounts$: Observable<GetAllAccountsModel[]>
-  @Select(AccountsState.getAccountsCountSelector) totalCount$ : Observable<number>;
+  @Select(AccountsState.getAllAccountsSelector) accounts$: Observable<AccountModel[]>
 
-  accounts : GetAllAccountsModel[];
+  accounts : AccountModel[];
+  @Select(AccountsState.getAccountsCountSelector) totalCount$ : Observable<number>;
   totalCount : number;
 
   destroy$: Subject<boolean> = new Subject<boolean>();

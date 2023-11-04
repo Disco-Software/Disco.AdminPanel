@@ -2,18 +2,20 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {catchError, EMPTY, tap} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {AccountService} from './account.service';
-import {CreateAccountAction, GetAccountsCountAction, GetAllAccountsAction} from './account.action';
-import {GetAllAccountsModel} from '../../models/account/getaccounts.model';
-import {RemoveAccountAction} from './remove.action';
-import {AccountStateInterface} from "@core";
+import { AccountService } from './account.service';
+import {
+  CreateAccountAction,
+  GetAccountsCountAction,
+  GetAllAccountsAction,
+  SearchAccountsAction
+} from './account.action';
+import { AccountModel } from '../../models/account/getaccounts.model';
+import { RemoveAccountAction } from './remove.action';
+import {AccountStateInterface} from "@core/models";
 
 @State<AccountStateInterface>({
   name: "AccountsState",
-  defaults: {
-    allAccounts: [],
-    count: 0
-  },
+  defaults: null,
 })
 @Injectable()
 export class AccountsState {
@@ -21,8 +23,8 @@ export class AccountsState {
 
   @Selector()
   static getAllAccountsSelector(result: {
-     allAccounts : GetAllAccountsModel[];
-  }): GetAllAccountsModel[] {
+     allAccounts : AccountModel[];
+  }): AccountModel[] {
     return result.allAccounts;
   }
 
@@ -31,9 +33,16 @@ export class AccountsState {
     return state.count
   }
 
+  // @Selector()
+  // static searchSelector(result: {
+  //   accounts: AccountModel[]
+  // }) : AccountModel[] {
+  //   return result.accounts;
+  // }
+
   @Action(GetAllAccountsAction)
   getAllAccounts(
-    { patchState }: StateContext<{ allAccounts: GetAllAccountsModel[] }>,
+    { patchState }: StateContext<{ allAccounts: AccountModel[] }>,
     { payload }: GetAllAccountsAction
   ) {
     return this._accountService.getAllAccounts(payload, GetAllAccountsAction.type)
@@ -41,7 +50,7 @@ export class AccountsState {
         catchError((err: HttpErrorResponse) => {
           return EMPTY;
         }),
-        tap((response: GetAllAccountsModel[]) => {
+        tap((response: AccountModel[]) => {
           patchState({ allAccounts: response});
         })
       );
@@ -77,4 +86,17 @@ export class AccountsState {
       }))
   }
 
+  @Action(SearchAccountsAction)
+  public searchAccounts(
+    { patchState } : StateContext<{allAccounts : AccountModel[]}>,
+    { payload } : SearchAccountsAction) {
+      return this._accountService.searchAccounts(payload, SearchAccountsAction.type).pipe(
+        catchError((err: HttpErrorResponse) => {
+          return EMPTY;
+        }),
+        tap((response: AccountModel[]) => {
+          patchState({ allAccounts: response});
+        })
+      );
+    }
 }

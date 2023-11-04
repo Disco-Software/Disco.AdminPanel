@@ -3,18 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { AccountRoutingModule } from './account-routing.module';
 import * as _components from './components';
-import * as _organizms from './organizms'
-import { AccountsHeaderComponent } from './organizms/accounts-header/accounts-header.component';
+import * as _organisms from './organisms'
+import { AccountsHeaderComponent } from './organisms/accounts-header/accounts-header.component';
 import { AccountItemComponent } from './components/accounts-list/organisms/account-item/account-item.component';
-import { DeleteModalComponent } from './organizms/delete-modal/delete-modal.component';
+import { DeleteModalComponent } from './organisms/delete-modal/delete-modal.component';
 import {PrimeNgModule, SharedModule} from '@shared';
-import { CreateUserModalComponent } from './organizms/create-user-modal/create-user-modal.component';
+import { CreateUserModalComponent } from './organisms/create-user-modal/create-user-modal.component';
 
 const COMPONENTS = [
   _components.AccountsListComponent,
-  _organizms.AccountModalComponent,
-  _organizms.AccountsHeaderComponent,
-  _organizms.DeleteModalComponent,
+  _organisms.AccountModalComponent,
+  _organisms.AccountsHeaderComponent,
+  _organisms.DeleteModalComponent,
   AccountItemComponent
 ];
 

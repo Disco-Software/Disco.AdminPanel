@@ -22,3 +22,11 @@ export class GetAccountsCountAction{
 
   constructor() {}
 }
+
+export class SearchAccountsAction{
+  static readonly type : string = '[Search account] search account';
+
+  constructor(public payload: string) {
+
+  }
+}
