@@ -11,11 +11,10 @@
     </div>
   </div>
   <p-paginator
-    [totalRecords]="totalCount * 2"
+    [totalRecords]="totalCount"
     [rows]="5"
     [pageLinkSize]="5"
     [showFirstLastIcon]="false"
-    [rowsPerPageOptions]="[10, 20, 30]"
     (onPageChange)="onPageChange($event)"></p-paginator>
 </div>
 
