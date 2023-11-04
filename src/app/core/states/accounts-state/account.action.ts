@@ -17,6 +17,12 @@ export class CreateAccountAction{
   }
 }
 
+export class GetAccountsCountAction{
+  static readonly type = '[Get accounts count] get accounts count';
+
+  constructor() {}
+}
+
 export class SearchAccountsAction{
   static readonly type : string = '[Search account] search account';
 

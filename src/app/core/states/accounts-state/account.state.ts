@@ -3,11 +3,16 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {catchError, EMPTY, tap} from 'rxjs';
 import {Injectable} from '@angular/core';
 import { AccountService } from './account.service';
-import {CreateAccountAction, GetAllAccountsAction, SearchAccountsAction} from './account.action';
+import {
+  CreateAccountAction,
+  GetAccountsCountAction,
+  GetAllAccountsAction,
+  SearchAccountsAction
+} from './account.action';
 import { AccountModel } from '../../models/account/getaccounts.model';
 import { RemoveAccountAction } from './remove.action';
 
-@State<any>({
+@State<AccountStateInterface>({
   name: "AccountsState",
   defaults: null,
 })
@@ -20,6 +25,11 @@ export class AccountsState {
      allAccounts : AccountModel[];
   }): AccountModel[] {
     return result.allAccounts;
+  }
+
+  @Selector()
+  static getAccountsCountSelector(state: AccountStateInterface): number {
+    return state.count
   }
 
   // @Selector()
@@ -59,6 +69,20 @@ export class AccountsState {
     { payload }: RemoveAccountAction
   ) {
     return this._accountService.deleteAccount(payload, RemoveAccountAction.type);
+  }
+
+  @Action(GetAccountsCountAction)
+  public getAccountsCount(
+    { patchState }: StateContext<{ count: number }>,
+  ) {
+    return this._accountService.getAccountsCount(GetAccountsCountAction.type)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return EMPTY;
+      }),
+      tap((response : number) => {
+        patchState({count : response});
+      }))
   }
 
   @Action(SearchAccountsAction)

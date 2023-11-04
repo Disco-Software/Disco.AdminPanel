@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Select, Selector, Store} from '@ngxs/store';
-import { GetAllAccountsAction } from 'src/app/core/states/accounts-state/account.action';
+import {GetAccountsCountAction, GetAllAccountsAction} from 'src/app/core/states/accounts-state/account.action';
 import {take, map, Observable, takeUntil, Subject} from 'rxjs';
 import { AccountModel } from 'src/app/core/models/account/getaccounts.model';
 import {AccountsState} from "../../../../../core/states/accounts-state/account.state";
@@ -14,6 +14,8 @@ export class AccountsListComponent implements OnInit, OnDestroy {
   @Select(AccountsState.getAllAccountsSelector) accounts$: Observable<AccountModel[]>
 
   accounts : AccountModel[];
+  @Select(AccountsState.getAccountsCountSelector) totalCount$ : Observable<number>;
+  totalCount : number;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -22,15 +24,23 @@ export class AccountsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.getTotalCount();
+    this.totalCount$.pipe(takeUntil(this.destroy$)).subscribe(count => {
+      this.totalCount = count;
+    })
+
     this.getData(1, 5);
     this.accounts$.pipe(takeUntil(this.destroy$)).subscribe(res=>{
-      console.log(res)
       this.accounts = res
     })
   }
 
   public getData(pageNumber : number, pageSize : number) {
     this._store.dispatch(new GetAllAccountsAction({ pageNumber, pageSize})).pipe(take(1))
+  }
+
+  public getTotalCount(){
+    this._store.dispatch(new GetAccountsCountAction()).pipe(take(1));
   }
 
   public onPageChange($event) {

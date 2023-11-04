@@ -13,14 +13,13 @@
     </div>
   </div>
   <p-paginator
+    [totalRecords]="totalCount"
+    [rows]="5"
+    [pageLinkSize]="5"
     [dropdownAppendTo]="false"
     [showFirstLastIcon]="false"
     [showCurrentPageReport]="false"
     [showJumpToPageDropdown]="false"
-    (onPageChange)="onPageChange($event)"
-    [first]="1"
-    [rows]="10"
-    [totalRecords]="120"
-    [rowsPerPageOptions]="[10, 20, 30]"
-  ></p-paginator>
+    (onPageChange)="onPageChange($event)"></p-paginator>
 </div>
+
