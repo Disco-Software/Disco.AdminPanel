@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Store} from '@ngxs/store';
 import {CreateAccountInterface} from '../../../../../core/models/account/create-account.interface';
@@ -37,6 +37,8 @@ export class CreateUserModalComponent {
 
   public currentState: string = this.states[0].name
 
+
+
   public form : FormGroup = new FormGroup({
     userName : new FormControl('', [Validators.required ]),
     email : new FormControl('', [Validators.required, Validators.email]),
@@ -66,5 +68,13 @@ export class CreateUserModalComponent {
     ).subscribe(res => {
       this._activeModal.close();
     })
+  }
+
+  getFormControl(field): AbstractControl {
+    return this.form.get(field)
+  }
+
+  checkIsValid(field) {
+    return this.getFormControl(field).invalid && (this.getFormControl(field).dirty || this.getFormControl(field).touched)
   }
 }
