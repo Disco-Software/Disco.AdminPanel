@@ -39,7 +39,7 @@ export class AccountModalComponent implements OnInit {
       this.account = res;
     });
 
-    const role = this.roles.find(x => x.key === this.account.user.roleName);
+    const role = this.roles.find(x => x.key === this.account?.user.roleName);
 
     this.currentRole = role;
   }

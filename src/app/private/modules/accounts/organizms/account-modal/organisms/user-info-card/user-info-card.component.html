@@ -8,16 +8,20 @@
       <span *ngIf="!isEdit; else editInput"
           class=" color-white">{{content}}</span>
       <ng-template #editInput>
-         <input [(ngModel)]="content" [type]="inputType" class=" card-input input bg-transparent border-0 text-white">
+         <input [(ngModel)]="content" [type]="inputType" class="card-input input bg-transparent border-0 text-white">
       </ng-template>
     </div>
   </div>
   <div
     class="row" *ngIf="isEditable">
-    <div class=" d-flex justify-content-end align-items-start">
+    <div class=" d-flex justify-content-end align-items-start" *ngIf="!isEdit">
       <button (click)="onEditClick()" class=" border-0 bg-transparent">
          <img [src]="'/assets/images/ic_edit.svg'">
       </button>
+    </div>
+    <div class=" d-flex justify-content-center align-items-between flex-column" *ngIf="isEdit">
+      <p-button icon="pi pi-times" (click)="isEdit = false"></p-button>
+      <p-button icon="pi pi-check"></p-button>
     </div>
   </div>
 </div>
