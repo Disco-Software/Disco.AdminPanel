@@ -11,6 +11,7 @@ import {
 } from './account.action';
 import { AccountModel } from '../../models/account/getaccounts.model';
 import { RemoveAccountAction } from './remove.action';
+import {AccountStateInterface} from "@core/models";
 
 @State<AccountStateInterface>({
   name: "AccountsState",

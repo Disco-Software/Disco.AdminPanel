@@ -1,6 +1,6 @@
-import {GetAllAccountsModel} from "./getaccounts.model";
+import {AccountModel} from "./getaccounts.model";
 
 export interface AccountStateInterface {
-  allAccounts: GetAllAccountsModel[],
+  allAccounts: AccountModel[],
   count: number
 }
