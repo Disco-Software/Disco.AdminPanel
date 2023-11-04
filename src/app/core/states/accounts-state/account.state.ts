@@ -2,14 +2,18 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {catchError, EMPTY, tap} from 'rxjs';
 import {Injectable} from '@angular/core';
-import { AccountService } from './account.service';
-import {CreateAccountAction, GetAllAccountsAction} from './account.action';
-import { GetAllAccountsModel } from '../../models/account/getaccounts.model';
-import { RemoveAccountAction } from './remove.action';
+import {AccountService} from './account.service';
+import {CreateAccountAction, GetAccountsCountAction, GetAllAccountsAction} from './account.action';
+import {GetAllAccountsModel} from '../../models/account/getaccounts.model';
+import {RemoveAccountAction} from './remove.action';
+import {AccountStateInterface} from "@core";
 
-@State<any>({
+@State<AccountStateInterface>({
   name: "AccountsState",
-  defaults: null,
+  defaults: {
+    allAccounts: [],
+    count: 0
+  },
 })
 @Injectable()
 export class AccountsState {
@@ -17,9 +21,14 @@ export class AccountsState {
 
   @Selector()
   static getAllAccountsSelector(result: {
-     allAccounts : GetAllAccountsModel;
-  }): GetAllAccountsModel {
+     allAccounts : GetAllAccountsModel[];
+  }): GetAllAccountsModel[] {
     return result.allAccounts;
+  }
+
+  @Selector()
+  static getAccountsCountSelector(state: AccountStateInterface): number {
+    return state.count
   }
 
   @Action(GetAllAccountsAction)
@@ -52,6 +61,20 @@ export class AccountsState {
     { payload }: RemoveAccountAction
   ) {
     return this._accountService.deleteAccount(payload, RemoveAccountAction.type);
+  }
+
+  @Action(GetAccountsCountAction)
+  public getAccountsCount(
+    { patchState }: StateContext<{ count: number }>,
+  ) {
+    return this._accountService.getAccountsCount(GetAccountsCountAction.type)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return EMPTY;
+      }),
+      tap((response : number) => {
+        patchState({count : response});
+      }))
   }
 
 }
