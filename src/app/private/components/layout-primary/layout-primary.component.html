@@ -1,4 +1,4 @@
-<div *ngIf="(loadingBarStatus$ | async)?.length > 0" class="loading-bar">
+<div *ngIf="isLoader" class="loading-bar">
 </div>
 <div class="min-vh-100">
   <app-topbar></app-topbar>

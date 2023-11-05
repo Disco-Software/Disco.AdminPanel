@@ -1,11 +1,12 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { Account } from 'src/app/core/models/account/account.model';
-import { ReportModel } from 'src/app/core/models/report/report.model';
-import { RoleModel } from 'src/app/core/models/role/role.model';
-import { AccountAction } from 'src/app/core/states/accounts-state/account.action';
-import { AccountsState } from 'src/app/core/states/accounts-state/account.state';
+import {Component, Input, OnInit} from '@angular/core';
+import {Select, Store} from '@ngxs/store';
+import {Observable, Subject, takeUntil} from 'rxjs';
+import {Account} from 'src/app/core/models/account/account.model';
+import {ReportModel} from 'src/app/core/models/report/report.model';
+import {RoleModel} from 'src/app/core/models/role/role.model';
+import {AccountAction} from 'src/app/core/states/accounts-state/account.action';
+import {AccountsState} from 'src/app/core/states/accounts-state/account.state';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-account-modal',
@@ -30,10 +31,10 @@ export class AccountModalComponent implements OnInit {
 
   public destory$ : Subject<boolean> = new Subject<boolean>();
 
-  constructor(private _store : Store) { }
+  constructor(private _store: Store, public activeModal: NgbActiveModal) {
+  }
 
   ngOnInit(): void {
-    console.log(this.id);
     this._store.dispatch(new AccountAction(this.id));
     this.account$.pipe(takeUntil(this.destory$)).subscribe(res => {
       this.account = res;

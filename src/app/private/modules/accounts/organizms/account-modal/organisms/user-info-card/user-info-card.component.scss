@@ -28,3 +28,7 @@
 .span-display-block{
   display: block;
 }
+
+:host::ng-deep.p-button:focus {
+  box-shadow: none !important;
+}
