@@ -12,6 +12,7 @@ import { CreateUserModalComponent } from './organizms/create-user-modal/create-u
 import { AccountModalComponent } from './organizms/account-modal/account-modal.component';
 import { UserInfoCardComponent } from './organizms/account-modal/organisms/user-info-card/user-info-card.component';
 import { TicketComponent } from './organizms/account-modal/organisms/ticket/ticket.component';
+import { SendEmailModalComponent } from './organizms/send-email-modal/send-email-modal.component';
 
 const COMPONENTS = [
   _components.AccountsListComponent,
@@ -25,7 +26,7 @@ const COMPONENTS = [
 const MODULES = [CommonModule, AccountRoutingModule, SharedModule];
 
 @NgModule({
-  declarations: [...COMPONENTS, UserInfoCardComponent, TicketComponent],
+  declarations: [...COMPONENTS, UserInfoCardComponent, TicketComponent, SendEmailModalComponent],
   imports: [...MODULES],
 })
 export class AccountsModule {}

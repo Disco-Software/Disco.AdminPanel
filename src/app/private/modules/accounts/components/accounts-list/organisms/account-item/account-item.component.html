@@ -1,5 +1,5 @@
-<div (click)="onUserInfoClick()" class="d-flex">
-  <div class="d-flex align-items-center w-50 cursor-pointer">
+<div class="d-flex">
+  <div (click)="onUserInfoClick()" class="d-flex align-items-center w-50 cursor-pointer">
     <img *ngIf="photo; else elseImage" height="70px" width="70px" [src]="photo" class="item-photo photo me-3">
     <ng-template #elseImage>
        <img width="70px" height="70px" class="photo photo-default me-3" [src]="'/assets/images/ic_user-default.png'">
@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="d-flex align-items-center justify-content-between w-50">
-    <button class="button button_blue-hover">Send to Email</button>
+    <button class="button button_blue-hover" (click)="onSendEmail()">Send to Email</button>
     <button class="button button_violet-hover">Send push notifications</button>
     <button class="button button_orange" (click)="onDelete()">Delete user</button>
   </div>

@@ -4,9 +4,12 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { PaginatorModule } from 'primeng/paginator';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 
-const MODULES = [ToastModule, PaginatorModule, ButtonModule];
+
+const MODULES = [ToastModule, PaginatorModule, ButtonModule, InputTextModule, InputTextareaModule];
 
 const PROVIDERS = [MessageService];
 
