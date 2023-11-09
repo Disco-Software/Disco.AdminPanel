@@ -1,7 +1,7 @@
 <div class="modal-body body">
   <div class=" row pb-5">
     <div class="d-flex justify-content-between">
-      <span class="modal-title title fs-5">Send to Email</span>
+      <span class="modal-title title fs-5">Send Email</span>
       <button (click)="closeModal()" class="bg-transparent border-0">
         <img [src]="'../../../../../../assets/images/ic_close.svg'" />
       </button>
@@ -9,7 +9,19 @@
   </div>
   <div class="row mt-2 mb-4">
     <div class=" d-flex flex-column w-100 justify-content-center align-items-center" [formGroup]="emailForm">
-      <input type="text" pInputText formControlName="recipient" class="w-100 bg-transparent" placeholder="Write Email To..." />
+      <!--      <input type="text" pInputText formControlName="recipient" class="w-100 bg-transparent" placeholder="Write Email To..." />-->
+      <span class="p-fluid w-100 bg-transparent">
+        <p-autoComplete
+          #autoComplete
+          formControlName="recipient"
+          placeholder="Write Email To..."
+          [multiple]="true"
+          [(ngModel)]="selectedItems"
+          [suggestions]="items"
+          (completeMethod)="search($event)"
+          (onUnselect)="disableDeletingFirstElement()"
+        ></p-autoComplete>
+    </span>
       <input type="text" pInputText formControlName="title" class="w-100 bg-transparent" placeholder="Title..." />
       <textarea rows="10" cols="30" formControlName="body" pInputTextarea class="w-100 bg-transparent" placeholder="Body..."></textarea>
 
@@ -19,8 +31,6 @@
     <div class="d-flex">
       <button
         class="w-100 w-sm-auto button button_violet"
-        [disabled]="emailForm.invalid"
-        [class.disabled]="emailForm.invalid"
         (click)="sendEmail()"
       >Send</button>
     </div>

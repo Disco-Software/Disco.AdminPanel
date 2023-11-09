@@ -46,6 +46,23 @@ export class AccountsState {
       );
   }
 
+  // @Action(SearchAccountsByEmailAction)
+  // public searchAccountsByEmail(
+  //   { patchState }: StateContext<{ accountsEmails: string[] }>,
+  //   { payload }: SearchAccountsByEmailAction
+  // ) {
+  //   return this._accountService.searchAccountsEmails(payload, GetAllAccountsAction.type)
+  //     .pipe(
+  //       catchError((err: HttpErrorResponse) => {
+  //         return EMPTY;
+  //       }),
+  //       tap((accountsEmails: any[]) => {
+  //         console.log(accountsEmails)
+  //         patchState({ accountsEmails});
+  //       })
+  //     );
+  // }
+
   @Action(CreateAccountAction)
   public createAccount(
     { patchState }: StateContext<{ }>,

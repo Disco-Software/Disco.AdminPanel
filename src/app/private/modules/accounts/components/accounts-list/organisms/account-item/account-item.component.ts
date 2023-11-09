@@ -11,9 +11,9 @@ import {SendEmailModalComponent} from "../../../../organizms/send-email-modal/se
 export class AccountItemComponent implements OnInit {
 
   @Input() public id : number;
-  @Input() public name : String;
-  @Input() public email : String;
-  @Input() public photo : String;
+  @Input() public name : string;
+  @Input() public email : string;
+  @Input() public photo : string;
 
   constructor(private _modalService : NgbModal) { }
 
@@ -26,6 +26,7 @@ export class AccountItemComponent implements OnInit {
       backdrop : 'static',
       keyboard : false
     });
+    ref.componentInstance.email = this.email
   }
 
   public onDelete() : void {

@@ -18,6 +18,10 @@ export class AccountService {
     return this._restService.request("GET", `admin/users?pageNumber=${request.pageNumber}&pageSize=${request.pageSize}`, description);
   }
 
+  public searchAccountsEmails(request : string, description : string) : Observable<GetAllAccountsModel[]>{
+    return this._restService.request("GET", `admin/users?email=${request}&pageNumber=1&pageSize=10`, description);
+  }
+
   public createAccount(request: CreateAccountInterface, description: string): Observable<CreateUserResponseModel> {
     return this._restService.request("POST", `admin/users/create`, description, request);
   }

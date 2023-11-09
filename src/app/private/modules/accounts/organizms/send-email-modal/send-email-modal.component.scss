@@ -68,11 +68,14 @@
   }
 }
 
-input, textarea {
+input, textarea, :host::ng-deep.p-autocomplete .p-autocomplete-multiple-container:not(.p-disabled) {
   color: white;
   border: none;
   border-radius: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.40);
+  outline: none !important;
+  box-shadow: none !important;
+
   &:focus {
     box-shadow: none !important;
     border-color: rgba(255, 255, 255, 0.40) !important;
@@ -84,3 +87,26 @@ input, textarea {
   }
 }
 
+:host::ng-deep.p-autocomplete-multiple-container {
+  background: transparent;
+}
+
+:host::ng-deep.p-autocomplete .p-autocomplete-multiple-container:not(.p-disabled) input {
+  color: white;
+}
+
+:host::ng-deep.p-autocomplete-multiple-container > li:first-child .p-autocomplete-token-icon {
+  display: none;
+}
+
+:host::ng-deep.p-autocomplete-token {
+  background: transparent !important;
+  color: white !important;
+  border: 1px solid white;
+  border-radius: 17px !important;
+  padding: 0.375rem 1.3rem !important;
+}
+
+:host::ng-deep.p-autocomplete-multiple-container {
+  padding-bottom: 15px;
+}
