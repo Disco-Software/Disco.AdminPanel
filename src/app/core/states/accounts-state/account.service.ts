@@ -1,6 +1,6 @@
-import {GetAllAccountsModel} from './../../models/account/getaccounts.model';
+import {GetAllAccountsModel} from '../../models/account/getaccounts.model';
 import {Injectable} from '@angular/core';
-import {RestService} from '../../services/rest.service';
+import {RestService} from '@core/services';
 import {RequestDataModel} from '../../models/request.interface';
 import {Observable} from 'rxjs';
 import {CreateAccountInterface} from "@core";
@@ -19,7 +19,7 @@ export class AccountService {
   }
 
   public searchAccountsEmails(request : string, description : string) : Observable<GetAllAccountsModel[]>{
-    return this._restService.request("GET", `admin/users?email=${request}&pageNumber=1&pageSize=10`, description);
+    return this._restService.request("GET", `admin/users?email=*${request}*&pageNumber=1&pageSize=10`, description);
   }
 
   public createAccount(request: CreateAccountInterface, description: string): Observable<CreateUserResponseModel> {

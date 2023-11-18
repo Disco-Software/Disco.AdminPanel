@@ -9,13 +9,13 @@ export class GetAllAccountsAction{
   }
 }
 
-// export class SearchAccountsByEmailAction{
-//
-//   static readonly type = "[Account state] get accounts";
-//
-//   constructor(public payload : string) {
-//   }
-// }
+export class SearchAccountsByEmailAction{
+
+  static readonly type = "[Account state] get accounts";
+
+  constructor(public payload : string) {
+  }
+}
 
 export class CreateAccountAction{
 

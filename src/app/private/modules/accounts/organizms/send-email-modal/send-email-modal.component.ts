@@ -45,8 +45,7 @@ export class SendEmailModalComponent implements OnInit, AfterViewInit {
     }
   }
 
-  search(event: any) {
-
+  search(event: any): void {
     // this.store.dispatch(new SearchAccountsByEmailAction(event.query)).pipe(take(1))
     this.items = [...Array(10).keys()].map((item) => event.query + '-' + item);
   }

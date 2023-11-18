@@ -2,11 +2,11 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {catchError, EMPTY, tap} from 'rxjs';
 import {Injectable} from '@angular/core';
-import { AccountService } from './account.service';
-import {AccountAction, CreateAccountAction, GetAllAccountsAction} from './account.action';
-import { GetAllAccountsModel } from '../../models/account/getaccounts.model';
-import { RemoveAccountAction } from './remove.action';
-import { Account } from '../../models/account/account.model';
+import {AccountService} from './account.service';
+import {AccountAction, CreateAccountAction, GetAllAccountsAction, SearchAccountsByEmailAction} from './account.action';
+import {GetAllAccountsModel} from '../../models/account/getaccounts.model';
+import {RemoveAccountAction} from './remove.action';
+import {Account} from '../../models/account/account.model';
 
 @State<any>({
   name: "AccountsState",
@@ -46,22 +46,22 @@ export class AccountsState {
       );
   }
 
-  // @Action(SearchAccountsByEmailAction)
-  // public searchAccountsByEmail(
-  //   { patchState }: StateContext<{ accountsEmails: string[] }>,
-  //   { payload }: SearchAccountsByEmailAction
-  // ) {
-  //   return this._accountService.searchAccountsEmails(payload, GetAllAccountsAction.type)
-  //     .pipe(
-  //       catchError((err: HttpErrorResponse) => {
-  //         return EMPTY;
-  //       }),
-  //       tap((accountsEmails: any[]) => {
-  //         console.log(accountsEmails)
-  //         patchState({ accountsEmails});
-  //       })
-  //     );
-  // }
+  @Action(SearchAccountsByEmailAction)
+  SearchAccountsByEmailAction(
+    {patchState}: StateContext<{ accountsEmails: string[] }>,
+    {payload}: SearchAccountsByEmailAction
+  ) {
+   this._accountService.searchAccountsEmails(payload, SearchAccountsByEmailAction.type)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          return EMPTY;
+        }),
+        tap((accountsEmails: any[]) => {
+          console.log(accountsEmails)
+          patchState({ accountsEmails});
+        })
+      )
+  }
 
   @Action(CreateAccountAction)
   public createAccount(
