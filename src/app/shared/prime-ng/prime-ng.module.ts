@@ -7,6 +7,8 @@ import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import { MenuModule } from 'primeng/menu';
+
 
 
 const MODULES = [
@@ -15,7 +17,8 @@ const MODULES = [
   ButtonModule,
   InputTextModule,
   InputTextareaModule,
-  AutoCompleteModule
+  AutoCompleteModule,
+  MenuModule
 ];
 
 const PROVIDERS = [MessageService];

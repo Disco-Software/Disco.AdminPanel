@@ -1,9 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
 import { GetAllAccountsAction } from 'src/app/core/states/accounts-state/account.action';
 import {take, map, Observable, takeUntil, Subject} from 'rxjs';
 import { GetAllAccountsModel } from 'src/app/core/models/account/getaccounts.model';
 import {AccountsState} from "../../../../../core/states/accounts-state/account.state";
+import { HostListener } from "@angular/core";
 
 @Component({
   selector: 'app-accounts-list',
@@ -16,11 +17,17 @@ export class AccountsListComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private _store : Store) {
+  isSmallPaginator: boolean;
 
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+    this.isSmallPaginator = window.innerWidth <= 450
   }
 
+  constructor(private _store : Store) {}
+
   ngOnInit(): void {
+    this.getScreenSize();
     this.getData(1, 5);
     this.accounts$.pipe(takeUntil(this.destroy$)).subscribe(res=>{
       this.accounts = res

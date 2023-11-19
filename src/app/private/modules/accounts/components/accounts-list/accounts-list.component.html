@@ -11,10 +11,16 @@
     </div>
   </div>
   <p-paginator
+    [showJumpToPageDropdown]="isSmallPaginator"
+    [showPageLinks]="!isSmallPaginator"
+
     [dropdownAppendTo]="false"
     [showFirstLastIcon]="false"
     [showCurrentPageReport]="false"
-    [showJumpToPageDropdown]="false"
-    (onPageChange)="onPageChange($event)" [first]="1" [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+    (onPageChange)="onPageChange($event)"
+    [first]="1"
+    [rows]="10"
+    [totalRecords]="120"
+  ></p-paginator>
 </div>
 

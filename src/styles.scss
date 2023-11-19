@@ -34,20 +34,44 @@ $spacers: map-merge((0: 0,
 //Тому що, без цього bootstrap не дозволяє писати w-sm-100, дозволяє лише w-100
 @import "bootstrap/scss/utilities";
 
+
 $utilities: map-merge($utilities,
-    ('width': (property: width,
-        class: w,
-        responsive: true,
-        values: (25: 25%,
-          33: 33%,
-          48: 48%,
-          50: 50%,
-          66: 66%,
-          75: 75%,
-          100: 100%,
-          auto: auto,
-          fit-content: fit-content,
-        ),
+    (
+      "widht": map-merge(
+          map-get($utilities, "width"),
+          (
+            values: map-merge(
+                map-get(map-get($utilities, "width"), "values"),
+                (
+                  10: 10%,
+                  15: 15%,
+                  20: 20%,
+                  25: 25%,
+                  30: 30%,
+                  33: 33%,
+                  35: 35%,
+                  40: 40%,
+                  45: 45%,
+                  46: 46%,
+                  48: 48%,
+                  49: 49%,
+                  50: 50%,
+                  60: 60%,
+                  65: 65%,
+                  66: 66%,
+                  70: 70%,
+                  75: 75%,
+                  80: 80%,
+                  85:85%,
+                  90: 90%,
+                  100: 100%,
+                  200: 200%,
+                  auto: auto,
+                  fit-content: fit-content,
+                ),
+            ),
+            responsive: true,
+          ),
       ),
     ));
 @import "bootstrap/scss/utilities/api";
@@ -678,81 +702,7 @@ template {
   float: none !important;
 }
 
-.w-10 {
-  width: 10% !important;
-}
 
-.w-15 {
-  width: 15% !important;
-}
-
-.w-20 {
-  width: 20% !important;
-}
-
-//Comment from Olena. Коментуємо цей клас, бо Bootstrap надає такий ж клас і виходять конфлікти стилів.
-// .w-25 {
-//   width: 25% !important;
-// }
-
-.w-30 {
-  width: 30% !important;
-}
-
-.w-35 {
-  width: 35% !important;
-}
-
-.w-40 {
-  width: 40% !important;
-}
-
-.w-45 {
-  width: 45% !important;
-}
-
-.w-46 {
-  width: 46% !important;
-}
-
-.w-48 {
-  width: 48% !important;
-}
-
-.w-49 {
-  width: 49% !important;
-}
-
-//Comment from Olena. Коментуємо цей клас, бо Bootstrap надає такий ж клас і виходять конфлікти стилів.
-// .w-50 {
-//   width: 50% !important;
-// }
-
-.w-60 {
-  width: 60% !important;
-}
-
-.w-65 {
-  width: 65% !important;
-}
-
-//Comment from Olena. Коментуємо цей клас, бо Bootstrap надає такий ж клас і виходять конфлікти стилів.
-// .w-75 {
-//   width: 75% !important;
-// }
-
-.w-85 {
-  width: 85% !important;
-}
-
-//Comment from Olena. Коментуємо цей клас, бо Bootstrap надає такий ж клас і виходять конфлікти стилів.
-// .w-100 {
-//   width: 100% !important;
-// }
-
-.w-200 {
-  width: 200% !important;
-}
 
 .w-vw-100 {
   width: 100vw !important;

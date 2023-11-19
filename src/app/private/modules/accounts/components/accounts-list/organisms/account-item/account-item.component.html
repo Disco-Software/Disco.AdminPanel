@@ -1,5 +1,5 @@
 <div class="d-flex">
-  <div (click)="onUserInfoClick()" class="d-flex align-items-center w-50 cursor-pointer">
+  <div (click)="onUserInfoClick()" class="d-flex align-items-center flex-grow-1 cursor-pointer">
     <img *ngIf="photo; else elseImage" height="70px" width="70px" [src]="photo" class="item-photo photo me-3">
     <ng-template #elseImage>
        <img width="70px" height="70px" class="photo photo-default me-3" [src]="'/assets/images/ic_user-default.png'">
@@ -10,9 +10,19 @@
       <p>{{email}}</p>
     </div>
   </div>
-  <div class="d-flex align-items-center justify-content-between w-50">
-    <button class="button button_blue-hover" (click)="onSendEmail()">Send Email</button>
-    <button class="button button_violet-hover">Send push notifications</button>
-    <button class="button button_orange" (click)="onDelete()">Delete user</button>
+  <div class="d-none d-md-flex align-items-center justify-content-between w-sm-40 w-xl-60">
+    <button class="d-none d-xl-block button button_blue-hover" (click)="onSendEmail()">Send Email</button>
+    <button class="d-block d-xl-none button border-0" (click)="onSendEmail()"><img src="./assets/images/mail.png" alt=""></button>
+    <button class="d-none d-xl-block button button_violet-hover">Send push notifications</button>
+    <button class="d-block d-xl-none button border-0"><img src="./assets/images/notification.png" alt=""></button>
+    <button class="d-none d-xl-block button button_orange" (click)="onDelete()">Delete user</button>
+    <button class="d-block d-xl-none button border-0" (click)="onDelete()"><img
+      src="./assets/images/trash.png" alt=""></button>
+  </div>
+  <div class="d-flex d-md-none align-items-center justify-content-between w-15">
+    <p-menu #menu [model]="items" [popup]="true"></p-menu>
+    <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars" class="bg-transparent no-borders"></button>
+  </div>
+  <div>
   </div>
 </div>

@@ -1,6 +1,6 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
-import { AccountModalComponent, DeleteModalComponent } from '../../../../organizms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, Input, OnInit} from '@angular/core';
+import {AccountModalComponent, DeleteModalComponent} from '../../../../organizms';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {SendEmailModalComponent} from "../../../../organizms/send-email-modal/send-email-modal.component";
 
 @Component({
@@ -14,6 +14,24 @@ export class AccountItemComponent implements OnInit {
   @Input() public name : string;
   @Input() public email : string;
   @Input() public photo : string;
+
+  items = [
+    {
+      label: 'Send Email',
+      command: () => {
+        this.onSendEmail();
+      }
+    },
+    {
+      label: 'Send Push Notifications',
+    },
+    {
+      label: 'Delete User',
+      command: () => {
+        this.onDelete()
+      }
+    }
+  ];
 
   constructor(private _modalService : NgbModal) { }
 
