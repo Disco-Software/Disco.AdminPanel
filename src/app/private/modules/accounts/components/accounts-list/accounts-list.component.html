@@ -1,16 +1,21 @@
 <div class="container-fluid">
-  <app-accounts-header></app-accounts-header>
+  <app-accounts-header
+  ></app-accounts-header>
   <div class="accounts-list mt-4 rounded-2 px-3 pt-3">
     <div class="pb-3" *ngFor="let account of accounts; let last = last">
       <app-account-item
-          [id]="account.user.id"
-          [photo]="account.photo"
-          [email]="account.user.email"
-          [name]="account.user.userName"></app-account-item>
-      <hr *ngIf="!last">
+        [id]="account.user.id"
+        [photo]="account.photo"
+        [email]="account.user.email"
+        [name]="account.user.userName"
+      ></app-account-item>
+      <hr *ngIf="!last" />
     </div>
   </div>
   <p-paginator
+    [totalRecords]="totalCount"
+    [rows]="5"
+    [pageLinkSize]="5"
     [showJumpToPageDropdown]="isSmallPaginator"
     [showPageLinks]="!isSmallPaginator"
 
@@ -19,8 +24,6 @@
     [showCurrentPageReport]="false"
     (onPageChange)="onPageChange($event)"
     [first]="1"
-    [rows]="10"
-    [totalRecords]="120"
   ></p-paginator>
 </div>
 

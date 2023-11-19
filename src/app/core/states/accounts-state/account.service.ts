@@ -1,4 +1,4 @@
-import {GetAllAccountsModel} from '../../models/account/getaccounts.model';
+import {GetAllAccountsModel} from './../../models/account/getaccounts.model';
 import {Injectable} from '@angular/core';
 import {RestService} from '@core/services';
 import {RequestDataModel} from '../../models/request.interface';
@@ -14,7 +14,7 @@ export class AccountService {
 
   constructor(private _restService : RestService) { }
 
-  public getAllAccounts(request : RequestDataModel, description : string) : Observable<GetAllAccountsModel[]>{
+  public getAllAccounts(request : RequestDataModel, description : string) : Observable<AccountModel[]>{
     return this._restService.request("GET", `admin/users?pageNumber=${request.pageNumber}&pageSize=${request.pageSize}`, description);
   }
 
@@ -28,6 +28,13 @@ export class AccountService {
 
   public deleteAccount(id : number, description : string) : Observable<void> {
     return this._restService.request("DELETE", `admin/users/${id}`, description);
+  }
+
+  public getAccountsCount(description : string) : Observable<number>{
+    return this._restService.request('GET', 'admin/users/count', description);
+  }
+  public searchAccounts(search: string, description : string) : Observable<AccountModel[]> {
+    return this._restService.request("GET",  `admin/users/search?search=${search}`, description);
   }
 
   public getAccount(id: number, description : string) : Observable<Account> {

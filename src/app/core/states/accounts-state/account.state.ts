@@ -7,8 +7,18 @@ import {AccountAction, CreateAccountAction, GetAllAccountsAction, SearchAccounts
 import {GetAllAccountsModel} from '../../models/account/getaccounts.model';
 import {RemoveAccountAction} from './remove.action';
 import {Account} from '../../models/account/account.model';
+import { AccountService } from './account.service';
+import {
+  CreateAccountAction,
+  GetAccountsCountAction,
+  GetAllAccountsAction,
+  SearchAccountsAction
+} from './account.action';
+import { AccountModel } from '../../models/account/getaccounts.model';
+import { RemoveAccountAction } from './remove.action';
+import {AccountStateInterface} from "@core/models";
 
-@State<any>({
+@State<AccountStateInterface>({
   name: "AccountsState",
   defaults: null,
 })
@@ -18,8 +28,8 @@ export class AccountsState {
 
   @Selector()
   static getAllAccountsSelector(result: {
-     allAccounts : GetAllAccountsModel;
-  }): GetAllAccountsModel {
+     allAccounts : AccountModel[];
+  }): AccountModel[] {
     return result.allAccounts;
   }
 
@@ -30,9 +40,21 @@ export class AccountsState {
     return result.account;
   }
 
+  @Selector()
+  static getAccountsCountSelector(state: AccountStateInterface): number {
+    return state.count
+  }
+
+  // @Selector()
+  // static searchSelector(result: {
+  //   accounts: AccountModel[]
+  // }) : AccountModel[] {
+  //   return result.accounts;
+  // }
+
   @Action(GetAllAccountsAction)
   getAllAccounts(
-    { patchState }: StateContext<{ allAccounts: GetAllAccountsModel[] }>,
+    { patchState }: StateContext<{ allAccounts: AccountModel[] }>,
     { payload }: GetAllAccountsAction
   ) {
     return this._accountService.getAllAccounts(payload, GetAllAccountsAction.type)
@@ -40,7 +62,7 @@ export class AccountsState {
         catchError((err: HttpErrorResponse) => {
           return EMPTY;
         }),
-        tap((response: GetAllAccountsModel[]) => {
+        tap((response: AccountModel[]) => {
           patchState({ allAccounts: response});
         })
       );
@@ -79,6 +101,33 @@ export class AccountsState {
     return this._accountService.deleteAccount(payload, RemoveAccountAction.type);
   }
 
+  @Action(GetAccountsCountAction)
+  public getAccountsCount(
+    { patchState }: StateContext<{ count: number }>,
+  ) {
+    return this._accountService.getAccountsCount(GetAccountsCountAction.type)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return EMPTY;
+      }),
+      tap((response : number) => {
+        patchState({count : response});
+      }))
+  }
+
+  @Action(SearchAccountsAction)
+  public searchAccounts(
+    { patchState } : StateContext<{allAccounts : AccountModel[]}>,
+    { payload } : SearchAccountsAction) {
+      return this._accountService.searchAccounts(payload, SearchAccountsAction.type).pipe(
+        catchError((err: HttpErrorResponse) => {
+          return EMPTY;
+        }),
+        tap((response: AccountModel[]) => {
+          patchState({ allAccounts: response});
+        })
+      );
+    }
   @Action(AccountAction)
   public getAccount(
     { patchState }: StateContext<{ account: Account }>,
