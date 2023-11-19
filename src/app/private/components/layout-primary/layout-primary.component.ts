@@ -1,10 +1,8 @@
-import {AfterContentChecked, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {Select, Store} from '@ngxs/store';
+import {Component, OnInit} from '@angular/core';
+import {Select} from '@ngxs/store';
 import {LoaderState} from '@core/states';
 import {Observable, Subject, takeUntil} from 'rxjs';
-import {Router} from '@angular/router';
-import {AppConfigState} from "@core";
-import {LanguageModel} from "@core";
+import {AppConfigState, LanguageModel} from "@core";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
@@ -12,34 +10,31 @@ import {TranslateService} from "@ngx-translate/core";
   templateUrl: './layout-primary.component.html',
   styleUrls: ['./layout-primary.component.scss']
 })
-export class LayoutPrimaryComponent implements AfterContentChecked, OnInit {
+export class LayoutPrimaryComponent implements OnInit {
   @Select(AppConfigState.selectedLanguageSelector) language$: Observable<LanguageModel>
 
-  isOverview: boolean;
-
-  loadingBarStatus$: Observable<Array<string>>;
+  @Select(LoaderState.getListSelector) selectorsList$: Observable<string[]>
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
+  isLoader: boolean = false;
+
   constructor(
-    private router: Router,
-    private chageDetectionRef : ChangeDetectorRef,
-    private _store: Store,
     private _translate: TranslateService
 
   ) {
-    this.loadingBarStatus$ = this._store
-    .select(LoaderState.getListSelector)
-    .pipe(takeUntil(this.destroy$)); //TODO delete after @Select fixed
-  }
-
-  ngAfterContentChecked(): void {
-      this.chageDetectionRef.detectChanges();
   }
 
   ngOnInit(): void {
     this.language$.subscribe(res=>{
       this._translate.use(res.shortCode)
     })
+
+    this.selectorsList$.pipe(takeUntil(this.destroy$)).subscribe(res => {
+      setTimeout(() => {
+        this.isLoader = !!res.length
+      })
+    })
   }
+
 }

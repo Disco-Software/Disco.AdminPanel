@@ -21,5 +21,8 @@
     outline: none;
     border: none;
     color: white;
+    @media (max-width: 316px) {
+      width: 70% !important;
+    }
   }
 }

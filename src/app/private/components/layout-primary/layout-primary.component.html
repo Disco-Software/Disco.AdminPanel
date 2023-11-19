@@ -1,11 +1,11 @@
-<div *ngIf="(loadingBarStatus$ | async)?.length > 0" class="loading-bar">
+<div *ngIf="isLoader" class="loading-bar">
 </div>
 <div class="min-vh-100">
   <app-topbar></app-topbar>
   <div class="sidebar">
     <app-sidebar></app-sidebar>
   </div>
-  <div  class="h-100 page page-container bg-dark-violet pt-9 pt-md-0">
+  <div  class="h-100 page page-container bg-dark-violet pt-9 pt-md-0 min-vh-100 h-100 pb-4">
     <app-header></app-header>
     <div>
       <router-outlet></router-outlet>

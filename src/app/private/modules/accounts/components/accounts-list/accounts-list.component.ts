@@ -4,6 +4,7 @@ import {GetAccountsCountAction, GetAllAccountsAction} from 'src/app/core/states/
 import {take, map, Observable, takeUntil, Subject} from 'rxjs';
 import { AccountModel } from 'src/app/core/models/account/getaccounts.model';
 import {AccountsState} from "../../../../../core/states/accounts-state/account.state";
+import { HostListener } from "@angular/core";
 
 @Component({
   selector: 'app-accounts-list',
@@ -19,11 +20,17 @@ export class AccountsListComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private _store : Store) {
+  isSmallPaginator: boolean;
 
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+    this.isSmallPaginator = window.innerWidth <= 450
   }
 
+  constructor(private _store : Store) {}
+
   ngOnInit(): void {
+    this.getScreenSize();
     this.getTotalCount();
     this.totalCount$.pipe(takeUntil(this.destroy$)).subscribe(count => {
       this.totalCount = count;

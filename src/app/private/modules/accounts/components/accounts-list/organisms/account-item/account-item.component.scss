@@ -24,9 +24,19 @@
   }
 }
 
+@media (max-width: 400px) {
+  .item {
+    &-photo {
+      display: none;
+    }
+  }
+}
 .item{
   &-photo{
     border-radius: 360px;
+    @media (max-width: 400px) {
+      display: none;
+    }
   }
 }
 
@@ -34,5 +44,8 @@
   &-default{
     border-radius: 360px;
     background-color: white;
+    @media (max-width: 400px) {
+      display: none;
+    }
   }
 }

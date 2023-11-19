@@ -1,0 +1,25 @@
+.modal {
+  &-body {
+    width: 580px;
+    background: #29193E;
+  }
+}
+
+.header{
+  &-photo{
+    border-radius: 360px;
+
+    width: 79px;
+    height: 79px;
+  }
+}
+
+.photo{
+  &-default{
+    width: 79px;
+    height: 79px;
+
+    border-radius: 360px;
+    background-color: white;
+  }
+}

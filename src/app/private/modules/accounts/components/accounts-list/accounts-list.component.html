@@ -16,10 +16,14 @@
     [totalRecords]="totalCount"
     [rows]="5"
     [pageLinkSize]="5"
+    [showJumpToPageDropdown]="isSmallPaginator"
+    [showPageLinks]="!isSmallPaginator"
+
     [dropdownAppendTo]="false"
     [showFirstLastIcon]="false"
     [showCurrentPageReport]="false"
-    [showJumpToPageDropdown]="false"
-    (onPageChange)="onPageChange($event)"></p-paginator>
+    (onPageChange)="onPageChange($event)"
+    [first]="1"
+  ></p-paginator>
 </div>
 

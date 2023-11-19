@@ -1,0 +1,34 @@
+.card{
+  &-container {
+    background: #2D1848;
+    box-shadow: 0px 4px 7px 0px rgba(160, 68, 255, 0.25);
+  }
+
+  &-content{
+    margin-left: 16px;
+  }
+
+  &-input{
+    &:hover{
+      outline : none;
+    }
+    &:active {
+     outline: none;
+    }
+    &:focus-visible{
+      outline: none;
+    }
+  }
+}
+
+.span-display-none{
+  display: none;
+}
+
+.span-display-block{
+  display: block;
+}
+
+:host::ng-deep.p-button:focus {
+  box-shadow: none !important;
+}

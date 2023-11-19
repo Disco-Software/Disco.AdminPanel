@@ -47,6 +47,25 @@
   color: white !important
 }
 
-:host ::ng-deep .p-dropdown{
-  display: none;
+:host::ng-deep.p-paginator-page-options {
+  background: transparent;
+  border: none;
+  & * {
+    color: white;
+  }
+
+}
+
+:host::ng-deep.p-dropdown-panel {
+  background: #29193E;
+  border: 1px solid #1a1025;
+}
+:host::ng-deep.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  background: #130b1a;
+}
+:host::ng-deep.p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+  background: #130b1a;
+}
+:host::ng-deep.p-dropdown:not(.p-disabled).p-focus {
+  box-shadow: none
 }

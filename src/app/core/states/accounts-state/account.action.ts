@@ -9,11 +9,26 @@ export class GetAllAccountsAction{
   }
 }
 
+export class SearchAccountsByEmailAction{
+
+  static readonly type = "[Account state] get accounts";
+
+  constructor(public payload : string) {
+  }
+}
+
 export class CreateAccountAction{
 
   static readonly type = "[Account state] create account";
 
   constructor(public payload : CreateAccountInterface) {
+  }
+}
+
+export class AccountAction {
+  static readonly type = "[Account state] get account";
+
+  constructor(public payload : number) {
   }
 }
 
