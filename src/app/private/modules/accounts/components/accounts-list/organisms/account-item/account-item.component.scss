@@ -49,3 +49,23 @@
     }
   }
 }
+
+:host::ng-deep.p-menu-overlay {
+  background: #29193E;
+  border: 1px solid #1a1025;
+  //& * {
+  //  color: #E6E1D4;
+  //}
+}
+
+:host::ng-deep.p-menu .p-menuitem-link:not(.p-disabled):hover {
+  background: #130b1a;
+}
+
+:host::ng-deep.p-menu .p-menuitem-link:focus {
+  box-shadow: none;
+}
+
+:host::ng-deep.p-menu .p-menuitem-link .p-menuitem-text {
+  color: #E6E1D4;
+}

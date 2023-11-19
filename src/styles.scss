@@ -2,8 +2,10 @@
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 
+$appMainTextColor: #E6E1D4;
+
 * {
-  color: #E6E1D4;
+  color: $appMainTextColor;
 }
 
 /* You can add global styles to this file, and also import other style files */
