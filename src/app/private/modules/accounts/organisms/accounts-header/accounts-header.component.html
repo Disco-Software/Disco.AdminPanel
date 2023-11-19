@@ -10,14 +10,14 @@
       <div class="header-search search h-100 p-3 p-sm-0">
         <div class="search search-container d-flex justify-content-center align-items-center flex-row h-100 cursor-pointer">
           <div class=" search-wrapper wrapper w-90">
-            <button class=" border-0 bg-transparent" (click)="onSearchButtonClick()">
+            <button class=" border-0 bg-transparent">
               <img [src]="'/assets/images/ic_search.svg'">
             </button>
             <input
               (keydown)="onEnterButtonClick($event)"
               [(ngModel)]="search"
               placeholder="Search..."
-              class="search-input w-80 input bg-transparent border-2 p-3 cursor-pointer"
+              class="search-input w-70 input bg-transparent border-2 p-3 cursor-pointer"
               type="text"
             >
           </div>
