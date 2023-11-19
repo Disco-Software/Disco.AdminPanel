@@ -1,22 +1,20 @@
-import {HttpErrorResponse} from '@angular/common/http';
-import {Action, Selector, State, StateContext} from '@ngxs/store';
-import {catchError, EMPTY, tap} from 'rxjs';
-import {Injectable} from '@angular/core';
-import {AccountService} from './account.service';
-import {AccountAction, CreateAccountAction, GetAllAccountsAction, SearchAccountsByEmailAction} from './account.action';
-import {GetAllAccountsModel} from '../../models/account/getaccounts.model';
-import {RemoveAccountAction} from './remove.action';
-import {Account} from '../../models/account/account.model';
-import { AccountService } from './account.service';
+import {Account, AccountStateInterface} from "@core/models";
+import {Action, Selector, State, StateContext} from "@ngxs/store";
+import {Injectable} from "@angular/core";
+import {AccountService} from "./account.service";
+import {AccountModel} from "../../models/account/getaccounts.model";
 import {
+  AccountAction,
   CreateAccountAction,
   GetAccountsCountAction,
-  GetAllAccountsAction,
-  SearchAccountsAction
-} from './account.action';
-import { AccountModel } from '../../models/account/getaccounts.model';
-import { RemoveAccountAction } from './remove.action';
-import {AccountStateInterface} from "@core/models";
+  GetAllAccountsAction, SearchAccountsAction,
+  SearchAccountsByEmailAction
+} from "./account.action";
+import {catchError} from "rxjs/operators";
+import {HttpErrorResponse} from "@angular/common/http";
+import {EMPTY, tap} from "rxjs";
+import {RemoveAccountAction} from "./remove.action";
+
 
 @State<AccountStateInterface>({
   name: "AccountsState",

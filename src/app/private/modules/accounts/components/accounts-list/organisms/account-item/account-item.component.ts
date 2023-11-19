@@ -1,10 +1,7 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
-import { DeleteModalComponent } from '../../../../organisms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {Component, Input, OnInit} from '@angular/core';
-import {AccountModalComponent, DeleteModalComponent} from '../../../../organizms';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {SendEmailModalComponent} from "../../../../organizms/send-email-modal/send-email-modal.component";
+import {Component, Input, OnInit} from "@angular/core";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AccountModalComponent, DeleteModalComponent, SendEmailModalComponent} from "../../../../organisms";
+
 
 @Component({
   selector: 'app-account-item',
