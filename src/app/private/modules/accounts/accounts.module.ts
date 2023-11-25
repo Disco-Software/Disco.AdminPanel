@@ -2,37 +2,38 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {AccountRoutingModule} from './account-routing.module';
-import {AccountsListComponent} from './components';
 import {
-  AccountModalComponent,
+  AccountItemComponent,
+  UserModalWindowComponent,
   AccountsHeaderComponent,
-  CreateUserModalComponent,
-  DeleteModalComponent,
-  PushNotificationsModalComponent,
-  SendEmailModalComponent,
+  AccountsListComponent,
+  CreateUserModalWindowComponent,
+  DeleteUserModalWindowComponent,
+  ModalWindowWrapperComponent,
+  PushNotificationsModalWindowComponent,
+  SendEmailModalWindowComponent,
   TicketComponent,
   UserInfoCardComponent
-} from './organisms'
-import {AccountItemComponent} from './components/accounts-list/organisms';
+} from './components';
 import {SharedModule} from "@shared";
 
 const COMPONENTS = [
   AccountsListComponent,
-  AccountModalComponent,
+  UserModalWindowComponent,
   AccountsHeaderComponent,
-  DeleteModalComponent,
+  DeleteUserModalWindowComponent,
   AccountItemComponent,
   UserInfoCardComponent,
   TicketComponent,
-  SendEmailModalComponent,
-  CreateUserModalComponent,
-  PushNotificationsModalComponent
+  SendEmailModalWindowComponent,
+  CreateUserModalWindowComponent,
+  PushNotificationsModalWindowComponent
 ];
 
 const MODULES = [CommonModule, AccountRoutingModule, SharedModule];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, ModalWindowWrapperComponent],
   imports: [...MODULES],
 })
 export class AccountsModule {}

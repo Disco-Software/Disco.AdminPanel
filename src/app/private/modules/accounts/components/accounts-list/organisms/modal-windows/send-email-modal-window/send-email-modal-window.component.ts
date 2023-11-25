@@ -1,26 +1,26 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Store} from "@ngxs/store";
 import {AutoComplete} from "primeng/autocomplete";
+import {Store} from "@ngxs/store";
 
 @Component({
-  selector: 'app-push-notifications-modal',
-  templateUrl: './push-notifications-modal.component.html',
-  styleUrls: ['./push-notifications-modal.component.scss']
+  selector: 'app-send-email-modal-window',
+  templateUrl: './send-email-modal-window.component.html',
+  styleUrls: ['./send-email-modal-window.component.scss']
 })
-export class PushNotificationsModalComponent implements OnInit {
+export class SendEmailModalWindowComponent implements OnInit, AfterViewInit {
   @ViewChild('autoComplete') autocomplete: AutoComplete
   @Input() email: string;
 
-  notificationsForm: FormGroup;
+  emailForm: FormGroup;
 
   selectedItems: any[] | undefined;
 
   items: any[] | undefined;
 
   constructor(private _modal: NgbActiveModal, private fb: FormBuilder, private store: Store) {
-    this.notificationsForm = this.fb.group({
+    this.emailForm = this.fb.group({
       recipient: [''],
       title: [''],
       body: ['', [Validators.required]]
@@ -32,7 +32,7 @@ export class PushNotificationsModalComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => this.autocomplete.focusInput(), 0)
+    // setTimeout(() => this.autocomplete.focusInput(), 0)
   }
 
   closeModal() {
@@ -50,11 +50,10 @@ export class PushNotificationsModalComponent implements OnInit {
     this.items = [...Array(10).keys()].map((item) => event.query + '-' + item);
   }
 
-  sendNotifications() {
-    this.notificationsForm.get('body').markAsDirty()
-    if (this.notificationsForm.invalid) {
+  sendEmail() {
+    this.emailForm.get('body').markAsDirty()
+    if (this.emailForm.invalid) {
       return
     }
   }
-
 }

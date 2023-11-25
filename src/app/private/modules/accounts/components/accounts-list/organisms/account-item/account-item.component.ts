@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {
-  AccountModalComponent,
-  DeleteModalComponent,
-  PushNotificationsModalComponent,
-  SendEmailModalComponent
-} from "../../../../organisms";
+  UserModalWindowComponent,
+  DeleteUserModalWindowComponent,
+  PushNotificationsModalWindowComponent,
+  SendEmailModalWindowComponent
+} from "../modal-windows";
 
 
 @Component({
@@ -29,6 +29,9 @@ export class AccountItemComponent implements OnInit {
     },
     {
       label: 'Send Push Notifications',
+      command: () => {
+        this.onSendNotifications();
+      }
     },
     {
       label: 'Delete User',
@@ -44,7 +47,7 @@ export class AccountItemComponent implements OnInit {
   }
 
   onSendEmail() {
-    const ref =  this._modalService.open(SendEmailModalComponent, {
+    const ref =  this._modalService.open(SendEmailModalWindowComponent, {
       modalDialogClass: 'd-flex justify-content-center align-items-center h-100',
       backdrop : 'static',
       keyboard : false
@@ -53,7 +56,8 @@ export class AccountItemComponent implements OnInit {
   }
 
   onSendNotifications() {
-    const ref =  this._modalService.open(PushNotificationsModalComponent, {
+    console.log('not')
+    const ref =  this._modalService.open(PushNotificationsModalWindowComponent, {
       modalDialogClass: 'd-flex justify-content-center align-items-center h-100',
       backdrop : 'static',
       keyboard : false
@@ -62,7 +66,7 @@ export class AccountItemComponent implements OnInit {
   }
 
   public onDelete() : void {
-    const ref =  this._modalService.open(DeleteModalComponent, {
+    const ref =  this._modalService.open(DeleteUserModalWindowComponent, {
       modalDialogClass: 'd-flex justify-content-center align-items-center h-100',
       backdrop : 'static',
       keyboard : false
@@ -71,7 +75,7 @@ export class AccountItemComponent implements OnInit {
   }
 
   public onUserInfoClick() : void{
-    const ref = this._modalService.open(AccountModalComponent, {
+    const ref = this._modalService.open(UserModalWindowComponent, {
       modalDialogClass: 'd-flex justify-content-center align-items-center h-100',
       backdrop : 'static',
       keyboard : false

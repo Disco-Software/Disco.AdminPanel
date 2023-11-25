@@ -1,13 +1,8 @@
-<div class="modal-body body">
-  <div class=" row pb-3">
-    <div class="d-flex justify-content-between">
-      <span class="modal-title title fs-5">Send push notifications</span>
-      <button (click)="closeModal()" class="bg-transparent border-0">
-        <img [src]="'../../../../../../assets/images/ic_close.svg'" />
-      </button>
-    </div>
-  </div>
-  <div class="row mt-2 mb-4">
+<app-modal-window-wrapper>
+
+  <ng-template #title>Send push notifications</ng-template>
+
+  <ng-template #body>
     <div class=" d-flex flex-column w-100 justify-content-center align-items-center" [formGroup]="notificationsForm">
       <span class="p-fluid w-100 bg-transparent">
         <p-autoComplete
@@ -25,13 +20,16 @@
       <textarea rows="10" cols="30" formControlName="body" pInputTextarea class="w-100 bg-transparent" placeholder="Body..."></textarea>
 
     </div>
-  </div>
-  <div class="row">
+  </ng-template>
+
+  <ng-template #buttons>
     <div class="d-flex">
       <button
         class="w-100 w-sm-auto button button_violet"
         (click)="sendNotifications()"
       >Send</button>
     </div>
-  </div>
-</div>
+  </ng-template>
+
+</app-modal-window-wrapper>
+

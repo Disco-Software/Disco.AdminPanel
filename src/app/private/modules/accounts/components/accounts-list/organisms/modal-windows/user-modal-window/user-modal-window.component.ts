@@ -1,19 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
 import {Observable, Subject, takeUntil} from 'rxjs';
-import {Account} from 'src/app/core/models/account/account.model';
-import {ReportModel} from 'src/app/core/models/report/report.model';
-import {RoleModel} from 'src/app/core/models/role/role.model';
-import {AccountAction} from 'src/app/core/states/accounts-state/account.action';
-import {AccountsState} from 'src/app/core/states/accounts-state/account.state';
+import {Account} from '../../../../../../../../core/models/account/account.model';
+import {ReportModel} from '../../../../../../../../core/models/report/report.model';
+import {RoleModel} from '../../../../../../../../core/models/role/role.model';
+import {AccountAction} from '../../../../../../../../core/states/accounts-state/account.action';
+import {AccountsState} from '../../../../../../../../core/states/accounts-state/account.state';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-account-modal',
-  templateUrl: './account-modal.component.html',
-  styleUrls: ['./account-modal.component.scss']
+  selector: 'app-user-modal-window',
+  templateUrl: './user-modal-window.component.html',
+  styleUrls: ['./user-modal-window.component.scss']
 })
-export class AccountModalComponent implements OnInit {
+export class UserModalWindowComponent implements OnInit {
 
   @Select(AccountsState.getAccountSelector) public account$ : Observable<Account>;
 

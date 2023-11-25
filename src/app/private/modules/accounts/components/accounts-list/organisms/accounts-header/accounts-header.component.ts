@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CreateUserModalComponent } from '../create-user-modal/create-user-modal.component';
+import { CreateUserModalWindowComponent } from '../modal-windows/create-user-modal-window/create-user-modal-window.component';
 import { Store } from '@ngxs/store';
-import { GetAllAccountsAction, SearchAccountsAction } from 'src/app/core/states/accounts-state/account.action';
+import { GetAllAccountsAction, SearchAccountsAction } from '../../../../../../../core/states/accounts-state/account.action';
 
 @Component({
   selector: 'app-accounts-header',
@@ -20,7 +20,7 @@ export class AccountsHeaderComponent implements OnInit {
   }
 
   public createUser() : void {
-    this._modalService.open(CreateUserModalComponent, {
+    this._modalService.open(CreateUserModalWindowComponent, {
       modalDialogClass: 'd-flex justify-content-center align-items-center h-100'
     });
   }

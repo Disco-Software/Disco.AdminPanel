@@ -1,0 +1,18 @@
+<div class="modal__body p-3">
+  <div class="row pb-3">
+    <div class="d-flex justify-content-between">
+      <span class="fs-5">
+        <ng-container [ngTemplateOutlet]="title"></ng-container>
+      </span>
+      <button (click)="closeModal()" class="bg-transparent border-0">
+        <img [src]="'../../../../../../assets/images/ic_close.svg'" />
+      </button>
+    </div>
+  </div>
+  <div class="row mt-2 mb-4">
+    <ng-container [ngTemplateOutlet]="body"></ng-container>
+  </div>
+  <div class="row">
+    <ng-container [ngTemplateOutlet]="buttons"></ng-container>
+  </div>
+</div>

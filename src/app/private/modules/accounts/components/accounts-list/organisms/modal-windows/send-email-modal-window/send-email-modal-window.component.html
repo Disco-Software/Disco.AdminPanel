@@ -1,13 +1,7 @@
-<div class="modal-body body">
-  <div class=" row pb-3">
-    <div class="d-flex justify-content-between">
-      <span class="modal-title title fs-5">Send Email</span>
-      <button (click)="closeModal()" class="bg-transparent border-0">
-        <img [src]="'../../../../../../assets/images/ic_close.svg'" />
-      </button>
-    </div>
-  </div>
-  <div class="row mt-2 mb-4">
+<app-modal-window-wrapper>
+  <ng-template #title>Send Email</ng-template>
+
+  <ng-template #body>
     <div class=" d-flex flex-column w-100 justify-content-center align-items-center" [formGroup]="emailForm">
       <span class="p-fluid w-100 bg-transparent">
         <p-autoComplete
@@ -25,16 +19,18 @@
       <textarea rows="10" cols="30" formControlName="body" pInputTextarea class="w-100 bg-transparent" placeholder="Body..."></textarea>
 
     </div>
-  </div>
-  <div class="row">
-    <div class="d-flex">
+  </ng-template>
+
+  <ng-template #buttons>
+    <div class="d-flex flex-column flex-sm-row">
       <button
-        class="w-100 w-sm-auto button button_violet"
+        class="w-100 mb-3 mb-sm-0 w-sm-auto button button_violet"
         (click)="sendEmail()"
       >Send</button>
       <button
-        class="w-100 w-sm-auto ms-3 button button_blue-hover"
+        class="w-100 w-sm-auto ms-0 ms-sm-3 button button_blue-hover"
       >Templates</button>
     </div>
-  </div>
-</div>
+  </ng-template>
+</app-modal-window-wrapper>
+

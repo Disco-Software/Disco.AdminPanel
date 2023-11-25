@@ -1,16 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngxs/store';
-import { RemoveAccountAction } from 'src/app/core/states/accounts-state/remove.action';
+import { RemoveAccountAction } from '../../../../../../../../core/states/accounts-state/remove.action';
 import {switchMap} from "rxjs";
-import {GetAllAccountsAction} from "../../../../../core/states/accounts-state/account.action";
+import {GetAllAccountsAction} from "../../../../../../../../core/states/accounts-state/account.action";
 
 @Component({
-  selector: 'app-delete-modal',
-  templateUrl: './delete-modal.component.html',
-  styleUrls: ['./delete-modal.component.scss']
+  selector: 'app-delete-user-modal-window',
+  templateUrl: './delete-user-modal-window.component.html',
+  styleUrls: ['./delete-user-modal-window.component.scss']
 })
-export class DeleteModalComponent implements OnInit {
+export class DeleteUserModalWindowComponent implements OnInit {
 
   @Input() public id : number;
 

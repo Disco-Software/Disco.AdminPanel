@@ -1,0 +1,94 @@
+<app-modal-window-wrapper>
+
+  <ng-template #title>Add user</ng-template>
+
+  <ng-template #body>
+    <form [formGroup]="form" class="px-2">
+      <div class="row">
+        <div class="d-flex justify-content-around align-items-center pb-4">
+          <button
+            *ngFor="let state of states"
+            [class.active]="currentState === state.name"
+            (click)="currentState = state.name"
+            class="modal-role role"
+          >
+            {{ state.title }}
+          </button>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center ">
+          <div class="w-100 w-sm-auto form-group group pb-3 pb-sm-5 position-relative">
+            <label class="form-label label mx-2">User name</label>
+            <input
+              [class.invalid]="checkIsValid('userName')"
+              formControlName="userName"
+              type="text"
+              class="form-control control"
+            />
+            <p-message severity="Error"
+                       text="User name is required"
+                       [@errorState]="checkIsValid('userName') ? 'show' : 'hide'"></p-message>
+          </div>
+          <div class="w-100 w-sm-auto form-group group pb-3 pb-sm-5 position-relative">
+            <label class="form-label label mx-2">E-mail</label>
+            <input
+              [class.invalid]="checkIsValid('email')"
+              type="text"
+              formControlName="email"
+              class="form-control control"
+            />
+            <p-message severity="Error"
+                       text="E-mail is required"
+                       [@errorState]="checkIsValid('email') ? 'show' : 'hide'"></p-message>
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center">
+          <div class="w-100 w-sm-auto form-group group pb-3 pb-sm-5 position-relative">
+            <label class="form-label label mx-2">Password</label>
+            <input
+              [class.invalid]="checkIsValid('password')"
+              formControlName="password"
+              type="password"
+              class="form-control control"
+            />
+            <p-message severity="Error"
+                       text="Password less then 6 letters"
+                       [@errorState]="checkIsValid('password') ? 'show' : 'hide'"></p-message>
+          </div>
+          <div class="w-100 w-sm-auto form-group group pb-3 pb-sm-5 position-relative" >
+            <label class="form-label label mx-2">Confirm password</label>
+            <input
+              [class.invalid]="checkIsValid('confirmPassword')"
+              formControlName="confirmPassword"
+              type="password"
+              class="form-control control"
+            />
+            <p-message severity="Error"
+                       text="Password less then 6 letters"
+                       [@errorState]="checkIsValid('confirmPassword') ? 'show' : 'hide'"></p-message>
+          </div>
+        </div>
+      </div>
+
+
+    </form>
+  </ng-template>
+
+  <ng-template #buttons>
+    <div class="d-flex justify-content-center align-items-center mb-3">
+      <button
+        class="form-submit submit px-4 py-2"
+        [class.form-submit_disabled]="!form.valid"
+        type="submit"
+        (click)="onSubmit()"
+        [disabled]="!form.valid"
+      >
+        Add user
+      </button>
+    </div>
+  </ng-template>
+
+</app-modal-window-wrapper>
