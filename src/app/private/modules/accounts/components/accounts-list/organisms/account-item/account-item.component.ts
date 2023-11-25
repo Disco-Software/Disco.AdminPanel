@@ -1,6 +1,11 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AccountModalComponent, DeleteModalComponent, SendEmailModalComponent} from "../../../../organisms";
+import {
+  AccountModalComponent,
+  DeleteModalComponent,
+  PushNotificationsModalComponent,
+  SendEmailModalComponent
+} from "../../../../organisms";
 
 
 @Component({
@@ -40,6 +45,15 @@ export class AccountItemComponent implements OnInit {
 
   onSendEmail() {
     const ref =  this._modalService.open(SendEmailModalComponent, {
+      modalDialogClass: 'd-flex justify-content-center align-items-center h-100',
+      backdrop : 'static',
+      keyboard : false
+    });
+    ref.componentInstance.email = this.email
+  }
+
+  onSendNotifications() {
+    const ref =  this._modalService.open(PushNotificationsModalComponent, {
       modalDialogClass: 'd-flex justify-content-center align-items-center h-100',
       backdrop : 'static',
       keyboard : false

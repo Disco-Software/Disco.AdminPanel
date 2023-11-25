@@ -1,14 +1,14 @@
 <div class="modal-body body">
   <div class=" row pb-3">
     <div class="d-flex justify-content-between">
-      <span class="modal-title title fs-5">Send Email</span>
+      <span class="modal-title title fs-5">Send push notifications</span>
       <button (click)="closeModal()" class="bg-transparent border-0">
         <img [src]="'../../../../../../assets/images/ic_close.svg'" />
       </button>
     </div>
   </div>
   <div class="row mt-2 mb-4">
-    <div class=" d-flex flex-column w-100 justify-content-center align-items-center" [formGroup]="emailForm">
+    <div class=" d-flex flex-column w-100 justify-content-center align-items-center" [formGroup]="notificationsForm">
       <span class="p-fluid w-100 bg-transparent">
         <p-autoComplete
           #autoComplete
@@ -30,11 +30,8 @@
     <div class="d-flex">
       <button
         class="w-100 w-sm-auto button button_violet"
-        (click)="sendEmail()"
+        (click)="sendNotifications()"
       >Send</button>
-      <button
-        class="w-100 w-sm-auto ms-3 button button_blue-hover"
-      >Templates</button>
     </div>
   </div>
 </div>

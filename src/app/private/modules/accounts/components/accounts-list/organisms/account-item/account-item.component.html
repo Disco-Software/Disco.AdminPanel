@@ -13,8 +13,8 @@
   <div class="d-none d-md-flex align-items-center justify-content-between w-sm-40 w-xl-60">
     <button class="d-none d-xl-block button button_blue-hover" (click)="onSendEmail()">Send Email</button>
     <button class="d-block d-xl-none button border-0" (click)="onSendEmail()"><img src="./assets/images/mail.png" alt=""></button>
-    <button class="d-none d-xl-block button button_violet-hover">Send push notifications</button>
-    <button class="d-block d-xl-none button border-0"><img src="./assets/images/notification.png" alt=""></button>
+    <button class="d-none d-xl-block button button_violet-hover" (click)="onSendNotifications()">Send push notifications</button>
+    <button class="d-block d-xl-none button border-0" (click)="onSendNotifications()"><img src="./assets/images/notification.png" alt=""></button>
     <button class="d-none d-xl-block button button_orange" (click)="onDelete()">Delete user</button>
     <button class="d-block d-xl-none button border-0" (click)="onDelete()"><img
       src="./assets/images/trash.png" alt=""></button>

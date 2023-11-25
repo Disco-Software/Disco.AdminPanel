@@ -1,26 +1,26 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AutoComplete} from "primeng/autocomplete";
 import {Store} from "@ngxs/store";
+import {AutoComplete} from "primeng/autocomplete";
 
 @Component({
-  selector: 'app-send-email-modal',
-  templateUrl: './send-email-modal.component.html',
-  styleUrls: ['./send-email-modal.component.scss']
+  selector: 'app-push-notifications-modal',
+  templateUrl: './push-notifications-modal.component.html',
+  styleUrls: ['./push-notifications-modal.component.scss']
 })
-export class SendEmailModalComponent implements OnInit, AfterViewInit {
+export class PushNotificationsModalComponent implements OnInit {
   @ViewChild('autoComplete') autocomplete: AutoComplete
   @Input() email: string;
 
-  emailForm: FormGroup;
+  notificationsForm: FormGroup;
 
   selectedItems: any[] | undefined;
 
   items: any[] | undefined;
 
   constructor(private _modal: NgbActiveModal, private fb: FormBuilder, private store: Store) {
-    this.emailForm = this.fb.group({
+    this.notificationsForm = this.fb.group({
       recipient: [''],
       title: [''],
       body: ['', [Validators.required]]
@@ -50,10 +50,11 @@ export class SendEmailModalComponent implements OnInit, AfterViewInit {
     this.items = [...Array(10).keys()].map((item) => event.query + '-' + item);
   }
 
-  sendEmail() {
-    this.emailForm.get('body').markAsDirty()
-    if (this.emailForm.invalid) {
+  sendNotifications() {
+    this.notificationsForm.get('body').markAsDirty()
+    if (this.notificationsForm.invalid) {
       return
     }
   }
+
 }

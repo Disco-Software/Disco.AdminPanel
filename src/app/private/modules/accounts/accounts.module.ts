@@ -5,8 +5,10 @@ import {AccountRoutingModule} from './account-routing.module';
 import {AccountsListComponent} from './components';
 import {
   AccountModalComponent,
-  AccountsHeaderComponent, CreateUserModalComponent,
+  AccountsHeaderComponent,
+  CreateUserModalComponent,
   DeleteModalComponent,
+  PushNotificationsModalComponent,
   SendEmailModalComponent,
   TicketComponent,
   UserInfoCardComponent
@@ -23,13 +25,14 @@ const COMPONENTS = [
   UserInfoCardComponent,
   TicketComponent,
   SendEmailModalComponent,
-  CreateUserModalComponent
+  CreateUserModalComponent,
+  PushNotificationsModalComponent
 ];
 
 const MODULES = [CommonModule, AccountRoutingModule, SharedModule];
 
 @NgModule({
-  declarations: [...COMPONENTS,],
+  declarations: [...COMPONENTS],
   imports: [...MODULES],
 })
 export class AccountsModule {}
