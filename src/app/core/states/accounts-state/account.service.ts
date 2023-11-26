@@ -37,7 +37,7 @@ export class AccountService {
     return this._restService.request("GET",  `admin/users/search?search=${search}`, description);
   }
 
-  public getAccount(id: number, description : string) : Observable<Account> {
+  public getAccount(id: number, description : string) : Observable<{account: Account}> {
      return this._restService.request("GET", `admin/users/${id}`, description);
   }
 }

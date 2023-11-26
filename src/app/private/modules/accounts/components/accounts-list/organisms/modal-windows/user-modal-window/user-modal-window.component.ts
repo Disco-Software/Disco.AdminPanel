@@ -36,7 +36,7 @@ export class UserModalWindowComponent implements OnInit {
 
   ngOnInit(): void {
     this._store.dispatch(new AccountAction(this.id));
-    this.account$.pipe(takeUntil(this.destory$)).subscribe(res => {
+    this.account$.pipe(takeUntil(this.destory$)).subscribe((res: Account) => {
       this.account = res;
     });
 

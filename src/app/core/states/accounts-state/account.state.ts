@@ -134,8 +134,8 @@ export class AccountsState {
       .pipe(catchError(() => {
         return EMPTY;
       }),
-      tap((response : Account) => {
-        patchState({account: response});
+      tap((response : {account: Account}) => {
+        patchState({account: response.account});
       }))
   }
 
