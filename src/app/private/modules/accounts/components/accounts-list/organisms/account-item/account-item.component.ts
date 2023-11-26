@@ -76,9 +76,9 @@ export class AccountItemComponent implements OnInit {
 
   public onUserInfoClick() : void{
     const ref = this._modalService.open(UserModalWindowComponent, {
-      modalDialogClass: 'd-flex justify-content-center align-items-center h-100',
+      modalDialogClass: 'd-flex justify-content-center align-items-center h-100 max-vh-100 py-4',
       backdrop : 'static',
-      keyboard : false
+      keyboard : false,
     });
 
     ref.componentInstance.id = this.id;
