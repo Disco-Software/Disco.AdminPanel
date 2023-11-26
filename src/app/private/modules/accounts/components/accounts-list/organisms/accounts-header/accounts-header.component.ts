@@ -21,7 +21,8 @@ export class AccountsHeaderComponent implements OnInit {
 
   public createUser() : void {
     this._modalService.open(CreateUserModalWindowComponent, {
-      modalDialogClass: 'd-flex justify-content-center align-items-center h-100'
+      modalDialogClass: 'd-flex justify-content-center align-items-center',
+      centered: true
     });
   }
 

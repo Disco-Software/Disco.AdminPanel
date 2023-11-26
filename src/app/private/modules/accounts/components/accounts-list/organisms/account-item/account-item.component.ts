@@ -1,10 +1,10 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {
-  UserModalWindowComponent,
-  DeleteUserModalWindowComponent,
-  PushNotificationsModalWindowComponent,
-  SendEmailModalWindowComponent
+    DeleteUserModalWindowComponent,
+    PushNotificationsModalWindowComponent,
+    SendEmailModalWindowComponent,
+    UserModalWindowComponent
 } from "../modal-windows";
 
 
@@ -13,7 +13,7 @@ import {
   templateUrl: './account-item.component.html',
   styleUrls: ['./account-item.component.scss']
 })
-export class AccountItemComponent implements OnInit {
+export class AccountItemComponent {
 
   @Input() public id : number;
   @Input() public name : string;
@@ -43,42 +43,44 @@ export class AccountItemComponent implements OnInit {
 
   constructor(private _modalService : NgbModal) { }
 
-  ngOnInit(): void {
-  }
-
   onSendEmail() {
     const ref =  this._modalService.open(SendEmailModalWindowComponent, {
-      modalDialogClass: 'd-flex justify-content-center align-items-center h-100',
+        modalDialogClass: 'd-flex justify-content-center align-items-center',
       backdrop : 'static',
-      keyboard : false
+        keyboard: false,
+        centered: true,
     });
     ref.componentInstance.email = this.email
   }
 
   onSendNotifications() {
-    console.log('not')
+
     const ref =  this._modalService.open(PushNotificationsModalWindowComponent, {
-      modalDialogClass: 'd-flex justify-content-center align-items-center h-100',
+        modalDialogClass: 'd-flex justify-content-center align-items-center',
       backdrop : 'static',
-      keyboard : false
+        keyboard: false,
+        centered: true,
     });
     ref.componentInstance.email = this.email
   }
 
   public onDelete() : void {
     const ref =  this._modalService.open(DeleteUserModalWindowComponent, {
-      modalDialogClass: 'd-flex justify-content-center align-items-center h-100',
+        modalDialogClass: 'd-flex justify-content-center align-items-center',
       backdrop : 'static',
-      keyboard : false
+        keyboard: false,
+        centered: true,
     });
     ref.componentInstance.id = this.id;
   }
 
   public onUserInfoClick() : void{
     const ref = this._modalService.open(UserModalWindowComponent, {
-      modalDialogClass: 'd-flex justify-content-center align-items-center h-100 max-vh-100 py-4',
+        size: 'lg',
+        modalDialogClass: 'd-flex justify-content-center align-items-center',
       backdrop : 'static',
       keyboard : false,
+        centered: true,
     });
 
     ref.componentInstance.id = this.id;

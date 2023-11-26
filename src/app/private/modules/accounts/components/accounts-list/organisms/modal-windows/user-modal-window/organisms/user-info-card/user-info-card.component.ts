@@ -31,6 +31,7 @@ export class UserInfoCardComponent implements OnInit {
   }
 
   public onEditClick() {
+    this.changedValue = this.content
     this.isEdit = !this.isEdit;
     if(this.inputType === 'password') {
       this.changedValue = ''
@@ -39,10 +40,10 @@ export class UserInfoCardComponent implements OnInit {
 
   saveChanges() {
     if(this.inputType === 'password') {
-      console.log(this.changedValue)
+      // console.log(this.changedValue)
       //handling password changes
     } else {
-      console.log(this.changedValue)
+      // console.log(this.changedValue)
       //handling email changes
     }
   }

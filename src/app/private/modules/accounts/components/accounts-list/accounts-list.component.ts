@@ -37,7 +37,6 @@ export class AccountsListComponent implements OnInit, OnDestroy {
 
     this.getData(1, 5);
     this.accounts$.pipe(takeUntil(this.destroy$)).subscribe(res=>{
-      console.log(res)
       this.accounts = res
     })
   }
