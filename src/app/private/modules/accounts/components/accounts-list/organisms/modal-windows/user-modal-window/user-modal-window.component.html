@@ -36,13 +36,17 @@
       <div class="col-12 col-sm-6 mb-3">
         <app-user-info-card [title]="'E-mail'" [content]="account?.user.email" [isEditable]="true"></app-user-info-card>
       </div>
-      <div class="col-12 order-sm-3 col-sm-6 mb-3">
+      <div class="col-12 d-sm-none col-sm-6 mb-3">
         <app-user-info-card [title]="'Password'" [content]="'Password is secret'" [isEditable]="true"
                             [inputType]="'password'"></app-user-info-card>
       </div>
       <div class="col-12 col-sm-6 mb-3">
         <app-user-info-card [title]="'Posts'" [content]="account?.postsCount.toString()"
                             [isEditable]="false"></app-user-info-card>
+      </div>
+      <div class="col-12 d-none d-sm-block col-sm-6 mb-3">
+        <app-user-info-card [title]="'Password'" [content]="'Password is secret'" [isEditable]="true"
+                            [inputType]="'password'"></app-user-info-card>
       </div>
       <div class="col-12 col-sm-6">
         <app-user-info-card [title]="'Stories'" [content]="account?.storiesCount.toString()"

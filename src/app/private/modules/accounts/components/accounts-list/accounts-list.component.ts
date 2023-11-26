@@ -13,7 +13,6 @@ import { HostListener } from "@angular/core";
 })
 export class AccountsListComponent implements OnInit, OnDestroy {
   @Select(AccountsState.getAllAccountsSelector) accounts$: Observable<AccountModel[]>
-
   accounts : AccountModel[];
   @Select(AccountsState.getAccountsCountSelector) totalCount$ : Observable<number>;
   totalCount : number;
@@ -38,6 +37,7 @@ export class AccountsListComponent implements OnInit, OnDestroy {
 
     this.getData(1, 5);
     this.accounts$.pipe(takeUntil(this.destroy$)).subscribe(res=>{
+      console.log(res)
       this.accounts = res
     })
   }
