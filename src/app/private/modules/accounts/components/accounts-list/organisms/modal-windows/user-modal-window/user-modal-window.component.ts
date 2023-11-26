@@ -18,12 +18,14 @@ export class UserModalWindowComponent implements OnInit {
   @Select(AccountsState.getAccountSelector) public account$ : Observable<Account>;
 
   @Input() public id : number;
+  @Input() public role : string;
 
   public account : Account;
 
   public reports : ReportModel[] = [];
 
   public currentRole : RoleModel;
+
   public roles : RoleModel[] = [
     {key: 'Admin', value: 'Administrator'},
     {key: 'User', value: 'User'}
@@ -40,9 +42,12 @@ export class UserModalWindowComponent implements OnInit {
       this.account = res;
     });
 
-    const role = this.roles.find(x => x.key === this.account?.user.roleName);
+    this.currentRole = this.roles.find(role=>role.key === this.role)
 
-    this.currentRole = role;
+  }
+
+  onRoleChange(event: Event) {
+    console.log('event')
   }
 
   public sliceString(str : string){

@@ -10,6 +10,8 @@ export class TicketComponent implements OnInit {
   @Input() public title : string;
   @Input() public description : string;
 
+
+  selecte
   constructor() { }
 
   ngOnInit(): void {

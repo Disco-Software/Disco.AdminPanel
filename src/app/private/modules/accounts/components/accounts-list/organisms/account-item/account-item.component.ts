@@ -16,6 +16,7 @@ import {
 export class AccountItemComponent {
 
   @Input() public id : number;
+  @Input() public role : string;
   @Input() public name : string;
   @Input() public email : string;
   @Input() public photo : string;
@@ -84,6 +85,7 @@ export class AccountItemComponent {
     });
 
     ref.componentInstance.id = this.id;
+    ref.componentInstance.role = this.role;
   }
 
 }

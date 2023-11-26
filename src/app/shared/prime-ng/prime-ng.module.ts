@@ -10,6 +10,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { MenuModule } from 'primeng/menu';
+import { DropdownModule } from 'primeng/dropdown';
 
 const MODULES = [
   ToastModule,
@@ -20,7 +21,8 @@ const MODULES = [
   AutoCompleteModule,
   MenuModule,
   MessageModule,
-  KeyFilterModule
+  KeyFilterModule,
+  DropdownModule
 ];
 
 const PROVIDERS = [MessageService];

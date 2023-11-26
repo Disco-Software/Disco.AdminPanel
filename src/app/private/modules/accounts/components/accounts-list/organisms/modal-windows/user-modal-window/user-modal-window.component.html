@@ -12,9 +12,9 @@
             <img width="70px" height="70px" class="mb-3 mb-sm-0 photo photo-default me-3"
                  [src]="'/assets/images/ic_user-default.png'" alt="user default photo">
           </ng-template>
-          <div class=" d-flex justify-content-center flex-column">
+          <div class=" d-flex justify-content-center align-items-center align-items-sm-start flex-column">
             <span class="size-25 weight-4">{{account?.user?.userName}}</span>
-            <span>{{ currentRole?.value }}</span>
+            <p-dropdown styleClass="bg-transparent" [options]="roles" [(ngModel)]="currentRole" optionLabel="value" placeholder="Select a Role" (onChange)="onRoleChange($event)"></p-dropdown>
           </div>
         </div>
       </div>
