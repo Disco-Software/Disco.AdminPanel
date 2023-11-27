@@ -1,3 +1,4 @@
+import { ChangeEmailRequestDto } from "../../models/account/change-email-request.model";
 import { RequestDataModel } from "../../models/request.interface";
 import {CreateAccountInterface} from "@core";
 
@@ -42,6 +43,13 @@ export class SearchAccountsAction{
   static readonly type : string = '[Search account] search account';
 
   constructor(public payload: string) {
+
+  }
+}
+export class EditAccountEmailAction{
+  static readonly type : string = '[Edit account email] edit account email';
+
+  constructor(public payload: ChangeEmailRequestDto) {
 
   }
 }

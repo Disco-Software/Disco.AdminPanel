@@ -34,7 +34,7 @@
     </div>
     <div class=" row mt-4 d-flex flex-row">
       <div class="col-12 col-lg-6 mb-3">
-        <app-user-info-card [title]="'E-mail'" [content]="account?.user.email" [isEditable]="true"></app-user-info-card>
+        <app-user-info-card [title]="'E-mail'" [content]="account?.user.email" [id]="id" [isEditable]="true"></app-user-info-card>
       </div>
       <div class="col-12 d-lg-none col-lg-6 mb-3">
         <app-user-info-card [title]="'Password'" [content]="'Password is secret'" [isEditable]="true"
@@ -49,8 +49,7 @@
                             [inputType]="'password'"></app-user-info-card>
       </div>
       <div class="col-12 col-lg-6">
-        <app-user-info-card [title]="'Stories'" [content]="account?.storiesCount.toString()"
-                            [isEditable]="false"></app-user-info-card>
+        <app-user-info-card [title]="'Stories'" [content]="account?.storiesCount.toString()" [isEditable]="false"></app-user-info-card>
       </div>
     </div>
     <div *ngIf="!reports" class=" d-flex justify-content-center align-items-center mt-4">

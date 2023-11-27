@@ -4,7 +4,7 @@ import {Observable, Subject, takeUntil} from 'rxjs';
 import {Account} from '../../../../../../../../core/models/account/account.model';
 import {ReportModel} from '../../../../../../../../core/models/report/report.model';
 import {RoleModel} from '../../../../../../../../core/models/role/role.model';
-import {AccountAction} from '../../../../../../../../core/states/accounts-state/account.action';
+import {AccountAction, EditAccountEmailAction} from '../../../../../../../../core/states/accounts-state/account.action';
 import {AccountsState} from '../../../../../../../../core/states/accounts-state/account.state';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -38,8 +38,9 @@ export class UserModalWindowComponent implements OnInit {
 
   ngOnInit(): void {
     this._store.dispatch(new AccountAction(this.id));
-    this.account$.pipe(takeUntil(this.destory$)).subscribe((res: Account) => {
+    this.account$.pipe(takeUntil(this.destory$)).subscribe((res:Account) => {
       this.account = res;
+      console.log(res);
     });
 
     this.currentRole = this.roles.find(role=>role.key === this.role)
