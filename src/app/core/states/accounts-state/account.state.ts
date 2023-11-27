@@ -6,6 +6,7 @@ import {AccountModel} from "../../models/account/getaccounts.model";
 import {
   AccountAction,
   CreateAccountAction,
+  EditAccountEmailAction,
   GetAccountsCountAction,
   GetAllAccountsAction, SearchAccountsAction,
   SearchAccountsByEmailAction
@@ -14,6 +15,7 @@ import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {EMPTY, tap} from "rxjs";
 import {RemoveAccountAction} from "./remove.action";
+import { ChangeEmailResponseModel } from "../../models/account/change-email-response.model";
 
 
 @State<AccountStateInterface>({
@@ -138,5 +140,19 @@ export class AccountsState {
         patchState({account: response.account});
       }))
   }
+
+  @Action(EditAccountEmailAction)
+  public changeAccountEmail(
+    { patchState }: StateContext<{ account: Account }>,
+    { payload }: EditAccountEmailAction){
+    return this._accountService.changeEmail(payload, EditAccountEmailAction.type)
+      .pipe(catchError(() => {
+        return EMPTY;
+      }),
+      tap((response : {account: Account}) => {
+        patchState({account: response.account});
+      }))
+  }
+
 
 }

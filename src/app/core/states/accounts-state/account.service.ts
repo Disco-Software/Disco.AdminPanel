@@ -6,6 +6,8 @@ import {Observable} from 'rxjs';
 import {CreateAccountInterface} from "@core";
 import {CreateUserResponseModel} from "../../models/account/create-account-response.model";
 import { Account } from '../../models/account/account.model';
+import { ChangeEmailRequestDto } from '../../models/account/change-email-request.model';
+import { ChangeEmailResponseModel } from '../../models/account/change-email-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,4 +42,9 @@ export class AccountService {
   public getAccount(id: number, description : string) : Observable<{account: Account}> {
      return this._restService.request("GET", `admin/users/${id}`, description);
   }
+
+  public changeEmail(request: ChangeEmailRequestDto, description : string) : Observable<{account: Account}>{
+    return this._restService.request("PUT", "admin/users/change/email", description, request);
+  }
+
 }
