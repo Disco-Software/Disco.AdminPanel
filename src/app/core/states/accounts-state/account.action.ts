@@ -1,4 +1,5 @@
 import { ChangeEmailRequestDto } from "../../models/account/change-email-request.model";
+import { ChangePasswordRequestModel } from "../../models/account/change-password-request.mdoel";
 import { RequestDataModel } from "../../models/request.interface";
 import {CreateAccountInterface} from "@core";
 
@@ -50,6 +51,13 @@ export class EditAccountEmailAction{
   static readonly type : string = '[Edit account email] edit account email';
 
   constructor(public payload: ChangeEmailRequestDto) {
+
+  }
+}
+export class EditAccountPasswordAction{
+  static readonly type : string = '[Edit account password] edit account password';
+
+  constructor(public payload: ChangePasswordRequestModel) {
 
   }
 }

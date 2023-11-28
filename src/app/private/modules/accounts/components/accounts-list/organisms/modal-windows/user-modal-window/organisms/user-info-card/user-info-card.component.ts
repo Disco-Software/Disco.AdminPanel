@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { Account, AccountAction, EditAccountEmailAction } from '@core';
+import { Account, AccountAction, EditAccountEmailAction, EditAccountPasswordAction } from '@core';
 import { Select, Store } from '@ngxs/store';
 import { ChangeEmailRequestDto } from '../../../../../../../../../../core/models/account/change-email-request.model';
 import { ChangeEmailResponseModel } from 'src/app/core/models/account/change-email-response.model';
 import { take } from 'rxjs';
+import { ChangePasswordRequestModel } from 'src/app/core/models/account/change-password-request.mdoel';
 
 @Component({
   selector: 'app-user-info-card',
@@ -46,13 +47,21 @@ export class UserInfoCardComponent implements OnInit {
 
   saveChanges() {
     if(this.inputType === 'password') {
-      console.log("password");
+      const req : ChangePasswordRequestModel = {
+        password: this.changedValue,
+        id: this.id
+      }
+
+      console.log(req);
+
+      this._store.dispatch(new EditAccountPasswordAction(req)).pipe(take(1)).subscribe(() => {
+        this.isEdit = false;
+      });
     } else {
       const req : ChangeEmailRequestDto = {
         email : this.changedValue,
         id: this.id
       };
-      console.log(req);
 
      this._store.dispatch(new EditAccountEmailAction(req)).pipe(take(1)).subscribe(() => {
       this.isEdit = false;

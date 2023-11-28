@@ -37,7 +37,7 @@
         <app-user-info-card [title]="'E-mail'" [content]="account?.user.email" [id]="id" [isEditable]="true"></app-user-info-card>
       </div>
       <div class="col-12 d-lg-none col-lg-6 mb-3">
-        <app-user-info-card [title]="'Password'" [content]="'Password is secret'" [isEditable]="true"
+        <app-user-info-card [id]="id" [title]="'Password'" [content]="'Password is secret'" [isEditable]="true"
                             [inputType]="'password'"></app-user-info-card>
       </div>
       <div class="col-12 col-lg-6 mb-3">
@@ -45,7 +45,7 @@
                             [isEditable]="false"></app-user-info-card>
       </div>
       <div class="col-12 d-none d-lg-block col-lg-6 mb-3">
-        <app-user-info-card [title]="'Password'" [content]="'Password is secret'" [isEditable]="true"
+        <app-user-info-card [id]="id" [title]="'Password'" [content]="'Password is secret'" [isEditable]="true"
                             [inputType]="'password'"></app-user-info-card>
       </div>
       <div class="col-12 col-lg-6">
