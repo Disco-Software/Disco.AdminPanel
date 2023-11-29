@@ -7,6 +7,7 @@ import {
   AccountAction,
   CreateAccountAction,
   EditAccountEmailAction,
+  EditAccountPasswordAction,
   GetAccountsCountAction,
   GetAllAccountsAction, SearchAccountsAction,
   SearchAccountsByEmailAction
@@ -154,5 +155,17 @@ export class AccountsState {
       }))
   }
 
+  @Action(EditAccountPasswordAction)
+  public changeAccountPassword(
+    { patchState }: StateContext<{ account: Account }>,
+    { payload }: EditAccountPasswordAction){
+    return this._accountService.changePassword(payload, EditAccountPasswordAction.type)
+      .pipe(catchError(() => {
+        return EMPTY;
+      }),
+      tap((response : {account: Account}) => {
+        patchState({account: response.account});
+      }))
+  }
 
 }
