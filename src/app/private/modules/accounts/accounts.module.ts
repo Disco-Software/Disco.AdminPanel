@@ -16,6 +16,7 @@ import {
   UserInfoCardComponent
 } from './components';
 import {SharedModule} from "@shared";
+import { TranslateModule } from '@ngx-translate/core';
 
 const COMPONENTS = [
   AccountsListComponent,
@@ -30,7 +31,7 @@ const COMPONENTS = [
   PushNotificationsModalWindowComponent
 ];
 
-const MODULES = [CommonModule, AccountRoutingModule, SharedModule];
+const MODULES = [CommonModule, AccountRoutingModule, SharedModule, TranslateModule.forChild()];
 
 @NgModule({
   declarations: [...COMPONENTS, ModalWindowWrapperComponent],

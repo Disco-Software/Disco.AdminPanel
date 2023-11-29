@@ -1,5 +1,5 @@
 <app-modal-window-wrapper>
-  <ng-template #title>Send Email</ng-template>
+  <ng-template #title>{{'email-notification-modal.header' | translate}}</ng-template>
 
   <ng-template #body>
     <div class=" d-flex flex-column w-100 justify-content-center align-items-center" [formGroup]="emailForm">
@@ -15,8 +15,8 @@
           (onUnselect)="disableDeletingFirstElement()"
         ></p-autoComplete>
     </span>
-      <input type="text" pInputText formControlName="title" class="w-100 bg-transparent" placeholder="Title..." />
-      <textarea rows="10" cols="30" formControlName="body" pInputTextarea class="w-100 bg-transparent" placeholder="Body..."></textarea>
+      <input type="text" pInputText formControlName="title" class="w-100 bg-transparent" placeholder="{{'email-notification-modal.title' | translate }}" />
+      <textarea rows="10" cols="30" formControlName="body" pInputTextarea class="w-100 bg-transparent" placeholder="{{'email-notification-modal.body' | translate }}"></textarea>
 
     </div>
   </ng-template>
@@ -26,10 +26,10 @@
       <button
         class="w-100 mb-3 mb-sm-0 w-sm-auto button button_violet"
         (click)="sendEmail()"
-      >Send</button>
+      >{{'email-notification-modal.send' | translate}}</button>
       <button
         class="w-100 w-sm-auto ms-0 ms-sm-3 button button_blue-hover"
-      >Templates</button>
+      >{{'email-notification-modal.templates' | translate}}</button>
     </div>
   </ng-template>
 </app-modal-window-wrapper>

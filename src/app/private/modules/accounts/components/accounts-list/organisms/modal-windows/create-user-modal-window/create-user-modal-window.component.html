@@ -1,6 +1,6 @@
 <app-modal-window-wrapper>
 
-  <ng-template #title>Add user</ng-template>
+  <ng-template #title>{{'create-user-modal.title' | translate}}</ng-template>
 
   <ng-template #body>
     <form [formGroup]="form" class="px-2">
@@ -12,7 +12,7 @@
             (click)="currentState = state.name"
             class="modal-role role"
           >
-            {{ state.title }}
+            {{ state.title | translate }}
           </button>
         </div>
       </div>
@@ -21,7 +21,7 @@
       <div class="row">
         <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center ">
           <div class="w-100 w-sm-auto form-group group pb-3 pb-sm-5 position-relative">
-            <label class="form-label label mx-2">User name</label>
+            <label class="form-label label mx-2">{{'create-user-modal.userName' | translate}}</label>
             <input
               [class.invalid]="checkIsValid('userName')"
               formControlName="userName"
@@ -29,11 +29,11 @@
               class="form-control control"
             />
             <p-message severity="Error"
-                       text="User name is required"
+                       text="{{'create-user-modal.userNameValidationError' | translate}}"
                        [@errorState]="checkIsValid('userName') ? 'show' : 'hide'"></p-message>
           </div>
           <div class="w-100 w-sm-auto form-group group pb-3 pb-sm-5 position-relative">
-            <label class="form-label label mx-2">E-mail</label>
+            <label class="form-label label mx-2">{{'create-user-modal.email' | translate}}</label>
             <input
               [class.invalid]="checkIsValid('email')"
               type="text"
@@ -41,13 +41,13 @@
               class="form-control control"
             />
             <p-message severity="Error"
-                       text="E-mail is required"
+                       text="{{'create-user-modal.emailValidationError' | translate}}"
                        [@errorState]="checkIsValid('email') ? 'show' : 'hide'"></p-message>
           </div>
         </div>
         <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center">
           <div class="w-100 w-sm-auto form-group group pb-3 pb-sm-5 position-relative">
-            <label class="form-label label mx-2">Password</label>
+            <label class="form-label label mx-2">{{'create-user-modal.password' | translate}}</label>
             <input
               [class.invalid]="checkIsValid('password')"
               formControlName="password"
@@ -55,11 +55,11 @@
               class="form-control control"
             />
             <p-message severity="Error"
-                       text="Password less then 6 letters"
+                       text="{{'create-user-modal.passwordValidationError' | translate}}"
                        [@errorState]="checkIsValid('password') ? 'show' : 'hide'"></p-message>
           </div>
           <div class="w-100 w-sm-auto form-group group pb-3 pb-sm-5 position-relative" >
-            <label class="form-label label mx-2">Confirm password</label>
+            <label class="form-label label mx-2">{{'create-user-modal.confirmPassword' | translate}}</label>
             <input
               [class.invalid]="checkIsValid('confirmPassword')"
               formControlName="confirmPassword"
@@ -67,7 +67,7 @@
               class="form-control control"
             />
             <p-message severity="Error"
-                       text="Password less then 6 letters"
+                       text="{{'create-user-modal.confirmPasswordValidationError' | translate}}"
                        [@errorState]="checkIsValid('confirmPassword') ? 'show' : 'hide'"></p-message>
           </div>
         </div>
@@ -86,7 +86,7 @@
         (click)="onSubmit()"
         [disabled]="!form.valid"
       >
-        Add user
+        {{'create-user-modal.create' | translate }}
       </button>
     </div>
   </ng-template>

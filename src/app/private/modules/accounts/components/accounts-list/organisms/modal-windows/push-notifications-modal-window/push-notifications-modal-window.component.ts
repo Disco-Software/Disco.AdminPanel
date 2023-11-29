@@ -3,6 +3,8 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngxs/store";
 import {AutoComplete} from "primeng/autocomplete";
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageModel, LocalStorageService } from '@core';
 
 @Component({
   selector: 'app-push-notifications-modal-window',
@@ -19,7 +21,15 @@ export class PushNotificationsModalWindowComponent implements OnInit {
 
   items: any[] | undefined;
 
-  constructor(private _modal: NgbActiveModal, private fb: FormBuilder, private store: Store) {
+  constructor(
+    private _storageService : LocalStorageService,
+    private _translate : TranslateService,
+    private _modal: NgbActiveModal, private fb: FormBuilder, private store: Store) {
+
+    const language : LanguageModel = _storageService.getItem('language');
+
+    _translate.use(language.shortCode);
+
     this.notificationsForm = this.fb.group({
       recipient: [''],
       title: [''],

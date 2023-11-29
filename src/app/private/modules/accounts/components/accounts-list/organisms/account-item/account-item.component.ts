@@ -6,6 +6,8 @@ import {
     SendEmailModalWindowComponent,
     UserModalWindowComponent
 } from "../modal-windows";
+import { LanguageModel, LocalStorageService } from "@core";
+import { TranslateService } from "@ngx-translate/core";
 
 
 @Component({
@@ -23,26 +25,33 @@ export class AccountItemComponent {
 
   items = [
     {
-      label: 'Send Email',
+      label: 'account-item.emailNotification',
       command: () => {
         this.onSendEmail();
       }
     },
     {
-      label: 'Send Push Notifications',
+      label: 'account-item.pushNotificationButton',
       command: () => {
         this.onSendNotifications();
       }
     },
     {
-      label: 'Delete User',
+      label: 'account-item.deleteButton',
       command: () => {
         this.onDelete()
       }
     }
   ];
 
-  constructor(private _modalService : NgbModal) { }
+  constructor(
+    private _storageService : LocalStorageService,
+    private _translate : TranslateService,
+    private _modalService : NgbModal) {
+      const language : LanguageModel = _storageService.getItem('language');
+
+      _translate.use(language.shortCode);
+    }
 
   onSendEmail() {
     const ref =  this._modalService.open(SendEmailModalWindowComponent, {
