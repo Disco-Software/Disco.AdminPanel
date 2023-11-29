@@ -105,6 +105,10 @@
   "user-modal" : {
     "followersCount" : "Followers",
     "followingsCount" : "Followings",
+    "roles" : {
+      "admin" : "Administrator",
+      "user" : "User"
+    },
     "changeEmailCard" : {
       "title" : "E-mail"
     },
@@ -113,7 +117,14 @@
     },
     "ticket" : {
       "title" : "Requests to support:"
-    }
+    },
+    "postsCard" : {
+      "title" : "Posts"
+    },
+    "storiesCard" : {
+      "title" : "Stories"
+    },
+    "title" : "Information"
   },
 
   "delete-user-modal" : {

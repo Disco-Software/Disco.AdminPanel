@@ -14,7 +14,14 @@
           </ng-template>
           <div class=" d-flex justify-content-center align-items-center align-items-sm-start flex-column">
             <span class="size-25 weight-4">{{account?.user?.userName}}</span>
-            <p-dropdown styleClass="bg-transparent" [options]="roles" [(ngModel)]="currentRole" optionLabel="value" placeholder="Select a Role" (onChange)="onRoleChange($event)"></p-dropdown>
+            <p-dropdown styleClass="bg-transparent" [options]="roles" [(ngModel)]="currentRole" optionLabel="value" placeholder="Select a Role" (onChange)="onRoleChange($event)">
+              <ng-template pTemplate="selectedItem">
+                  {{ currentRole.value | translate }}
+              </ng-template>
+              <ng-template let-role pTemplate="item">
+                  {{ role.value | translate }}
+              </ng-template>
+            </p-dropdown>
           </div>
         </div>
       </div>

@@ -52,6 +52,14 @@
   padding: 0;
 }
 
+:host::ng-deep.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  color: #E6E1D4;
+}
+
+:host::ng-deep.p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+  color: #E6E1D4;
+}
+
 :host::ng-deep.p-dropdown .p-dropdown-trigger {
   width: auto;
   padding-left: 10px;
