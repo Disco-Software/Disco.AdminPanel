@@ -4,6 +4,8 @@ import { Store } from '@ngxs/store';
 import { RemoveAccountAction } from '../../../../../../../../core/states/accounts-state/remove.action';
 import {switchMap} from "rxjs";
 import {GetAllAccountsAction} from "../../../../../../../../core/states/accounts-state/account.action";
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageModel, LocalStorageService } from '@core';
 
 @Component({
   selector: 'app-delete-user-modal-window',
@@ -14,7 +16,15 @@ export class DeleteUserModalWindowComponent implements OnInit {
 
   @Input() public id : number;
 
-  constructor(private _modal : NgbActiveModal, private _store : Store) { }
+  constructor(
+    private _storageService : LocalStorageService,
+    private _translate : TranslateService,
+    private _modal : NgbActiveModal,
+    private _store : Store) {
+      const language : LanguageModel = _storageService.getItem('language');
+
+      _translate.use(language.shortCode);
+    }
 
   ngOnInit(): void {
   }

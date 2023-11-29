@@ -3,6 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateUserModalWindowComponent } from '../modal-windows/create-user-modal-window/create-user-modal-window.component';
 import { Store } from '@ngxs/store';
 import { GetAllAccountsAction, SearchAccountsAction } from '../../../../../../../core/states/accounts-state/account.action';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageModel, LocalStorageService } from '@core';
 
 @Component({
   selector: 'app-accounts-header',
@@ -13,8 +15,14 @@ export class AccountsHeaderComponent implements OnInit {
   public search : string;
 
   constructor(
+    private _storageService : LocalStorageService,
+    private _translate : TranslateService,
     private _store : Store,
-    private _modalService : NgbModal) { }
+    private _modalService : NgbModal) {
+      const leng : LanguageModel = _storageService.getItem("language");
+
+      _translate.use(leng.shortCode);
+    }
 
   ngOnInit(): void {
   }

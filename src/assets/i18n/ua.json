@@ -20,7 +20,7 @@
     "confirm" : "Підтвердити пароль",
     "submit" : "Відправити"
   },
-  
+
   "sidebar" : {
     "overview" : "Огляд",
     "accounts" : "Облікові записи",
@@ -80,6 +80,81 @@
 
   "userInfo" : {
     "logout" : "Вихід"
+  },
+
+  "accountsHeader" : {
+    "create" : "Створити користувача",
+    "search" : "Пошук..."
+  },
+
+  "create-user-modal" : {
+    "title" : "Створення користувача",
+    "admin" : "Адміністратор",
+    "user" : "Користувач",
+    "userName" : "Ім'я користувача",
+    "userNameValidationError" : "Ім'я користувача є обов'ясковим",
+    "email" : "Ел.пошта",
+    "emailValidationError" : "Ел.пошта є обов'ясковою",
+    "password" : "Пароль",
+    "passwordValidationError" : "Пароль має бути не месьше ні 6 літер",
+    "confirmPassword" : "Підтведження паролью",
+    "confirmPasswordValidationError" : "Пароль має бути не месьше ні 6 літер",
+    "create" : "Створити користувача"
+  },
+
+  "user-modal" : {
+    "title" : "Інформація про користувача",
+    "followersCount" : "Підписники",
+    "followingsCount" : "Підписки",
+    "roles" : {
+      "admin" : "Адміністратор",
+      "user" : "Користувач"
+    },
+    "changeEmailCard" : {
+      "title" : "Ел.пошта"
+    },
+    "changePasswordCard" : {
+      "title" : "Пароль",
+      "secretValue" : "Пароль є секретом"
+    },
+    "postsCard" : {
+      "title" : "Публікації"
+    },
+    "storiesCard" : {
+      "title" : "Історії"
+    },
+   "ticket" : {
+      "title" : "Звернення до підтримки:"
+    }
+
+  },
+
+  "delete-user-modal" : {
+    "title" : "Видалення користувача",
+    "description" : "Ви впевнені, що хочете видалити цього користувача?",
+    "cancelButton" : "Відмінити",
+    "deleteButton" : "Видалити"
+  },
+
+  "push-notification-modal" : {
+    "header" : "Надіслати push-повідомлення",
+    "title" : "Назва...",
+    "body" : "Тіло...",
+    "send" : "Відправити"
+  },
+
+  "email-notification-modal" : {
+    "header" : "Відправити поштового листа",
+    "title" : "Назва...",
+    "body" : "Тіло...",
+    "send" : "Відправити",
+    "templates" : "Шаблони"
+  },
+
+  "account-item" : {
+    "deleteButton" : "Видалити користувача",
+    "pushNotificationButton" : "Надіслати push-повідомлення",
+    "emailNotification" : "Надіслати на ел.пошту"
   }
 
 }

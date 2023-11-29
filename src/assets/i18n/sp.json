@@ -80,5 +80,84 @@
 
   "userInfo" : {
     "logout" : "Salida"
+  },
+
+  "accountsHeader" : {
+    "create" : "Crear usuario",
+    "search" : "Buscar..."
+  },
+
+  "create-user-modal" : {
+    "title" : "Agregar usuario",
+    "admin" : "Administrador",
+    "user" : "Usuario",
+    "userName" : "Nombre de usuario",
+    "userNameValidationError" : "Se requiere nombre de usuario",
+    "email" : "Correo electrónico",
+    "emailValidationError" : "Correo electronico es requerido",
+    "password" : "Contraseña",
+    "passwordValidationError" : "Contraseña de menos de 6 letras",
+    "confirmPassword" : "Confirmar Contraseña",
+    "confirmPasswordValidationError" : "Contraseña de menos de 6 letras",
+    "create" : "Agregar usuario"
+  },
+
+  "user-modal" : {
+    "title" : "Informacion del usuario",
+    "followersCount" : "Seguidores",
+    "followingsCount" : "Suscripciones",
+    "roles" : {
+      "admin" : "Administrador",
+      "user" : "Usuario"
+    },
+    "stories" : {
+       "title" : "Cuentos"
+    },
+    "changeEmailCard" : {
+      "title" : "Correo electrónico"
+    },
+    "changePasswordCard" : {
+      "title" : "Contraseña",
+      "secretValue" : "La contraseña es secreta."
+    },
+    "postsCard" : {
+      "title" : "Publicaciones"
+    },
+    "storiesCard" : {
+      "title" : "Cuentos"
+    },
+    "ticket" : {
+      "title" : "Solicitudes de apoyo:"
+    }
+  },
+
+  "delete-user-modal" : {
+    "title" : "Borrar usuario",
+    "description" : "¿Estás seguro de que deseas eliminar este usuario?",
+    "cancelButton" : "Cancelar",
+    "deleteButton" : "Borrar usuario"
+  },
+
+  "push-notification-modal" : {
+    "header" : "Enviar notificaciones automáticas",
+    "title" : "Título...",
+    "body" : "Cuerpo...",
+    "send" : "Enviar"
+  },
+
+  "email-notification-modal" : {
+    "header" : "Enviar al correo electrónico",
+    "title" : "Título...",
+    "body" : "Cuerpo...",
+    "send" : "Enviar",
+    "templates" : "Plantillas"
+  },
+
+  "account-item" : {
+    "deleteButton" : "Borrar usuario",
+    "pushNotificationButton" : "Enviar notificación push",
+    "emailNotification" : "Enviar al correo electrónico"
   }
+
+
 }
