@@ -6,11 +6,24 @@
     <div class="row d-flex justify-content-between">
       <div class="col-12 col-sm-6">
         <div class="d-flex flex-column flex-sm-row align-items-center ">
-          <img *ngIf="account?.photo; else defaultPhoto" [src]="account?.photo" class="mb-3 mb-sm-0 header header-photo p-0 mx-3"
-               alt="user photo">
+          <div class="image-container me-3 mx-3" *ngIf="account?.photo; else defaultPhoto">
+            <img  [src]="account?.photo" class="mb-3 mb-sm-0 header header-photo p-0 "
+                 alt="user photo">
+            <div class="overlay">
+              <input type="file" (change)="onFileChange($event)" accept="image/*" class="h-100 w-100 position-absolute opacity-0 cursor-pointer">
+              <span class="pi pi-camera"></span>
+<!--              <img src="icon.png" alt="icon">-->
+            </div>
+          </div>
           <ng-template #defaultPhoto>
-            <img width="70px" height="70px" class="mb-3 mb-sm-0 photo photo-default me-3"
-                 [src]="'/assets/images/ic_user-default.png'" alt="user default photo">
+            <div class="image-container me-3" >
+              <img width="70px" height="70px" class="mb-3 mb-sm-0 photo-default"
+                   [src]="'/assets/images/ic_user-default.png'" alt="user default photo">
+              <div class="overlay">
+                <input type="file" (change)="onFileChange($event)" accept="image/*" class="h-100 w-100 position-absolute opacity-0 cursor-pointer">
+                <i class="pi pi-camera"></i>
+              </div>
+            </div>
           </ng-template>
           <div class=" d-flex justify-content-center align-items-center align-items-sm-start flex-column">
             <span class="size-25 weight-4">{{account?.user?.userName}}</span>
@@ -70,3 +83,4 @@
   </ng-template>
 
 </app-modal-window-wrapper>
+

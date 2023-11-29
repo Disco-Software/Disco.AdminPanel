@@ -11,6 +11,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { MenuModule } from 'primeng/menu';
 import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+
 
 const MODULES = [
   ToastModule,
@@ -22,7 +24,8 @@ const MODULES = [
   MenuModule,
   MessageModule,
   KeyFilterModule,
-  DropdownModule
+  DropdownModule,
+  DialogModule
 ];
 
 const PROVIDERS = [MessageService];

@@ -4,11 +4,12 @@ import {Observable, Subject, takeUntil} from 'rxjs';
 import {Account} from '../../../../../../../../core/models/account/account.model';
 import {ReportModel} from '../../../../../../../../core/models/report/report.model';
 import {RoleModel} from '../../../../../../../../core/models/role/role.model';
-import {AccountAction, EditAccountEmailAction} from '../../../../../../../../core/states/accounts-state/account.action';
+import {AccountAction} from '../../../../../../../../core/states/accounts-state/account.action';
 import {AccountsState} from '../../../../../../../../core/states/accounts-state/account.state';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
-import { LanguageModel, LocalStorageService } from '@core';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TranslateService} from '@ngx-translate/core';
+import {LanguageModel, LocalStorageService} from '@core';
+import {ImageCropperModalWindowComponent} from "../image-cropper-modal-window/image-cropper-modal-window.component";
 
 @Component({
   selector: 'app-user-modal-window',
@@ -16,7 +17,6 @@ import { LanguageModel, LocalStorageService } from '@core';
   styleUrls: ['./user-modal-window.component.scss']
 })
 export class UserModalWindowComponent implements OnInit {
-
   @Select(AccountsState.getAccountSelector) public account$ : Observable<Account>;
 
   @Input() public id : number;
@@ -39,7 +39,8 @@ export class UserModalWindowComponent implements OnInit {
     private _storageService : LocalStorageService,
     private _translate : TranslateService,
     private _store: Store,
-    public activeModal: NgbActiveModal) {
+    public activeModal: NgbActiveModal,
+    private _modalService: NgbModal) {
       const lang : LanguageModel = _storageService.getItem("language");
 
       for (let role of this.roles) {
@@ -58,6 +59,26 @@ export class UserModalWindowComponent implements OnInit {
     this.currentRole = this.roles.find(role=>role.key === this.role)
 
   }
+
+  onFileChange(event: any) {
+    // const reader = new FileReader();
+    //
+    // reader.onload = (e: any) => {
+    //   this.imageChangedEvent = e.target.result;
+    // };
+    //
+    // reader.readAsDataURL(event.target.files[0]);
+    // this.isImageCropperVisible = !this.isImageCropperVisible
+    const ref = this._modalService.open(ImageCropperModalWindowComponent, {
+      modalDialogClass: 'd-flex justify-content-center align-items-center',
+      backdrop: 'static',
+      keyboard: false,
+      centered: true,
+    });
+
+    console.log(event)
+  }
+
 
   onRoleChange(event: Event) {
     console.log('event')

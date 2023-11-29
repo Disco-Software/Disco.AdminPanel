@@ -17,6 +17,7 @@ import {
 } from './components';
 import {SharedModule} from "@shared";
 import { TranslateModule } from '@ngx-translate/core';
+import { ImageCropperModalWindowComponent } from './components/accounts-list/organisms/modal-windows/image-cropper-modal-window/image-cropper-modal-window.component';
 
 const COMPONENTS = [
   AccountsListComponent,
@@ -34,7 +35,7 @@ const COMPONENTS = [
 const MODULES = [CommonModule, AccountRoutingModule, SharedModule, TranslateModule.forChild()];
 
 @NgModule({
-  declarations: [...COMPONENTS, ModalWindowWrapperComponent],
+  declarations: [...COMPONENTS, ModalWindowWrapperComponent, ImageCropperModalWindowComponent],
   imports: [...MODULES],
 })
 export class AccountsModule {}
