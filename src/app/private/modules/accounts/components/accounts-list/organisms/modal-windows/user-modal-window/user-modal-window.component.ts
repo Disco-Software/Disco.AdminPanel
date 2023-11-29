@@ -7,6 +7,8 @@ import {RoleModel} from '../../../../../../../../core/models/role/role.model';
 import {AccountAction, EditAccountEmailAction} from '../../../../../../../../core/states/accounts-state/account.action';
 import {AccountsState} from '../../../../../../../../core/states/accounts-state/account.state';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageModel, LocalStorageService } from '@core';
 
 @Component({
   selector: 'app-user-modal-window',
@@ -27,20 +29,30 @@ export class UserModalWindowComponent implements OnInit {
   public currentRole : RoleModel;
 
   public roles : RoleModel[] = [
-    {key: 'Admin', value: 'Administrator'},
-    {key: 'User', value: 'User'}
+    {key: 'Admin', value: 'user-modal.roles.admin'},
+    {key: 'User', value: 'user-modal.roles.user'}
   ];
 
   public destory$ : Subject<boolean> = new Subject<boolean>();
 
-  constructor(private _store: Store, public activeModal: NgbActiveModal) {
+  constructor(
+    private _storageService : LocalStorageService,
+    private _translate : TranslateService,
+    private _store: Store,
+    public activeModal: NgbActiveModal) {
+      const lang : LanguageModel = _storageService.getItem("language");
+
+      for (let role of this.roles) {
+        _translate.get(role.value);
+      }
+
+      _translate.use(lang.shortCode);
   }
 
   ngOnInit(): void {
     this._store.dispatch(new AccountAction(this.id));
     this.account$.pipe(takeUntil(this.destory$)).subscribe((res:Account) => {
       this.account = res;
-      console.log(res);
     });
 
     this.currentRole = this.roles.find(role=>role.key === this.role)

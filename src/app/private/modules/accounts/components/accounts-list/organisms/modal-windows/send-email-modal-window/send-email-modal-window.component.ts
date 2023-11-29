@@ -3,6 +3,8 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AutoComplete} from "primeng/autocomplete";
 import {Store} from "@ngxs/store";
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageModel, LocalStorageService } from '@core';
 
 @Component({
   selector: 'app-send-email-modal-window',
@@ -19,8 +21,16 @@ export class SendEmailModalWindowComponent implements OnInit, AfterViewInit {
 
   items: any[] | undefined;
 
-  constructor(private _modal: NgbActiveModal, private fb: FormBuilder, private store: Store) {
-    this.emailForm = this.fb.group({
+  constructor(
+    private _storageService : LocalStorageService,
+    private _translate : TranslateService,
+    private _modal: NgbActiveModal, private fb: FormBuilder, private store: Store) {
+
+      const language : LanguageModel = _storageService.getItem('language');
+
+      _translate.use(language.shortCode);
+
+      this.emailForm = this.fb.group({
       recipient: [''],
       title: [''],
       body: ['', [Validators.required]]

@@ -80,6 +80,68 @@
 
   "userInfo" : {
     "logout" : "Log out"
+  },
+
+  "accountsHeader" : {
+    "create" : "Create User",
+    "search" : "Search..."
+  },
+
+  "create-user-modal" : {
+    "title" : "Add user",
+    "admin" : "Administrator",
+    "user" : "User",
+    "userName" : "User name",
+    "userNameValidationError" : "User name is required",
+    "email" : "E-mail",
+    "emailValidationError" : "E-mail is required",
+    "password" : "Password",
+    "passwordValidationError" : "Password less then 6 letters",
+    "confirmPassword" : "Confirm password",
+    "confirmPasswordValidationError" : "Password less then 6 letters",
+    "create" : "Add user"
+  },
+
+  "user-modal" : {
+    "followersCount" : "Followers",
+    "followingsCount" : "Followings",
+    "changeEmailCard" : {
+      "title" : "E-mail"
+    },
+    "changePasswordCard" : {
+      "title" : "Password"
+    },
+    "ticket" : {
+      "title" : "Requests to support:"
+    }
+  },
+
+  "delete-user-modal" : {
+    "title" : "Delete User",
+    "description" : "Are you sure you want to delete this user?",
+    "cancelButton" : "Cancel",
+    "deleteButton" : "Delete User"
+  },
+
+  "push-notification-modal" : {
+    "header" : "Send push notifications",
+    "title" : "Title...",
+    "body" : "Body...",
+    "send" : "Send"
+  },
+
+  "email-notification-modal" : {
+    "header" : "Send to Email",
+    "title" : "Title...",
+    "body" : "Body...",
+    "send" : "Send",
+    "templates" : "Templates"
+  },
+
+  "account-item" : {
+    "deleteButton" : "Delete User",
+    "pushNotificationButton" : "Send Push Notification",
+    "emailNotification" : "Send to Email"
   }
 
 }
