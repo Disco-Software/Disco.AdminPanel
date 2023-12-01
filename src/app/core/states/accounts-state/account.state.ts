@@ -17,6 +17,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {EMPTY, tap} from "rxjs";
 import {RemoveAccountAction} from "./remove.action";
 import { ChangeEmailResponseModel } from "../../models/account/change-email-response.model";
+import { MessageService } from "primeng/api";
+import { ErrorsCollection } from "../../models/error.model";
 
 
 @State<AccountStateInterface>({
@@ -25,7 +27,9 @@ import { ChangeEmailResponseModel } from "../../models/account/change-email-resp
 })
 @Injectable()
 export class AccountsState {
-  constructor(private _accountService: AccountService) {}
+  constructor(
+    private _errorService : MessageService,
+    private _accountService: AccountService) {}
 
   @Selector()
   static getAllAccountsSelector(result: {
@@ -160,7 +164,15 @@ export class AccountsState {
     { patchState }: StateContext<{ account: Account }>,
     { payload }: EditAccountPasswordAction){
     return this._accountService.changePassword(payload, EditAccountPasswordAction.type)
-      .pipe(catchError(() => {
+      .pipe(catchError((error : ErrorsCollection) => {
+        error.errorMessages.forEach((error) => {
+          this._errorService.add({
+            severity : "validation error",
+            summary : "Api Validation Error",
+            detail: '',
+          });
+          console.log(error.message);
+        });
         return EMPTY;
       }),
       tap((response : {account: Account}) => {
