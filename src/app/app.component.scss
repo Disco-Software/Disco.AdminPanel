@@ -40,3 +40,9 @@
   /* Зміни стилів для іконки закриття тоста */
   color: #ffffff;
 }
+
+@media (max-width: 430px) {
+  :host::ng-deep.p-toast {
+    width: 280px;
+  }
+}

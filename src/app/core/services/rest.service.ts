@@ -26,7 +26,10 @@ export class RestService {
           return of(response);
         }), catchError((error) => {
           console.error(error);
-          this._messageService.add({severity: "error", summary: 'Api Error', detail: error.statusText})
+          error.error.errorMessages.forEach(error=>{
+            this._messageService.add({severity: "error", summary: 'Api Error', detail: error.message})
+          })
+          // this._messageService.add({severity: "error", summary: 'Api Error', detail: error.statusText})
           return throwError(() => error);
         }), finalize(() => this._store.dispatch(new LoaderRemoveAction(description))))
      }));

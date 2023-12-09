@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {LocalStorageService} from '@core/services';
 import {TranslateService} from "@ngx-translate/core";
 import {Select, Store} from "@ngxs/store";
@@ -13,6 +13,13 @@ import {Observable} from "rxjs";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  isSmallSizeToaster: boolean;
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+    this.isSmallSizeToaster = window.innerWidth <= 430
+  }
+
   @Select(AppConfigState.selectedLanguageSelector) language$: Observable<LanguageModel>
   private role: string = '';
   isLoggedIn = false;
@@ -29,6 +36,7 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
+    this.getScreenSize();
     setTimeout(() => {
       this.siteLoader = false;
     }, 2000);
