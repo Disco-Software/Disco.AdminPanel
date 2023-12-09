@@ -4,4 +4,8 @@
   </div>
 </ng-template>
 
-<p-toast position="bottom-right"></p-toast>
+<p-toast *ngIf="isSmallSizeToaster; else bigSizeToaster" position="bottom-center" [showTransitionOptions]="'1000ms'"></p-toast>
+<ng-template #bigSizeToaster>
+  <p-toast position="bottom-right" [showTransitionOptions]="'1000ms'"></p-toast>
+
+</ng-template>

@@ -23,3 +23,26 @@
   }
 }
 
+::ng-deep .p-toast-message {
+  /* Ваші зміни стилів тут */
+  background: radial-gradient(101.53% 125.91% at 100% -24.31%, #2E1257 0%, #221338 100%) !important /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+  box-shadow: 1px 4px 10px rgba(160, 68, 255, 0.7) !important;
+  border-radius: 10px 0 0 10px !important;
+}
+
+::ng-deep .p-toast-message-icon {
+  /* Зміни стилів для іконки тоста */
+  background-color: transparent;
+  color: #ffffff;
+}
+
+::ng-deep .p-toast-close-icon {
+  /* Зміни стилів для іконки закриття тоста */
+  color: #ffffff;
+}
+
+@media (max-width: 430px) {
+  :host::ng-deep.p-toast {
+    width: 280px;
+  }
+}
