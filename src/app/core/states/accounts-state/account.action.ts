@@ -35,29 +35,37 @@ export class AccountAction {
 }
 
 export class GetAccountsCountAction{
-  static readonly type = '[Get accounts count] get accounts count';
+  static readonly type = '[Account state] get accounts count';
 
   constructor() {}
 }
 
 export class SearchAccountsAction{
-  static readonly type : string = '[Search account] search account';
+  static readonly type : string = '[Account state] search account';
 
   constructor(public payload: string) {
 
   }
 }
 export class EditAccountEmailAction{
-  static readonly type : string = '[Edit account email] edit account email';
+  static readonly type : string = '[Account state] edit account email';
 
   constructor(public payload: ChangeEmailRequestDto) {
 
   }
 }
 export class EditAccountPasswordAction{
-  static readonly type : string = '[Edit account password] edit account password';
+  static readonly type : string = '[Account state] edit account password';
 
   constructor(public payload: ChangePasswordRequestModel) {
 
   }
+}
+
+export class EditAccountPhotoAction {
+  static readonly type: string = '[Account state] edit account photo';
+
+  constructor(public image: any) {
+  }
+
 }

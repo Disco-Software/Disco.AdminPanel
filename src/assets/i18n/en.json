@@ -153,6 +153,11 @@
     "deleteButton" : "Delete User",
     "pushNotificationButton" : "Send Push Notification",
     "emailNotification" : "Send to Email"
+  },
+
+  "image-cropper" : {
+    "update": "Update Image",
+    "save": "Save Image"
   }
 
 }

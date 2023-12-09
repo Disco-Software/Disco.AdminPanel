@@ -5,20 +5,28 @@
   <ng-template #body>
     <div class=" d-flex flex-column w-100 justify-content-center align-items-center" >
       <image-cropper
+
+        [roundCropper] = "true"
         [imageChangedEvent]="imageChangedEvent"
         [maintainAspectRatio]="true"
-        [aspectRatio]="1"
-        format="png"
+
         (imageCropped)="imageCropped($event)"
-        (imageLoaded)="imageLoaded()"
+        (imageLoaded)="imageLoaded($event)"
         (cropperReady)="cropperReady()"
         (loadImageFailed)="loadImageFailed()"
       ></image-cropper>
+
+<!--      <img [src]="croppedImage" />-->
     </div>
   </ng-template>
 
   <ng-template #buttons>
-
+    <div class="d-flex align-items-center justify-content-end">
+      <button
+        (click)="saveImage()"
+        class="w-100 mb-3 mb-sm-0 w-sm-auto button button_violet"
+      >{{(isAccountPhoto ? 'image-cropper.update' : 'image-cropper.save') | translate}}</button>
+    </div>
   </ng-template>
 </app-modal-window-wrapper>
 

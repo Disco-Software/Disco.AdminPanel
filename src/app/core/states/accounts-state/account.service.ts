@@ -5,10 +5,9 @@ import {RequestDataModel} from '../../models/request.interface';
 import {Observable} from 'rxjs';
 import {CreateAccountInterface} from "@core";
 import {CreateUserResponseModel} from "../../models/account/create-account-response.model";
-import { Account } from '../../models/account/account.model';
-import { ChangeEmailRequestDto } from '../../models/account/change-email-request.model';
-import { ChangeEmailResponseModel } from '../../models/account/change-email-response.model';
-import { ChangePasswordRequestModel } from '../../models/account/change-password-request.mdoel';
+import {Account} from '../../models/account/account.model';
+import {ChangeEmailRequestDto} from '../../models/account/change-email-request.model';
+import {ChangePasswordRequestModel} from '../../models/account/change-password-request.mdoel';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +45,13 @@ export class AccountService {
 
   public changeEmail(request: ChangeEmailRequestDto, description : string) : Observable<{account: Account}>{
     return this._restService.request("PUT", "admin/users/change/email", description, request);
+  }
+
+  public changePhoto(image: any, description: string): Observable<{ account: Account }> {
+    let fd = new FormData();
+    fd.append('photo', image);
+    console.log(image)
+    return this._restService.request("PUT", "admin/users/change/photo", description, fd);
   }
 
   public changePassword(request: ChangePasswordRequestModel, description: string) : Observable<{account : Account}> {

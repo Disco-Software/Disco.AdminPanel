@@ -155,6 +155,11 @@
     "deleteButton" : "Видалити користувача",
     "pushNotificationButton" : "Надіслати push-повідомлення",
     "emailNotification" : "Надіслати на ел.пошту"
+  },
+
+  "image-cropper" : {
+    "update": "Оновити зображення",
+    "save": "Зберегти зображення"
   }
 
 }

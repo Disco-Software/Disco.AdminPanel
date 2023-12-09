@@ -157,7 +157,10 @@
     "deleteButton" : "Borrar usuario",
     "pushNotificationButton" : "Enviar notificación push",
     "emailNotification" : "Enviar al correo electrónico"
+  },
+
+  "image-cropper" : {
+    "update": "Actualizar imagen",
+    "save": "Guardar imagen"
   }
-
-
 }

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
-import {Observable, Subject, takeUntil} from 'rxjs';
+import {Observable, Subject, take, takeUntil} from 'rxjs';
 import {Account} from '../../../../../../../../core/models/account/account.model';
 import {ReportModel} from '../../../../../../../../core/models/report/report.model';
 import {RoleModel} from '../../../../../../../../core/models/role/role.model';
@@ -61,14 +61,6 @@ export class UserModalWindowComponent implements OnInit {
   }
 
   onFileChange(event: any) {
-    // const reader = new FileReader();
-    //
-    // reader.onload = (e: any) => {
-    //   this.imageChangedEvent = e.target.result;
-    // };
-    //
-    // reader.readAsDataURL(event.target.files[0]);
-    // this.isImageCropperVisible = !this.isImageCropperVisible
     const ref = this._modalService.open(ImageCropperModalWindowComponent, {
       modalDialogClass: 'd-flex justify-content-center align-items-center',
       backdrop: 'static',
@@ -76,7 +68,15 @@ export class UserModalWindowComponent implements OnInit {
       centered: true,
     });
 
-    console.log(event)
+    ref.componentInstance.imageChangedEvent = event;
+    ref.componentInstance.isAccountPhoto = !!this.account.photo;
+    ref.componentInstance.updatedPhoto.pipe(take(1)).subscribe(res=>{
+      this.account = {
+        ...this.account,
+        photo: res
+      }
+    })
+
   }
 
 

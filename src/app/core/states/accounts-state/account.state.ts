@@ -7,7 +7,7 @@ import {
   AccountAction,
   CreateAccountAction,
   EditAccountEmailAction,
-  EditAccountPasswordAction,
+  EditAccountPasswordAction, EditAccountPhotoAction,
   GetAccountsCountAction,
   GetAllAccountsAction, SearchAccountsAction,
   SearchAccountsByEmailAction
@@ -159,23 +159,25 @@ export class AccountsState {
       }))
   }
 
+  @Action(EditAccountPhotoAction)
+  public changeAccountPhoto(
+    { patchState }: StateContext<{ account: Account }>,
+    { image }: EditAccountPhotoAction){
+    return this._accountService.changePhoto(image, EditAccountEmailAction.type)
+      .pipe(catchError(() => {
+          return EMPTY;
+        }),
+        tap((response : {account: Account}) => {
+          patchState({account: response.account});
+        }))
+  }
+
   @Action(EditAccountPasswordAction)
   public changeAccountPassword(
     { patchState }: StateContext<{ account: Account }>,
     { payload }: EditAccountPasswordAction){
     return this._accountService.changePassword(payload, EditAccountPasswordAction.type)
-      .pipe(catchError((error : ErrorsCollection) => {
-        error.errorMessages.forEach((error) => {
-          this._errorService.add({
-            severity : "validation error",
-            summary : "Api Validation Error",
-            detail: '',
-          });
-          console.log(error.message);
-        });
-        return EMPTY;
-      }),
-      tap((response : {account: Account}) => {
+      .pipe(tap((response : {account: Account}) => {
         patchState({account: response.account});
       }))
   }
