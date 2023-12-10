@@ -11,6 +11,10 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ['./layout-primary.component.scss']
 })
 export class LayoutPrimaryComponent implements OnInit {
+  test(e: any) {
+    console.log(e)
+  }
+  isCollapsedBurgerMenu: boolean;
   @Select(AppConfigState.selectedLanguageSelector) language$: Observable<LanguageModel>
 
   @Select(LoaderState.getListSelector) selectorsList$: Observable<string[]>
