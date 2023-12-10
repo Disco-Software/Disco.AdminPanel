@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -13,6 +13,7 @@ import {Navigate} from "@ngxs/router-plugin";
   styleUrls: ['./topbar.component.scss'],
 })
 export class TopbarComponent implements OnInit {
+  @Output() isCollapsedEmitter = new EventEmitter<boolean>()
 
   public routes : Routes[] = [
     { path: 'private/overview', title: 'sidebar.overview', icon: 'overview'},
@@ -45,10 +46,12 @@ export class TopbarComponent implements OnInit {
 
   toggleMenu(): void {
     this.isCollapsed = !this.isCollapsed
+    this.isCollapsedEmitter.emit(this.isCollapsed)
   }
 
   navigateTo(path: string): void {
     this.isCollapsed = !this.isCollapsed
+    this.isCollapsedEmitter.emit(this.isCollapsed)
     this.store.dispatch(new Navigate([path]))
   }
 }
