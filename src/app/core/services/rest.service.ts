@@ -22,16 +22,21 @@ export class RestService {
      return this._store.dispatch(new LoaderAddAction(description)).pipe(take(1),switchMap(() => {
         return this.http[(method).toLowerCase()](`${this.serverUrl}/${url}`, request).pipe(take(1), mergeMap((response) => {
           this._store.dispatch(new LoaderRemoveAction(description)).pipe(take(1));
-
           return of(response);
         }), catchError((error) => {
-          console.error(error);
-          error.error.errorMessages.forEach(error=>{
-            this._messageService.add({severity: "error", summary: 'Api Error', detail: error.message})
-          })
-          // this._messageService.add({severity: "error", summary: 'Api Error', detail: error.statusText})
+          if(error.error) {
+            this.showToasterWithErrorMessages(error.error.errorMessages)
+          } else {
+            this.showToasterWithErrorMessages(error.errorMessages)
+          }
           return throwError(() => error);
         }), finalize(() => this._store.dispatch(new LoaderRemoveAction(description))))
      }));
+   }
+
+   showToasterWithErrorMessages(errorMessages) {
+     errorMessages.forEach(error=>{
+       this._messageService.add({severity: "error", summary: 'Api Error', detail: error.message})
+     })
    }
 }
