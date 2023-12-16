@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { ResetPasswordComponent } from '../reset-password/reset-password.component'
-import { TranslateService } from '@ngx-translate/core';
-import { LanguageModel, LocalStorageService } from '@core';
+import {ResetPasswordComponent} from '../reset-password/reset-password.component'
 
 @Component({
   selector: 'app-forgot-password',
@@ -13,12 +11,7 @@ import { LanguageModel, LocalStorageService } from '@core';
 export class ForgotPasswordComponent {
 
   constructor(
-    private _modalService: NgbModal,
-    private _storageService: LocalStorageService,
-    private _translate: TranslateService) {
-      const language : LanguageModel = this._storageService.getItem('language');
-
-      _translate.use(language.shortCode);
+    private _modalService: NgbModal) {
     }
 
   public onSubmit(){

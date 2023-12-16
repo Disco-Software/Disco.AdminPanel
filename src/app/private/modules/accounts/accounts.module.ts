@@ -18,6 +18,7 @@ import {
 import {SharedModule} from "@shared";
 import { TranslateModule } from '@ngx-translate/core';
 import { ImageCropperModalWindowComponent } from './components/accounts-list/organisms/modal-windows/image-cropper-modal-window/image-cropper-modal-window.component';
+import {CoreModule} from "@core";
 
 const COMPONENTS = [
   AccountsListComponent,
@@ -32,7 +33,7 @@ const COMPONENTS = [
   PushNotificationsModalWindowComponent
 ];
 
-const MODULES = [CommonModule, AccountRoutingModule, SharedModule, TranslateModule.forChild()];
+const MODULES = [CommonModule, AccountRoutingModule, SharedModule, CoreModule];
 
 @NgModule({
   declarations: [...COMPONENTS, ModalWindowWrapperComponent, ImageCropperModalWindowComponent],

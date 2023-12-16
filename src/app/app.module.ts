@@ -1,23 +1,22 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxsModule } from '@ngxs/store';
-import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { SharedModule } from '@shared'
-import { CoreModule } from '@core';
-import { HeaderInterceptor } from "@core/interceptors";
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgxsModule} from '@ngxs/store';
+import {NgxsRouterPluginModule} from '@ngxs/router-plugin';
+import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {SharedModule} from '@shared'
+import {AppConfigState, CoreModule} from '@core';
+import {HeaderInterceptor} from "@core/interceptors";
 
-import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {environment} from '../environments/environment';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
-import {AppConfigState} from "./core/states/app-config-state/app-config.state";
-import {LangChangeEvent, TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
+import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
-export function HttpLoaderFactory(http: HttpClient) {
+export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
@@ -34,7 +33,13 @@ const MODULES = [
   AppRoutingModule,
   NgbModule,
   BrowserAnimationsModule,
-
+  TranslateModule.forRoot({
+    loader: {
+      provide: TranslateLoader,
+      useFactory: httpLoaderFactory,
+      deps: [HttpClient],
+    },
+  }),
 ];
 
 const NGXS_MODULES = [

@@ -31,6 +31,9 @@ export class AppComponent {
   constructor(
     private localStorageService: LocalStorageService,    private _translate: TranslateService, private _store: Store
   ) {
+    const language : LanguageModel = this.localStorageService.getItem('language');
+
+    _translate.use(language.shortCode);
     // _translate.setDefaultLang('en');
     // _translate.use('en');
   }

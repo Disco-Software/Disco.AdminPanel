@@ -28,29 +28,24 @@ export function httpLoaderFactory(http: HttpClient) {
 }
 
 const MODULES = [
-  NgxsModule, HttpClientModule];
+  NgxsModule, HttpClientModule
+];
 
 @NgModule({
   imports: [
     CommonModule,
     ...MODULES,
     ...NGXS_MODULES,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpLoaderFactory,
-        deps: [HttpClient],
-      },
-    }),
+
   ],
   exports: [...MODULES, TranslateModule],
   providers: [...SERVICES],
 })
 export class CoreModule {
   constructor(public translationService: TranslateService) {
-    this.translationService.store.onLangChange
-      .subscribe((lang: LangChangeEvent) => {
-        this.translationService.use(lang.lang);
-      });
+    // this.translationService.store.onLangChange
+    //   .subscribe((lang: LangChangeEvent) => {
+    //     this.translationService.use(lang.lang);
+    //   });
   }
 }

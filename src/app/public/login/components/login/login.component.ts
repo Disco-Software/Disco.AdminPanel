@@ -7,10 +7,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Select, Store} from '@ngxs/store';
 import {LocalStorageService} from '@core/services';
 import {LoaderState, UserLoginAction, UsersState} from '@core/states';
-import {LanguageModel, User, UserResponseModel} from '@core/models';
-
-import {ForgotPasswordComponent} from '../forgot-password/forgot-password.component';
-import {TranslateService} from '@ngx-translate/core';
+import {User, UserResponseModel} from '@core/models';
+import {ForgotPasswordComponent} from "../forgot-password/forgot-password.component";
 
 @Component({
   selector: 'app-login',
@@ -36,15 +34,11 @@ export class LoginComponent implements OnDestroy {
   });
 
   constructor(
-    private translate: TranslateService,
     private _storageService: LocalStorageService,
     private _modalService: NgbModal,
     private _store: Store,
     private _router: Router
   ) {
-    const language : LanguageModel = this._storageService.getItem('language');
-
-    translate.use(language.shortCode);
   }
 
   ngOnInit(): void {
