@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Select} from '@ngxs/store';
 import {LoaderState} from '@core/states';
 import {Observable, Subject, takeUntil} from 'rxjs';
-import {AppConfigState, LanguageModel} from "@core";
+import {AppConfigState, LanguageModel, PageModel} from "@core";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
@@ -11,9 +11,6 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ['./layout-primary.component.scss']
 })
 export class LayoutPrimaryComponent implements OnInit {
-  test(e: any) {
-    console.log(e)
-  }
   isCollapsedBurgerMenu: boolean;
   @Select(AppConfigState.selectedLanguageSelector) language$: Observable<LanguageModel>
 
@@ -25,7 +22,6 @@ export class LayoutPrimaryComponent implements OnInit {
 
   constructor(
     private _translate: TranslateService
-
   ) {
   }
 
@@ -39,6 +35,10 @@ export class LayoutPrimaryComponent implements OnInit {
         this.isLoader = !!res.length
       })
     })
+  }
+
+  onPageModel(pageModel: PageModel) {
+
   }
 
 }

@@ -43,7 +43,7 @@ $spacers: map-merge((0: 0,
 
 $utilities: map-merge($utilities,
     (
-      "widht": map-merge(
+      "width": map-merge(
           map-get($utilities, "width"),
           (
             values: map-merge(
@@ -844,4 +844,21 @@ template {
   background: #29193e;
   box-shadow: 0px 4px 7px rgba(160, 68, 255, 0.25);
   border-radius: 10px;
+}
+
+.rounded-button {
+  background: inherit;
+  border: 1px solid inherit;
+  border-radius: 20px;
+  padding: 10px 30px;
+  color: inherit;
+  font-weight: 500;
+  &_orange {
+    background: #C26929;
+    border: 1px solid #C26929;
+  }
+  &_gray {
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(80, 76, 76, 0.10);
+  }
 }

@@ -158,6 +158,13 @@
   "image-cropper" : {
     "update": "Update Image",
     "save": "Save Image"
+  },
+
+  "feedback": {
+    "buttons" : {
+      "inWork": "In work",
+      "archiv": "Archiv"
+    }
   }
 
 }

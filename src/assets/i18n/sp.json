@@ -162,5 +162,12 @@
   "image-cropper" : {
     "update": "Actualizar imagen",
     "save": "Guardar imagen"
+  },
+
+  "feedback": {
+    "buttons" : {
+      "inWork": "En el trabajo",
+      "archiv": "Archivo"
+    }
   }
 }

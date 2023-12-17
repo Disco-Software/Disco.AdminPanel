@@ -7,6 +7,7 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { PrivateRoutingModule } from './private-routing.module';
 import * as _components from './components';
 import { CoreModule } from '../core/core.module';
+import {PageNameComponent} from "./components";
 
 const COMPONENTS = [
   _components.LayoutPrimaryComponent,
@@ -17,6 +18,7 @@ const COMPONENTS = [
   _components.LanguageDropdownComponent,
   _components.NotificationComponent,
   _components.LangualeFullDropdownComponent,
+  _components.PageNameComponent
 ];
 
 const MODULES = [

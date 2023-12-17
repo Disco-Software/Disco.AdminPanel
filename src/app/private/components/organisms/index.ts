@@ -5,3 +5,4 @@ export * from './topbar/topbar.component';
 export * from './user-info/user-info.component';
 export * from './languale-full-dropdown/languale-full-dropdown.component';
 export * from './notification/notification.component';
+export * from './page-name/page-name.component';

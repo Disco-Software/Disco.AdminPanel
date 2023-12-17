@@ -1,10 +1,7 @@
 <div
   class="header header-container w-100 mt-0 d-none d-md-flex align-items-center justify-content-between"
 >
-  <div class="header-title title d-flex flex-row text-end align-items-center">
-    <mat-icon class="mt-0 me-3" [svgIcon]="pageModel?.pageIcon"></mat-icon>
-    <p class="title-name name size-32">{{ pageModel?.pageName | translate }}</p>
-  </div>
+  <app-page-name></app-page-name>
   <div class="d-flex flex-row align-items-center">
     <app-notification></app-notification>
     <app-language-dropdown></app-language-dropdown>

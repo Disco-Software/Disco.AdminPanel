@@ -34,9 +34,9 @@
 
 .page{
   &-container{
-    @media (min-width: 360px){
       margin-left: 0;
-    }
+      padding-left: 10px;
+      padding-right: 10px;
 
     @media (min-width: 768px){
       margin-left: 25%;

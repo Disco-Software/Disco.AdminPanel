@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {PageModel} from '@core/models';
 import {NavigationEnd, Router} from '@angular/router';
 import {Subject} from "rxjs/internal/Subject";
@@ -10,8 +10,10 @@ import {takeUntil} from "rxjs";
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  // @Output() pageModelEmitter = new EventEmitter<PageModel>();
+
   pageModel: PageModel;
-  
+
 
   onDestroy$: Subject<void> = new Subject();
 
@@ -20,21 +22,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const pageIdentifier = this._router.url.split('private/')[1];
-    this.pageModel = {
-      pageName: `sidebar.${pageIdentifier.toLowerCase()}`,
-      pageIcon: pageIdentifier,
-    };
-
-    this._router.events.pipe(takeUntil(this.onDestroy$)).subscribe((val) => {
-      if (val instanceof NavigationEnd) {
-        const pageIdentifier = val.url.split('private/')[1];
-        this.pageModel = {
-          pageName: `sidebar.${pageIdentifier.toLowerCase()}`,
-          pageIcon: pageIdentifier,
-        };
-      }
-    });
+    // const pageIdentifier = this._router.url.split('private/')[1];
+    // this.pageModel = {
+    //   pageName: `sidebar.${pageIdentifier.toLowerCase()}`,
+    //   pageIcon: pageIdentifier,
+    // };
+    //
+    // this.pageModelEmitter.emit(this.pageModel);
+    //
+    // this._router.events.pipe(takeUntil(this.onDestroy$)).subscribe((val) => {
+    //   if (val instanceof NavigationEnd) {
+    //     const pageIdentifier = val.url.split('private/')[1];
+    //     this.pageModel = {
+    //       pageName: `sidebar.${pageIdentifier.toLowerCase()}`,
+    //       pageIcon: pageIdentifier,
+    //     };
+    //     this.pageModelEmitter.emit(this.pageModel);
+    //   }
+    // });
   }
 
   ngOnDestroy() {

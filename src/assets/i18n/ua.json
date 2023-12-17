@@ -160,6 +160,13 @@
   "image-cropper" : {
     "update": "Оновити зображення",
     "save": "Зберегти зображення"
+  },
+
+  "feedback": {
+    "buttons" : {
+      "inWork": "В роботі",
+      "archiv": "Архів"
+    }
   }
 
 }
