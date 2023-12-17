@@ -1,6 +1,6 @@
 <div *ngIf="isLoader" class="loading-bar">
 </div>
-<div class="min-vh-100" [class.position-fixed]="isCollapsedBurgerMenu">
+<div class="min-vh-100 w-100" [class.position-fixed]="isCollapsedBurgerMenu">
   <app-topbar (isCollapsedEmitter)="isCollapsedBurgerMenu = !isCollapsedBurgerMenu"></app-topbar>
   <div class="sidebar">
     <app-sidebar></app-sidebar>

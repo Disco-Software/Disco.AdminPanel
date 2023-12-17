@@ -16,7 +16,7 @@
             [class.active]="
               route.path === _router.url || _router.url.includes(route.path)
             "
-            class="sidenav-item item"
+            class="sidenav-item item d-flex align-items-center ps-4 py-3 ps-lg-5"
           >
             <mat-icon [svgIcon]="route.icon" color="#E6E0D2"></mat-icon>
             <span class="m-3 size-25">{{ route.title | translate }}</span>
