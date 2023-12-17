@@ -35,4 +35,4 @@ const PROVIDERS = [MessageService];
   exports: [...MODULES],
   providers: [...PROVIDERS],
 })
-export class PrimeNgModule {}
+export class PrimengModule {}

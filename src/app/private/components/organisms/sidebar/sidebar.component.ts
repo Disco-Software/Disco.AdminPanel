@@ -21,7 +21,7 @@ export class SidebarComponent implements OnInit {
     { path: 'overview', title: 'sidebar.overview', icon: 'overview'},
     { path: 'accounts', title: 'sidebar.accounts', icon: 'accounts'},
     { path: 'posts', title: 'sidebar.posts', icon: 'posts'},
-    { path: 'help', title: 'sidebar.help', icon: 'help'},
+    { path: 'feedback', title: 'sidebar.feedback', icon: 'feedback'},
   ]
 
   isShowing : boolean = false;
@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit {
       this._matIconRegistry.addSvgIcon('overview', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_dashboard.svg'))
       this._matIconRegistry.addSvgIcon('accounts', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_accounts.svg'))
       this._matIconRegistry.addSvgIcon('posts', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_posts.svg'))
-      this._matIconRegistry.addSvgIcon('help', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_help.svg'))
+      this._matIconRegistry.addSvgIcon('feedback', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_help.svg'))
     }
 
   ngOnInit(): void {

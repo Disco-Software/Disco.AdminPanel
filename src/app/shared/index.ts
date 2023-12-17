@@ -1,2 +1,3 @@
-export {SharedModule} from './shared.module'
-export * from './prime-ng'
+export {SharedModule} from './shared.module';
+export * from './primeng';
+export * from './components';

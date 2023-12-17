@@ -1,0 +1,16 @@
+.search{
+  &-wrapper{
+    border: solid 2px white;
+    border-radius: 365px;
+  }
+
+  &-input{
+    width: 90%;
+    outline: none;
+    border: none;
+    color: white;
+    @media (max-width: 316px) {
+      width: 68% !important;
+    }
+  }
+}

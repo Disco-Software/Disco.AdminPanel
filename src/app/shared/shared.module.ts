@@ -1,20 +1,26 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {PrimeNgModule} from './prime-ng';
+import {PrimengModule} from './primeng';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ImageCropperModule} from "ngx-image-cropper";
-import {TranslateModule} from "@ngx-translate/core";
+import {SearchInputComponent} from "./components";
+import {CoreModule} from "@core";
+
+const COMPONENTS = [
+  SearchInputComponent
+]
 
 const MODULES = [
-  PrimeNgModule,
+  PrimengModule,
   FormsModule,
   ReactiveFormsModule,
-  ImageCropperModule
+  ImageCropperModule,
+  CoreModule
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [...COMPONENTS],
   imports: [...MODULES, CommonModule],
-  exports: [...MODULES],
+  exports: [...MODULES, ...COMPONENTS],
 })
 export class SharedModule {}

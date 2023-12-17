@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HelpListComponent } from './help-list.component';
+import { FeedbackListComponent } from './feedback-list.component';
 
 describe('HelpListComponent', () => {
-  let component: HelpListComponent;
-  let fixture: ComponentFixture<HelpListComponent>;
+  let component: FeedbackListComponent;
+  let fixture: ComponentFixture<FeedbackListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HelpListComponent ]
+      declarations: [ FeedbackListComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HelpListComponent);
+    fixture = TestBed.createComponent(FeedbackListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

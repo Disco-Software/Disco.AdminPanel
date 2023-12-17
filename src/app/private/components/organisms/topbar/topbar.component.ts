@@ -19,7 +19,7 @@ export class TopbarComponent implements OnInit {
     { path: 'private/overview', title: 'sidebar.overview', icon: 'overview'},
     { path: 'private/accounts', title: 'sidebar.accounts', icon: 'accounts'},
     { path: 'private/posts', title: 'sidebar.posts', icon: 'posts'},
-    { path: 'private/help', title: 'sidebar.help', icon: 'help'},
+    { path: 'private/feedback', title: 'sidebar.feedback', icon: 'feedback'},
 
   ]
 
@@ -36,7 +36,7 @@ export class TopbarComponent implements OnInit {
       this._matIconRegistry.addSvgIcon('overview', this._domSanitizer.bypassSecurityTrustUrl('../../../../../assets/images/ic_dashboard.svg'))
       this._matIconRegistry.addSvgIcon('accounts', this._domSanitizer.bypassSecurityTrustUrl('../../../../../assets/images/ic_accounts.svg'))
       this._matIconRegistry.addSvgIcon('posts', this._domSanitizer.bypassSecurityTrustUrl('../../../../../assets/images/ic_posts.svg'))
-      this._matIconRegistry.addSvgIcon('help', this._domSanitizer.bypassSecurityTrustUrl('../../../../../assets/images/ic_help.svg'))
+      this._matIconRegistry.addSvgIcon('feedback', this._domSanitizer.bypassSecurityTrustUrl('../../../../../assets/images/ic_help.svg'))
 
      }
 

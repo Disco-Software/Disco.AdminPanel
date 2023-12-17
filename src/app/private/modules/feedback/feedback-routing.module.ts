@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HelpListComponent } from './components/help-list/help-list.component';
+import { FeedbackListComponent } from './components/feedback-list/feedback-list.component';
 
 const routes: Routes = [
-  {path: '', component: HelpListComponent}
+  {path: '', component: FeedbackListComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HelpRoutingModule { }
+export class FeedbackRoutingModule { }

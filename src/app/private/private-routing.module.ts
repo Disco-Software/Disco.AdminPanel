@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutPrimaryComponent } from './components';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'overview' },
+  { path: '', pathMatch: 'full', redirectTo: 'overview'},
   {
     path: '',
     component: LayoutPrimaryComponent,
@@ -23,17 +23,17 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'help',
-        loadChildren: () =>
-          import('../private/modules/help/help.module').then(
-            (m) => m.HelpModule
-          ),
-      },
-      {
         path: 'posts',
         loadChildren: () =>
           import('./modules/posts/posts.module').then(
             (m) => m.PostsModule
+          ),
+      },
+      {
+        path: 'feedback',
+        loadChildren: () =>
+          import('./modules/feedback/feedback.module').then(
+            (m) => m.FeedbackModule
           ),
       },
     ],
