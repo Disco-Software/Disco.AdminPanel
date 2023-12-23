@@ -1,0 +1,34 @@
+:host::ng-deep p-table {
+  border-right: 0px !important;
+  border-left: 0px !important;
+  .p-datatable-thead tr > th, .p-datatable-tbody > tr > td {
+    background: linear-gradient(90deg, #291A3D 0%, #291A3D 100%);
+  }
+  .p-datatable-tbody > tr > td {
+    border: 1px solid #594B63;
+    border-right: 0px !important;
+    border-left: 0px !important;
+  }
+  .p-datatable .p-datatable-thead > tr > th {
+    color: rgba(255, 255, 255, 0.35);
+    border-bottom: 1px;
+  }
+  .p-datatable-wrapper {
+    border-radius: 6px;
+  }
+  .p-paginator-bottom {
+    background: linear-gradient(90deg, #291A3D 0%, #291A3D 100%);
+    border: none;
+  }
+}
+
+// Paginator for mobile
+:host::ng-deep .p-paginator{
+  background: inherit;
+}
+
+.feedback {
+  &__card {
+    background: linear-gradient(90deg, #291A3D 0%, #291A3D 100%);
+  }
+}

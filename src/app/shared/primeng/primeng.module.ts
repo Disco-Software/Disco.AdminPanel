@@ -12,6 +12,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import { MenuModule } from 'primeng/menu';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
+import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
 
 
 const MODULES = [
@@ -25,7 +27,9 @@ const MODULES = [
   MessageModule,
   KeyFilterModule,
   DropdownModule,
-  DialogModule
+  DialogModule,
+  TableModule,
+  TagModule
 ];
 
 const PROVIDERS = [MessageService];

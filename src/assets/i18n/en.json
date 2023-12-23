@@ -164,6 +164,24 @@
     "buttons" : {
       "inWork": "In work",
       "archiv": "Archiv"
+    },
+    "table" : {
+      "header" : {
+        "name": "Name",
+        "priority": "Priority",
+        "status": "Status",
+        "date": "Date"
+      },
+      "body": {
+        "priority": {
+          "low": "Low",
+          "medium": "Medium",
+          "high": "High"
+        },
+        "status": {
+          "closed": "Closed"
+        }
+      }
     }
   }
 

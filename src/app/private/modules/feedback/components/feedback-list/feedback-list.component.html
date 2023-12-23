@@ -9,4 +9,63 @@
   </div>
   <app-search-input class="w-100 w-md-40 w-lg-30 w-xl-25 pt-3 pt-md-0"></app-search-input>
 </div>
-
+<div class="mt-4">
+  <p-table
+    class="d-none d-md-block"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    styleClass="p-datatable-lg"
+    [paginator]="true"
+    [rows]="5"
+    [value]="products"
+    [showCurrentPageReport]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>{{'feedback.table.header.name' | translate}}</th>
+        <th>{{'feedback.table.header.priority' | translate}}</th>
+        <th>{{'feedback.table.header.status' | translate}}</th>
+        <th class="d-flex align-items-center">{{'feedback.table.header.date' | translate}} <i
+          class="pi pi-sort ps-1 cursor-pointer" style="color: rgba(255, 255, 255, 0.35)"></i></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body">
+      <tr>
+        <td class="d-flex align-items-center">
+          <img src="./assets/images/ic_user-default.png" style="width: 40px"/>
+          <span class="ms-2 vertical-align-middle">Stanislav Korchevskyi</span>
+        </td>
+        <td>
+          <img src="./assets/images/ic_medium.svg" style="width: 30px"/>
+          <span class="ms-2 vertical-align-middle"
+                style="color: #D5AD1D">{{'feedback.table.body.priority.medium' | translate}}</span>
+        </td>
+        <td>
+          <p-tag severity="success" [value]="'feedback.table.body.status.closed' | translate"></p-tag>
+        </td>
+        <td>2023-03-18, 11:00</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div class="d-block d-md-none">
+    <div *ngFor="let item of [1,2,3]; let last = last" class="feedback__card rounded p-3 d-flex flex-column mb-3" [class.mb-4]="!last">
+      <div class="d-flex">
+        <img src="./assets/images/ic_user-default.png" style="height: 60px"/>
+        <div class="d-flex flex-column ms-2">
+          <span class="fs-4">Stanislav Korchevskyi</span>
+          <span style="color: rgba(255, 255, 255, 0.35);">2023-03-18, 11:00</span>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between mt-3">
+        <div class="d-flex align-items-center">
+          <img src="./assets/images/ic_medium.svg" style="width: 30px"/>
+          <span class="ms-2 vertical-align-middle fs-5"
+                style="color: #D5AD1D">{{'feedback.table.body.priority.medium' | translate}}</span>
+        </div>
+        <p-tag
+          severity="success"
+          [value]="'feedback.table.body.status.closed' | translate"
+          [style]="{ 'font-size': '16px'}"></p-tag>
+      </div>
+    </div>
+    <p-paginator [rows]="5" [totalRecords]="10"></p-paginator>
+  </div>
+</div>

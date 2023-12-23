@@ -166,6 +166,24 @@
     "buttons" : {
       "inWork": "В роботі",
       "archiv": "Архів"
+    },
+    "table" : {
+      "header" : {
+        "name": "Імʼя",
+        "priority": "Пріоритет",
+        "status": "Статус",
+        "date": "Дата"
+      },
+      "body": {
+        "priority": {
+          "low": "Низький",
+          "medium": "Середній",
+          "high": "Високий"
+        },
+        "status": {
+          "closed": "Закрито"
+        }
+      }
     }
   }
 

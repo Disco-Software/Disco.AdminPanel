@@ -168,6 +168,24 @@
     "buttons" : {
       "inWork": "En el trabajo",
       "archiv": "Archivo"
+    },
+    "table" : {
+      "header" : {
+        "name": "Nombre",
+        "priority": "Prioridad",
+        "status": "Estado",
+        "date": "Fecha"
+      },
+      "body": {
+        "priority": {
+          "low": "Bajo",
+          "medium": "Medio",
+          "high": "Alto"
+        },
+        "status": {
+          "closed": "Cerrado"
+        }
+      }
     }
   }
 }
