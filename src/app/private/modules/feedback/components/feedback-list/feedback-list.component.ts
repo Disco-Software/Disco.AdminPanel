@@ -1,4 +1,7 @@
 import {Component} from '@angular/core';
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {DeleteUserModalWindowComponent} from "../../../accounts/components";
+import {FeedbackChatComponent} from "./components";
 
 @Component({
   selector: 'app-feedback-list',
@@ -45,11 +48,22 @@ export class FeedbackListComponent {
     },
   ];
 
-  // constructor(private productService: ProductService) {}
+  isChatShown: boolean;
+
+  constructor(private _modalService : NgbModal) {
+  }
+  open() {
+    const ref =  this._modalService.open(FeedbackChatComponent, {
+    modalDialogClass: 'h-100 w-100 m-0 position-absolute right-0',
+    backdrop : 'static',
+    keyboard: false,
+      size: 'lg',
+      animation: true
+  });
+
+  }
 
   ngOnInit() {
-    // this.productService.getProductsMini().then((data) => {
-    //   this.products = data;
-    // });
+
   }
 }

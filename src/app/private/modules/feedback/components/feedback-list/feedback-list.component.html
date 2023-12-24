@@ -1,4 +1,4 @@
-<div class="d-flex flex-column flex-md-row justify-content-between align-items center">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items center" [class.half-opacity-background]="isChatShown">
   <div class="d-flex align-items-center">
     <button class="rounded-button rounded-button_orange me-2 me-sm-4 w-50 w-md-auto px-0 px-md-4">
       {{'feedback.buttons.inWork' | translate}} (3)
@@ -29,7 +29,7 @@
     </ng-template>
     <ng-template pTemplate="body">
       <tr>
-        <td class="d-flex align-items-center">
+        <td class="d-flex align-items-center cursor-pointer underlined_hover" (click)="open()">
           <img src="./assets/images/ic_user-default.png" style="width: 40px"/>
           <span class="ms-2 vertical-align-middle">Stanislav Korchevskyi</span>
         </td>
@@ -69,3 +69,4 @@
     <p-paginator [rows]="5" [totalRecords]="10"></p-paginator>
   </div>
 </div>
+<app-feedback-chat *ngIf="isChatShown" class="feedback__chat"></app-feedback-chat>

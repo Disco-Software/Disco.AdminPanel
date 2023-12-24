@@ -182,6 +182,11 @@
           "closed": "Closed"
         }
       }
+    },
+    "chat": {
+      "input": {
+        "placeholder": "Enter your message..."
+      }
     }
   }
 

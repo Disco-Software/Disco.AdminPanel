@@ -7,7 +7,8 @@ import {CoreModule} from "@core";
 import {SharedModule} from "@shared";
 
 const COMPONENTS = [
-  _components.FeedbackListComponent
+  _components.FeedbackListComponent,
+  _components.FeedbackChatComponent,
 ];
 
 const MODULES = [
