@@ -48,6 +48,9 @@ export class FeedbackListComponent {
     },
   ];
 
+  status = 'closed'
+  priority = 'medium'
+
   isChatShown: boolean;
 
   constructor(private _modalService : NgbModal) {

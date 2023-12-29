@@ -8,8 +8,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class FeedbackChatComponent implements OnInit {
 
-  statuses = ['closed', 'open']
-
+  status = 'closed'
   constructor(private _activeModal : NgbActiveModal) { }
 
   ngOnInit(): void {

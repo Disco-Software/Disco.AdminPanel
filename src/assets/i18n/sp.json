@@ -180,9 +180,12 @@
         "priority": {
           "low": "Bajo",
           "medium": "Medio",
-          "high": "Alto"
+          "high": "Alto",
+          "critical": "Crítico"
         },
         "status": {
+          "open": "Abiertamente",
+          "inProgress": "En proceso",
           "closed": "Cerrado"
         }
       }

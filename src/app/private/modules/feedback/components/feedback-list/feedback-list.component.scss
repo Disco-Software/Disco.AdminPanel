@@ -52,3 +52,40 @@
 .half-opacity-background {
   background: green;
 }
+
+.priority {
+  &_low {
+    img {
+      width: 15px;
+    }
+    span {
+      color: rgba(52, 153, 116, 1);
+    }
+  }
+  &_medium {
+    img {
+      width: 20px;
+    }
+    span {
+      color: rgba(213, 173, 29, 1);
+    }
+  }
+  &_high {
+    img {
+      width: 15px;
+    }
+    span {
+      color: rgba(192, 105, 50, 1);
+    }
+  }
+  &_critical {
+    img {
+      width: 15px;
+    }
+    span {
+      color: rgba(224, 85, 61, 1);
+    }
+  }
+}
+
+

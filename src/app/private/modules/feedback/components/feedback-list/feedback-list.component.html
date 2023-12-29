@@ -33,13 +33,21 @@
           <img src="./assets/images/ic_user-default.png" style="width: 40px"/>
           <span class="ms-2 vertical-align-middle">Stanislav Korchevskyi</span>
         </td>
-        <td>
-          <img src="./assets/images/ic_medium.svg" style="width: 30px"/>
-          <span class="ms-2 vertical-align-middle"
-                style="color: #D5AD1D">{{'feedback.table.body.priority.medium' | translate}}</span>
+        <td [class]="'priority_' + priority">
+          <div class="d-flex align-items-center">
+            <img [src]="'./assets/images/priorities/ic_' + priority + '.svg'"/>
+            <span class="ms-2 vertical-align-middle">{{'feedback.table.body.priority.' + priority | translate}}</span>
+          </div>
         </td>
         <td>
-          <p-tag severity="success" [value]="'feedback.table.body.status.closed' | translate"></p-tag>
+          <p-tag
+            [style]="{ 'background':
+            status === 'open' ? 'rgba(255, 255, 255, 0.10)' :
+            status === 'inProgress' ? '#3983CB' :
+            status === 'closed' ? '#349974' : ''
+            }"
+            [value]="'feedback.table.body.status.' + status | translate"
+          ></p-tag>
         </td>
         <td>2023-03-18, 11:00</td>
       </tr>
@@ -56,7 +64,7 @@
       </div>
       <div class="d-flex align-items-center justify-content-between mt-3">
         <div class="d-flex align-items-center">
-          <img src="./assets/images/ic_medium.svg" style="width: 30px"/>
+          <img src="./assets/images/priorities/ic_medium.svg" style="width: 30px"/>
           <span class="ms-2 vertical-align-middle fs-5"
                 style="color: #D5AD1D">{{'feedback.table.body.priority.medium' | translate}}</span>
         </div>

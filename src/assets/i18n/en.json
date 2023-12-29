@@ -176,9 +176,12 @@
         "priority": {
           "low": "Low",
           "medium": "Medium",
-          "high": "High"
+          "high": "High",
+          "critical": "Critical"
         },
         "status": {
+          "open": "Open",
+          "inProgress": "In progress",
           "closed": "Closed"
         }
       }
