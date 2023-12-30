@@ -55,7 +55,7 @@
   </p-table>
   <div class="d-block d-md-none">
     <div *ngFor="let item of [1,2,3]; let last = last" class="feedback__card rounded p-3 d-flex flex-column mb-3" [class.mb-4]="!last">
-      <div class="d-flex">
+      <div class="d-flex cursor-pointer"  (click)="open()">
         <img src="./assets/images/ic_user-default.png" style="height: 60px"/>
         <div class="d-flex flex-column ms-2">
           <span class="fs-4">Stanislav Korchevskyi</span>
@@ -77,4 +77,3 @@
     <p-paginator [rows]="5" [totalRecords]="10"></p-paginator>
   </div>
 </div>
-<app-feedback-chat *ngIf="isChatShown" class="feedback__chat"></app-feedback-chat>

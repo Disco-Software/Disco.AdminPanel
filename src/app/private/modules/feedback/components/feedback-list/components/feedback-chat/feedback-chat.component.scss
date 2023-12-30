@@ -7,6 +7,19 @@
 }
 
 .chat {
+  &-container {
+    height: 91%;
+    @media (max-width: 993px) {
+      height: 89%;
+    }
+  }
+  height: 93%;
+  @media (max-width: 993px) {
+    height: 89%;
+  }
+  @media (max-width: 404px) {
+    height: 80%;
+  }
   &__date {
     border-radius: 100px;
     background: rgba(250, 250, 250, 0.15);
