@@ -48,8 +48,8 @@ export class FeedbackListComponent {
     },
   ];
 
-  status = 'closed'
-  priority = 'medium'
+  status = 'open'
+  priority = 'critical'
 
   isChatShown: boolean;
 
