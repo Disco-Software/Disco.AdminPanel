@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -6,20 +6,19 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
   templateUrl: './feedback-chat.component.html',
   styleUrls: ['./feedback-chat.component.scss']
 })
-export class FeedbackChatComponent implements OnInit, AfterViewInit {
+export class FeedbackChatComponent implements AfterViewInit {
   @ViewChild('chatBlock', { static: false }) chatBlock: ElementRef;
-  status = 'closed'
   statuses = [
-    'open',
-    'closed',
-    'inProgress'
-  ]
-  constructor(private _activeModal : NgbActiveModal, private renderer: Renderer2) { }
+    'feedback.table.body.status.open',
+    'feedback.table.body.status.inProgress',
+    'feedback.table.body.status.closed',
+  ];
+  status: string = this.statuses[2]
 
-  ngOnInit(): void {
+  constructor(private _activeModal: NgbActiveModal) {
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.scrollToBottom();
   }
 
@@ -28,7 +27,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
     chatBlockElement.scrollTop = chatBlockElement.scrollHeight;
   }
 
-  public onClose() : void{
+  public onClose(): void {
     this._activeModal.close();
   }
 

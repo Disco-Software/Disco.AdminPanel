@@ -71,6 +71,9 @@
   box-shadow: none
 }
 :host::ng-deep.p-dropdown-label {
-  padding: 5px;
+  padding: 5px 5px 5px 10px;
+  color: white;
+}
+:host::ng-deep.p-dropdown-item {
   color: white;
 }

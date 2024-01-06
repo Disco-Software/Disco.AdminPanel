@@ -13,11 +13,18 @@
           'border': 'none',
           'font-size': '16px',
           'background':
-            status === 'open' ? 'rgba(255, 255, 255, 0.10)' :
-            status === 'inProgress' ? '#3983CB' :
-            status === 'closed' ? '#349974' : ''
+            status.includes('open') ? 'rgba(255, 255, 255, 0.10)' :
+            status.includes('inProgress') ? '#3983CB' :
+            status.includes('closed') ? '#349974' : ''
             }"
-        ></p-dropdown>
+        >
+          <ng-template pTemplate="selectedItem">
+            {{ status | translate }}
+          </ng-template>
+          <ng-template let-status pTemplate="item">
+            <span style="color: white">{{ status | translate }}</span>
+          </ng-template>
+        </p-dropdown>
         <p-tag class="ms-3 cursor-pointer" [style]="{ 'background': 'white'}">
             <img src="./assets/images/jira.jpg"  class="me-1"/>
             <span style="color: #3983CB;" class="me-2" >Jira</span>
