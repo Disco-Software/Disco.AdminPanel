@@ -21,7 +21,7 @@ export class SidebarComponent implements OnInit {
     { path: 'overview', title: 'sidebar.overview', icon: 'overview'},
     { path: 'accounts', title: 'sidebar.accounts', icon: 'accounts'},
     { path: 'posts', title: 'sidebar.posts', icon: 'posts'},
-    { path: 'feedback', title: 'sidebar.feedback', icon: 'feedback'},
+    { path: 'feedback', title: 'sidebar.feedback', icon: 'feedback', isBadge: true},
   ]
 
   isShowing : boolean = false;

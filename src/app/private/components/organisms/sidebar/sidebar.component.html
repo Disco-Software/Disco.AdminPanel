@@ -16,10 +16,13 @@
             [class.active]="
               route.path === _router.url || _router.url.includes(route.path)
             "
-            class="sidenav-item item d-flex align-items-center ps-4 py-3 ps-lg-5"
+            class="sidenav-item item d-flex align-items-center justify-content-between px-4 py-3 px-lg-5"
           >
-            <mat-icon [svgIcon]="route.icon" color="#E6E0D2"></mat-icon>
-            <span class="m-3 size-25">{{ route.title | translate }}</span>
+            <div class="d-flex align-items-center">
+              <mat-icon [svgIcon]="route.icon" color="#E6E0D2"></mat-icon>
+              <span class="m-3 size-25">{{ route.title | translate }}</span>
+            </div>
+            <p-badge *ngIf="route.isBadge" severity="danger" [value]="'2'"></p-badge>
           </li>
         </ul>
       </div>

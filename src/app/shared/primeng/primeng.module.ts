@@ -14,6 +14,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
 
 
 const MODULES = [
@@ -29,7 +30,8 @@ const MODULES = [
   DropdownModule,
   DialogModule,
   TableModule,
-  TagModule
+  TagModule,
+  BadgeModule
 ];
 
 const PROVIDERS = [MessageService];

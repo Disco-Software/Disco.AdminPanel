@@ -4,5 +4,6 @@ export interface  Routes
 {
   title: string,
   path: string,
-  icon: string
+  icon: string,
+  isBadge?: boolean
 }
