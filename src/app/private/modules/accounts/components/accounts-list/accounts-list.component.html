@@ -5,10 +5,10 @@
     <div class="pb-3" *ngFor="let account of accounts; let last = last">
       <app-account-item
         [id]="account.id"
-        [role]="account.user.roleName"
+        [role]="account.user?.roleName"
         [photo]="account.photo"
-        [email]="account.user.email"
-        [name]="account.user.userName"
+        [email]="account.user?.email"
+        [name]="account.user?.userName"
       ></app-account-item>
       <hr *ngIf="!last" />
     </div>

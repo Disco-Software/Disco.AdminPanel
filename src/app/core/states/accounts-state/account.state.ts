@@ -33,9 +33,9 @@ export class AccountsState {
 
   @Selector()
   static getAllAccountsSelector(result: {
-     allAccounts : AccountModel[];
+     allAccounts : {account: AccountModel}[];
   }): AccountModel[] {
-    return result.allAccounts;
+    return result.allAccounts.map((acc: {account: AccountModel})=> acc.account);
   }
 
   @Selector()
