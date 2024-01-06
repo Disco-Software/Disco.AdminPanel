@@ -9,6 +9,11 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 export class FeedbackChatComponent implements OnInit, AfterViewInit {
   @ViewChild('chatBlock', { static: false }) chatBlock: ElementRef;
   status = 'closed'
+  statuses = [
+    'open',
+    'closed',
+    'inProgress'
+  ]
   constructor(private _activeModal : NgbActiveModal, private renderer: Renderer2) { }
 
   ngOnInit(): void {

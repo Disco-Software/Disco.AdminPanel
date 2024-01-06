@@ -6,16 +6,28 @@
         <span class="ms-2 vertical-align-middle">Stanislav Korchevskyi</span>
       </span>
       <div class="d-flex align-items-center">
-        <p-tag
+        <p-dropdown
+          [options]="statuses"
+          [(ngModel)]="status"
           [style]="{
+          'border': 'none',
           'font-size': '16px',
           'background':
             status === 'open' ? 'rgba(255, 255, 255, 0.10)' :
             status === 'inProgress' ? '#3983CB' :
             status === 'closed' ? '#349974' : ''
             }"
-          [value]="'feedback.table.body.status.' + status | translate"
-        ></p-tag>
+        ></p-dropdown>
+<!--        <p-tag-->
+<!--          [style]="{-->
+<!--          'font-size': '16px',-->
+<!--          'background':-->
+<!--            status === 'open' ? 'rgba(255, 255, 255, 0.10)' :-->
+<!--            status === 'inProgress' ? '#3983CB' :-->
+<!--            status === 'closed' ? '#349974' : ''-->
+<!--            }"-->
+<!--          [value]="'feedback.table.body.status.' + status | translate"-->
+<!--        ></p-tag>-->
         <p-tag class="ms-3 cursor-pointer" [style]="{ 'background': 'white'}">
             <img src="./assets/images/jira.jpg"  class="me-1"/>
             <span style="color: #3983CB;" class="me-2" >Jira</span>

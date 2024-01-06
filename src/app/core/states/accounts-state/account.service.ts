@@ -17,41 +17,41 @@ export class AccountService {
   constructor(private _restService : RestService) { }
 
   public getAllAccounts(request : RequestDataModel, description : string) : Observable<AccountModel[]>{
-    return this._restService.request("GET", `admin/users?pageNumber=${request.pageNumber}&pageSize=${request.pageSize}`, description);
+    return this._restService.request("GET", `admin/account?pageNumber=${request.pageNumber}&pageSize=${request.pageSize}`, description);
   }
 
   public searchAccountsEmails(request : string, description : string) : Observable<AccountModel[]>{
-    return this._restService.request("GET", `admin/users?email=*${request}*&pageNumber=1&pageSize=10`, description);
+    return this._restService.request("GET", `admin/account?email=*${request}*&pageNumber=1&pageSize=10`, description);
   }
 
   public createAccount(request: CreateAccountInterface, description: string): Observable<CreateUserResponseModel> {
-    return this._restService.request("POST", `admin/users/create`, description, request);
+    return this._restService.request("POST", `admin/account/create`, description, request);
   }
 
   public deleteAccount(id : number, description : string) : Observable<void> {
-    return this._restService.request("DELETE", `admin/users/${id}`, description);
+    return this._restService.request("DELETE", `admin/account/${id}`, description);
   }
 
   public getAccountsCount(description : string) : Observable<number>{
-    return this._restService.request('GET', 'admin/users/count', description);
+    return this._restService.request('GET', 'admin/account/count', description);
   }
   public searchAccounts(search: string, description : string) : Observable<AccountModel[]> {
-    return this._restService.request("GET",  `admin/users/search?search=${search}`, description);
+    return this._restService.request("GET",  `admin/account/search?search=${search}`, description);
   }
 
   public getAccount(id: number, description : string) : Observable<{account: Account}> {
-     return this._restService.request("GET", `admin/users/${id}`, description);
+     return this._restService.request("GET", `admin/account/${id}`, description);
   }
 
   public changeEmail(request: ChangeEmailRequestDto, description : string) : Observable<{account: Account}>{
-    return this._restService.request("PUT", "admin/users/change/email", description, request);
+    return this._restService.request("PUT", "admin/account/change/email", description, request);
   }
 
   public changePhoto(image: any, description: string): Observable<{ account: Account }> {
     let fd = new FormData();
     fd.append('photo', image);
     console.log(image)
-    return this._restService.request("PUT", "admin/users/change/photo", description, fd);
+    return this._restService.request("PUT", "admin/account/change/photo", description, fd);
   }
 
   public changePassword(request: ChangePasswordRequestModel, description: string) : Observable<{account : Account}> {
