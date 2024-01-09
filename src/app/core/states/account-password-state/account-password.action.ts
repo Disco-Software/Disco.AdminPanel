@@ -6,7 +6,7 @@ import { RecoveryPasswordRequestModel } from '../../models/account-password/reco
 export class ForgotPasswordAction {
    static readonly type = "[Account password state] account password state";
 
-   constructor(public payload: ForgotPasswordRequestModel) {}
+   constructor(public payload: ForgotPasswordRequestModel, public language: string) {}
 }
 
 export class RecoveryPasswordCodeAction {

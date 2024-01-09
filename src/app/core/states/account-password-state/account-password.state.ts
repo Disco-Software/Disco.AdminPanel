@@ -22,8 +22,8 @@ export class AccountPassowrdState {
     @Action(ForgotPasswordAction)
     public ForgotPassword(
       { patchState }: StateContext<{ }>,
-      { payload }: ForgotPasswordAction) : Observable<void>{
-      return this._accountPasswordService.forgotPassword(payload, ForgotPasswordAction.type)
+      { payload, language }: ForgotPasswordAction) : Observable<void>{
+      return this._accountPasswordService.forgotPassword(payload, ForgotPasswordAction.type, language)
         .pipe(catchError(() => {
           return EMPTY;
         }),

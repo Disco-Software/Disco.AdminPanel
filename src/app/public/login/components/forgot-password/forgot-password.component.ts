@@ -51,7 +51,7 @@ export class ForgotPasswordComponent {
       email : this.formGroup.value.email,
     }
 
-    this._store.dispatch(new ForgotPasswordAction(req)).subscribe(() => {
+    this._store.dispatch(new ForgotPasswordAction(req, navigator.language)).subscribe(() => {
       const ref = this._modalService.open(PasswordCodeModalComponent, {
         modalDialogClass: 'd-flex justify-content-center align-items-center h-100'
       });

@@ -1,4 +1,4 @@
-import {HttpClient, HttpRequest} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {catchError, finalize, mergeMap, Observable, of, switchMap, take, throwError} from 'rxjs';
 import {Store} from '@ngxs/store';
@@ -18,9 +18,9 @@ export class RestService {
      this.serverUrl = environment.api;
    }
 
-  public request(method: string, url: string, description: string, request?: any) : Observable<any>{
+  public request(method: string, url: string, description: string, request?: any, requestOptions?: any): Observable<any> {
      return this._store.dispatch(new LoaderAddAction(description)).pipe(take(1),switchMap(() => {
-        return this.http[(method).toLowerCase()](`${this.serverUrl}/${url}`, request).pipe(take(1), mergeMap((response) => {
+       return this.http[(method).toLowerCase()](`${this.serverUrl}/${url}`, request, requestOptions).pipe(take(1), mergeMap((response) => {
           this._store.dispatch(new LoaderRemoveAction(description)).pipe(take(1));
           return of(response);
         }), catchError((error) => {
