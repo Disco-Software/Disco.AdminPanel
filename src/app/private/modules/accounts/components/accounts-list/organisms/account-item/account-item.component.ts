@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {
     DeleteUserModalWindowComponent,
@@ -8,6 +8,7 @@ import {
 } from "../modal-windows";
 import { LanguageModel, LocalStorageService } from "@core";
 import { TranslateService } from "@ngx-translate/core";
+import {take} from "rxjs";
 
 
 @Component({
@@ -16,6 +17,7 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ['./account-item.component.scss']
 })
 export class AccountItemComponent {
+  @Output() updatedItemData = new EventEmitter()
 
   @Input() public id : number;
   @Input() public role : string;
@@ -95,6 +97,9 @@ export class AccountItemComponent {
 
     ref.componentInstance.id = this.id;
     ref.componentInstance.role = this.role;
+    ref.componentInstance.updatedItemData.pipe(take(1)).subscribe(res=>{
+      this.updatedItemData.emit()
+    })
   }
 
 }
