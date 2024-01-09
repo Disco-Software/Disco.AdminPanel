@@ -26,7 +26,6 @@ export class ImageCropperModalWindowComponent {
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    console.log(event)
     this.croppedImageBlob = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl);
     this.croppedImageFile = event.blob
   }
