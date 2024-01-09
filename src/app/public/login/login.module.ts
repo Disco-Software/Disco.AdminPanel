@@ -21,7 +21,7 @@ const MODULES = [
   LoginRoutingModule,
   SharedModule,
   CodeInputModule.forRoot({
-    codeLength: 6,
+    codeLength: 7,
     isCharsCode: false,
   }),
 ];
