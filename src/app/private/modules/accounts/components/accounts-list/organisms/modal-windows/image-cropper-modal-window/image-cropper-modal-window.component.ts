@@ -16,6 +16,7 @@ export class ImageCropperModalWindowComponent {
   @Input() id: number;
   @Output() updatedPhoto = new EventEmitter<any>();
   croppedImageBlob: any = '';
+  croppedImageFile: any
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -25,13 +26,15 @@ export class ImageCropperModalWindowComponent {
   }
 
   imageCropped(event: ImageCroppedEvent) {
+    console.log(event)
     this.croppedImageBlob = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl);
+    this.croppedImageFile = event.blob
   }
 
   saveImage() {
     this.closeModal();
 
-    this.store.dispatch(new EditAccountPhotoAction(this.croppedImageBlob.changingThisBreaksApplicationSecurity, this.id)).subscribe(res => {
+    this.store.dispatch(new EditAccountPhotoAction(this.croppedImageFile, this.id)).subscribe(res => {
       this.updatedPhoto.emit(this.croppedImageBlob);
     })
 
