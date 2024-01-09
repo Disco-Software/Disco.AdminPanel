@@ -47,9 +47,10 @@ export class AccountService {
     return this._restService.request("PUT", "admin/account/change/email", description, request);
   }
 
-  public changePhoto(image: any, description: string): Observable<{ account: Account }> {
+  public changePhoto({image, id}: any, description: string): Observable<{ account: Account }> {
     let fd = new FormData();
     fd.append('photo', image);
+    fd.append('id', id);
     return this._restService.request("PUT", "admin/account/change/photo", description, fd);
   }
 

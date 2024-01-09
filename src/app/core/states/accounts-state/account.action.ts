@@ -65,7 +65,7 @@ export class EditAccountPasswordAction{
 export class EditAccountPhotoAction {
   static readonly type: string = '[Account state] edit account photo';
 
-  constructor(public image: any) {
+  constructor(public image: any, public id: number) {
   }
 
 }

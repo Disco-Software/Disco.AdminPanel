@@ -162,8 +162,8 @@ export class AccountsState {
   @Action(EditAccountPhotoAction)
   public changeAccountPhoto(
     { patchState }: StateContext<{ account: Account }>,
-    { image }: EditAccountPhotoAction){
-    return this._accountService.changePhoto(image, EditAccountEmailAction.type)
+    { image, id }: EditAccountPhotoAction){
+    return this._accountService.changePhoto({image, id}, EditAccountEmailAction.type)
       .pipe(catchError(() => {
           return EMPTY;
         }),

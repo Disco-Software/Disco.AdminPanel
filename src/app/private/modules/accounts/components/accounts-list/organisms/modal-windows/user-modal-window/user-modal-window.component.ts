@@ -70,6 +70,7 @@ export class UserModalWindowComponent implements OnInit {
 
     ref.componentInstance.imageChangedEvent = event;
     ref.componentInstance.isAccountPhoto = !!this.account.photo;
+    ref.componentInstance.id = this.account.user.id;
     ref.componentInstance.updatedPhoto.pipe(take(1)).subscribe(res=>{
       this.account = {
         ...this.account,

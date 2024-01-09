@@ -13,6 +13,7 @@ import {EditAccountPhotoAction} from "@core";
 export class ImageCropperModalWindowComponent {
   @Input() imageChangedEvent: any = '';
   @Input() isAccountPhoto: boolean;
+  @Input() id: number;
   @Output() updatedPhoto = new EventEmitter<any>();
   croppedImageBlob: any = '';
 
@@ -30,7 +31,7 @@ export class ImageCropperModalWindowComponent {
   saveImage() {
     this.closeModal();
 
-    this.store.dispatch(new EditAccountPhotoAction(this.croppedImageBlob.changingThisBreaksApplicationSecurity)).subscribe(res => {
+    this.store.dispatch(new EditAccountPhotoAction(this.croppedImageBlob.changingThisBreaksApplicationSecurity, this.id)).subscribe(res => {
       this.updatedPhoto.emit(this.croppedImageBlob);
     })
 
