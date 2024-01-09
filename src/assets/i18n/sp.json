@@ -14,6 +14,13 @@
     "formSubmit" : "Enviar"
   },
 
+  "ConfirmPasswordResetCode": {
+    "confirmation": "Confirmación de identidad",
+    "additionalConfirmation": "Para proteger su información personal y mejorar la seguridad de la cuenta, requerimos confirmación adicional de su identidad. Por favor, ingrese el código que le enviamos a su correo electrónico. Si no ha recibido el código, verifique su carpeta de 'Spam' o haga clic en el botón para volver a enviar el código.",
+    "code": "Código",
+    "send": "Enviar"
+  },
+
   "reset" : {
     "title" : "Restaurar contraseña",
     "newPassword" : "Nueva contraseña",

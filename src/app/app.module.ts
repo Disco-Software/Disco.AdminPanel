@@ -7,7 +7,7 @@ import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SharedModule} from '@shared'
 import {AppConfigState, CoreModule} from '@core';
-import {HeaderInterceptor} from "@core/interceptors";
+import {HeaderInterceptor, LanguageHeaderInterceptor} from "@core/interceptors";
 
 import {environment} from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
@@ -63,7 +63,12 @@ const NGXS_MODULES = [
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor,
       multi: true,
-  },
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LanguageHeaderInterceptor,
+      multi : true,
+    },
   ]
 })
 export class AppModule {}

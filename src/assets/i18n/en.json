@@ -18,7 +18,22 @@
     "title" : "Password",
     "description" : "Enter your e-mail and you will receive a link to create a new password",
     "formTitle" : "E-mail",
-    "formSubmit" : "Send"
+    "formSubmit" : "Send",
+    "validationErrors" : {
+      "requared" : "Email is requared"
+    }
+  },
+
+  "ConfirmPasswordResetCode": {
+    "confirmation": "Identity Confirmation",
+    "additionalConfirmation": "To secure your personal information and enhance account security, we require additional confirmation of your identity. Please enter the code we sent to your email. If you haven't received the code, check your 'Spam' folder or click the button to resend the code.",
+    "validation" : {
+      "requeared" : "Code is a required field",
+      "maxLength" : "The code should contain exactly 6 digits",
+      "minLength" : "The code must contain at least 6 digits"
+    },
+    "code": "Code",
+    "send": "Send"
   },
 
   "reset" : {

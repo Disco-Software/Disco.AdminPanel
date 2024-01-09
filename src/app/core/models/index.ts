@@ -9,3 +9,4 @@ export * from './user-actions'
 export * from './loader';
 export * from './graph';
 export * from './app-config'
+export * from './account-password'
