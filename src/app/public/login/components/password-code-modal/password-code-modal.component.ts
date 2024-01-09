@@ -43,18 +43,11 @@ export class PasswordCodeModalComponent implements OnInit {
 
   public isValidConfirmationCode: boolean;
 
-  public formGroup: FormGroup;
+  public code : number;
 
   constructor(private _modal: NgbModal, private _store: Store) {}
 
   ngOnInit(): void {
-    this.formGroup = new FormGroup({
-      code: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(6),
-        Validators.minLength(6),
-      ]),
-    });
   }
 
   public onSubmit() {
@@ -62,7 +55,7 @@ export class PasswordCodeModalComponent implements OnInit {
       .dispatch(
         new RecoveryPasswordCodeAction({
           email: this.email,
-          code: this.formGroup.value.code,
+          code: this.code,
         })
       )
       .subscribe((isValid: boolean) => {
@@ -78,19 +71,9 @@ export class PasswordCodeModalComponent implements OnInit {
       });
   }
 
-  getFormControl(field): AbstractControl {
-    return this.formGroup.get(field);
-  }
-
-  checkIsValid(field) {
-    return (
-      this.getFormControl(field).invalid &&
-      (this.getFormControl(field).dirty || this.getFormControl(field).touched)
-    );
-  }
-
   // this called every time when user changed the code
   onCodeChanged(code: string) {
+    this.code = +code
   }
 
 // this called only if user entered full code
