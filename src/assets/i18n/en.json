@@ -20,7 +20,7 @@
     "formTitle" : "E-mail",
     "formSubmit" : "Send",
     "validationErrors" : {
-      "requared" : "Email is requared"
+      "required" : "Email is required"
     }
   },
 

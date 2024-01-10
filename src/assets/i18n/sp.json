@@ -11,7 +11,10 @@
     "title" : "Contraseña",
     "description" : "Ingresa tu correo electrónico y recibirás un enlace para crear una nueva contraseña",
     "formTitle" : "Correo electrónico",
-    "formSubmit" : "Enviar"
+    "formSubmit" : "Enviar",
+    "validationErrors" : {
+      "required" : "Сorreo electronico es requerido"
+    }
   },
 
   "ConfirmPasswordResetCode": {

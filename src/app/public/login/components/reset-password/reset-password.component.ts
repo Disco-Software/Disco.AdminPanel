@@ -1,11 +1,12 @@
 import {Component, Input} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RecoveryPasswordAction } from '@core';
+import {LoaderState, RecoveryPasswordAction} from '@core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import { AccountPasswordResetPasswordRequestModel } from 'src/app/core/models/account-password/account-password-reset-request.model';
 import { PasswordCodeModalComponent } from '../password-code-modal/password-code-modal.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-reset-password',
@@ -13,6 +14,8 @@ import { ForgotPasswordComponent } from '../forgot-password/forgot-password.comp
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent {
+  @Select(LoaderState.isLoadingSelector) loadingState$: Observable<boolean>;
+
   @Input() public email : string;
   @Input() public isValidCode : boolean;
 

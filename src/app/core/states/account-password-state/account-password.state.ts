@@ -2,7 +2,7 @@ import {Action, Selector, State, StateContext} from "@ngxs/store";
 import {Injectable} from "@angular/core";
 import { MessageService } from "primeng/api";
 import { ErrorsCollection } from "../../models/error.model";
-import { EMPTY, catchError, tap, Observable } from 'rxjs';
+import {EMPTY, catchError, tap, Observable, throwError} from 'rxjs';
 import { AccountPassowrdStateInterface } from "../../models/account-password/account-password-state.interface";
 import { AccountPasswordService } from "./account-password.service";
 import { ForgotPasswordAction, RecoveryPasswordAction, RecoveryPasswordCodeAction } from './account-password.action';
@@ -24,8 +24,8 @@ export class AccountPassowrdState {
       { patchState }: StateContext<{ }>,
       { payload, language }: ForgotPasswordAction) : Observable<void>{
       return this._accountPasswordService.forgotPassword(payload, ForgotPasswordAction.type, language)
-        .pipe(catchError(() => {
-          return EMPTY;
+        .pipe(catchError((err) => {
+          return throwError(err);
         }),
           tap(() => {
             patchState({});
@@ -38,8 +38,8 @@ export class AccountPassowrdState {
       { patchState }: StateContext<{ codeConfirmation : boolean }>,
       { payload }: RecoveryPasswordCodeAction) : Observable<boolean>{
       return this._accountPasswordService.confirmCode(payload, RecoveryPasswordCodeAction.type)
-        .pipe(catchError(() => {
-          return EMPTY;
+        .pipe(catchError((err) => {
+            return throwError(err);
         }),
           tap((response : boolean) => {
             patchState({codeConfirmation: response});

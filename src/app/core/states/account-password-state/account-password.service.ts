@@ -18,7 +18,7 @@ export class AccountPasswordService {
     const httpHeaders: HttpHeaders = new HttpHeaders({
       Language: 'uk'
     });
-    const requestOptions = {
+    const requestOptions  = {
       headers: httpHeaders,
     };
     return this._restService.request('POST', 'admin/account/password/forgot', description, forgotPasswordModel, requestOptions);
@@ -29,6 +29,6 @@ export class AccountPasswordService {
   }
 
   public recoveryPassword(recoveryPasswordRequestModel : RecoveryPasswordRequestModel, description: string) : Observable<boolean>{
-    return this._restService.request('PUT', 'admin/account/password/reset', description, recoveryPasswordRequestModel);
+    return this._restService.request('PUT', 'admin/account/password/recovery', description, recoveryPasswordRequestModel);
   }
  }

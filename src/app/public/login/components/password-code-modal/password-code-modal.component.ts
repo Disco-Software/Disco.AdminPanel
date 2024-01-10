@@ -5,14 +5,15 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { RecoveryPasswordCodeAction } from '@core';
+import {LoaderState, RecoveryPasswordCodeAction} from '@core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 import { TranslateService } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
+import {Observable, Subject, take, throwError} from 'rxjs';
 import { state, style, trigger } from '@angular/animations';
 import { CodeInputComponent } from 'angular-code-input';
+import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-password-code-modal',
@@ -39,6 +40,8 @@ import { CodeInputComponent } from 'angular-code-input';
   ],
 })
 export class PasswordCodeModalComponent implements OnInit {
+  @Select(LoaderState.isLoadingSelector) loadingState$: Observable<boolean>;
+
   @Input() public email: string;
 
   public isValidConfirmationCode: boolean;
@@ -56,6 +59,12 @@ export class PasswordCodeModalComponent implements OnInit {
         new RecoveryPasswordCodeAction({
           email: this.email,
           code: this.code,
+        })
+      )
+      .pipe(
+        take(1),
+        catchError(err=>{
+          return throwError(err);
         })
       )
       .subscribe((isValid: boolean) => {

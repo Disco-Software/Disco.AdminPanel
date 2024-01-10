@@ -1,15 +1,13 @@
 import {Component} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
-import {ResetPasswordComponent} from '../reset-password/reset-password.component'
-import { Store } from '@ngxs/store';
-import { ForgotPasswordAction, ForgotPasswordRequestModel } from '@core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PasswordCodeModalComponent } from '../password-code-modal/password-code-modal.component';
-import { TranslateService } from '@ngx-translate/core';
-import { LanguageModel, LocalStorageService } from '@core';
-import { CoreModule } from '@core';
-import { state, style, trigger } from '@angular/animations';
+import {Select, Store} from '@ngxs/store';
+import {ForgotPasswordAction, ForgotPasswordRequestModel, LoaderState} from '@core';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {PasswordCodeModalComponent} from '../password-code-modal/password-code-modal.component';
+import {TranslateService} from '@ngx-translate/core';
+import {state, style, trigger} from '@angular/animations';
+import {catchError} from "rxjs/operators";
+import {Observable, throwError} from "rxjs";
 
 @Component({
   selector: 'app-forgot-password',
@@ -30,6 +28,7 @@ import { state, style, trigger } from '@angular/animations';
   ]
 })
 export class ForgotPasswordComponent {
+  @Select(LoaderState.isLoadingSelector) loadingState$: Observable<boolean>;
 
   public email : string;
 
@@ -42,7 +41,7 @@ export class ForgotPasswordComponent {
 
   public ngOnInit(): void {
     this.formGroup = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email])
+      email: new FormControl('', [Validators.required])
     });
   }
 
@@ -51,7 +50,11 @@ export class ForgotPasswordComponent {
       email : this.formGroup.value.email,
     }
 
-    this._store.dispatch(new ForgotPasswordAction(req, navigator.language)).subscribe(() => {
+    this._store.dispatch(new ForgotPasswordAction(req, navigator.language)).pipe(
+      catchError(err => {
+        return throwError(err);
+      })
+    ).subscribe(() => {
       const ref = this._modalService.open(PasswordCodeModalComponent, {
         modalDialogClass: 'd-flex justify-content-center align-items-center h-100'
       });
@@ -64,6 +67,7 @@ export class ForgotPasswordComponent {
   }
 
   checkIsValid(field) {
+    // console.log(this.getFormControl(field).errors)
     return this.getFormControl(field).invalid && (this.getFormControl(field).dirty || this.getFormControl(field).touched)
   }
 }
