@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
 import {Observable, Subject, take, takeUntil} from 'rxjs';
 import {Account} from '../../../../../../../../core/models/account/account.model';
@@ -18,6 +18,7 @@ import {ImageCropperModalWindowComponent} from "../image-cropper-modal-window/im
 })
 export class UserModalWindowComponent implements OnInit {
   @Select(AccountsState.getAccountSelector) public account$ : Observable<Account>;
+  @Output() updatedItemData = new EventEmitter()
 
   @Input() public id : number;
   @Input() public role : string;
@@ -70,11 +71,13 @@ export class UserModalWindowComponent implements OnInit {
 
     ref.componentInstance.imageChangedEvent = event;
     ref.componentInstance.isAccountPhoto = !!this.account.photo;
+    ref.componentInstance.id = this.account.user.id;
     ref.componentInstance.updatedPhoto.pipe(take(1)).subscribe(res=>{
       this.account = {
         ...this.account,
         photo: res
       }
+      this.updatedItemData.emit()
     })
 
   }

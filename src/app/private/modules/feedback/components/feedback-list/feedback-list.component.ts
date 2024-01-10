@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {DeleteUserModalWindowComponent} from "../../../accounts/components";
 import {FeedbackChatComponent} from "./components";
@@ -9,6 +9,13 @@ import {FeedbackChatComponent} from "./components";
   styleUrls: ['./feedback-list.component.scss']
 })
 export class FeedbackListComponent {
+  isSmallPaginator: boolean;
+
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+    this.isSmallPaginator = window.innerWidth <= 450
+  }
+
   products: any[] = [
     {
       id: '1000',
@@ -54,6 +61,7 @@ export class FeedbackListComponent {
   isChatShown: boolean;
 
   constructor(private _modalService : NgbModal) {
+    this.getScreenSize();
   }
   open() {
     const ref =  this._modalService.open(FeedbackChatComponent, {

@@ -45,6 +45,10 @@ export class AccountsListComponent implements OnInit, OnDestroy {
     this._store.dispatch(new GetAllAccountsAction({ pageNumber, pageSize})).pipe(take(1))
   }
 
+  public updatedItemData(event: any): void {
+    this.getData(1, 5);
+  }
+
   public getTotalCount(){
     this._store.dispatch(new GetAccountsCountAction()).pipe(take(1));
   }

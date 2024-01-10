@@ -15,9 +15,10 @@
     [tableStyle]="{ 'min-width': '50rem' }"
     styleClass="p-datatable-lg"
     [paginator]="true"
-    [rows]="5"
+    [rows]="2"
+    [showFirstLastIcon]="false"
     [value]="products"
-    [showCurrentPageReport]="true">
+    [showCurrentPageReport]="false">
     <ng-template pTemplate="header">
       <tr>
         <th>{{'feedback.table.header.name' | translate}}</th>
@@ -74,6 +75,14 @@
           [style]="{ 'font-size': '16px'}"></p-tag>
       </div>
     </div>
-    <p-paginator [rows]="5" [totalRecords]="10"></p-paginator>
+    <p-paginator
+      [totalRecords]="10"
+      [rows]="5"
+      [pageLinkSize]="5"
+      [showFirstLastIcon]="false"
+      [showCurrentPageReport]="false"
+      [showJumpToPageDropdown]="isSmallPaginator"
+      [showPageLinks]="!isSmallPaginator"
+    ></p-paginator>
   </div>
 </div>

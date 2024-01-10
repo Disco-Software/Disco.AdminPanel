@@ -5,18 +5,11 @@
   <ng-template #body>
     <div class=" d-flex flex-column w-100 justify-content-center align-items-center" >
       <image-cropper
-
         [roundCropper] = "true"
         [imageChangedEvent]="imageChangedEvent"
         [maintainAspectRatio]="true"
-
         (imageCropped)="imageCropped($event)"
-        (imageLoaded)="imageLoaded($event)"
-        (cropperReady)="cropperReady()"
-        (loadImageFailed)="loadImageFailed()"
       ></image-cropper>
-
-<!--      <img [src]="croppedImage" />-->
     </div>
   </ng-template>
 

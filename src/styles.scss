@@ -867,3 +867,58 @@ template {
     border: 1px solid rgba(80, 76, 76, 0.10);
   }
 }
+
+
+:host ::ng-deep .p-paginator{
+  background-color: #29193E !important;
+  color: white !important
+}
+
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: linear-gradient(181deg, rgba(160, 68, 255, 0.50) -4.14%, rgba(160, 68, 255, 0.00) 99.34%);
+  color: white !important
+}
+
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover{
+  background: linear-gradient(181deg, rgba(160, 68, 255, 0.50) -4.14%, rgba(160, 68, 255, 0.00) 99.34%);
+  color: white !important
+}
+
+:host ::ng-deep .p-paginator .p-paginator-prev {
+  color: white;
+  background-image: url(./assets/images/ic_prev.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+:host ::ng-deep .p-paginator .p-paginator-next {
+  color: white;
+  background-image: url(./assets/images/ic_next.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+:host ::ng-deep .p-paginator .p-paginator-next:hover{
+  background-color: transparent !important;
+  background-image: url(./assets/images/ic_next.svg) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  color: white !important
+}
+
+:host ::ng-deep .p-paginator .p-paginator-prev:hover{
+  background-color: transparent !important;
+  background-image: url(./assets/images/ic_prev.svg) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  color: white !important
+}
+
+:host::ng-deep.p-paginator-page-options {
+  background: transparent;
+  border: none;
+  & * {
+    color: white;
+  }
+
+}

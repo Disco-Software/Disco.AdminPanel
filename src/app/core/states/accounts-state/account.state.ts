@@ -33,9 +33,9 @@ export class AccountsState {
 
   @Selector()
   static getAllAccountsSelector(result: {
-     allAccounts : AccountModel[];
+     allAccounts : {account: AccountModel}[];
   }): AccountModel[] {
-    return result.allAccounts;
+    return result.allAccounts.map((acc: {account: AccountModel})=> acc.account);
   }
 
   @Selector()
@@ -162,8 +162,8 @@ export class AccountsState {
   @Action(EditAccountPhotoAction)
   public changeAccountPhoto(
     { patchState }: StateContext<{ account: Account }>,
-    { image }: EditAccountPhotoAction){
-    return this._accountService.changePhoto(image, EditAccountEmailAction.type)
+    { image, id }: EditAccountPhotoAction){
+    return this._accountService.changePhoto({image, id}, EditAccountEmailAction.type)
       .pipe(catchError(() => {
           return EMPTY;
         }),
