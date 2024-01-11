@@ -2,9 +2,10 @@ import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core'
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AutoComplete} from "primeng/autocomplete";
-import {Store} from "@ngxs/store";
+import {Select, Store} from "@ngxs/store";
 import { TranslateService } from '@ngx-translate/core';
-import { LanguageModel, LocalStorageService } from '@core';
+import { AccountsState, GetSelectedEmailsAction, LanguageModel, LocalStorageService } from '@core';
+import { Observable, switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'app-send-email-modal-window',
@@ -12,6 +13,8 @@ import { LanguageModel, LocalStorageService } from '@core';
   styleUrls: ['./send-email-modal-window.component.scss']
 })
 export class SendEmailModalWindowComponent implements OnInit, AfterViewInit {
+  @Select(AccountsState.getSelectedEmailsSelector) public emails$ : Observable<string[]>
+
   @ViewChild('autoComplete') autocomplete: AutoComplete
   @Input() email: string;
 
@@ -56,8 +59,10 @@ export class SendEmailModalWindowComponent implements OnInit, AfterViewInit {
   }
 
   search(event: any): void {
-    // this.store.dispatch(new SearchAccountsByEmailAction(event.query)).pipe(take(1))
-    this.items = [...Array(10).keys()].map((item) => event.query + '-' + item);
+     this.store.dispatch(new GetSelectedEmailsAction(event.query)).pipe(take(1));
+    this.emails$.subscribe((result : string[]) => {
+      this.items = result.map((item) => item);
+    })
   }
 
   sendEmail() {

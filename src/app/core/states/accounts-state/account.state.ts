@@ -9,7 +9,7 @@ import {
   EditAccountEmailAction,
   EditAccountPasswordAction, EditAccountPhotoAction,
   GetAccountsCountAction,
-  GetAllAccountsAction, SearchAccountsAction,
+  GetAllAccountsAction, GetSelectedEmailsAction, SearchAccountsAction,
   SearchAccountsByEmailAction
 } from "./account.action";
 import {catchError} from "rxjs/operators";
@@ -48,6 +48,13 @@ export class AccountsState {
   @Selector()
   static getAccountsCountSelector(state: AccountStateInterface): number {
     return state.count
+  }
+
+  @Selector()
+  public static getSelectedEmailsSelector(result : {
+    emails : string[]
+  }) : string[] {
+    return result.emails;
   }
 
   // @Selector()
@@ -158,6 +165,19 @@ export class AccountsState {
         patchState({account: response.account});
       }))
   }
+
+  @Action(GetSelectedEmailsAction)
+  public getSelectedEmails(
+    {patchState}: StateContext<{ emails : string[] }>,
+    {search} : GetSelectedEmailsAction) {
+      return this._accountService.getSearchedEmails(search, GetSelectedEmailsAction.type)
+        .pipe(catchError(() => {
+          return EMPTY;
+        }),
+        tap((emails : string[]) => {
+          patchState({emails : emails})
+        }));
+    }
 
   @Action(EditAccountPhotoAction)
   public changeAccountPhoto(
