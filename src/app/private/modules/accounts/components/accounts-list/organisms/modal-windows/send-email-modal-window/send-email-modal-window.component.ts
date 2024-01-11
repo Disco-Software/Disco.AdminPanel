@@ -4,7 +4,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AutoComplete} from "primeng/autocomplete";
 import {Store} from "@ngxs/store";
 import { TranslateService } from '@ngx-translate/core';
-import { LanguageModel, LocalStorageService } from '@core';
+import { LanguageModel, LocalStorageService, SendingEmailAction } from '@core';
+import { EmailSendingRequestModel } from 'src/app/core/models/email/email-sending-request.model';
 
 @Component({
   selector: 'app-send-email-modal-window',
@@ -61,9 +62,14 @@ export class SendEmailModalWindowComponent implements OnInit, AfterViewInit {
   }
 
   sendEmail() {
-    this.emailForm.get('body').markAsDirty()
-    if (this.emailForm.invalid) {
-      return
-    }
+    const req : EmailSendingRequestModel = {
+      toEmails : ['s.d.korchevskyi@gmail.com'],
+      title : this.emailForm.value.title,
+      body : this.emailForm.value.body,
+      isHtml : true,
+      name : '',
+    };
+
+    this.store.dispatch(new SendingEmailAction(req));
   }
 }
