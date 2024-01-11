@@ -4,12 +4,13 @@ import {Observable, Subject, take, takeUntil} from 'rxjs';
 import {Account} from '../../../../../../../../core/models/account/account.model';
 import {ReportModel} from '../../../../../../../../core/models/report/report.model';
 import {RoleModel} from '../../../../../../../../core/models/role/role.model';
-import {AccountAction} from '../../../../../../../../core/states/accounts-state/account.action';
+import {AccountAction, EditAccountRoleAction} from '../../../../../../../../core/states/accounts-state/account.action';
 import {AccountsState} from '../../../../../../../../core/states/accounts-state/account.state';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
 import {LanguageModel, LocalStorageService} from '@core';
 import {ImageCropperModalWindowComponent} from "../image-cropper-modal-window/image-cropper-modal-window.component";
+import { ChangeRoleRequestModel } from '../../../../../../../../core/models/account/change-role-request.model';
 
 @Component({
   selector: 'app-user-modal-window',
@@ -84,7 +85,19 @@ export class UserModalWindowComponent implements OnInit {
 
 
   onRoleChange(event: Event) {
-    console.log('event')
+    const req : ChangeRoleRequestModel = {
+      id : this.id,
+      roleName : this.currentRole.key,
+    };
+
+    console.log(req);
+
+    this._store.dispatch(new EditAccountRoleAction(req)).subscribe((response : Account) => {
+      this.account.user = {
+        ...this.account.user,
+        roleName : response.user.roleName
+      }
+    });
   }
 
   public sliceString(str : string){

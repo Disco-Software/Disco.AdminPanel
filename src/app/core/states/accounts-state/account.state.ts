@@ -8,6 +8,7 @@ import {
   CreateAccountAction,
   EditAccountEmailAction,
   EditAccountPasswordAction, EditAccountPhotoAction,
+  EditAccountRoleAction,
   GetAccountsCountAction,
   GetAllAccountsAction, SearchAccountsAction,
   SearchAccountsByEmailAction
@@ -171,6 +172,20 @@ export class AccountsState {
           patchState({account: response.account});
         }))
   }
+
+  @Action(EditAccountRoleAction)
+  public changeAccountRole(
+    { patchState }: StateContext<{ account: Account }>,
+    { payload }: EditAccountRoleAction){
+    return this._accountService.changeRole(payload, EditAccountRoleAction.type)
+      .pipe(catchError(() => {
+          return EMPTY;
+        }),
+        tap((response : {account: Account}) => {
+          patchState({account: response.account});
+        }))
+  }
+
 
   @Action(EditAccountPasswordAction)
   public changeAccountPassword(

@@ -1,5 +1,6 @@
 import { ChangeEmailRequestDto } from "../../models/account/change-email-request.model";
 import { ChangePasswordRequestModel } from "../../models/account/change-password-request.mdoel";
+import { ChangeRoleRequestModel } from "../../models/account/change-role-request.model";
 import { RequestDataModel } from "../../models/request.interface";
 import {CreateAccountInterface} from "@core";
 
@@ -68,4 +69,10 @@ export class EditAccountPhotoAction {
   constructor(public image: any, public id: number) {
   }
 
+}
+
+export class EditAccountRoleAction {
+  public static readonly type = "[Change role state] edit role state";
+
+  constructor(public payload : ChangeRoleRequestModel) {}
 }

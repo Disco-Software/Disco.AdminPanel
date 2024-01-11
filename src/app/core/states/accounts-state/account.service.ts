@@ -8,6 +8,7 @@ import {CreateUserResponseModel} from "../../models/account/create-account-respo
 import {Account} from '../../models/account/account.model';
 import {ChangeEmailRequestDto} from '../../models/account/change-email-request.model';
 import {ChangePasswordRequestModel} from '../../models/account/change-password-request.mdoel';
+import { ChangeRoleRequestModel } from '../../models/account/change-role-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,10 @@ export class AccountService {
     fd.append('photo', image);
     fd.append('userId', id);
     return this._restService.request("PUT", "admin/account/change/photo", description, fd);
+  }
+
+  public changeRole(request : ChangeRoleRequestModel, description : string) : Observable<{account : Account}> {
+    return this._restService.request('PUT', 'admin/roles/change/role', description, request);
   }
 
   public changePassword(request: ChangePasswordRequestModel, description: string) : Observable<{account : Account}> {
