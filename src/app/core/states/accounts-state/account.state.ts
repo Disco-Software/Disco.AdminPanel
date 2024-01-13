@@ -9,6 +9,7 @@ import {
   EditAccountEmailAction,
   EditAccountPasswordAction, EditAccountPhotoAction,
   GetAccountsCountAction,
+  GetAccountsSearchResultAction,
   GetAllAccountsAction, SearchAccountsAction,
   SearchAccountsByEmailAction
 } from "./account.action";
@@ -133,6 +134,21 @@ export class AccountsState {
         })
       );
     }
+
+    @Action(GetAccountsSearchResultAction)
+    public getSearchAccountsCount(
+      { patchState } : StateContext<{count : number}>,
+      { search } : GetAccountsSearchResultAction) {
+        return this._accountService.getSearchAccountsResultCount(search, GetAccountsSearchResultAction.type).pipe(
+          catchError((err: HttpErrorResponse) => {
+            return EMPTY;
+          }),
+          tap((response: number) => {
+            patchState({ count: response});
+          })
+        );
+      }
+
   @Action(AccountAction)
   public getAccount(
     { patchState }: StateContext<{ account: Account }>,

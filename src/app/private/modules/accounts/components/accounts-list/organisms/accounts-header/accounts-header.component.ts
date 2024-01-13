@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CreateUserModalWindowComponent} from '../modal-windows';
 import {Store} from '@ngxs/store';
-import {GetAllAccountsAction, SearchAccountsAction} from '@core/states';
+import {GetAccountsCountAction, GetAccountsSearchResultAction, GetAllAccountsAction, SearchAccountsAction} from '@core/states';
 
 @Component({
   selector: 'app-accounts-header',
@@ -28,10 +28,12 @@ export class AccountsHeaderComponent {
 
   private getData(searchString: string): void {
     if (!searchString) {
+      this._store.dispatch(new GetAccountsCountAction());
       this._store.dispatch(new GetAllAccountsAction({ pageNumber: 1, pageSize: 5}));
     }
     else {
-      this._store.dispatch(new SearchAccountsAction(searchString));
+      this._store.dispatch(new GetAccountsSearchResultAction(searchString))
+      this._store.dispatch(new SearchAccountsAction({search : searchString, pageNumber: 1, pageSize: 5}));
     }
   }
 }
