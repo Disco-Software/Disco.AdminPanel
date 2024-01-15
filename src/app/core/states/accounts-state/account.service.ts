@@ -8,6 +8,7 @@ import {CreateUserResponseModel} from "../../models/account/create-account-respo
 import {Account} from '../../models/account/account.model';
 import {ChangeEmailRequestDto} from '../../models/account/change-email-request.model';
 import {ChangePasswordRequestModel} from '../../models/account/change-password-request.mdoel';
+import { SearchAccountsRequestModel } from '../../models/account/search-accounts-requset.model';
 import { ChangeRoleRequestModel } from '../../models/account/change-role-request.model';
 
 @Injectable({
@@ -36,8 +37,13 @@ export class AccountService {
   public getAccountsCount(description : string) : Observable<number>{
     return this._restService.request('GET', 'admin/account/count', description);
   }
-  public searchAccounts(search: string, description : string) : Observable<AccountModel[]> {
-    return this._restService.request("GET",  `admin/account/search?search=${search}`, description);
+
+  public searchAccounts(searchAccountsRequestModel : SearchAccountsRequestModel, description : string) : Observable<AccountModel[]> {
+    return this._restService.request("GET",  `admin/account/search?search=${searchAccountsRequestModel.search}&pageNumber=${searchAccountsRequestModel.pageNumber}&pageSize=${searchAccountsRequestModel.pageSize}`, description);
+  }
+
+  public getSearchAccountsResultCount(search : string, description : string) : Observable<number> {
+    return this._restService.request('GET', `admin/account/search/count?search=${search}`, description);
   }
 
   public getAccount(id: number, description : string) : Observable<{account: Account}> {
