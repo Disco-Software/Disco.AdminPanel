@@ -9,6 +9,7 @@ import {Account} from '../../models/account/account.model';
 import {ChangeEmailRequestDto} from '../../models/account/change-email-request.model';
 import {ChangePasswordRequestModel} from '../../models/account/change-password-request.mdoel';
 import { SearchAccountsRequestModel } from '../../models/account/search-accounts-requset.model';
+import { ChangeRoleRequestModel } from '../../models/account/change-role-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -53,11 +54,19 @@ export class AccountService {
     return this._restService.request("PUT", "admin/account/change/email", description, request);
   }
 
+  public getSearchedEmails(search : string, description : string) : Observable<string[]> {
+    return this._restService.request("GET", `admin/account/emails/search?search=${search}`, description);
+  }
+
   public changePhoto({image, id}: any, description: string): Observable<{ account: Account }> {
     let fd = new FormData();
     fd.append('photo', image);
     fd.append('userId', id);
     return this._restService.request("PUT", "admin/account/change/photo", description, fd);
+  }
+
+  public changeRole(request : ChangeRoleRequestModel, description : string) : Observable<{account : Account}> {
+    return this._restService.request('PUT', 'admin/roles/change/role', description, request);
   }
 
   public changePassword(request: ChangePasswordRequestModel, description: string) : Observable<{account : Account}> {
