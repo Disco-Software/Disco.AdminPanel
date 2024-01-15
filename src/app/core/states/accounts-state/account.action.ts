@@ -1,5 +1,7 @@
 import { ChangeEmailRequestDto } from "../../models/account/change-email-request.model";
 import { ChangePasswordRequestModel } from "../../models/account/change-password-request.mdoel";
+import { SearchAccountsRequestModel } from "../../models/account/search-accounts-requset.model";
+import { ChangeRoleRequestModel } from "../../models/account/change-role-request.model";
 import { RequestDataModel } from "../../models/request.interface";
 import {CreateAccountInterface} from "@core";
 
@@ -43,10 +45,15 @@ export class GetAccountsCountAction{
 export class SearchAccountsAction{
   static readonly type : string = '[Account state] search account';
 
-  constructor(public payload: string) {
-
-  }
+  constructor(public payload: SearchAccountsRequestModel) {}
 }
+
+export class GetAccountsSearchResultAction {
+  static readonly type : string = '[Accounts search results count] search accounts results count';
+
+  constructor(public search : string) {}
+}
+
 export class EditAccountEmailAction{
   static readonly type : string = '[Account state] edit account email';
 
@@ -67,5 +74,16 @@ export class EditAccountPhotoAction {
 
   constructor(public image: any, public id: number) {
   }
+}
 
+export class GetSelectedEmailsAction {
+    public static type : string = '[Get selected emails] get selected emails'
+
+    constructor(public search : string) {}
+}
+
+export class EditAccountRoleAction {
+  public static readonly type = "[Change role state] edit role state";
+
+  constructor(public payload : ChangeRoleRequestModel) {}
 }

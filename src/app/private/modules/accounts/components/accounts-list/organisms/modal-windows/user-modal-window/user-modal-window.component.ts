@@ -4,12 +4,13 @@ import {Observable, Subject, take, takeUntil} from 'rxjs';
 import {Account} from '../../../../../../../../core/models/account/account.model';
 import {ReportModel} from '../../../../../../../../core/models/report/report.model';
 import {RoleModel} from '../../../../../../../../core/models/role/role.model';
-import {AccountAction} from '../../../../../../../../core/states/accounts-state/account.action';
+import {AccountAction, EditAccountRoleAction} from '../../../../../../../../core/states/accounts-state/account.action';
 import {AccountsState} from '../../../../../../../../core/states/accounts-state/account.state';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
 import {LanguageModel, LocalStorageService} from '@core';
 import {ImageCropperModalWindowComponent} from "../image-cropper-modal-window/image-cropper-modal-window.component";
+import { ChangeRoleRequestModel } from '../../../../../../../../core/models/account/change-role-request.model';
 
 @Component({
   selector: 'app-user-modal-window',
@@ -21,7 +22,6 @@ export class UserModalWindowComponent implements OnInit {
   @Output() updatedItemData = new EventEmitter()
 
   @Input() public id : number;
-  @Input() public role : string;
 
   public account : Account;
 
@@ -55,9 +55,10 @@ export class UserModalWindowComponent implements OnInit {
     this._store.dispatch(new AccountAction(this.id));
     this.account$.pipe(takeUntil(this.destory$)).subscribe((res:Account) => {
       this.account = res;
+      this.currentRole = this.roles.find(role=>role.key === this.account?.user.roleName)
     });
 
-    this.currentRole = this.roles.find(role=>role.key === this.role)
+
 
   }
 
@@ -84,7 +85,12 @@ export class UserModalWindowComponent implements OnInit {
 
 
   onRoleChange(event: Event) {
-    console.log('event')
+    const req : ChangeRoleRequestModel = {
+      id : this.id,
+      roleName : this.currentRole.key,
+    };
+
+    this._store.dispatch(new EditAccountRoleAction(req));
   }
 
   public sliceString(str : string){

@@ -1,20 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NgxsModule } from '@ngxs/store';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NgxsModule} from '@ngxs/store';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 import * as _states from './states';
 import * as _services from './services';
-import * as _interceptors from './interceptors';
-import {
-  LangChangeEvent,
-  TranslateLoader,
-  TranslateModule,
-  TranslateService,
-} from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AccountService } from './states/accounts-state/account.service';
-import { AccountsState } from './states/accounts-state/account.state';
+import {TranslateModule, TranslateService,} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {AccountService} from './states/accounts-state/account.service';
+import {AccountsState} from './states/accounts-state/account.state';
 
 const SERVICES = [
   AccountService,
@@ -32,6 +26,7 @@ const NGXS_MODULES = [
     _states.StatisticsState,
     AccountsState,
     _states.AccountPassowrdState,
+    _states.EmailState
   ]),
 ];
 

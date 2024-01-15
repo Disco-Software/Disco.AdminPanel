@@ -8,8 +8,10 @@ import {
   CreateAccountAction,
   EditAccountEmailAction,
   EditAccountPasswordAction, EditAccountPhotoAction,
+  EditAccountRoleAction,
   GetAccountsCountAction,
-  GetAllAccountsAction, SearchAccountsAction,
+  GetAccountsSearchResultAction,
+  GetAllAccountsAction, GetSelectedEmailsAction, SearchAccountsAction,
   SearchAccountsByEmailAction
 } from "./account.action";
 import {catchError} from "rxjs/operators";
@@ -48,6 +50,13 @@ export class AccountsState {
   @Selector()
   static getAccountsCountSelector(state: AccountStateInterface): number {
     return state.count
+  }
+
+  @Selector()
+  public static getSelectedEmailsSelector(result : {
+    emails : string[]
+  }) : string[] {
+    return result.emails;
   }
 
   // @Selector()
@@ -133,6 +142,21 @@ export class AccountsState {
         })
       );
     }
+
+    @Action(GetAccountsSearchResultAction)
+    public getSearchAccountsCount(
+      { patchState } : StateContext<{count : number}>,
+      { search } : GetAccountsSearchResultAction) {
+        return this._accountService.getSearchAccountsResultCount(search, GetAccountsSearchResultAction.type).pipe(
+          catchError((err: HttpErrorResponse) => {
+            return EMPTY;
+          }),
+          tap((response: number) => {
+            patchState({ count: response});
+          })
+        );
+      }
+
   @Action(AccountAction)
   public getAccount(
     { patchState }: StateContext<{ account: Account }>,
@@ -159,6 +183,19 @@ export class AccountsState {
       }))
   }
 
+  @Action(GetSelectedEmailsAction)
+  public getSelectedEmails(
+    {patchState}: StateContext<{ emails : string[] }>,
+    {search} : GetSelectedEmailsAction) {
+      return this._accountService.getSearchedEmails(search, GetSelectedEmailsAction.type)
+        .pipe(catchError(() => {
+          return EMPTY;
+        }),
+        tap((emails : string[]) => {
+          patchState({emails : emails})
+        }));
+    }
+
   @Action(EditAccountPhotoAction)
   public changeAccountPhoto(
     { patchState }: StateContext<{ account: Account }>,
@@ -171,6 +208,20 @@ export class AccountsState {
           patchState({account: response.account});
         }))
   }
+
+  @Action(EditAccountRoleAction)
+  public changeAccountRole(
+    { patchState }: StateContext<{ account: Account }>,
+    { payload }: EditAccountRoleAction){
+    return this._accountService.changeRole(payload, EditAccountRoleAction.type)
+      .pipe(catchError(() => {
+          return EMPTY;
+        }),
+        tap((response : {account: Account}) => {
+          patchState({account: response.account});
+        }))
+  }
+
 
   @Action(EditAccountPasswordAction)
   public changeAccountPassword(
