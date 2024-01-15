@@ -8,8 +8,9 @@ import {
   CreateAccountAction,
   EditAccountEmailAction,
   EditAccountPasswordAction, EditAccountPhotoAction,
+  EditAccountRoleAction,
   GetAccountsCountAction,
-  GetAllAccountsAction, SearchAccountsAction,
+  GetAllAccountsAction, GetSelectedEmailsAction, SearchAccountsAction,
   SearchAccountsByEmailAction
 } from "./account.action";
 import {catchError} from "rxjs/operators";
@@ -48,6 +49,13 @@ export class AccountsState {
   @Selector()
   static getAccountsCountSelector(state: AccountStateInterface): number {
     return state.count
+  }
+
+  @Selector()
+  public static getSelectedEmailsSelector(result : {
+    emails : string[]
+  }) : string[] {
+    return result.emails;
   }
 
   // @Selector()
@@ -159,6 +167,19 @@ export class AccountsState {
       }))
   }
 
+  @Action(GetSelectedEmailsAction)
+  public getSelectedEmails(
+    {patchState}: StateContext<{ emails : string[] }>,
+    {search} : GetSelectedEmailsAction) {
+      return this._accountService.getSearchedEmails(search, GetSelectedEmailsAction.type)
+        .pipe(catchError(() => {
+          return EMPTY;
+        }),
+        tap((emails : string[]) => {
+          patchState({emails : emails})
+        }));
+    }
+
   @Action(EditAccountPhotoAction)
   public changeAccountPhoto(
     { patchState }: StateContext<{ account: Account }>,
@@ -171,6 +192,20 @@ export class AccountsState {
           patchState({account: response.account});
         }))
   }
+
+  @Action(EditAccountRoleAction)
+  public changeAccountRole(
+    { patchState }: StateContext<{ account: Account }>,
+    { payload }: EditAccountRoleAction){
+    return this._accountService.changeRole(payload, EditAccountRoleAction.type)
+      .pipe(catchError(() => {
+          return EMPTY;
+        }),
+        tap((response : {account: Account}) => {
+          patchState({account: response.account});
+        }))
+  }
+
 
   @Action(EditAccountPasswordAction)
   public changeAccountPassword(
