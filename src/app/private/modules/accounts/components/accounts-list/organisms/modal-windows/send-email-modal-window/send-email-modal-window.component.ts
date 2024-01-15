@@ -3,8 +3,9 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AutoComplete} from "primeng/autocomplete";
 import {Select, Store} from "@ngxs/store";
-import {AccountsState, GetSelectedEmailsAction} from '@core';
+import {AccountsState, GetSelectedEmailsAction, SendingEmailAction} from '@core';
 import {Observable, Subject, take, takeUntil} from 'rxjs';
+import {EmailSendingRequestModel} from "../../../../../../../../core/models/email/email-sending-request.model";
 
 @Component({
   selector: 'app-send-email-modal-window',
@@ -28,7 +29,8 @@ export class SendEmailModalWindowComponent implements OnInit, AfterViewInit, OnD
   constructor(
     private _modal: NgbActiveModal,
     private fb: FormBuilder,
-    private store: Store) {
+    private store: Store,
+    ) {
 
       this.emailForm = this.fb.group({
       recipient: [''],
@@ -40,7 +42,7 @@ export class SendEmailModalWindowComponent implements OnInit, AfterViewInit, OnD
   ngOnInit(): void {
     this.selectedItems = [this.email]
     this.emails$.pipe(takeUntil(this.destroy$)).subscribe((result : string[]) => {
-      this.items = result.map((item) => item);
+      this.items = result?.map((item) => item);
     })
   }
 
@@ -63,10 +65,17 @@ export class SendEmailModalWindowComponent implements OnInit, AfterViewInit, OnD
   }
 
   sendEmail() {
-    this.emailForm.get('body').markAsDirty()
-    if (this.emailForm.invalid) {
-      return
-    }
+    const req : EmailSendingRequestModel = {
+      toEmails : this.selectedItems,
+      title : this.emailForm.value.title,
+      body : this.emailForm.value.body,
+      isHtml : true,
+      name : '',
+    };
+
+    this.store.dispatch(new SendingEmailAction(req)).pipe(take(1)).subscribe((res) => {
+      this.closeModal();
+    })
   }
 
   ngOnDestroy(): void {
