@@ -75,8 +75,6 @@ export class PasswordCodeModalComponent implements OnInit {
         });
         ref.componentInstance.isValidCode = this.isValidConfirmationCode;
         ref.componentInstance.email = this.email;
-
-        console.log(this.isValidConfirmationCode);
       });
   }
 

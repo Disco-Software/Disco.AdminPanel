@@ -9,6 +9,7 @@ import {LocalStorageService} from '@core/services';
 import {LoaderState, UserLoginAction, UsersState} from '@core/states';
 import {User, UserResponseModel} from '@core/models';
 import {ForgotPasswordComponent} from "../forgot-password/forgot-password.component";
+import {ResetPasswordComponent} from "../reset-password/reset-password.component";
 
 @Component({
   selector: 'app-login',
@@ -37,8 +38,16 @@ export class LoginComponent implements OnDestroy {
     private _storageService: LocalStorageService,
     private _modalService: NgbModal,
     private _store: Store,
-    private _router: Router
+    private _router: Router,
+    private _modal: NgbModal
   ) {
+  }
+
+  open() {
+    const ref = this._modal.open(ResetPasswordComponent, {
+      modalDialogClass:
+        'd-flex justify-content-center align-items-center h-100',
+    });
   }
 
   ngOnInit(): void {

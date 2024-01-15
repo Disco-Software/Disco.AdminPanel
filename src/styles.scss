@@ -922,3 +922,8 @@ template {
   }
 
 }
+
+.disabled-btn {
+  background: gray !important;
+  cursor: default !important;
+}

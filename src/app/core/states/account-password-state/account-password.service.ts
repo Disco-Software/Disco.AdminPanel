@@ -20,6 +20,7 @@ export class AccountPasswordService {
     });
     const requestOptions  = {
       headers: httpHeaders,
+      responseType: 'text'
     };
     return this._restService.request('POST', 'admin/account/password/forgot', description, forgotPasswordModel, requestOptions);
   }

@@ -1,11 +1,11 @@
 import {Component, Input} from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoaderState, RecoveryPasswordAction} from '@core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Select, Store} from '@ngxs/store';
-import { AccountPasswordResetPasswordRequestModel } from 'src/app/core/models/account-password/account-password-reset-request.model';
-import { PasswordCodeModalComponent } from '../password-code-modal/password-code-modal.component';
-import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import {
+  AccountPasswordResetPasswordRequestModel
+} from 'src/app/core/models/account-password/account-password-reset-request.model';
 import {Observable} from "rxjs";
 
 @Component({
@@ -32,6 +32,7 @@ export class ResetPasswordComponent {
     });
   }
 
+
   public recoverPassword() {
     const req : AccountPasswordResetPasswordRequestModel = {
       email: this.email,
@@ -43,5 +44,11 @@ export class ResetPasswordComponent {
     this._store.dispatch(new RecoveryPasswordAction(req)).subscribe((x : boolean) => {
       this._modalActive.close(this);
     })
+  }
+
+  isDisabledButton(): boolean {
+    return !((this.formGroup.get('password').value.length > 0 &&
+        this.formGroup.get('confirmPassword').value.length > 0) &&
+      (this.formGroup.get('password').value === this.formGroup.get('confirmPassword').value))
   }
 }
