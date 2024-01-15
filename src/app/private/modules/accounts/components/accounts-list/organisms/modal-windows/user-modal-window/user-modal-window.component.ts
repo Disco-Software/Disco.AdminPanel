@@ -22,7 +22,6 @@ export class UserModalWindowComponent implements OnInit {
   @Output() updatedItemData = new EventEmitter()
 
   @Input() public id : number;
-  @Input() public role : string;
 
   public account : Account;
 
@@ -56,9 +55,10 @@ export class UserModalWindowComponent implements OnInit {
     this._store.dispatch(new AccountAction(this.id));
     this.account$.pipe(takeUntil(this.destory$)).subscribe((res:Account) => {
       this.account = res;
+      this.currentRole = this.roles.find(role=>role.key === this.account?.user.roleName)
     });
 
-    this.currentRole = this.roles.find(role=>role.key === this.role)
+
 
   }
 
@@ -90,14 +90,7 @@ export class UserModalWindowComponent implements OnInit {
       roleName : this.currentRole.key,
     };
 
-    console.log(req);
-
-    this._store.dispatch(new EditAccountRoleAction(req)).subscribe((response : Account) => {
-      this.account.user = {
-        ...this.account.user,
-        roleName : response.user.roleName
-      }
-    });
+    this._store.dispatch(new EditAccountRoleAction(req));
   }
 
   public sliceString(str : string){
