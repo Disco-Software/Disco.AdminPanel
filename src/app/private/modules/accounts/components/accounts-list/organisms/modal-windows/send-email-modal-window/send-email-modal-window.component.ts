@@ -29,7 +29,8 @@ export class SendEmailModalWindowComponent implements OnInit, AfterViewInit, OnD
   constructor(
     private _modal: NgbActiveModal,
     private fb: FormBuilder,
-    private store: Store) {
+    private store: Store,
+    ) {
 
       this.emailForm = this.fb.group({
       recipient: [''],
@@ -41,7 +42,7 @@ export class SendEmailModalWindowComponent implements OnInit, AfterViewInit, OnD
   ngOnInit(): void {
     this.selectedItems = [this.email]
     this.emails$.pipe(takeUntil(this.destroy$)).subscribe((result : string[]) => {
-      this.items = result.map((item) => item);
+      this.items = result?.map((item) => item);
     })
   }
 
@@ -65,14 +66,16 @@ export class SendEmailModalWindowComponent implements OnInit, AfterViewInit, OnD
 
   sendEmail() {
     const req : EmailSendingRequestModel = {
-      toEmails : ['s.d.korchevskyi@gmail.com'],
+      toEmails : this.selectedItems,
       title : this.emailForm.value.title,
       body : this.emailForm.value.body,
       isHtml : true,
       name : '',
     };
 
-    this.store.dispatch(new SendingEmailAction(req));
+    this.store.dispatch(new SendingEmailAction(req)).pipe(take(1)).subscribe((res) => {
+      this.closeModal();
+    })
   }
 
   ngOnDestroy(): void {
