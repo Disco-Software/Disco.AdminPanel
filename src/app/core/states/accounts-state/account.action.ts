@@ -68,7 +68,12 @@ export class EditAccountPhotoAction {
 
   constructor(public image: any, public id: number) {
   }
+}
 
+export class GetSelectedEmailsAction {
+    public static type : string = '[Get selected emails] get selected emails'
+
+    constructor(public search : string) {}
 }
 
 export class EditAccountRoleAction {

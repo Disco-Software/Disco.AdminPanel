@@ -48,6 +48,10 @@ export class AccountService {
     return this._restService.request("PUT", "admin/account/change/email", description, request);
   }
 
+  public getSearchedEmails(search : string, description : string) : Observable<string[]> {
+    return this._restService.request("GET", `admin/account/emails/search?search=${search}`, description);
+  }
+
   public changePhoto({image, id}: any, description: string): Observable<{ account: Account }> {
     let fd = new FormData();
     fd.append('photo', image);
