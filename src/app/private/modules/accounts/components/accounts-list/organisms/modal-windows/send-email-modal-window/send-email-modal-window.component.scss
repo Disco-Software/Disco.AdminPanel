@@ -119,3 +119,9 @@ input, textarea, :host::ng-deep.p-autocomplete .p-autocomplete-multiple-containe
 :host::ng-deep.p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item:hover {
   background: #130b1a;
 }
+
+.invalid-button {
+  background-color: transparent;
+  border-radius: 30px;
+  border: 1px solid white;
+}
