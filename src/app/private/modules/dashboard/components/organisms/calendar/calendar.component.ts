@@ -158,7 +158,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         // додати тиждень в загальний масив, якщо зараз останній день місяця
         if (i === lastOfMonth.getDate()) {
           monthData = [...monthData, {
-            label: weekData.length !== 1 ? weekData[0].label + ' - ' + weekData.at(-1).label : weekData[0].label,
+            label: weekData?.length !== 1 ? weekData[0]?.label + ' - ' + weekData.at(-1)?.label : weekData[0]?.label,
             selected: !!weekData.find(el => el.selected)
           }]
         }
@@ -167,7 +167,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
         // коли наступає понеділок - додаємо інформацію зі всього минулого тижня в загальний масив місяця
         monthData = [...monthData, {
-          label: weekData.length !== 1 ? weekData[0].label + ' - ' + weekData.at(-1).label : weekData[0].label,
+          label: weekData?.length !== 1 ? weekData[0]?.label + ' - ' + weekData.at(-1)?.label : weekData[0]?.label,
           selected: !!weekData.find(el => el.selected)
         }]
 
@@ -191,7 +191,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         // перевіряємо чи цей понеділок - це не останній день місяця. якщо останній, то додаємо про нього інформацію в загальний масив
         if (i === lastOfMonth.getDate()) {
           monthData = [...monthData, {
-            label: weekData.length !== 1 ? weekData[0].label + ' - ' + weekData.at(-1).label : weekData[0].label,
+            label: weekData?.length !== 1 ? weekData[0]?.label + ' - ' + weekData.at(-1)?.label : weekData[0]?.label,
             selected: !!weekData.find(el => el.selected)
           }]
         }
