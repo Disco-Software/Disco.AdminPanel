@@ -87,3 +87,9 @@ export class EditAccountRoleAction {
 
   constructor(public payload : ChangeRoleRequestModel) {}
 }
+
+export class GetSearchedNamesAction{
+  public static readonly type = "[Get searched names action] GetSearchedNamesAction";
+
+  constructor(public search : string) {}
+}

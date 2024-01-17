@@ -1,10 +1,11 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Store} from "@ngxs/store";
+import {Select, Store} from "@ngxs/store";
 import {AutoComplete} from "primeng/autocomplete";
 import { TranslateService } from '@ngx-translate/core';
-import { LanguageModel, LocalStorageService } from '@core';
+import { GetSearchedNamesAction, LanguageModel, LocalStorageService } from '@core';
+import { Observable, take, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-push-notifications-modal-window',
@@ -12,10 +13,14 @@ import { LanguageModel, LocalStorageService } from '@core';
   styleUrls: ['./push-notifications-modal-window.component.scss']
 })
 export class PushNotificationsModalWindowComponent implements OnInit {
+  @Select(GetSearchedNamesAction) names$ : Observable<string[]>;
+
   @ViewChild('autoComplete') autocomplete: AutoComplete
-  @Input() email: string;
+  @Input() name: string;
 
   notificationsForm: FormGroup;
+
+  public names : string[];
 
   selectedItems: any[] | undefined;
 
@@ -31,14 +36,19 @@ export class PushNotificationsModalWindowComponent implements OnInit {
     _translate.use(language.shortCode);
 
     this.notificationsForm = this.fb.group({
-      recipient: [''],
+      name: [''],
       title: [''],
       body: ['', [Validators.required]]
     })
   }
 
   ngOnInit(): void {
-    this.selectedItems = [this.email]
+    this.selectedItems = [this.name]
+    this.names$.pipe(take(1)).subscribe((searchedNames : string[]) => {
+      this.names = searchedNames;
+    })
+
+    console.log(this.name);
   }
 
   ngAfterViewInit(): void {
@@ -51,13 +61,13 @@ export class PushNotificationsModalWindowComponent implements OnInit {
 
   disableDeletingFirstElement() {
     if (this.selectedItems.length === 0) {
-      this.selectedItems = [this.email]
+      this.selectedItems = [this.name]
     }
   }
 
   search(event: any): void {
     // this.store.dispatch(new SearchAccountsByEmailAction(event.query)).pipe(take(1))
-    this.items = [...Array(10).keys()].map((item) => event.query + '-' + item);
+    this.store.dispatch(new GetSearchedNamesAction(event.query)).pipe(take(1));
   }
 
   sendNotifications() {

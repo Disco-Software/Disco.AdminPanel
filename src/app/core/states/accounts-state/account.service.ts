@@ -72,4 +72,8 @@ export class AccountService {
   public changePassword(request: ChangePasswordRequestModel, description: string) : Observable<{account : Account}> {
     return this._restService.request("PUT", "admin/account/password/change/password", description, request);
   }
+
+  public searchUserNames(search : string, description: string) : Observable<string[]> {
+    return this._restService.request('GET', `admin/account/names/search?search=${search}`, description);
+  }
 }
