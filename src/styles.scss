@@ -927,3 +927,16 @@ template {
   background: gray !important;
   cursor: default !important;
 }
+
+// Hide/Show password icon styles
+.password-container {
+  position: relative;
+}
+
+.password-container i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}

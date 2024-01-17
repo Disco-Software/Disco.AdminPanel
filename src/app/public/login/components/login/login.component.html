@@ -5,7 +5,6 @@
     <div
       class="login-form form d-flex justify-content-center flex-column align-items-center py-6 px-3 py-sm-7 px-sm-8"
     >
-      <button (click)="open()"></button>
       <div class="form-title title weight-4 size-50">DISCO</div>
       <div class="form-login weight-4 size-32">
         <h4>{{'authentication.title' | translate}}</h4>
@@ -24,14 +23,15 @@
             />
           </div>
           <div class="inputs-input weight-4 size-16 d-flex flex-column">
-            <label class="m-3 mb-2 mt-0" for="password">{{'authentication.password' | translate}}</label>
-            <input
-              class=" p-2"
-              type="password"
-              name="password"
-              id="password"
-              formControlName="password"
-            />
+            <label class="m-3 mb-2 mt-0" for="password">{{ 'authentication.password' | translate }}</label>
+              <input
+                class="p-2"
+                type="password"
+                name="password"
+                id="password"
+                formControlName="password"
+                appShowPassword
+              />
           </div>
         </form>
       </div>

@@ -25,6 +25,8 @@
     <div class="d-flex flex-column flex-sm-row">
       <button
         class="w-100 mb-3 mb-sm-0 w-sm-auto button button_violet"
+        [class.invalid-button]="!emailForm.valid"
+        [disabled]="!emailForm.valid"
         (click)="sendEmail()"
       >{{'email-notification-modal.send' | translate}}</button>
       <button

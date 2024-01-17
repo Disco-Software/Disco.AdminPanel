@@ -34,6 +34,12 @@ export class LoginComponent implements OnDestroy {
     ]),
   });
 
+  showPassword = false;
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
   constructor(
     private _storageService: LocalStorageService,
     private _modalService: NgbModal,

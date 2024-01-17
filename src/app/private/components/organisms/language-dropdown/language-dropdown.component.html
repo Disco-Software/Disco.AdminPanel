@@ -1,6 +1,6 @@
 <div
   ngbDropdown
-  class=" lenguage lenguage-container dropdown dropdown-toggle  m-5 mt-0 mb-0">
+  class=" lenguage lenguage-container dropdown dropdown-toggle  m-5 mt-0 mb-0 position-relative">
 
   <div role="button"   class=" d-flex flex-row justify-content-center align-items-center text-center  bg-transparent border-0">
     <label  class=" lenguage-span span dropdown-toggle m-2 mt-0 mb-0" id="dropdownMenu1">{{currentLanguage?.name | translate}}</label>
@@ -16,7 +16,7 @@
     [class.lenguage-menu-close]="!isShowing"
     [ngbCollapse]="!isShowing"
 
-    class=" lenguage-menu menu dropdown-menu" aria-labelledby="dropdownMenu1">
+    class=" lenguage-menu menu dropdown-menu position-absolute right-0" style="top: 30px" aria-labelledby="dropdownMenu1">
     <div *ngFor="let language of languages" class="cursor-pointer lenguage-item item d-flex justify-content-between flex-row align-items-center">
       <ng-container *ngIf="!language.isActive; else elseTemplate">
         <div (click)="switchLanguage(language)" class="cursor-pointer item item-container w-100 d-flex flex-row align-items-center m-0 pt-2 pb-2">

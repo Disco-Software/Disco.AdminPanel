@@ -10,7 +10,7 @@ import { UserActionModel } from '@core/models';
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss']
 })
-export class UserInfoComponent implements OnInit {
+export class UserInfoComponent {
 
   @Input() public userName : String;
   @Input() public userRole : String;
@@ -32,9 +32,6 @@ export class UserInfoComponent implements OnInit {
     private _domSanitizer : DomSanitizer) {
       this._matIconRegistry.addSvgIcon('logout', this._domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/images/ic_logout.svg'))
     }
-
-  ngOnInit(): void {
-  }
 
   toggleDropdown() {
     this.isOpen = !this.isOpen;
