@@ -4,9 +4,10 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Select, Store} from "@ngxs/store";
 import {AutoComplete} from "primeng/autocomplete";
 import { TranslateService } from '@ngx-translate/core';
-import {AccountsState, GetSearchedNamesAction, LanguageModel, LocalStorageService} from '@core';
+import {AccountsState, GetSearchedNamesAction, LanguageModel, LocalStorageService, SendNotificationAction} from '@core';
 import { Observable, take, takeUntil } from 'rxjs';
 import {Subject} from "rxjs/internal/Subject";
+import { NotificationRequestModel } from 'src/app/core/models/notification/notification-request.model';
 
 @Component({
   selector: 'app-push-notifications-modal-window',
@@ -73,10 +74,16 @@ export class PushNotificationsModalWindowComponent implements OnInit, OnDestroy 
   }
 
   sendNotifications() {
-    this.notificationsForm.get('body').markAsDirty()
-    if (this.notificationsForm.invalid) {
-      return
-    }
+    const req : NotificationRequestModel = {
+      title : this.notificationsForm.value.title,
+      body : this.notificationsForm.value.body,
+      userNames : this.selectedItems,
+      silent : true
+    };
+
+    this.store.dispatch(new SendNotificationAction(req)).pipe(take(1), takeUntil(this.onDestroy$)).subscribe(() => {
+      this._modal.close();
+    })
   }
 
   ngOnDestroy() {

@@ -20,6 +20,7 @@ const SERVICES = [
 
 const NGXS_MODULES = [
   NgxsModule.forFeature([
+    _states.NotificationState,
     _states.AppConfigState,
     _states.UsersState,
     _states.LoaderState,
