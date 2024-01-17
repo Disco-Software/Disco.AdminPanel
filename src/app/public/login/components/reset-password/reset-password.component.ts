@@ -38,11 +38,11 @@ export class ResetPasswordComponent {
       email: this.email,
       password : this.formGroup.value.password,
       confirmPassword: this.formGroup.value.confirmPassword,
-      isValidPasswordRecoveryCode : this.isValidCode,
+      isValidPasswordRecoveryCode : true,
     };
 
     this._store.dispatch(new RecoveryPasswordAction(req)).subscribe((x : boolean) => {
-      this._modalActive.close(this);
+      location.reload();
     })
   }
 
