@@ -73,7 +73,7 @@ export class AccountItemComponent {
         keyboard: false,
         centered: true,
     });
-    ref.componentInstance.email = this.email
+    ref.componentInstance.name = this.name
   }
 
   public onDelete() : void {

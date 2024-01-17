@@ -5,3 +5,4 @@ export * from './app-config-state';
 export * from './accounts-state';
 export * from './account-password-state'
 export * from './email-state'
+export * from './notification-state'

@@ -11,7 +11,7 @@ import {
   EditAccountRoleAction,
   GetAccountsCountAction,
   GetAccountsSearchResultAction,
-  GetAllAccountsAction, GetSelectedEmailsAction, SearchAccountsAction,
+  GetAllAccountsAction, GetSearchedNamesAction, GetSelectedEmailsAction, SearchAccountsAction,
   SearchAccountsByEmailAction
 } from "./account.action";
 import {catchError} from "rxjs/operators";
@@ -57,6 +57,11 @@ export class AccountsState {
     emails : string[]
   }) : string[] {
     return result.emails;
+  }
+
+  @Selector()
+  public static getUserNamesSelector(result) {
+    return result.names;
   }
 
   // @Selector()
@@ -230,6 +235,17 @@ export class AccountsState {
     return this._accountService.changePassword(payload, EditAccountPasswordAction.type)
       .pipe(tap((response : {account: Account}) => {
         patchState({account: response.account});
+      }))
+  }
+
+  @Action(GetSearchedNamesAction)
+  public GetSearchedNames(
+    { patchState }: StateContext<{ names: string[] }>,
+    { search }: GetSearchedNamesAction){
+    return this._accountService.searchUserNames(search, GetSearchedNamesAction.type)
+      .pipe(
+        tap((response : string[]) => {
+        patchState({names: response});
       }))
   }
 
