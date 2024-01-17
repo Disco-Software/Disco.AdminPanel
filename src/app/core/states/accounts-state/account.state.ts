@@ -59,9 +59,8 @@ export class AccountsState {
     return result.emails;
   }
 
-  public static getUserNamesSelector(result : {
-    names : string[]
-  }) {
+  @Selector()
+  public static getUserNamesSelector(result) {
     return result.names;
   }
 
