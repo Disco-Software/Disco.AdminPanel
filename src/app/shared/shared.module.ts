@@ -5,6 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ImageCropperModule} from "ngx-image-cropper";
 import {InputComponent, SearchInputComponent} from "./components";
 import {CoreModule} from "@core";
+import { ShowPasswordDirective } from './directives';
 
 const COMPONENTS = [
   SearchInputComponent,
@@ -19,9 +20,13 @@ const MODULES = [
   CoreModule
 ];
 
+const DIRECTIVES = [
+  ShowPasswordDirective
+]
+
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, ...DIRECTIVES],
   imports: [...MODULES, CommonModule],
-  exports: [...MODULES, ...COMPONENTS],
+  exports: [...MODULES, ...COMPONENTS, ...DIRECTIVES],
 })
 export class SharedModule {}

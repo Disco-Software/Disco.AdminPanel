@@ -23,14 +23,15 @@
             />
           </div>
           <div class="inputs-input weight-4 size-16 d-flex flex-column">
-            <label class="m-3 mb-2 mt-0" for="password">{{'authentication.password' | translate}}</label>
-            <input
-              class=" p-2"
-              type="password"
-              name="password"
-              id="password"
-              formControlName="password"
-            />
+            <label class="m-3 mb-2 mt-0" for="password">{{ 'authentication.password' | translate }}</label>
+              <input
+                class="p-2"
+                type="password"
+                name="password"
+                id="password"
+                formControlName="password"
+                appShowPassword
+              />
           </div>
         </form>
       </div>
