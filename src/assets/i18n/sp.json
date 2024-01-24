@@ -4,7 +4,13 @@
     "email" : "Correo electrónico",
     "password" : "Contraseña",
     "submit" : "Iniciar",
-    "forgot" : "¿Olvidaste tu contraseña?"
+    "forgot" : "¿Olvidaste tu contraseña?",
+    "validationErrors" : {
+      "email": "El correo electrónico es obligatorio",
+      "passwordRequired": "Se requiere contraseña",
+      "passwordLength": "La contraseña debe tener al menos 6 letras",
+      "passwordCases": "La contraseña debe contener 1 letra mayúscula, 1 letra minúscula, 1 número, 1 carácter especial"
+    }
   },
 
   "forgot" : {

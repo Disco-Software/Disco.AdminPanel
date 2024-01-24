@@ -4,7 +4,13 @@
     "email" : "E-mail",
     "password" : "Password",
     "submit" : "Log in",
-    "forgot" : "Forgot your password?"
+    "forgot" : "Forgot your password?",
+    "validationErrors" : {
+      "email" : "Email is required",
+      "passwordRequired": "Password is required",
+      "passwordLength": "Password must be at least 6 letters",
+      "passwordCases": "Password must contain 1 uppercase letter, 1 lowercase letter, 1 number, 1 special character"
+    }
   },
 
   "sidebar" : {

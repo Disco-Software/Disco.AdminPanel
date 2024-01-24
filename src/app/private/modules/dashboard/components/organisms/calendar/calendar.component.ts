@@ -60,7 +60,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     const date: Date = new Date();
     this.setYearRange();
     this.setWeekData(new Date().getFullYear(), new Date().getMonth(), new Date())
-    this.setDayData(this.Week.find((el) => el.selected), true);
+    this.setDayData(this.Week.find((el) => el?.selected), true);
 
     this.state.forEach((s) => {
       if (s.name !== 'Week' && s.name !== 'Day') {
@@ -73,7 +73,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     });
 
     this.currentState = 'Day'
-    const day = new Date(this.Day.find(d=>d.selected).date.split('.').reverse().join(', '))
+    const day = new Date(this.Day.find(d=>d?.selected).date.split('.').reverse().join(', '))
     const req = {
       fromDate: new Date(day.setHours(0, 0, 0, 0)).toISOString(),
       toDate: new Date(day.setHours(23, 59, 59, 999)).toISOString(),
@@ -92,7 +92,10 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   setDayData(week: { label: string, selected?: boolean }, isInit?: boolean): void {
-    const selectedWeek = week.label
+    const selectedWeek = week?.label
+    if(!selectedWeek) {
+      return;
+    }
     if (selectedWeek.includes(' - ')) {
       //set day array if we have more than one day in the week
       this.Day = []
@@ -159,7 +162,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         if (i === lastOfMonth.getDate()) {
           monthData = [...monthData, {
             label: weekData?.length !== 1 ? weekData[0]?.label + ' - ' + weekData.at(-1)?.label : weekData[0]?.label,
-            selected: !!weekData.find(el => el.selected)
+            selected: !!weekData.find(el => el?.selected)
           }]
         }
       } else {
@@ -168,7 +171,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         // коли наступає понеділок - додаємо інформацію зі всього минулого тижня в загальний масив місяця
         monthData = [...monthData, {
           label: weekData?.length !== 1 ? weekData[0]?.label + ' - ' + weekData.at(-1)?.label : weekData[0]?.label,
-          selected: !!weekData.find(el => el.selected)
+          selected: !!weekData.find(el => el?.selected)
         }]
 
         // після того, як додали інформацію про минулий тиждень, очищуємо масив тижня, щоб створювати в ньому наступний масив тижня
@@ -192,7 +195,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         if (i === lastOfMonth.getDate()) {
           monthData = [...monthData, {
             label: weekData?.length !== 1 ? weekData[0]?.label + ' - ' + weekData.at(-1)?.label : weekData[0]?.label,
-            selected: !!weekData.find(el => el.selected)
+            selected: !!weekData.find(el => el?.selected)
           }]
         }
       }
@@ -202,7 +205,10 @@ export class CalendarComponent implements OnInit, OnChanges {
     }
     // якщо ми не передали день як аргумент, це означає, що ми перегенеровуємо масив тижнів і ми маємо задати selected тиждень як перший
     if (!day) {
-      monthData[0].selected = true
+      // @ts-ignore
+      if(monthData[0]) {
+        monthData[0].selected = true
+      }
     }
 
     this.Week = monthData;
@@ -224,7 +230,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   change(value: 'Next' | 'Back'): void {
     let array = this[this.currentState];
-    let selectedIndex = array.findIndex((s) => s.selected);
+    let selectedIndex = array.findIndex((s) => s?.selected);
     //Make circle array start
     array[selectedIndex].selected = false;
     if (value === 'Next') {
@@ -249,11 +255,11 @@ export class CalendarComponent implements OnInit, OnChanges {
     switch (this.currentState) {
       case 'Month':
       case 'Year':
-        this.setWeekData(this.Year.find(el => el.selected).label, this.Month.findIndex(el => el.selected));
-        this.setDayData(this.Week.find((el) => el.selected));
+        this.setWeekData(this.Year.find(el => el?.selected)?.label, this.Month.findIndex(el => el?.selected));
+        this.setDayData(this.Week.find((el) => el?.selected));
         break;
       case 'Week':
-        this.setDayData(this.Week.find((el) => el.selected))
+        this.setDayData(this.Week.find((el) => el?.selected))
         break;
     }
 
@@ -264,7 +270,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     }
     switch (this.currentState) {
       case 'Day':
-        const day = new Date(this.Day.find(d => d.selected).date.split('.').reverse().join(', '))
+        const day = new Date(this.Day.find(d => d?.selected).date.split('.').reverse().join(', '))
         req = {
           fromDate: new Date(day.setHours(0, 0, 0, 0)).toISOString(),
           toDate: new Date(day.setHours(23, 59, 59, 999)).toISOString(),
@@ -272,7 +278,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         }
         break;
       case 'Week':
-        const week = this.Week.find(w => w.selected).label
+        const week = this.Week.find(w => w?.selected)?.label
         if (week.includes(' - ')) {
           const firstDayOfTheWeek = week.split(' - ')[0]
           const lastDayOfTheWeek = week.split(' - ')[1]
@@ -291,8 +297,8 @@ export class CalendarComponent implements OnInit, OnChanges {
         }
         break;
       case 'Month':
-        const year = this.Year.find(y => y.selected).label
-        const month = this.Month.findIndex(m => m.selected)
+        const year = this.Year.find(y => y?.selected)?.label
+        const month = this.Month.findIndex(m => m?.selected)
         req = {
           fromDate: new Date(year, month, 1).toISOString(),
           toDate: new Date(year, month + 1, 1).toISOString(),
@@ -301,8 +307,8 @@ export class CalendarComponent implements OnInit, OnChanges {
         break;
       case 'Year':
         req = {
-          fromDate: new Date(this.Year.find(y => y.selected).label, 0, 1).toISOString(),
-          toDate: new Date(this.Year.find(y => y.selected).label + 1, 0, 1).toISOString(),
+          fromDate: new Date(this.Year.find(y => y?.selected)?.label, 0, 1).toISOString(),
+          toDate: new Date(this.Year.find(y => y?.selected)?.label + 1, 0, 1).toISOString(),
           statisticsBy: this.currentState
         }
         break;
@@ -322,7 +328,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
 
   getCurrent(state: string): SearchType {
-    return this[state].find(el => el.selected).label;
+    return this[state].find(el => el?.selected)?.label;
   }
 
   ngOnChanges(changes: SimpleChanges): void {

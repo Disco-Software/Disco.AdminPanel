@@ -42,12 +42,9 @@
   border-bottom: solid orange 2px;
 }
 
-.invalid{
-  border-color: red !important;
-}
-
 :host::ng-deep p-message{
-  position: absolute; bottom: 8px; left: -17px;
+  //position: absolute;
+  //bottom: 8px; left: -17px;
   span {
     font-size: 14px !important;
   }

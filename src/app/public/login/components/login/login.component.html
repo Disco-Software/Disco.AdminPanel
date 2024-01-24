@@ -6,25 +6,32 @@
       class="login-form form d-flex justify-content-center flex-column align-items-center py-6 px-3 py-sm-7 px-sm-8"
     >
       <div class="form-title title weight-4 size-50">DISCO</div>
-      <div class="form-login weight-4 size-32">
+      <div class="form-login weight-4 size-32 mb-4">
         <h4>{{'authentication.title' | translate}}</h4>
       </div>
       <div class="mw-100 form-inputs inputs">
         <form (keydown)="onEnterSubmit($event)"
           [formGroup]="loginForm" (submit)="onSubmit()" class="mb-5">
-          <div class="inputs-input weight-4 size-16 d-flex flex-column mb-4">
+          <div class="inputs-input weight-4 size-16 d-flex flex-column mb-5 position-relative">
             <label class="m-3 mb-2 mt-0" for="email">{{'authentication.email' | translate}}</label>
             <input
+              [class.invalid]="checkIsValid('email')"
               class=" p-2"
               type="email"
               name="email"
               id="email"
               formControlName="email"
             />
+            <span *ngIf="checkIsValid('email')" style="color: red; font-size: 12px; top: 69px;"
+                  class="mt-2 position-absolute">
+              <i class="pi pi-exclamation-triangle" style="color: red"></i>
+              {{'authentication.validationErrors.email' | translate}}
+            </span>
           </div>
-          <div class="inputs-input weight-4 size-16 d-flex flex-column">
+          <div class="inputs-input weight-4 size-16 d-flex flex-column position-relative mb-4">
             <label class="m-3 mb-2 mt-0" for="password">{{ 'authentication.password' | translate }}</label>
               <input
+                [class.invalid]="checkIsValid('password')"
                 class="p-2"
                 type="password"
                 name="password"
@@ -32,6 +39,32 @@
                 formControlName="password"
                 appShowPassword
               />
+            <div style="color: red; font-size: 12px; top: 69px; max-width: 230px" class="mt-2">
+              <span
+                *ngIf="checkIsValid('password') && getFormControlErrors('password')['required'] "
+                style="color: red; font-size: 12px;" class="mt-2">
+              <i class="pi pi-exclamation-triangle" style="color: red"></i>
+                {{'authentication.validationErrors.passwordRequired' | translate}}
+            </span>
+                 <span
+                   *ngIf="checkIsValid('password') && (getFormControlErrors('password')['minlength'])"
+                   style="color: red; font-size: 12px;" class="mt-2">
+              <i class="pi pi-exclamation-triangle" style="color: red"></i>
+                   {{'authentication.validationErrors.passwordLength' | translate}}
+            </span>
+              <div *ngIf="checkIsValid('password') && (getFormControlErrors('password')['invalidPassword'])"  style="color: red; font-size: 12px;" class="mt-2">
+                <i class="pi pi-exclamation-triangle" style="color: red"></i>
+                {{'authentication.validationErrors.passwordCases' | translate}}
+              </div>
+            </div>
+            <!--            <span *ngIf="checkIsValid('password')" style="color: red; font-size: 12px; top: 69px;" class="mt-2 position-absolute">-->
+            <!--              <i class="pi pi-exclamation-triangle" style="color: red"></i>-->
+            <!--              {{'authentication.validationErrors.passwordLength' | translate}}-->
+            <!--            </span>-->
+            <!--            <span *ngIf="checkIsValid('password') && getFormControlErrors('password')['invalidPassword']" style="color: red; font-size: 12px; top: 69px;" class="mt-2 position-absolute">-->
+            <!--              <i class="pi pi-exclamation-triangle" style="color: red"></i>']-->
+            <!--              {{'authentication.validationErrors.passwordCases' | translate}}-->
+            <!--            </span>-->
           </div>
         </form>
       </div>

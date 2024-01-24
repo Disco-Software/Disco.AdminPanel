@@ -4,7 +4,13 @@
     "email" : "Ел.пошта",
     "password" : "Пароль",
     "submit" : "Увійти",
-    "forgot" : "Забули пароль?"
+    "forgot" : "Забули пароль?",
+    "validationErrors" : {
+      "email" : "Емейл є обовʼязковим",
+      "passwordRequired": "Пароль є обовʼязковим",
+      "passwordLength": "Пароль має бути не менше ніж 6 літер",
+      "passwordCases": "Пароль має містити 1 велику літеру, 1 маленьку літеру, 1 цифру, 1 спеціальний символ"
+    }
   },
 
   "forgot" : {
@@ -102,13 +108,13 @@
     "admin" : "Адміністратор",
     "user" : "Користувач",
     "userName" : "Ім'я користувача",
-    "userNameValidationError" : "Ім'я користувача є обов'ясковим",
+    "userNameValidationError" : "Ім'я користувача є обов'язковим",
     "email" : "Ел.пошта",
-    "emailValidationError" : "Ел.пошта є обов'ясковою",
+    "emailValidationError" : "Ел.пошта є обов'язковою",
     "password" : "Пароль",
-    "passwordValidationError" : "Пароль має бути не месьше ні 6 літер",
-    "confirmPassword" : "Підтведження паролью",
-    "confirmPasswordValidationError" : "Пароль має бути не месьше ні 6 літер",
+    "passwordValidationError" : "Пароль має бути не менше ніж 6 літер",
+    "confirmPassword" : "Підтвердження паролю",
+    "confirmPasswordValidationError" : "Пароль має бути не менше ніж 6 літер",
     "create" : "Створити користувача"
   },
 

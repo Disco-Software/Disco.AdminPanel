@@ -27,22 +27,34 @@ export class RestService {
           this._store.dispatch(new LoaderRemoveAction(description)).pipe(take(1));
           return of(response);
         }), catchError((error) => {
+             console.log(error)
+             console.log(typeof error.error)
           if(error.error) {
-            this.showToasterWithErrorMessages(error.error.errorMessages)
-          } else {
+            let errors: any = error.error;
+            if(typeof errors === 'string') {
+              errors = JSON.parse(errors)
+            }
+            this.showToasterWithErrorMessages(errors.errorMessages)
+          } else if(error.errorMessages) {
             this.showToasterWithErrorMessages(error.errorMessages)
+          } else {
+            this.showToasterWithErrorMessages(error.statusText)
           }
           return throwError(() => error);
         }), finalize(() => this._store.dispatch(new LoaderRemoveAction(description))))
      }));
    }
 
-   showToasterWithErrorMessages(errorMessages) {
+   showToasterWithErrorMessages(errorMessages): void {
     if(!errorMessages) {
       return;
     }
-     errorMessages.forEach(error=>{
-       this._messageService.add({severity: "error", summary: 'Api Error', detail: error.message})
-     })
+    if(typeof errorMessages === 'string') {
+      this._messageService.add({severity: "error", summary: 'Api Error', detail: errorMessages})
+    } else {
+      errorMessages.forEach(error=>{
+        this._messageService.add({severity: "error", summary: 'Api Error', detail: error.message})
+      })
+    }
    }
 }

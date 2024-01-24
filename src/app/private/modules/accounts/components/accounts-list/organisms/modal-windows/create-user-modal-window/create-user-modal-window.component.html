@@ -5,7 +5,7 @@
   <ng-template #body>
     <form [formGroup]="form" class="px-2">
       <div class="row">
-        <div class="d-flex justify-content-around align-items-center pb-4">
+        <div class="d-flex justify-content-around align-items-center pt-3 pt-sm-0 pb-5 pb-sm-4">
           <button
             *ngFor="let state of states"
             [class.active]="currentState === state.name"
@@ -19,8 +19,8 @@
 
 
       <div class="row">
-        <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center ">
-          <div class="w-100 w-sm-auto form-group group pb-3 pb-sm-5 position-relative">
+        <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center">
+          <div class="w-100 w-sm-43 form-group group pb-4 pb-sm-5 position-relative">
             <label class="form-label label mx-2">{{'create-user-modal.userName' | translate}}</label>
             <input
               [class.invalid]="checkIsValid('userName')"
@@ -28,11 +28,12 @@
               type="text"
               class="form-control control"
             />
-            <p-message severity="Error"
-                       text="{{'create-user-modal.userNameValidationError' | translate}}"
-                       [@errorState]="checkIsValid('userName') ? 'show' : 'hide'"></p-message>
+            <span *ngIf="checkIsValid('userName')" style="color: red; font-size: 12px" class="mt-2 position-absolute">
+              <i class="pi pi-exclamation-triangle" style="color: red"></i>
+              {{'create-user-modal.userNameValidationError' | translate}}
+            </span>
           </div>
-          <div class="w-100 w-sm-auto form-group group pb-3 pb-sm-5 position-relative">
+          <div class="w-100 w-sm-43 form-group group pt-3 pt-sm-0 pb-4 pb-sm-5 position-relative">
             <label class="form-label label mx-2">{{'create-user-modal.email' | translate}}</label>
             <input
               [class.invalid]="checkIsValid('email')"
@@ -40,13 +41,14 @@
               formControlName="email"
               class="form-control control"
             />
-            <p-message severity="Error"
-                       text="{{'create-user-modal.emailValidationError' | translate}}"
-                       [@errorState]="checkIsValid('email') ? 'show' : 'hide'"></p-message>
+            <span *ngIf="checkIsValid('email')" style="color: red; font-size: 12px" class="mt-2 position-absolute">
+              <i class="pi pi-exclamation-triangle" style="color: red"></i>
+              {{'create-user-modal.emailValidationError' | translate}}
+            </span>
           </div>
         </div>
-        <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center">
-          <div class="w-100 w-sm-auto form-group group pb-3 pb-sm-5 position-relative">
+        <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center mb-2">
+          <div class="w-100 w-sm-43 form-group group  pt-3 pt-sm-0 pb-4 pb-sm-5 position-relative">
             <label class="form-label label mx-2">{{'create-user-modal.password' | translate}}</label>
             <input
               [class.invalid]="checkIsValid('password')"
@@ -54,11 +56,12 @@
               type="password"
               class="form-control control"
             />
-            <p-message severity="Error"
-                       text="{{'create-user-modal.passwordValidationError' | translate}}"
-                       [@errorState]="checkIsValid('password') ? 'show' : 'hide'"></p-message>
+            <span *ngIf="checkIsValid('password')" style="color: red; font-size: 12px" class="mt-2 position-absolute">
+              <i class="pi pi-exclamation-triangle" style="color: red"></i>
+              {{'create-user-modal.passwordValidationError' | translate}}
+            </span>
           </div>
-          <div class="w-100 w-sm-auto form-group group pb-3 pb-sm-5 position-relative" >
+          <div class="w-100 w-sm-43 form-group group  pt-3 pt-sm-0 pb-4 pb-sm-5 position-relative" >
             <label class="form-label label mx-2">{{'create-user-modal.confirmPassword' | translate}}</label>
             <input
               [class.invalid]="checkIsValid('confirmPassword')"
@@ -66,9 +69,10 @@
               type="password"
               class="form-control control"
             />
-            <p-message severity="Error"
-                       text="{{'create-user-modal.confirmPasswordValidationError' | translate}}"
-                       [@errorState]="checkIsValid('confirmPassword') ? 'show' : 'hide'"></p-message>
+            <span *ngIf="checkIsValid('confirmPassword')" style="color: red; font-size: 12px" class="mt-2 position-absolute">
+              <i class="pi pi-exclamation-triangle" style="color: red"></i>
+              {{'create-user-modal.confirmPasswordValidationError' | translate}}
+            </span>
           </div>
         </div>
       </div>

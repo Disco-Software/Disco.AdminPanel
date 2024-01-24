@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {takeUntil} from 'rxjs/operators';
 import {map, Observable, Subject} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -31,6 +31,7 @@ export class LoginComponent implements OnDestroy {
     password: new FormControl('', [
       Validators.minLength(6),
       Validators.required,
+      this.passwordValidator,
     ]),
   });
 
@@ -111,6 +112,38 @@ export class LoginComponent implements OnDestroy {
         'd-flex justify-content-center align-items-center h-100',
     });
   }
+
+  getFormControl(field): AbstractControl {
+    return this.loginForm.get(field)
+  }
+
+  public checkIsValid(field): boolean {
+    return this.getFormControl(field)?.invalid && (this.getFormControl(field)?.dirty || this.getFormControl(field)?.touched)
+  }
+
+  public getFormControlErrors(field): ValidationErrors {
+    return this.getFormControl(field).errors
+  }
+
+  private passwordValidator(control: AbstractControl): ValidationErrors | null {
+    const value: string = control.value;
+
+    const hasUpperCase = /[A-Z]/.test(value);
+    const hasLowerCase = /[a-z]/.test(value);
+    const hasDigit = /\d/.test(value);
+    const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value);
+
+    const isValid = hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar;
+
+    return isValid
+      ? null
+      : {
+        invalidPassword: true,
+      };
+  }
+
+  // ... (решта коду без змін)
+
 
   ngOnDestroy(): void {
     this.destroy$.next(true);

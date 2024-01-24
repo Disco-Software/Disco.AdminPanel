@@ -84,7 +84,7 @@ export class CreateUserModalWindowComponent {
     return this.form.get(field)
   }
 
-  checkIsValid(field) {
-    return this.getFormControl(field).invalid && (this.getFormControl(field).dirty || this.getFormControl(field).touched)
+  checkIsValid(field): boolean {
+    return this.getFormControl(field)?.invalid && (this.getFormControl(field)?.dirty || this.getFormControl(field)?.touched)
   }
 }
