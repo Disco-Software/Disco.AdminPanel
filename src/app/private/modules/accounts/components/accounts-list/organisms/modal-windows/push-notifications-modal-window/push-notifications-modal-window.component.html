@@ -3,7 +3,7 @@
   <ng-template #title>{{'push-notification-modal.header' | translate}}</ng-template>
 
   <ng-template #body>
-    <div class=" d-flex flex-column w-100 justify-content-center align-items-center" [formGroup]="notificationsForm">
+    <form class=" d-flex flex-column w-100 justify-content-center align-items-center" [formGroup]="notificationsForm" (keydown)="onEnterSubmit($event)">
       <span class="p-fluid w-100 bg-transparent">
         <p-autoComplete
           #autoComplete
@@ -19,7 +19,7 @@
       <input type="text" pInputText formControlName="title" class="w-100 bg-transparent" placeholder="{{'push-notification-modal.title' | translate}}" />
       <textarea rows="10" cols="30" formControlName="body" pInputTextarea class="w-100 bg-transparent" placeholder="{{'push-notification-modal.body' | translate}}"></textarea>
 
-    </div>
+    </form>
   </ng-template>
 
   <ng-template #buttons>

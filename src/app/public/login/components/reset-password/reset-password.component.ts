@@ -51,4 +51,10 @@ export class ResetPasswordComponent {
         this.formGroup.get('confirmPassword').value.length > 0) &&
       (this.formGroup.get('password').value === this.formGroup.get('confirmPassword').value))
   }
+
+  public onEnterSubmit(e: KeyboardEvent): void {
+    if (e.key === 'Enter') {
+      this.recoverPassword()
+    }
+  }
 }

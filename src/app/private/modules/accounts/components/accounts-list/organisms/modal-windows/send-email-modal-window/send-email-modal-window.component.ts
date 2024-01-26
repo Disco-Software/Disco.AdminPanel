@@ -78,6 +78,12 @@ export class SendEmailModalWindowComponent implements OnInit, AfterViewInit, OnD
     })
   }
 
+  public onEnterSubmit(e: KeyboardEvent): void {
+    if (e.key === 'Enter') {
+      this.sendEmail()
+    }
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();

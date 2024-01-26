@@ -3,7 +3,7 @@
   <ng-template #title>{{'create-user-modal.title' | translate}}</ng-template>
 
   <ng-template #body>
-    <form [formGroup]="form" class="px-2">
+    <form [formGroup]="form" class="px-2" (keydown)="onEnterSubmit($event)">
       <div class="row">
         <div class="d-flex justify-content-around align-items-center pt-3 pt-sm-0 pb-5 pb-sm-4">
           <button

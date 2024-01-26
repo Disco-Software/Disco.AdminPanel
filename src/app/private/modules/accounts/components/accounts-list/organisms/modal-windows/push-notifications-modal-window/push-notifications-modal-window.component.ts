@@ -86,6 +86,12 @@ export class PushNotificationsModalWindowComponent implements OnInit, OnDestroy 
     })
   }
 
+  public onEnterSubmit(e: KeyboardEvent): void {
+    if (e.key === 'Enter') {
+      this.sendNotifications()
+    }
+  }
+
   ngOnDestroy() {
     this.onDestroy$.next();
     this.onDestroy$.complete();

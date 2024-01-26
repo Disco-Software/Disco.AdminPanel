@@ -83,7 +83,7 @@ export class LoginComponent implements OnDestroy {
     }
   }
 
-  private userLogin(): void {
+  public userLogin(): void {
     this._store
       .dispatch(
         new UserLoginAction({

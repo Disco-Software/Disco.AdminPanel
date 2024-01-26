@@ -67,7 +67,12 @@ export class ForgotPasswordComponent {
   }
 
   checkIsValid(field) {
-    // console.log(this.getFormControl(field).errors)
     return this.getFormControl(field).invalid && (this.getFormControl(field).dirty || this.getFormControl(field).touched)
+  }
+
+  public onEnterSubmit(e: KeyboardEvent): void {
+    if (e.key === 'Enter') {
+      this.onSubmit()
+    }
   }
 }

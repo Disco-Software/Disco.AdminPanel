@@ -86,4 +86,11 @@ export class PasswordCodeModalComponent implements OnInit {
 // this called only if user entered full code
   onCodeCompleted(code: string) {
   }
+
+  public onEnterSubmit(e: KeyboardEvent): void {
+    console.log('here')
+    if (e.key === 'Enter') {
+      this.onSubmit()
+    }
+  }
 }

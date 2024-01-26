@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ImageCropperModule} from "ngx-image-cropper";
 import {InputComponent, SearchInputComponent} from "./components";
 import {CoreModule} from "@core";
-import { ShowPasswordDirective } from './directives';
+import {ShowPasswordDirective} from './directives';
 
 const COMPONENTS = [
   SearchInputComponent,
@@ -21,7 +21,7 @@ const MODULES = [
 ];
 
 const DIRECTIVES = [
-  ShowPasswordDirective
+  ShowPasswordDirective,
 ]
 
 @NgModule({
