@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LocalStorageService} from '@core/services';
 import {Store} from '@ngxs/store';
 import {GetStatisticsAction} from '@core/states';
@@ -9,12 +9,10 @@ import {SearchType} from 'src/app/core/models/calendar/search-type.model';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
 })
-export class CalendarComponent implements OnInit, OnChanges {
+export class CalendarComponent implements OnInit {
   public currentState: string;
 
-  public selectedItem: string;
-
-  public dayEnum: any = [
+  public dayEnum: string[] = [
     'dayEnum.Monday',
     'dayEnum.Tuesday',
     'dayEnum.Wednesday',
@@ -24,29 +22,29 @@ export class CalendarComponent implements OnInit, OnChanges {
     'dayEnum.Sunday',
   ];
 
-  public state : SearchType[] = [
+  public states: SearchType[] = [
     {name: 'Day', title : 'calendar.day'},
     {name: 'Week', title : 'calendar.week'},
     {name: 'Month', title : 'calendar.month'},
     {name: 'Year', title : 'calendar.year'}
   ];
 
-  public Month: any = [
-    { label: 'monthes.January' },
-    { label: 'monthes.February' },
-    { label: 'monthes.March' },
-    { label: 'monthes.April' },
-    { label: 'monthes.May' },
-    { label: 'monthes.June' },
-    { label: 'monthes.July' },
-    { label: 'monthes.August' },
-    { label: 'monthes.September' },
-    { label: 'monthes.October' },
-    { label: 'monthes.November' },
-    { label: 'monthes.December' },
+  public Month: {label: string, selected?: boolean}[] = [
+    { label: 'months.January' },
+    { label: 'months.February' },
+    { label: 'months.March' },
+    { label: 'months.April' },
+    { label: 'months.May' },
+    { label: 'months.June' },
+    { label: 'months.July' },
+    { label: 'months.August' },
+    { label: 'months.September' },
+    { label: 'months.October' },
+    { label: 'months.November' },
+    { label: 'months.December' },
   ];
 
-  public Day: any = []
+  public Day: any = [];
 
   public Year: any = [];
 
@@ -62,7 +60,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.setWeekData(new Date().getFullYear(), new Date().getMonth(), new Date())
     this.setDayData(this.Week.find((el) => el?.selected), true);
 
-    this.state.forEach((s) => {
+    this.states.forEach((s) => {
       if (s.name !== 'Week' && s.name !== 'Day') {
         this[s.name].forEach((item : {selected : boolean}, i : Number) => {
           if (i === date['get' + s.name]()) {
@@ -131,16 +129,18 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   setWeekData(year: number, month: number, day?: Date): void {
+
     let monthData = [];
 
     var firstOfMonth = new Date(year, month, 1);
 
     var lastOfMonth = new Date(year, month + 1, 0);
 
-    let weekData = []
+    let weekData = [];
 
     for (let i = firstOfMonth.getDate(); i <= lastOfMonth.getDate(); i++) {
-      const dayInfo = new Date(year, month, i)
+      const dayInfo = new Date(year, month, i);
+
       if (dayInfo.getDay() !== 1) {
         // не понеділок
 
@@ -156,23 +156,38 @@ export class CalendarComponent implements OnInit, OnChanges {
         }
 
         // додаємо інформацію про день в масив тижня
-        weekData = [...weekData, labelInfo]
+        if(weekData.length > 0) {
+          weekData = [...weekData, labelInfo]
+        } else {
+          weekData = [labelInfo]
+        }
 
         // додати тиждень в загальний масив, якщо зараз останній день місяця
         if (i === lastOfMonth.getDate()) {
+          if(monthData.length > 0 ){
+            monthData = [...monthData, {
+              label: weekData?.length !== 1 ? weekData[0]?.label + ' - ' + weekData.at(-1)?.label : weekData[0]?.label,
+              selected: !!weekData.find(el => el?.selected)
+            }]
+          } else {
+            monthData = [{
+              label: weekData?.length !== 1 ? weekData[0]?.label + ' - ' + weekData.at(-1)?.label : weekData[0]?.label,
+              selected: !!weekData.find(el => el?.selected)
+            }]
+          }
+
+        }
+
+      } else {
+        //понеділок
+
+        // коли наступає понеділок - додаємо інформацію зі всього минулого тижня в загальний масив місяця
+        if(weekData.length > 0) {
           monthData = [...monthData, {
             label: weekData?.length !== 1 ? weekData[0]?.label + ' - ' + weekData.at(-1)?.label : weekData[0]?.label,
             selected: !!weekData.find(el => el?.selected)
           }]
         }
-      } else {
-        //понеділок
-
-        // коли наступає понеділок - додаємо інформацію зі всього минулого тижня в загальний масив місяця
-        monthData = [...monthData, {
-          label: weekData?.length !== 1 ? weekData[0]?.label + ' - ' + weekData.at(-1)?.label : weekData[0]?.label,
-          selected: !!weekData.find(el => el?.selected)
-        }]
 
         // після того, як додали інформацію про минулий тиждень, очищуємо масив тижня, щоб створювати в ньому наступний масив тижня
         weekData = []
@@ -199,9 +214,6 @@ export class CalendarComponent implements OnInit, OnChanges {
           }]
         }
       }
-
-
-
     }
     // якщо ми не передали день як аргумент, це означає, що ми перегенеровуємо масив тижнів і ми маємо задати selected тиждень як перший
     if (!day) {
@@ -212,18 +224,19 @@ export class CalendarComponent implements OnInit, OnChanges {
     }
 
     this.Week = monthData;
-    // this.setDayData(this.Week.find(el => el.selected));
   }
 
   setYearRange(): void {
-    const yearOfRegistration = new Date(
+    let yearOfRegistration: number = new Date(
       this._lsService.getItem('user').dateOfRegister
     ).getFullYear();
+    // TODO
+    yearOfRegistration = 2021;
     const yearOfNow = new Date().getFullYear();
     for (let i = yearOfRegistration; i <= yearOfNow; i++) {
       this.Year = [
         ...this.Year,
-        { label: i, selected: i === yearOfNow ? true : false },
+        { label: i, selected: i === yearOfNow },
       ];
     }
   }
@@ -329,9 +342,5 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   getCurrent(state: string): SearchType {
     return this[state].find(el => el?.selected)?.label;
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('on changes')
   }
 }

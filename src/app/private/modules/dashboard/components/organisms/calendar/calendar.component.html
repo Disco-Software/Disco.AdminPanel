@@ -13,12 +13,12 @@
       class="d-flex justify-content-center align-items-center mt-sm-0 mt-md-4"
     >
       <button
-        [class.active]="item.name === currentState"
-        *ngFor="let item of state"
-        (click)="setState(item.name)"
+        *ngFor="let state of states"
+        [class.active]="state.name === currentState"
+        (click)="setState(state.name)"
         class="calendar calendar-item m-2 mt-0 mb-0 mr-md-4"
       >
-        {{ item.title | translate }}
+        {{ state.title | translate }}
       </button>
     </div>
   </div>
