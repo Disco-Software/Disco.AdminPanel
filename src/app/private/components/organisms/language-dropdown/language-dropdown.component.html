@@ -4,7 +4,7 @@
 
   <div role="button"   class=" d-flex flex-row justify-content-center align-items-center text-center  bg-transparent border-0">
     <label  class=" lenguage-span span dropdown-toggle m-2 mt-0 mb-0" id="dropdownMenu1">{{currentLanguage?.name | translate}}</label>
-    <img
+    <img #toggleMenuIcon
     (click)="toggleDropDownMenu()"
     [class.lenguage-icon-open]="isShowing"
     [class.lenguage-icon-close]="!isShowing"
@@ -15,7 +15,8 @@
     [class.lenguage-menu-open]="isShowing"
     [class.lenguage-menu-close]="!isShowing"
     [ngbCollapse]="!isShowing"
-
+    (appClickOutside)="isShowing = false"
+    [additionalClickableSpace]="toggleMenuIcon"
     class=" lenguage-menu menu dropdown-menu position-absolute right-0" style="top: 30px" aria-labelledby="dropdownMenu1">
     <div *ngFor="let language of languages" class="cursor-pointer lenguage-item item d-flex justify-content-between flex-row align-items-center">
       <ng-container *ngIf="!language.isActive; else elseTemplate">

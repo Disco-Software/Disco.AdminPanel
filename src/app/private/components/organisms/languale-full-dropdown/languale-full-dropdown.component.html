@@ -1,4 +1,5 @@
 <div
+  #toggleMenuIcon
   class="w-100 py-4 px-5 d-flex justify-content-between align-items-center"
 >
   <div>
@@ -13,7 +14,11 @@
     [src]="'/assets/images/ic_sm_dropdown.svg'"
   />
 </div>
-<div [ngbCollapse]="!isShowing" class="ml-5 collapse">
+<div
+  [ngbCollapse]="!isShowing" class="ml-5 collapse"
+  (appClickOutside)="isShowing = false"
+  [additionalClickableSpace]="toggleMenuIcon"
+>
   <ul class="list-style-type-none full-dropdown-list">
     <li
       *ngFor="let language of languages"

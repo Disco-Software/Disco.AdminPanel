@@ -1,4 +1,5 @@
 <div
+  #toggleMenuIcon
   [style.width.%]="width"
   [class.user-open-dropdown]="isOpen"
   [class.user-close-dropdown]="!isOpen"
@@ -20,7 +21,11 @@
     </div>
   </div>
 </div>
-<div [ngbCollapse]="!isOpen" class=" collapse m-4 mr-0 mb-0 mt-0">
+<div
+  [ngbCollapse]="!isOpen" class=" collapse m-4 mr-0 mb-0 mt-0"
+  (appClickOutside)="isOpen = false"
+  [additionalClickableSpace]="toggleMenuIcon"
+>
   <ul class=" user-actions actions bg-transparent">
     <li
        *ngFor="let userAction of userActions"
