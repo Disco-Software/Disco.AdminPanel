@@ -18,17 +18,15 @@ export class RestService {
      this.serverUrl = environment.api;
    }
 
-  public request(method: string, url: string, description: string, request?: any, requestOptions?: any): Observable<any> {
+  public request(method: string, url: string, description: string, requestObject?: any, requestOptions?: any): Observable<any> {
      return this._store.dispatch(new LoaderAddAction(description)).pipe(take(1),switchMap(() => {
-       return this.http[(method).toLowerCase()](`${this.serverUrl}/${url}`, request, requestOptions)
+       return this.http[(method).toLowerCase()](`${this.serverUrl}/${url}`, requestObject, requestOptions)
          .pipe(
            take(1),
            mergeMap((response) => {
           this._store.dispatch(new LoaderRemoveAction(description)).pipe(take(1));
           return of(response);
         }), catchError((error) => {
-             console.log(error)
-             console.log(typeof error.error)
           if(error.error) {
             let errors: any = error.error;
             if(typeof errors === 'string') {
