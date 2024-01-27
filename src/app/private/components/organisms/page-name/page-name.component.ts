@@ -20,7 +20,7 @@ export class PageNameComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const pageIdentifier = this._router.url.split('private/')[1];
+    const pageIdentifier = this._router.url.split('/')[1];
     this.pageModel = {
       pageName: `sidebar.${pageIdentifier.toLowerCase()}`,
       pageIcon: pageIdentifier,
@@ -29,7 +29,7 @@ export class PageNameComponent implements OnInit, OnDestroy {
 
     this._router.events.pipe(takeUntil(this.onDestroy$)).subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        const pageIdentifier = val.url.split('private/')[1];
+        const pageIdentifier = val.url.split('/')[1];
         this.pageModel = {
           pageName: `sidebar.${pageIdentifier.toLowerCase()}`,
           pageIcon: pageIdentifier,

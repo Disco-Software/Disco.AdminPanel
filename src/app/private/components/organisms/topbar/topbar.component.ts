@@ -16,10 +16,10 @@ export class TopbarComponent implements OnInit {
   @Output() isCollapsedEmitter = new EventEmitter<boolean>()
 
   public routes : Routes[] = [
-    { path: 'private/overview', title: 'sidebar.overview', icon: 'overview'},
-    { path: 'private/accounts', title: 'sidebar.accounts', icon: 'accounts'},
-    { path: 'private/posts', title: 'sidebar.posts', icon: 'posts'},
-    { path: 'private/feedback', title: 'sidebar.feedback', icon: 'feedback'},
+    { path: 'overview', title: 'sidebar.overview', icon: 'overview'},
+    { path: 'accounts', title: 'sidebar.accounts', icon: 'accounts'},
+    { path: 'posts', title: 'sidebar.posts', icon: 'posts'},
+    { path: 'feedback', title: 'sidebar.feedback', icon: 'feedback'},
 
   ]
 
