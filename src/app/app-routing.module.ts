@@ -5,19 +5,19 @@ import { AuthenticationGuard } from '@core/guards';
 const routes: Routes = [
   {
     path: "",
-    redirectTo: 'public',
+    redirectTo: '/overview',
     pathMatch: 'full',
   },
 
   {
-    path: 'public',
+    path: '',
     children: [
       {path: '', loadChildren: () => import('./public/public.module').then((m) => m.PublicModule)}
     ]
   },
 
   {
-    path: 'private',
+    path: '',
     canActivate: [AuthenticationGuard],
     children: [
       {path: '', loadChildren: () => import('./private/private.module').then((m) => m.PrivateModule)}

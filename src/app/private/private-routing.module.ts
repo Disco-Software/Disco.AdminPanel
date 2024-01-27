@@ -11,7 +11,7 @@ const routes: Routes = [
       {
         path: 'overview',
         loadChildren: () =>
-          import('../private/modules/dashboard/dashboard.module').then(
+          import('./modules/dashboard/dashboard.module').then(
             (m) => m.DashboardModule
           ),
       },

@@ -36,7 +36,7 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild {
       return true;
     }
     else {
-      this.router.navigateByUrl('/public');
+      this.router.navigateByUrl('/login');
       return false;
     }
 

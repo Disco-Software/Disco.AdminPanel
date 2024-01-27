@@ -69,7 +69,7 @@ export class LoginComponent implements OnDestroy {
 
       this.username = user.userName;
 
-      this._router.navigateByUrl('/private');
+      this._router.navigateByUrl('/');
     }
   }
 
@@ -101,7 +101,7 @@ export class LoginComponent implements OnDestroy {
           this._storageService.setString('accessToken', response.accessToken);
           this._storageService.setString('refreshToken', response.refreshToken);
 
-          this._router.navigateByUrl('private/overview');
+          this._router.navigateByUrl('overview');
         }
       });
   }

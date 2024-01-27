@@ -42,7 +42,7 @@ export class UserInfoComponent {
     this._localStorageService.removeItem('accessToken');
     this._localStorageService.removeItem('refreshToken');
 
-     this._router.navigateByUrl('public/login');
+     this._router.navigateByUrl('login');
   }
 
 }
