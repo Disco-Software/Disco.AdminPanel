@@ -1,4 +1,4 @@
-.image-container {
+.image-container:not(i) {
   position: relative;
   display: inline-block;
   cursor: pointer;
@@ -24,11 +24,6 @@
   border-radius: 50px;
 }
 
-//.overlay img {
-//  width: 50px; /* задайте розмір іконки відповідно до ваших потреб */
-//  height: 50px;
-//  border-radius: 50%; /* для круглої форми іконки */
-//}
 
 .modal {
   &-body {
