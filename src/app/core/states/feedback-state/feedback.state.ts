@@ -2,13 +2,15 @@ import {Action, Selector, State, StateContext} from "@ngxs/store";
 import {catchError, EMPTY, tap} from "rxjs";
 import {Injectable} from "@angular/core";
 import {FeedbackService} from "./feedback.service";
-import {GetAllFeedbacks} from "./feedback.action";
-import {FeedbackInterface, FeedbackStateInterface} from "@core";
+import {GetAllFeedbacks, GetFeedbacksCountAction} from "./feedback.action";
+import {AccountStateInterface, FeedbackInterface, FeedbackStateInterface, GetAccountsCountAction} from "@core";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @State({
   name: "FeedbackState",
   defaults: {
-    allFeedbacks: []
+    allFeedbacks: [],
+    count: null
   },
 })
 @Injectable()
@@ -19,6 +21,11 @@ export class FeedbackState {
   @Selector()
   static getAllFeedbacksSelector(state: FeedbackStateInterface): FeedbackInterface[] {
     return state.allFeedbacks;
+  }
+
+  @Selector()
+  static getFeedbacksCountSelector(state: FeedbackStateInterface): number {
+    return state.count
   }
 
   @Action(GetAllFeedbacks)
@@ -33,5 +40,19 @@ export class FeedbackState {
           allFeedbacks: res
         });
       }))
+  }
+
+  @Action(GetFeedbacksCountAction)
+  public getFeedbacksCount(
+    {patchState}: StateContext<{ count: number }>,
+  ) {
+    return this.feedbackService.getFeedbacksCount(GetAccountsCountAction.type)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return EMPTY;
+        }),
+        tap((response: number) => {
+          patchState({count: response});
+        }))
   }
 }

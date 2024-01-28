@@ -6,3 +6,7 @@ export class GetAllFeedbacks {
   constructor(public payload: RequestDataModel, public isArchive: boolean) {
   }
 }
+
+export class GetFeedbacksCountAction {
+  static readonly type = '[Feedback] Get Count';
+}

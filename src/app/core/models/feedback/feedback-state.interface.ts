@@ -1,5 +1,6 @@
 import {FeedbackInterface} from "./feedback.interface";
 
 export interface FeedbackStateInterface {
-  allFeedbacks: FeedbackInterface[];
+  allFeedbacks: FeedbackInterface[],
+  count: number
 }

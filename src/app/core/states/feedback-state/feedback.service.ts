@@ -14,4 +14,8 @@ export class FeedbackService {
   public getAllFeedbacks(payload: RequestDataModel, isArchive: boolean, description : string): Observable<FeedbackInterface[]> {
     return this._restService.request('GET', `admin/tickets?pageNumber=${payload.pageNumber}&pageSize=${payload.pageSize}&isArchive=${isArchive}`, description, payload);
   }
+
+  public getFeedbacksCount(description : string) : Observable<number>{
+    return this._restService.request('GET', 'admin/tickets/count', description);
+  }
 }

@@ -98,7 +98,6 @@ export class AccountsState {
           return EMPTY;
         }),
         tap((accountsEmails: any[]) => {
-          console.log(accountsEmails)
           patchState({ accountsEmails});
         })
       )

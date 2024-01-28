@@ -1,9 +1,9 @@
 import {Component, HostListener} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {FeedbackChatComponent} from "./components";
-import {Select} from "@ngxs/store";
-import {FeedbackInterface, FeedbackState} from "@core";
-import {Observable} from "rxjs";
+import {Select, Store} from "@ngxs/store";
+import {FeedbackInterface, FeedbackState, GetAllFeedbacks} from "@core";
+import {Observable, take} from "rxjs";
 
 @Component({
   selector: 'app-feedback-list',
@@ -13,6 +13,11 @@ import {Observable} from "rxjs";
 export class FeedbackListComponent {
   @Select(FeedbackState.getAllFeedbacksSelector)
   allFeedbacks$: Observable<FeedbackInterface[]>;
+
+  @Select(FeedbackState.getFeedbacksCountSelector) totalCount$: Observable<number>;
+
+  isArchive: boolean;
+
   isSmallPaginator: boolean;
 
   @HostListener('window:resize', ['$event'])
@@ -22,7 +27,7 @@ export class FeedbackListComponent {
 
   isChatShown: boolean;
 
-  constructor(private _modalService : NgbModal) {
+  constructor(private _modalService: NgbModal, private store: Store) {
     this.getScreenSize();
   }
   open() {
@@ -33,10 +38,13 @@ export class FeedbackListComponent {
       size: 'lg',
       animation: true
   });
-
   }
 
-  ngOnInit() {
+  public onPageChange($event): void {
+    this.getData($event.page + 1, 5);
+  }
 
+  public getData(pageNumber: number, pageSize: number): void {
+    this.store.dispatch(new GetAllFeedbacks({pageNumber, pageSize}, this.isArchive)).pipe(take(1));
   }
 }

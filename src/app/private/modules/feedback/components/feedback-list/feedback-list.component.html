@@ -12,13 +12,16 @@
 <div class="mt-4">
   <p-table
     class="d-none d-md-block"
+    [totalRecords]="totalCount$ | async"
     [tableStyle]="{ 'min-width': '50rem' }"
     styleClass="p-datatable-lg"
     [paginator]="true"
-    [rows]="2"
+    [rows]="5"
     [showFirstLastIcon]="false"
     [value]="allFeedbacks$ | async"
-    [showCurrentPageReport]="false">
+    [showCurrentPageReport]="false"
+    (onPage)="onPageChange($event)"
+  >
     <ng-template pTemplate="header">
       <tr>
         <th>{{'feedback.table.header.name' | translate}}</th>
@@ -55,12 +58,12 @@
     </ng-template>
   </p-table>
   <div class="d-block d-md-none">
-    <div *ngFor="let item of [1,2,3]; let last = last" class="feedback__card rounded p-3 d-flex flex-column mb-3" [class.mb-4]="!last">
+    <div *ngFor="let feedback of (allFeedbacks$ | async); let last = last" class="feedback__card rounded p-3 d-flex flex-column mb-3" [class.mb-4]="!last">
       <div class="d-flex cursor-pointer"  (click)="open()">
         <img src="./assets/images/ic_user-default.png" style="height: 60px"/>
         <div class="d-flex flex-column ms-2">
-          <span class="fs-4">Stanislav Korchevskyi</span>
-          <span style="color: rgba(255, 255, 255, 0.35);">2023-03-18, 11:00</span>
+          <span class="fs-4">{{feedback.owner.username}}</span>
+          <span style="color: rgba(255, 255, 255, 0.35);">{{feedback.createdDate | date:'short' }}</span>
         </div>
       </div>
       <div class="d-flex align-items-center justify-content-between mt-3">
@@ -76,13 +79,14 @@
       </div>
     </div>
     <p-paginator
-      [totalRecords]="10"
+      [totalRecords]="totalCount$ | async"
       [rows]="5"
       [pageLinkSize]="5"
       [showFirstLastIcon]="false"
       [showCurrentPageReport]="false"
       [showJumpToPageDropdown]="isSmallPaginator"
       [showPageLinks]="!isSmallPaginator"
+      (onPageChange)="onPageChange($event)"
     ></p-paginator>
   </div>
 </div>
