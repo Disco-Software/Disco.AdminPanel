@@ -6,3 +6,4 @@ export * from './accounts-state';
 export * from './account-password-state'
 export * from './email-state'
 export * from './notification-state'
+export * from './feedback-state';

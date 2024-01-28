@@ -17,7 +17,7 @@
     [paginator]="true"
     [rows]="2"
     [showFirstLastIcon]="false"
-    [value]="products"
+    [value]="allFeedbacks$ | async"
     [showCurrentPageReport]="false">
     <ng-template pTemplate="header">
       <tr>
@@ -28,29 +28,29 @@
           class="pi pi-sort ps-1 cursor-pointer" style="color: rgba(255, 255, 255, 0.35)"></i></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body">
+    <ng-template pTemplate="body" let-feedback>
       <tr>
         <td class="d-flex align-items-center cursor-pointer underlined_hover" (click)="open()">
           <img src="./assets/images/ic_user-default.png" style="width: 40px"/>
-          <span class="ms-2 vertical-align-middle">Stanislav Korchevskyi</span>
+          <span class="ms-2 vertical-align-middle">{{feedback.owner.username}}</span>
         </td>
-        <td [class]="'priority_' + priority">
+        <td [class]="'priority_' + feedback.priority.toLowerCase()">
           <div class="d-flex align-items-center">
-            <img [src]="'./assets/images/priorities/ic_' + priority + '.svg'"/>
-            <span class="ms-2 vertical-align-middle">{{'feedback.table.body.priority.' + priority | translate}}</span>
+            <img [src]="'./assets/images/priorities/ic_' + feedback.priority.toLowerCase() + '.svg'"/>
+            <span class="ms-2 vertical-align-middle">{{'feedback.table.body.priority.' + feedback.priority.toLowerCase() | translate}}</span>
           </div>
         </td>
         <td>
           <p-tag
             [style]="{ 'background':
-            status === 'open' ? 'rgba(255, 255, 255, 0.10)' :
-            status === 'inProgress' ? '#3983CB' :
-            status === 'closed' ? '#349974' : ''
+            feedback.status.toLowerCase() === 'open' ? 'rgba(255, 255, 255, 0.10)' :
+            feedback.status.toLowerCase() === 'inProgress' ? '#3983CB' :
+            feedback.status.toLowerCase() === 'closed' ? '#349974' : ''
             }"
-            [value]="'feedback.table.body.status.' + status | translate"
+            [value]="'feedback.table.body.status.' + feedback.status.toLowerCase() | translate"
           ></p-tag>
         </td>
-        <td>2023-03-18, 11:00</td>
+        <td>{{feedback.createdDate | date:'short' }}</td>
       </tr>
     </ng-template>
   </p-table>

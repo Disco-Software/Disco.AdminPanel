@@ -15,7 +15,7 @@ export class ClickOutsideDirective {
         if (!targetElement) {
             return;
         }
-      console.log('here')
+
         if(this.additionalClickableSpace instanceof ElementRef) {
             this.additionalClickableSpace = this.additionalClickableSpace.nativeElement;
         }

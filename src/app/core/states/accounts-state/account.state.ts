@@ -5,7 +5,7 @@ import {AccountService} from "./account.service";
 import {AccountModel} from "../../models/account/getaccounts.model";
 import {
   AccountAction,
-  CreateAccountAction,
+  CreateAccountAction, DeleteAccountPhotoAction,
   EditAccountEmailAction,
   EditAccountPasswordAction, EditAccountPhotoAction,
   EditAccountRoleAction,
@@ -213,6 +213,20 @@ export class AccountsState {
           patchState({account: response.account});
         }))
   }
+
+  @Action(DeleteAccountPhotoAction)
+  public deleteAccountPhoto(
+    { patchState }: StateContext<{ account: Account }>,
+    { id }: DeleteAccountPhotoAction){
+    return this._accountService.deletePhoto(id, EditAccountEmailAction.type)
+      .pipe(catchError(() => {
+          return EMPTY;
+        }),
+        tap((response : {account: Account}) => {
+          patchState({account: response.account});
+        }))
+  }
+
 
   @Action(EditAccountRoleAction)
   public changeAccountRole(

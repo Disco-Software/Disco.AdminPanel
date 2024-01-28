@@ -65,6 +65,10 @@ export class AccountService {
     return this._restService.request("PUT", "admin/account/change/photo", description, fd);
   }
 
+  public deletePhoto(id : number, description : string) : Observable<{account : Account}> {
+    return this._restService.request('DELETE', `admin/account/delete/photo/${id}`, description);
+  }
+
   public changeRole(request : ChangeRoleRequestModel, description : string) : Observable<{account : Account}> {
     return this._restService.request('PUT', 'admin/roles/change/role', description, request);
   }

@@ -228,10 +228,8 @@ export class CalendarComponent implements OnInit {
 
   setYearRange(): void {
     let yearOfRegistration: number = new Date(
-      this._lsService.getItem('user').dateOfRegister
+      this._lsService.getItem('user').created
     ).getFullYear();
-    // TODO
-    yearOfRegistration = 2021;
     const yearOfNow = new Date().getFullYear();
     for (let i = yearOfRegistration; i <= yearOfNow; i++) {
       this.Year = [

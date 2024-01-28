@@ -8,5 +8,7 @@ export * from './rest'
 export * from './user-actions'
 export * from './loader';
 export * from './graph';
-export * from './app-config'
-export * from './account-password'
+export * from './app-config';
+export * from './account-password';
+export * from './request.interface';
+export * from './feedback';

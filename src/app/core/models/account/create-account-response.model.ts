@@ -9,7 +9,7 @@ export interface User {
   roleName: string
   refreshToken: string
   refreshTokenExpiress: string
-  dateOfRegister: string
+  created: string
   accountId: number
   account: Account
   id: number

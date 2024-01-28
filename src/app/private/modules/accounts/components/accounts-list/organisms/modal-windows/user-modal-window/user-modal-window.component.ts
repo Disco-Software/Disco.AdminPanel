@@ -4,7 +4,7 @@ import {Observable, Subject, take, takeUntil} from 'rxjs';
 import {Account} from '../../../../../../../../core/models/account/account.model';
 import {ReportModel} from '../../../../../../../../core/models/report/report.model';
 import {RoleModel} from '../../../../../../../../core/models/role/role.model';
-import {AccountAction, AccountsState, EditAccountRoleAction} from '@core/states';
+import {AccountAction, AccountsState, DeleteAccountPhotoAction, EditAccountRoleAction} from '@core/states';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ImageCropperModalWindowComponent} from "../image-cropper-modal-window/image-cropper-modal-window.component";
 import {ChangeRoleRequestModel} from '../../../../../../../../core/models/account/change-role-request.model';
@@ -78,8 +78,10 @@ export class UserModalWindowComponent implements OnInit {
   }
 
 
-  public onDeleteUserPhoto() {
-    console.log('delete user')
+  public onDeleteUserPhoto(): void {
+    this._store.dispatch(new DeleteAccountPhotoAction(this.id)).pipe(take(1)).subscribe(() => {
+      this.updatedItemData.emit();
+    })
   }
 
 }

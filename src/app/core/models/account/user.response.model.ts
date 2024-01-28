@@ -36,7 +36,7 @@ export interface User {
   roleName?: string | undefined;
   refreshToken?: string | undefined;
   refreshTokenExpiress?: Date | undefined;
-  dateOfRegister?: Date | undefined;
+  created?: Date | undefined;
   accountId?: number | undefined;
   account?: Account | undefined;
   id?: number | undefined;
