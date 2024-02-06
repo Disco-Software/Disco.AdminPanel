@@ -39,7 +39,7 @@ export class FeedbackChatComponent implements AfterViewInit {
 
   private startSignalRConnection(): void {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('http://localhost:5001/api/hub/ticket',)
+      .withUrl('http://localhost:5000/api/hub/ticket',)
       .build();
 
     this.hubConnection.start()
