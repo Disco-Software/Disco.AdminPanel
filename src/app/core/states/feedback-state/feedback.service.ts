@@ -12,7 +12,8 @@ export class FeedbackService {
   constructor(private _restService : RestService, private h: HttpClient) { }
 
   public getAllFeedbacks(payload: RequestDataModel, isArchive: boolean, description : string): Observable<FeedbackInterface[]> {
-    return this._restService.request('GET', `admin/tickets?pageNumber=${payload.pageNumber}&pageSize=${payload.pageSize}&isArchive=${isArchive}`, description, payload);
+    //TODO make dynamic
+    return this._restService.request('GET', `admin/tickets?pageNumber=${payload.pageNumber}&pageSize=${payload.pageSize}&statusType=Active`, description, payload);
   }
 
   public getFeedbacksCount(description : string) : Observable<number>{
