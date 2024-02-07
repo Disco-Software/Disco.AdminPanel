@@ -3,7 +3,8 @@ export interface FeedbackInterface {
   owner: FeedbackOwnerInterface,
   createdDate: string,
   priority: string,
-  status: string
+  status: string,
+  name: string
 }
 
 export interface FeedbackOwnerInterface {
