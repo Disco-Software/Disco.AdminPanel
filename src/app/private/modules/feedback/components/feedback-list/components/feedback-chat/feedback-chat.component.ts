@@ -1,10 +1,7 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import * as signalR from '@microsoft/signalr';
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
-import {MessageHeaders } from '@microsoft/signalr';
-import { httpLoaderFactory } from '../../../../../../../app.module';
-import { getUserAgentHeader } from '@microsoft/signalr/dist/esm/Utils';
+import {MessageHeaders} from '@microsoft/signalr';
 
 @Component({
   selector: 'app-feedback-chat',
@@ -43,6 +40,10 @@ export class FeedbackChatComponent implements AfterViewInit {
 
   private startSignalRConnection(): void {
     const headers: MessageHeaders = {
+      'Connection': 'Upgrade',
+      'Upgrade': 'websocket',
+      'Sec-WebSocket-Version': '13',
+      'Sec-WebSocket-Extensions': 'permessage-deflate; client_max_window_bits',
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin' : '*',
       'Access-Control-Allow-Credentials' : 'true',
@@ -68,13 +69,7 @@ export class FeedbackChatComponent implements AfterViewInit {
       console.log('Received message: ', message);
       this.messages.push(message);
     });
-    fetch("http://localhost:5000/hub/ticket", {
-      mode: 'no-cors'
-  }).then(response => {
-      // Handle the response here
-  }).catch(error => {
-      // Handle any errors here
-  });  }
+  }
 
   // public startChat(): void {
   //   if (this.tempUserName) {
