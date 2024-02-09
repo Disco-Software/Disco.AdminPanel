@@ -37,35 +37,25 @@
     </div>
   </div>
   <div class="row g-0 chat-container">
-    <div #chatBlock class="chat py-4 px-2 d-flex flex-column align-items-center" style="overflow: auto; ">
+    <div #chatBlock class="chat py-4 px-2 d-flex flex-column align-items-center" style="overflow: auto; " *ngIf="!isLoading else spinner">
       <div class="chat__date py-2 px-3 mb-3">Friday 18</div>
       <div class="d-flex flex-column" style="height: 100%">
         <div class="chat__message chat__message-companion">
           Hello, I've been experiencing some playback issues with the app. The songs keep skipping, and the audio quality is poor. Can you please look into this? Thanks.
           <span class="chat__message-date date">8:01 am</span>
         </div>
-        <div class="chat__message chat__message-companion">
-          Hello, I've been experiencing some playback issues with the app. The songs keep skipping, and the audio quality is poor. Can you please look into this? Thanks.
-          <span class="chat__message-date date">8:01 am</span>
-        </div>
-        <div class="chat__message chat__message-my">
-          Hello, I've been experiencing some playback issues with the app. The songs keep skipping, and the audio quality is poor. Can you please look into this? Thanks.
-          <span class="chat__message-date date">8:01 am</span>
-        </div>
-        <div class="chat__message chat__message-my">
-          Hello, I've been experiencing some playback issues with the app. The songs keep skipping, and the audio quality is poor. Can you please look into this? Thanks.
-          <span class="chat__message-date date">8:01 am</span>
-        </div>
-        <div class="chat__message chat__message-companion">
-          Hello, I've been experiencing some playback issues with the app. The songs keep skipping, and the audio quality is poor. Can you please look into this? Thanks.
-          <span class="chat__message-date date">8:01 am</span>
-        </div>
-        <div class="chat__message chat__message-my">
-          Hello, I've been experiencing some playback issues with the app. The songs keep skipping, and the audio quality is poor. Can you please look into this? Thanks.
-          <span class="chat__message-date date">8:01 am</span>
+        <div class="chat__message chat__message-my" *ngFor="let message of messages">
+          {{message.message}}
+          <span class="chat__message-date date">{{getTime(message.createdDate)}}</span>
         </div>
       </div>
-      <app-input class="position-absolute" (onInput)="''" style="width: 97%; bottom: 10px"></app-input>
+      <app-input class="position-absolute" (onInput)="sendMessage()" style="width: 97%; bottom: 10px"></app-input>
     </div>
   </div>
 </div>
+
+<ng-template #spinner>
+  <div style="top: 50%; left: 50%" class="position-absolute">
+    <img width="100" src="../../../../../assets/gifs/gif_public.gif">
+  </div>
+</ng-template>

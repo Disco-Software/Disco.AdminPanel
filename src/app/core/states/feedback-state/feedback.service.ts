@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { RestService } from '@core/services';
-import { Observable } from 'rxjs';
-import {FeedbackInterface, RequestDataModel} from "@core";
+import {Injectable} from '@angular/core';
+import {RestService} from '@core/services';
+import {Observable} from 'rxjs';
+import {FeedbackInterface, FeedbackMessagesRequestInterface, RequestDataModel} from "@core";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
@@ -18,5 +18,9 @@ export class FeedbackService {
 
   public getFeedbacksCount(description : string) : Observable<number>{
     return this._restService.request('GET', 'admin/tickets/count', description);
+  }
+
+  public getFeedbackMessages(payload: FeedbackMessagesRequestInterface, description: string): Observable<any> {
+    return this._restService.requestWithoutLoader('GET', `admin/tickets/messages?groupId=${payload.groupId}&userId=${payload.userId}&pageNumber=${payload.pageNumber}&pageSize=${payload.pageSize}`);
   }
 }

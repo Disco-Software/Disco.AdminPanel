@@ -18,7 +18,7 @@ export class RestService {
      this.serverUrl = environment.api;
    }
 
-  public request(method: string, url: string, description: string, requestObject?: any, requestOptions?: any): Observable<any> {
+  public request(method: string, url: string, description?: string, requestObject?: any, requestOptions?: any): Observable<any> {
      return this._store.dispatch(new LoaderAddAction(description)).pipe(take(1),switchMap(() => {
        return this.http[(method).toLowerCase()](`${this.serverUrl}/${url}`, requestObject, requestOptions)
          .pipe(
@@ -42,6 +42,28 @@ export class RestService {
         }), finalize(() => this._store.dispatch(new LoaderRemoveAction(description))))
      }));
    }
+
+  public requestWithoutLoader(method: string, url: string, description?: string, requestObject?: any, requestOptions?: any): Observable<any> {
+      return this.http[(method).toLowerCase()](`${this.serverUrl}/${url}`, requestObject, requestOptions)
+        .pipe(
+          take(1),
+          mergeMap((response) => {
+            return of(response);
+          }), catchError((error) => {
+            if(error.error) {
+              let errors: any = error.error;
+              if(typeof errors === 'string') {
+                errors = JSON.parse(errors)
+              }
+              this.showToasterWithErrorMessages(errors.errorMessages)
+            } else if(error.errorMessages) {
+              this.showToasterWithErrorMessages(error.errorMessages)
+            } else {
+              this.showToasterWithErrorMessages(error.statusText)
+            }
+            return throwError(() => error);
+          }))
+  }
 
    showToasterWithErrorMessages(errorMessages): void {
     if(!errorMessages) {

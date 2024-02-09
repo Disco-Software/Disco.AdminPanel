@@ -10,3 +10,13 @@ export class GetAllFeedbacks {
 export class GetFeedbacksCountAction {
   static readonly type = '[Feedback] Get Count';
 }
+
+export class GetFeedbackMessagesAction {
+  static readonly type = '[Feedback] Get Feedback Messages';
+  constructor(public payload: FeedbackMessagesRequestInterface ) {
+  }
+}
+
+export interface FeedbackMessagesRequestInterface extends RequestDataModel{
+  groupId: number, userId: number
+}

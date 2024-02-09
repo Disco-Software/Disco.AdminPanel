@@ -33,7 +33,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-feedback>
       <tr>
-        <td class="d-flex align-items-center cursor-pointer underlined_hover" (click)="open(feedback.name)">
+        <td class="d-flex align-items-center cursor-pointer underlined_hover" (click)="open(feedback)">
           <img src="./assets/images/ic_user-default.png" style="width: 40px"/>
           <span class="ms-2 vertical-align-middle">{{feedback.owner.username}}</span>
         </td>
@@ -59,7 +59,7 @@
   </p-table>
   <div class="d-block d-md-none">
     <div *ngFor="let feedback of (allFeedbacks$ | async); let last = last" class="feedback__card rounded p-3 d-flex flex-column mb-3" [class.mb-4]="!last">
-      <div class="d-flex cursor-pointer"  (click)="open(feedback.name)">
+      <div class="d-flex cursor-pointer"  (click)="open(feedback)">
         <img src="./assets/images/ic_user-default.png" style="height: 60px"/>
         <div class="d-flex flex-column ms-2">
           <span class="fs-4">{{feedback.owner.username}}</span>

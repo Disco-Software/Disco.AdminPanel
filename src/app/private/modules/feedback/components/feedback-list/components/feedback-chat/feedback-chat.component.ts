@@ -2,7 +2,9 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@a
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import * as signalR from '@microsoft/signalr';
 import {MessageHeaders} from '@microsoft/signalr';
-import {LocalStorageService} from "@core";
+import {FeedbackInterface, FeedbackState, GetFeedbackMessagesAction, LocalStorageService} from "@core";
+import {Select, Store} from "@ngxs/store";
+import {map, Observable, take, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-feedback-chat',
@@ -12,7 +14,10 @@ import {LocalStorageService} from "@core";
 export class FeedbackChatComponent implements OnInit, AfterViewInit {
   @ViewChild('chatBlock', { static: false }) chatBlock: ElementRef;
 
-  @Input() ticketName: string;
+  @Input() ticket: FeedbackInterface;
+
+  @Select(FeedbackState.isLoadingSelector) isLoading$: Observable<boolean>;
+  isLoading = true
 
   private hubConnection: signalR.HubConnection | undefined;
   public messages: any[] = [];
@@ -24,7 +29,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
   ];
   status: string = this.statuses[2]
 
-  constructor(private _activeModal: NgbActiveModal, private lsService: LocalStorageService) {
+  constructor(private _activeModal: NgbActiveModal, private lsService: LocalStorageService, private store: Store) {
   }
 
   ngOnInit(): void {
@@ -45,9 +50,8 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
   }
 
   private startSignalRConnection(): void {
-
-    const userName = this.lsService.getItem('user').userName;
-
+    console.log(this.ticket)
+    const user = this.lsService.getItem('user');
     const accessToken = this.lsService.getString('accessToken');
 
     const httpConnectionOptions : signalR.IHttpConnectionOptions = {
@@ -57,11 +61,25 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
 
 
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`https://devdiscoapi.azurewebsites.net/hub/ticket?ticketName=${this.ticketName}&userName=${userName}`, httpConnectionOptions)
+      .withUrl(
+        `https://devdiscoapi.azurewebsites.net/hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
+        httpConnectionOptions
+      )
       .build();
 
     this.hubConnection.start()
-      .then(() => console.log('SignalR connection started.'))
+      .then(() => {
+        const req = {
+          groupId: this.ticket.id,
+          userId: user.id,
+          pageNumber: 1,
+          pageSize: 20,
+        }
+        this.store.dispatch(new GetFeedbackMessagesAction(req)).pipe(take(1), map(state=> state.FeedbackState.messages)).subscribe(res=>{
+          this.messages = res;
+          this.isLoading = false;
+        })
+      })
       .catch(err => console.log('Error while starting SignalR connection: ', err));
 
     this.hubConnection.on('ReceiveMessage', (message: any) => {
@@ -81,6 +99,22 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
         .catch(err => console.error('Error while sending message: ', err));
 
     }
+  }
+
+  getTime(date: string) {
+// Отримання годин та хвилин
+    var hours = new Date(date).getHours();
+    var minutes = new Date(date).getMinutes();
+
+// Визначення періоду доби (AM або PM)
+    var period = hours >= 12 ? "pm" : "am";
+
+// Конвертація годин у 12-годинний формат
+    hours = hours % 12;
+    hours = hours ? hours : 12; // Година 0 в 12-годинному форматі - 12 година
+
+// Форматування відповідно до потрібного формату
+    return hours + ":" + (minutes < 10 ? "0" : "") + minutes + " " + period;
   }
 
 }

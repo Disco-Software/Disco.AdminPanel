@@ -30,7 +30,7 @@ export class FeedbackListComponent {
   constructor(private _modalService: NgbModal, private store: Store) {
     this.getScreenSize();
   }
-  open(ticketName: string) {
+  open(ticket: FeedbackInterface) {
     const ref: NgbModalRef =  this._modalService.open(FeedbackChatComponent, {
     modalDialogClass: 'h-100 w-100 m-0 position-absolute right-0',
     backdrop : 'static',
@@ -38,7 +38,7 @@ export class FeedbackListComponent {
       size: 'lg',
       animation: true
   });
-    ref.componentInstance.ticketName = ticketName
+    ref.componentInstance.ticket = ticket
 
   }
 
