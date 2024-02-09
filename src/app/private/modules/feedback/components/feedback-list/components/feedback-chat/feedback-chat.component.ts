@@ -48,14 +48,16 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
 
     const userName = this.lsService.getItem('user').userName;
 
+    const accessToken = this.lsService.getString('accessToken');
+
     const httpConnectionOptions : signalR.IHttpConnectionOptions = {
       withCredentials: false,
-      accessTokenFactory : () => 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcwNzMyNDcwMCwiZXhwIjoxNzA3Mzk2NzAwLCJpc3MiOiJkaXNjby1hcGkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0L0Rpc2NvLkFwaSJ9.Sxd47rzXm1WPq5RAI_SocqbR1bIsAuf2i-_qHGKCAx0',
+      accessTokenFactory : () => accessToken,
     }
 
 
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`https://devdiscoapi.azurewebsites.net/hub/ticket?userName=${userName}&ticketName=${this.ticketName}`, httpConnectionOptions)
+      .withUrl(`https://devdiscoapi.azurewebsites.net/hub/ticket?ticketName=${this.ticketName}&userName=${userName}`, httpConnectionOptions)
       .build();
 
     this.hubConnection.start()
