@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   api: "https://devdiscoapi.azurewebsites.net/api",
-  url: 'http://localhost:4200/'
+  url: 'http://localhost:4200/',
+  server: "https://devdiscoapi.azurewebsites.net",
+  localServer: 'http://localhost:5000/'
 };
 
 /*

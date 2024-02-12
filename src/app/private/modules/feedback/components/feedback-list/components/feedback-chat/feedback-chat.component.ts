@@ -6,6 +6,7 @@ import {FeedbackInterface, FeedbackState, GetFeedbackMessagesAction, LocalStorag
 import {Select, Store} from "@ngxs/store";
 import {map, Observable, take, takeUntil} from "rxjs";
 import { MessageRequestInterface } from 'src/app/core/models/ticket-chat/message-request.interface';
+import {environment} from "../../../../../../../../environments/environment";
 
 @Component({
   selector: 'app-feedback-chat',
@@ -73,7 +74,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
 
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(
-        `https://devdiscoapi.azurewebsites.net/hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
+        `${environment.localServer}/hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
         httpConnectionOptions
       )
       .build();
