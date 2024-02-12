@@ -74,7 +74,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
 
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(
-        `${environment.localServer}/hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
+        `${environment.localServer}hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
         httpConnectionOptions
       )
       .build();
