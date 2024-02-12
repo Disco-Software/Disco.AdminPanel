@@ -74,7 +74,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
 
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(
-        `${environment.localServer}hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
+        `${environment.localServer}/hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
         httpConnectionOptions
       )
       .build();
@@ -105,7 +105,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
   }
 
   public sendMessage(search : string): void {
-    // if (search) {
+    if (search) {
       const chatMessage : MessageRequestInterface = {
         message: search,
         ticketName: this.ticket.name,
@@ -113,11 +113,11 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
       };
 
       this.hubConnection?.invoke('send', chatMessage.message, chatMessage.ticketName, chatMessage.ticketId)
-        .then(() => {
-          console.log('here')
+        .then((res) => {
+          console.log(res)
         })
         .catch(err => console.error('Error while sending message: ', err));
-    // }
+    }
   }
 
   getTime(date: string) {
