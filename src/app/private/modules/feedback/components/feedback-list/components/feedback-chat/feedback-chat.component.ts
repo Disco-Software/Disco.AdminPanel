@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import * as signalR from '@microsoft/signalr';
 import {MessageHeaders} from '@microsoft/signalr';
@@ -32,7 +32,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
   ];
   status: string = this.statuses[2]
 
-  constructor(private _activeModal: NgbActiveModal, private lsService: LocalStorageService, private store: Store) {
+  constructor(private _activeModal: NgbActiveModal, private lsService: LocalStorageService, private store: Store, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -40,12 +40,20 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.scrollToBottom();
   }
 
-  private scrollToBottom(): void {
+  public scrollToBottom(): void {
     const chatBlockElement = this.chatBlock.nativeElement;
-    chatBlockElement.scrollTop = chatBlockElement.scrollHeight;
+    // console.log(Math.max(
+    //   chatBlockElement.scrollHeight,
+    //   chatBlockElement.offsetHeight,
+    //   chatBlockElement.clientHeight,
+    // ))
+    chatBlockElement.scrollTop = Math.max(
+      chatBlockElement.scrollHeight,
+      chatBlockElement.offsetHeight,
+      chatBlockElement.clientHeight,
+    )
   }
 
   public onClose(): void {
@@ -53,7 +61,6 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
   }
 
   private startSignalRConnection(): void {
-    console.log(this.ticket)
     const user = this.lsService.getItem('user');
     const accessToken = this.lsService.getString('accessToken');
 
@@ -74,7 +81,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
 
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(
-        `${environment.localServer}/hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
+        `${environment.server}/hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
         httpConnectionOptions
       )
       .build();
@@ -85,18 +92,27 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
           groupId: this.ticket.id,
           userId: user.id,
           pageNumber: 1,
-          pageSize: 20,
+          pageSize: 50,
         }
         this.store.dispatch(new GetFeedbackMessagesAction(req)).pipe(take(1), map(state=> state.FeedbackState.messages)).subscribe(res=>{
           this.messages = res;
           this.isLoading = false;
+          this.scrollToBottom();
         })
       })
       .catch(err => console.log('Error while starting SignalR connection: ', err));
 
-    this.hubConnection.on('recive', (message: any) => {
+    this.hubConnection.on('receive', (message: any) => {
       console.log('Received message: ', message);
-      this.messages.push(message);
+      // console.log(this.messages)
+      this.messages = [
+        ...this.messages,
+        message
+      ];
+      this.cdr.detectChanges();
+      // this.scrollToBottom();
+      setTimeout(()=> this.scrollToBottom(), 1000)
+      console.log(this.messages)
     });
 
     this.hubConnection.onclose((message) => {
@@ -115,6 +131,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
       this.hubConnection?.invoke('send', chatMessage.message, chatMessage.ticketName, chatMessage.ticketId)
         .then((res) => {
           console.log(res)
+
         })
         .catch(err => console.error('Error while sending message: ', err));
     }
