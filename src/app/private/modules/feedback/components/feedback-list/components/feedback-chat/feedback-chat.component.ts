@@ -67,13 +67,13 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
 
     const httpConnectionOptions : signalR.IHttpConnectionOptions = {
       headers: headers,
-      withCredentials: true,
+      withCredentials: false,
       accessTokenFactory : () => accessToken,
     }
 
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(
-        `http://localhost:5000/hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
+        `https://devdiscoapi.azurewebsites.net/hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
         httpConnectionOptions
       )
       .build();
@@ -104,17 +104,19 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
   }
 
   public sendMessage(search : string): void {
-    console.log(search);
-    if (search) {
+    // if (search) {
       const chatMessage : MessageRequestInterface = {
         message: search,
         ticketName: this.ticket.name,
         ticketId: this.ticket.id
       };
+
       this.hubConnection?.invoke('send', chatMessage.message, chatMessage.ticketName, chatMessage.ticketId)
-        .then(() => search = '')
+        .then(() => {
+          console.log('here')
+        })
         .catch(err => console.error('Error while sending message: ', err));
-    }
+    // }
   }
 
   getTime(date: string) {
