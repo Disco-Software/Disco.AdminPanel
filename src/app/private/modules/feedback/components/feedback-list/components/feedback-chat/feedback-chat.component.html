@@ -49,7 +49,8 @@
           <span class="chat__message-date date">{{getTime(message.createdDate)}}</span>
         </div>
       </div>
-      <app-input class="position-absolute" (onInput)="sendMessage()" style="width: 97%; bottom: 10px"></app-input>
+      <app-input
+        (onSend)="sendMessage($event)" class="position-absolute" style="width: 97%; bottom: 10px"></app-input>
     </div>
   </div>
 </div>

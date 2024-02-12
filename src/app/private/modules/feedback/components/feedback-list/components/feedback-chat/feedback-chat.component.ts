@@ -2,9 +2,10 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@a
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import * as signalR from '@microsoft/signalr';
 import {MessageHeaders} from '@microsoft/signalr';
-import {FeedbackInterface, FeedbackState, GetFeedbackMessagesAction, LocalStorageService} from "@core";
+import {FeedbackInterface, FeedbackState, GetFeedbackMessagesAction, LocalStorageService, RestService} from "@core";
 import {Select, Store} from "@ngxs/store";
 import {map, Observable, take, takeUntil} from "rxjs";
+import { MessageRequestInterface } from 'src/app/core/models/ticket-chat/message-request.interface';
 
 @Component({
   selector: 'app-feedback-chat',
@@ -15,6 +16,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
   @ViewChild('chatBlock', { static: false }) chatBlock: ElementRef;
 
   @Input() ticket: FeedbackInterface;
+  @Input() message : string;
 
   @Select(FeedbackState.isLoadingSelector) isLoading$: Observable<boolean>;
   isLoading = true
@@ -54,15 +56,24 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
     const user = this.lsService.getItem('user');
     const accessToken = this.lsService.getString('accessToken');
 
+    const headers : MessageHeaders = {
+      //"Content-Type" : "application/json",
+      "Connection" : "Upgrade",
+      "Upgrade" : "websocket",
+      "Sec-WebSocket-Version" : "13",
+      "Sec-WebSocket-Extensions" : "permessage-deflate; client_max_window_bits",
+      "User-Agent" : navigator.userAgent,
+    }
+
     const httpConnectionOptions : signalR.IHttpConnectionOptions = {
-      withCredentials: false,
+      headers: headers,
+      withCredentials: true,
       accessTokenFactory : () => accessToken,
     }
 
-
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(
-        `https://devdiscoapi.azurewebsites.net/hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
+        `http://localhost:5000/hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
         httpConnectionOptions
       )
       .build();
@@ -82,22 +93,27 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
       })
       .catch(err => console.log('Error while starting SignalR connection: ', err));
 
-    this.hubConnection.on('ReceiveMessage', (message: any) => {
+    this.hubConnection.on('recive', (message: any) => {
       console.log('Received message: ', message);
       this.messages.push(message);
     });
+
+    this.hubConnection.onclose((message) => {
+      console.log(message);
+    })
   }
 
-  public sendMessage(): void {
-    const message = 'TEST MESSAGE'
-    if (message) {
-      const chatMessage = {
-        sender: 1,
-        content: message
+  public sendMessage(search : string): void {
+    console.log(search);
+    if (search) {
+      const chatMessage : MessageRequestInterface = {
+        message: search,
+        ticketName: this.ticket.name,
+        ticketId: this.ticket.id
       };
-      this.hubConnection?.invoke('SendMessage', chatMessage)
+      this.hubConnection?.invoke('send', chatMessage.message, chatMessage.ticketName, chatMessage.ticketId)
+        .then(() => search = '')
         .catch(err => console.error('Error while sending message: ', err));
-
     }
   }
 
