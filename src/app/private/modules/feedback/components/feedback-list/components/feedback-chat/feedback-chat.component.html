@@ -2,8 +2,14 @@
   <div class="modal-window__header row g-0 py-3 px-4">
     <div class="d-flex justify-content-between align-items-center">
       <span class="fs-5">
-        <img src="./assets/images/ic_user-default.png" style="width: 40px"/>
-        <span class="ms-2 vertical-align-middle">Stanislav Korchevskyi</span>
+        <ng-container *ngIf="ticket.owner.photo else defaultPhoto">
+          <img [src]="ticket.owner.photo" style="width: 40px; border-radius: 360px"/>
+        </ng-container>
+        <ng-template #defaultPhoto>
+          <img src="./assets/images/ic_user-default.png" style="width: 40px; background-color: white; border-radius: 360px"/>
+        </ng-template>
+
+        <span class="ms-2 vertical-align-middle">{{ticket.owner.userName}}</span>
       </span>
       <div class="d-flex align-items-center">
         <p-dropdown
