@@ -1,7 +1,7 @@
 <div class="search search-container d-flex justify-content-center align-items-center flex-row h-100 cursor-pointer">
   <div class=" search-wrapper wrapper w-100 position-relative">
     <input
-      (keydown)="onEnterButtonClick()"
+      (keydown.enter)="onEnterButtonClick()"
       [(ngModel)]="search"
       placeholder="{{'feedback.chat.input.placeholder' | translate}}"
       class="search-input w-95 input bg-transparent border-2 p-3 cursor-pointer"
