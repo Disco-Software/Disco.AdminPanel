@@ -8,6 +8,7 @@ export interface User {
   userName: string;
   email: string;
   account: Account;
+  created: string;
 }
 
 export interface Account {

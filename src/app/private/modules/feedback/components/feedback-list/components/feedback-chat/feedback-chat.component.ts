@@ -16,6 +16,7 @@ import {Select, Store} from "@ngxs/store";
 import {map, Observable, take} from "rxjs";
 import {MessageRequestInterface} from 'src/app/core/models/ticket-chat/message-request.interface';
 import {environment} from "../../../../../../../../environments/environment";
+import {User} from "../../../../../../../core/models/account/change-email-response.model";
 
 @Component({
   selector: 'app-feedback-chat',
@@ -40,11 +41,13 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
     'feedback.table.body.status.closed',
   ];
   status: string = this.statuses[2];
+  myUser: User;
 
   constructor(private _activeModal: NgbActiveModal, private lsService: LocalStorageService, private store: Store, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
+    this.myUser = this.lsService.getItem('user').userName
     this.startSignalRConnection();
   }
 
@@ -52,13 +55,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public scrollToBottom(): void {
-    console.log('scrolling')
     const chatBlockElement = this.chatBlock.nativeElement;
-    // console.log(Math.max(
-    //   chatBlockElement.scrollHeight,
-    //   chatBlockElement.offsetHeight,
-    //   chatBlockElement.clientHeight,
-    // ))
     chatBlockElement.scrollTop = Math.max(
       chatBlockElement.scrollHeight,
       chatBlockElement.offsetHeight,
@@ -115,17 +112,12 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
       .catch(err => console.log('Error while starting SignalR connection: ', err));
 
     this.hubConnection.on('receive', (message: any) => {
-      console.log('Received message: ', message);
       this.messages = [
         ...this.messages,
         message
       ];
       setTimeout(()=> this.scrollToBottom())
     });
-
-    this.hubConnection.onclose((message) => {
-      console.log(message);
-    })
   }
 
   public sendMessage(search : string): void {
@@ -162,6 +154,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.hubConnection.stop();
   }
 
 }

@@ -12,10 +12,6 @@ export class InputComponent{
 
   public search : string;
 
-  public onEnterButtonClick(){
-    this.onInput.emit(this.search)
-  }
-
   public onSendButtonClick() {
     this.onSend.emit(this.search);
   }
