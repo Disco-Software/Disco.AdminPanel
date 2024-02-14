@@ -17,6 +17,7 @@ import {map, Observable, take} from "rxjs";
 import {MessageRequestInterface} from 'src/app/core/models/ticket-chat/message-request.interface';
 import {environment} from "../../../../../../../../environments/environment";
 import {User} from "../../../../../../../core/models/account/change-email-response.model";
+import {InputComponent} from "@shared";
 
 @Component({
   selector: 'app-feedback-chat',
@@ -24,7 +25,9 @@ import {User} from "../../../../../../../core/models/account/change-email-respon
   styleUrls: ['./feedback-chat.component.scss']
 })
 export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('chatBlock', { static: false }) chatBlock: ElementRef;
+  @ViewChild('chatBlock') chatBlock: ElementRef;
+  @ViewChild(InputComponent) inputComponent: InputComponent;
+
 
   @Input() ticket: FeedbackInterface;
   @Input() message : string;
@@ -130,7 +133,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.hubConnection?.invoke('send', chatMessage.message, chatMessage.ticketName, chatMessage.ticketId)
         .then((res) => {
-          console.log(res)
+          this.inputComponent.clearMessageString();
 
         })
         .catch(err => console.error('Error while sending message: ', err));

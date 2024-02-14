@@ -15,4 +15,8 @@ export class InputComponent{
   public onSendButtonClick() {
     this.onSend.emit(this.search);
   }
+
+  public clearMessageString() {
+    this.search = '';
+  }
 }
