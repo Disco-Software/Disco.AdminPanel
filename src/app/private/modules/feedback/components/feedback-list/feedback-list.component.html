@@ -1,7 +1,7 @@
 <div class="d-flex flex-column flex-md-row justify-content-between align-items center" [class.half-opacity-background]="isChatShown">
   <div class="d-flex align-items-center">
     <button class="rounded-button rounded-button_orange me-2 me-sm-4 w-50 w-md-auto px-0 px-md-4">
-      {{'feedback.buttons.inWork' | translate}} (3)
+      {{'feedback.buttons.inWork' | translate}} ({{totalCount$ | async}})
     </button>
     <button class="rounded-button rounded-button_gray w-50 w-md-auto px-0 px-md-4">
       {{'feedback.buttons.archiv' | translate}}
@@ -34,8 +34,13 @@
     <ng-template pTemplate="body" let-feedback>
       <tr>
         <td class="d-flex align-items-center cursor-pointer underlined_hover" (click)="open(feedback)">
-          <img src="./assets/images/ic_user-default.png" style="width: 40px"/>
-          <span class="ms-2 vertical-align-middle">{{feedback.owner.username}}</span>
+          <ng-container *ngIf="feedback.owner.photo; else defaultPhoto">
+            <img [src]="feedback.owner.photo" class="feedback-photo photo" style="width: 40px"/>
+          </ng-container>
+          <ng-template #defaultPhoto>
+            <img class=" bg-white" src="./assets/images/ic_user-default.png" style="width: 40px; border-radius: 20px;"/>
+          </ng-template>
+          <span class="ms-2 vertical-align-middle">{{feedback.owner.userName}}</span>
         </td>
         <td [class]="'priority_' + feedback.priority.toLowerCase()">
           <div class="d-flex align-items-center">
@@ -60,9 +65,14 @@
   <div class="d-block d-md-none">
     <div *ngFor="let feedback of (allFeedbacks$ | async); let last = last" class="feedback__card rounded p-3 d-flex flex-column mb-3" [class.mb-4]="!last">
       <div class="d-flex cursor-pointer"  (click)="open(feedback)">
-        <img src="./assets/images/ic_user-default.png" style="height: 60px"/>
+        <ng-container *ngIf="feedback.owner.photo; else defaultPhoto">
+          <img [src]="feedback.owner.photo" style="height: 60px; border-radius: 365px; margin-right: 15px;"/>
+        </ng-container>
+        <ng-template #defaultPhoto>
+          <img class=" bg-white" src="./assets/images/ic_user-default.png" style="height: 60px; border-radius: 20px; margin-right: 15px;"/>
+        </ng-template>
         <div class="d-flex flex-column ms-2">
-          <span class="fs-4">{{feedback.owner.username}}</span>
+          <span class="fs-4">{{feedback.owner.userName}}</span>
           <span style="color: rgba(255, 255, 255, 0.35);">{{feedback.createdDate | date:'short' }}</span>
         </div>
       </div>

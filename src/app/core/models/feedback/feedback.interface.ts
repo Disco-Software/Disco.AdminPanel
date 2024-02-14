@@ -9,5 +9,5 @@ export interface FeedbackInterface {
 
 export interface FeedbackOwnerInterface {
   photo: string,
-  username: string,
+  userName: string,
 }
