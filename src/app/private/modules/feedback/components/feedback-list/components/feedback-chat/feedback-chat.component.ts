@@ -34,6 +34,8 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Select(FeedbackState.isLoadingSelector) isLoading$: Observable<boolean>;
   isLoading = true;
+  isSendingMessage = false;
+
 
   private hubConnection: signalR.HubConnection | undefined;
   public messages: any[] = [];
@@ -110,6 +112,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
           setTimeout(() => {
             this.scrollToBottom();
           });
+
         })
       })
       .catch(err => console.log('Error while starting SignalR connection: ', err));
@@ -119,12 +122,16 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
         ...this.messages,
         message
       ];
-      setTimeout(()=> this.scrollToBottom())
+      setTimeout(()=> {
+        this.scrollToBottom();
+        this.isSendingMessage = false;
+      })
     });
   }
 
   public sendMessage(search : string): void {
     if (search) {
+      this.isSendingMessage = true;
       const chatMessage : MessageRequestInterface = {
         message: search,
         ticketName: this.ticket.name,

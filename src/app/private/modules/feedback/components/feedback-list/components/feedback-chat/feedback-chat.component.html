@@ -54,6 +54,7 @@
         </div>
       </div>
       <app-input
+        [isLoading]="isSendingMessage"
         (onInput)="sendMessage($event)"
         (onSend)="sendMessage($event)" class="position-absolute" style="width: 97%; bottom: 10px"></app-input>
     </div>
