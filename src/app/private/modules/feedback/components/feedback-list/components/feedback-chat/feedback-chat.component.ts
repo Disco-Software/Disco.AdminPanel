@@ -1,11 +1,20 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import * as signalR from '@microsoft/signalr';
 import {MessageHeaders} from '@microsoft/signalr';
-import {FeedbackInterface, FeedbackState, GetFeedbackMessagesAction, LocalStorageService, RestService} from "@core";
+import {FeedbackInterface, FeedbackState, GetFeedbackMessagesAction, LocalStorageService} from "@core";
 import {Select, Store} from "@ngxs/store";
-import {map, Observable, take, takeUntil} from "rxjs";
-import { MessageRequestInterface } from 'src/app/core/models/ticket-chat/message-request.interface';
+import {map, Observable, take} from "rxjs";
+import {MessageRequestInterface} from 'src/app/core/models/ticket-chat/message-request.interface';
 import {environment} from "../../../../../../../../environments/environment";
 
 @Component({
@@ -13,14 +22,14 @@ import {environment} from "../../../../../../../../environments/environment";
   templateUrl: './feedback-chat.component.html',
   styleUrls: ['./feedback-chat.component.scss']
 })
-export class FeedbackChatComponent implements OnInit, AfterViewInit {
+export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('chatBlock', { static: false }) chatBlock: ElementRef;
 
   @Input() ticket: FeedbackInterface;
   @Input() message : string;
 
   @Select(FeedbackState.isLoadingSelector) isLoading$: Observable<boolean>;
-  isLoading = true
+  isLoading = true;
 
   private hubConnection: signalR.HubConnection | undefined;
   public messages: any[] = [];
@@ -30,7 +39,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
     'feedback.table.body.status.inProgress',
     'feedback.table.body.status.closed',
   ];
-  status: string = this.statuses[2]
+  status: string = this.statuses[2];
 
   constructor(private _activeModal: NgbActiveModal, private lsService: LocalStorageService, private store: Store, private cdr: ChangeDetectorRef) {
   }
@@ -43,6 +52,7 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
   }
 
   public scrollToBottom(): void {
+    console.log('scrolling')
     const chatBlockElement = this.chatBlock.nativeElement;
     // console.log(Math.max(
     //   chatBlockElement.scrollHeight,
@@ -97,22 +107,20 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
         this.store.dispatch(new GetFeedbackMessagesAction(req)).pipe(take(1), map(state=> state.FeedbackState.messages)).subscribe(res=>{
           this.messages = res;
           this.isLoading = false;
-          this.scrollToBottom();
+          setTimeout(() => {
+            this.scrollToBottom();
+          });
         })
       })
       .catch(err => console.log('Error while starting SignalR connection: ', err));
 
     this.hubConnection.on('receive', (message: any) => {
       console.log('Received message: ', message);
-      // console.log(this.messages)
       this.messages = [
         ...this.messages,
         message
       ];
-      this.cdr.detectChanges();
-      // this.scrollToBottom();
-      setTimeout(()=> this.scrollToBottom(), 1000)
-      console.log(this.messages)
+      setTimeout(()=> this.scrollToBottom())
     });
 
     this.hubConnection.onclose((message) => {
@@ -151,6 +159,9 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit {
 
 // Форматування відповідно до потрібного формату
     return hours + ":" + (minutes < 10 ? "0" : "") + minutes + " " + period;
+  }
+
+  ngOnDestroy(): void {
   }
 
 }

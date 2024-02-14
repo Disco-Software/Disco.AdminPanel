@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class="row g-0 chat-container">
-    <div #chatBlock class="chat py-4 px-2 d-flex flex-column align-items-center" style="overflow: auto; ">
+    <div #chatBlock class="chat py-4 px-2 d-flex flex-column align-items-center" style="overflow: auto;" *ngIf="!isLoading else spinner">
       <button (click)="scrollToBottom()">test</button>
       <div class="chat__date py-2 px-3 mb-3">Friday 18</div>
       <div class="d-flex flex-column" style="height: 100%">
