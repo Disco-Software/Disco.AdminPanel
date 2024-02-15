@@ -50,7 +50,7 @@
         <div class="chat__message"  [ngClass]="message.account.user.userName === myUser ? 'chat__message-my': 'chat__message-companion'" *ngFor="let message of messages">
           <div style="color: #C26929" class="fs-5 fw-bolder" *ngIf="message.account.user.userName !== myUser">{{message.account.user.userName}}</div>
           <div class="ps-1">{{message.message}}</div>
-          <span class="chat__message-date date">{{getTime(message.createdDate)}}</span>
+          <span class="chat__message-date date">{{getTime(message.createdDate ?? message.created)}}</span>
         </div>
       </div>
       <app-input

@@ -115,9 +115,10 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
         })
       })
-      .catch(err => console.log('Error while starting SignalR connection: ', err));
+      .catch(err => null);
 
     this.hubConnection.on('receive', (message: any) => {
+      console.log(message)
       this.messages = [
         ...this.messages,
         message
@@ -125,6 +126,11 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
       setTimeout(()=> {
         this.scrollToBottom();
         this.isSendingMessage = false;
+        // this.inputComponent.inputElement.nativeElement.focus();
+        // this.inputComponent.inputElement.focus();
+        // this.inputComponent.inputElement.nativeElement.selector();
+        // this.inputComponent.inputElement.selector();
+
       })
     });
   }
@@ -141,13 +147,18 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
       this.hubConnection?.invoke('send', chatMessage.message, chatMessage.ticketName, chatMessage.ticketId)
         .then((res) => {
           this.inputComponent.clearMessageString();
+          // this.inputComponent.inputElement.nativeElement.setF
+          // this.inputComponent.inputElement.focus();
+          // this.inputComponent.inputElement.nativeElement.selector();
+          // this.inputComponent.inputElement.selector();
 
         })
-        .catch(err => console.error('Error while sending message: ', err));
+        .catch(err => null);
     }
   }
 
   getTime(date: string) {
+    // console.log(date)
 // Отримання годин та хвилин
     var hours = new Date(date).getHours();
     var minutes = new Date(date).getMinutes();
