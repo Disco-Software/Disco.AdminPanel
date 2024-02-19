@@ -106,12 +106,11 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
           groupId: this.ticket.id,
           userId: user.id,
           pageNumber: 1,
-          pageSize: 50,
+          pageSize: 500,
         }
         this.store.dispatch(new GetFeedbackMessagesAction(req)).pipe(take(1), map(state=> state.FeedbackState.messages)).subscribe(res=>{
           this.messages = res;
-          this.messageDates = this.messages.map(message => message.createdDate.split('T')[0]);
-          this.messageDates = this.messageDates.filter((value, index) => this.messageDates.indexOf(value) === index)
+          this.generateMapDates()
           this.isLoading = false;
           setTimeout(() => {
             this.scrollToBottom();
@@ -122,10 +121,12 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
       .catch(err => null);
 
     this.hubConnection.on('receive', (message: any) => {
+      console.log(message)
       this.messages = [
         ...this.messages,
         message
       ];
+      this.generateMapDates();
       setTimeout(()=> {
         this.scrollToBottom();
         this.isSendingMessage = false;
@@ -138,8 +139,18 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  generateMapDates() {
+    this.messageDates = this.messages.map(message =>
+      message.createdDate ?
+        message.createdDate.split('T')[0] : message.created.split('T')[0]
+    );
+    this.messageDates = this.messageDates.filter((value, index) => this.messageDates.indexOf(value) === index)
+  }
+
   public filterMessagesByDate(date: string): any[] {
-    return this.messages.filter(message => message.createdDate.includes(date));
+    return this.messages.filter(message =>
+      message.createdDate ? message.createdDate?.includes(date) : message.created?.includes(date)
+    );
   }
 
   public sendMessage(search : string): void {
