@@ -39,6 +39,8 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private hubConnection: signalR.HubConnection | undefined;
   public messages: any[] = [];
+  public messageDates: string[] = [];
+  test: any[] = [];
 
   statuses = [
     'feedback.table.body.status.open',
@@ -108,6 +110,8 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
         }
         this.store.dispatch(new GetFeedbackMessagesAction(req)).pipe(take(1), map(state=> state.FeedbackState.messages)).subscribe(res=>{
           this.messages = res;
+          this.messageDates = this.messages.map(message => message.createdDate.split('T')[0]);
+          this.messageDates = this.messageDates.filter((value, index) => this.messageDates.indexOf(value) === index)
           this.isLoading = false;
           setTimeout(() => {
             this.scrollToBottom();
@@ -118,7 +122,6 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
       .catch(err => null);
 
     this.hubConnection.on('receive', (message: any) => {
-      console.log(message)
       this.messages = [
         ...this.messages,
         message
@@ -133,6 +136,10 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
       })
     });
+  }
+
+  public filterMessagesByDate(date: string): any[] {
+    return this.messages.filter(message => message.createdDate.includes(date));
   }
 
   public sendMessage(search : string): void {
