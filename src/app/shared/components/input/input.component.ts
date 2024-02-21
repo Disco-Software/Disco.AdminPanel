@@ -6,7 +6,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
   styleUrls: ['./input.component.scss']
 })
 export class InputComponent {
-  // @ViewChild('inputElement') inputElement: any;
+  @ViewChild('inputElement') inputElement: any;
   @Output() onInput = new EventEmitter<string>();
   @Output() onSend = new EventEmitter<string>();
 
@@ -20,5 +20,9 @@ export class InputComponent {
 
   public clearMessageString() {
     this.search = '';
+  }
+
+  public focusInput(): void {
+    this.inputElement.nativeElement.focus();
   }
 }

@@ -28,12 +28,11 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('chatBlock') chatBlock: ElementRef;
   @ViewChild(InputComponent) inputComponent: InputComponent;
 
-
   @Input() ticket: FeedbackInterface;
   @Input() message : string;
 
   @Select(FeedbackState.isLoadingSelector) isLoading$: Observable<boolean>;
-  isLoading = true;
+  isLoading: boolean = true;
   isSendingMessage = false;
 
 
@@ -121,25 +120,21 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
       .catch(err => null);
 
     this.hubConnection.on('receive', (message: any) => {
-      console.log(message)
       this.messages = [
         ...this.messages,
         message
       ];
       this.generateMapDates();
-      setTimeout(()=> {
+      setTimeout((): void => {
         this.scrollToBottom();
         this.isSendingMessage = false;
-        // this.inputComponent.inputElement.nativeElement.focus();
-        // this.inputComponent.inputElement.focus();
-        // this.inputComponent.inputElement.nativeElement.selector();
-        // this.inputComponent.inputElement.selector();
-
-      })
+        this.inputComponent.focusInput();
+      });
+      this.inputComponent.focusInput();
     });
   }
 
-  generateMapDates() {
+  generateMapDates(): void {
     this.messageDates = this.messages.map(message =>
       message.createdDate ?
         message.createdDate.split('T')[0] : message.created.split('T')[0]
@@ -165,11 +160,10 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
       this.hubConnection?.invoke('send', chatMessage.message, chatMessage.ticketName, chatMessage.ticketId)
         .then((res) => {
           this.inputComponent.clearMessageString();
-          // this.inputComponent.inputElement.nativeElement.setF
-          // this.inputComponent.inputElement.focus();
-          // this.inputComponent.inputElement.nativeElement.selector();
-          // this.inputComponent.inputElement.selector();
 
+          setTimeout((): void => {
+            this.inputComponent.focusInput();
+          })
         })
         .catch(err => null);
     }

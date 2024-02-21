@@ -1,6 +1,7 @@
 <div class="search search-container d-flex justify-content-center align-items-center flex-row h-100 cursor-pointer">
   <div class=" search-wrapper wrapper w-100 position-relative">
     <input
+      #inputElement
       [class.opacity-03]="isLoading"
       [disabled]="isLoading"
       (keydown.enter)="onSendButtonClick()"
