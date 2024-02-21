@@ -23,6 +23,7 @@
             status.includes('inProgress') ? '#3983CB' :
             status.includes('closed') ? '#349974' : ''
             }"
+          (onChange)="changeStatus($event)"
         >
           <ng-template pTemplate="selectedItem">
             {{ status | translate }}

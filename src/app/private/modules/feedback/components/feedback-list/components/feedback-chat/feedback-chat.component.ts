@@ -1,13 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import * as signalR from '@microsoft/signalr';
 import {MessageHeaders} from '@microsoft/signalr';
@@ -24,7 +15,7 @@ import {InputComponent} from "@shared";
   templateUrl: './feedback-chat.component.html',
   styleUrls: ['./feedback-chat.component.scss']
 })
-export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
+export class FeedbackChatComponent implements OnInit, OnDestroy {
   @ViewChild('chatBlock') chatBlock: ElementRef;
   @ViewChild(InputComponent) inputComponent: InputComponent;
 
@@ -46,18 +37,17 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
     'feedback.table.body.status.inProgress',
     'feedback.table.body.status.closed',
   ];
-  status: string = this.statuses[2];
+  status: string;
   myUser: User;
 
   constructor(private _activeModal: NgbActiveModal, private lsService: LocalStorageService, private store: Store, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
-    this.myUser = this.lsService.getItem('user').userName
-    this.startSignalRConnection();
-  }
+    this.myUser = this.lsService.getItem('user').userName;
+    this.status = this.statuses.find(status => status.includes(this.ticket.status.toLowerCase()));
 
-  ngAfterViewInit(): void {
+    this.startSignalRConnection();
   }
 
   public scrollToBottom(): void {
@@ -107,18 +97,28 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
           pageNumber: 1,
           pageSize: 500,
         }
-        this.store.dispatch(new GetFeedbackMessagesAction(req)).pipe(take(1), map(state=> state.FeedbackState.messages)).subscribe(res=>{
-          this.messages = res;
-          this.generateMapDates()
-          this.isLoading = false;
-          setTimeout(() => {
-            this.scrollToBottom();
-          });
-
-        })
+        this.getAllMessages(req);
       })
       .catch(err => null);
 
+    this.subscribeMessages();
+
+    this.subscribeStatuses();
+  }
+
+  getAllMessages(req: any): void {
+    this.store.dispatch(new GetFeedbackMessagesAction(req)).pipe(take(1), map(state => state.FeedbackState.messages)).subscribe(res => {
+      this.messages = res;
+      this.generateMapDates()
+      this.isLoading = false;
+      setTimeout(() => {
+        this.scrollToBottom();
+      });
+
+    })
+  }
+
+  subscribeMessages(): void {
     this.hubConnection.on('receive', (message: any) => {
       this.messages = [
         ...this.messages,
@@ -128,9 +128,13 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
       setTimeout((): void => {
         this.scrollToBottom();
         this.isSendingMessage = false;
-        this.inputComponent.focusInput();
       });
-      this.inputComponent.focusInput();
+    });
+  }
+
+  subscribeStatuses(): void {
+    this.hubConnection.on('changeStatus', (status: string): void => {
+      console.log('received status: ', status);
     });
   }
 
@@ -169,20 +173,28 @@ export class FeedbackChatComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  getTime(date: string) {
-    // console.log(date)
-// Отримання годин та хвилин
-    var hours = new Date(date).getHours();
-    var minutes = new Date(date).getMinutes();
+  changeStatus(event: any): void {
+    const status: any = {
+      id: this.ticket.id,
+      status: event.value.split('status.')[1],
+    };
 
-// Визначення періоду доби (AM або PM)
-    var period = hours >= 12 ? "pm" : "am";
+    this.hubConnection?.invoke('updateStatus', status.id, status.status)
+      .then((res) => {
+        console.log('successful status change')
+      })
+      .catch(err => null);
 
-// Конвертація годин у 12-годинний формат
+  }
+  getTime(date: string): string {
+    let hours = new Date(date).getHours();
+    let minutes = new Date(date).getMinutes();
+
+    let period = hours >= 12 ? "pm" : "am";
+
     hours = hours % 12;
     hours = hours ? hours : 12; // Година 0 в 12-годинному форматі - 12 година
 
-// Форматування відповідно до потрібного формату
     return hours + ":" + (minutes < 10 ? "0" : "") + minutes + " " + period;
   }
 
