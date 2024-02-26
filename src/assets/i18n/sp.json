@@ -188,6 +188,8 @@
     "table" : {
       "header" : {
         "name": "Nombre",
+        "title": "Título",
+        "description": "Descripción",
         "priority": "Prioridad",
         "status": "Estado",
         "date": "Fecha"

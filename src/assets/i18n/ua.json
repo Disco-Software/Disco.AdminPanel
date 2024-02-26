@@ -186,6 +186,8 @@
     "table" : {
       "header" : {
         "name": "Імʼя",
+        "title": "Заголовок",
+        "description": "Опис",
         "priority": "Пріоритет",
         "status": "Статус",
         "date": "Дата"

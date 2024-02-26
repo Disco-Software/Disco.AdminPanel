@@ -25,6 +25,8 @@
     <ng-template pTemplate="header">
       <tr>
         <th>{{'feedback.table.header.name' | translate}}</th>
+        <th>{{'feedback.table.header.title' | translate}}</th>
+        <th>{{'feedback.table.header.description' | translate}}</th>
         <th>{{'feedback.table.header.priority' | translate}}</th>
         <th>{{'feedback.table.header.status' | translate}}</th>
         <th class="d-flex align-items-center">{{'feedback.table.header.date' | translate}} <i
@@ -41,6 +43,12 @@
             <img class=" bg-white" src="./assets/images/ic_user-default.png" style="width: 40px; border-radius: 20px;"/>
           </ng-template>
           <span class="ms-2 vertical-align-middle">{{feedback.owner.userName}}</span>
+        </td>
+        <td>
+         {{feedback.title}}
+        </td>
+        <td>
+          {{feedback.description}}
         </td>
         <td [class]="'priority_' + feedback.priority.toLowerCase()">
           <div class="d-flex align-items-center">
@@ -76,16 +84,27 @@
           <span style="color: rgba(255, 255, 255, 0.35);">{{feedback.createdDate | date:'short' }}</span>
         </div>
       </div>
+      <div class="fw-bold fs-6 pt-3">
+        {{feedback.title}}
+      </div>
+      <div>
+        {{feedback.description}}
+      </div>
       <div class="d-flex align-items-center justify-content-between mt-3">
-        <div class="d-flex align-items-center">
-          <img src="./assets/images/priorities/ic_medium.svg" style="width: 30px"/>
-          <span class="ms-2 vertical-align-middle fs-5"
-                style="color: #D5AD1D">{{'feedback.table.body.priority.medium' | translate}}</span>
+        <div [class]="'priority_' + feedback.priority.toLowerCase()">
+          <div class="d-flex align-items-center">
+            <img [src]="'./assets/images/priorities/ic_' + feedback.priority.toLowerCase() + '.svg'"/>
+            <span class="ms-2 vertical-align-middle">{{'feedback.table.body.priority.' + feedback.priority.toLowerCase() | translate}}</span>
+          </div>
         </div>
         <p-tag
-          severity="success"
-          [value]="'feedback.table.body.status.closed' | translate"
-          [style]="{ 'font-size': '16px'}"></p-tag>
+          [style]="{ 'background':
+            feedback.status.toLowerCase() === 'open' ? 'rgba(255, 255, 255, 0.10)' :
+            feedback.status.toLowerCase() === 'in progress' ? '#3983CB' :
+            feedback.status.toLowerCase() === 'closed' ? '#349974' : ''
+            }"
+          [value]="'feedback.table.body.status.' + feedback.status.toLowerCase() | translate"
+        ></p-tag>
       </div>
     </div>
     <p-paginator

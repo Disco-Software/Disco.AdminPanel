@@ -4,7 +4,9 @@ export interface FeedbackInterface {
   createdDate: string,
   priority: string,
   status: string,
-  name: string
+  name: string,
+  title: string,
+  description: string,
 }
 
 export interface FeedbackOwnerInterface {

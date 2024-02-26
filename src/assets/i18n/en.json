@@ -189,6 +189,8 @@
     "table" : {
       "header" : {
         "name": "Name",
+        "title": "Title",
+        "description": "Description",
         "priority": "Priority",
         "status": "Status",
         "date": "Date"
