@@ -134,7 +134,9 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
 
   subscribeStatuses(): void {
     this.hubConnection.on('changeStatus', (status: string): void => {
-      console.log('received status: ', status);
+      this.status = this.statuses.find(statusItem => {
+        return statusItem.includes(status.toLowerCase())
+      });
     });
   }
 
