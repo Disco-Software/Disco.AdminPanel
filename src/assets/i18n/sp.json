@@ -201,7 +201,7 @@
         },
         "status": {
           "open": "Abiertamente",
-          "inProgress": "En proceso",
+          "in progress": "En proceso",
           "closed": "Cerrado"
         }
       }

@@ -34,7 +34,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
 
   statuses = [
     'feedback.table.body.status.open',
-    'feedback.table.body.status.inProgress',
+    'feedback.table.body.status.in progress',
     'feedback.table.body.status.closed',
   ];
   status: string;

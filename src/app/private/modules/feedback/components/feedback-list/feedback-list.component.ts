@@ -41,7 +41,7 @@ export class FeedbackListComponent {
     ref.componentInstance.ticket = ticket
 
   }
-  
+
   public onPageChange($event): void {
     this.getData($event.page + 1, 5);
   }
