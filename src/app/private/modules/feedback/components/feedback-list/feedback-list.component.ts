@@ -39,7 +39,9 @@ export class FeedbackListComponent {
       animation: true
   });
     ref.componentInstance.ticket = ticket
-
+    ref.componentInstance.closeWindowEmitter.pipe(take(1)).subscribe(() => {
+      this.getData(1, 5);
+    })
   }
 
   public onPageChange($event): void {

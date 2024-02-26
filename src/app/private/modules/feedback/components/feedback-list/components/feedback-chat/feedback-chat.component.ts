@@ -1,4 +1,14 @@
-import {ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import * as signalR from '@microsoft/signalr';
 import {MessageHeaders} from '@microsoft/signalr';
@@ -18,6 +28,8 @@ import {InputComponent} from "@shared";
 export class FeedbackChatComponent implements OnInit, OnDestroy {
   @ViewChild('chatBlock') chatBlock: ElementRef;
   @ViewChild(InputComponent) inputComponent: InputComponent;
+
+  @Output() closeWindowEmitter = new EventEmitter()
 
   @Input() ticket: FeedbackInterface;
   @Input() message : string;
@@ -61,6 +73,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
 
   public onClose(): void {
     this._activeModal.close();
+    this.closeWindowEmitter.emit();
   }
 
   private startSignalRConnection(): void {
