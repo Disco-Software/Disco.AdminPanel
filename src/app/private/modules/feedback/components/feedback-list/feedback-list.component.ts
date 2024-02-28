@@ -36,9 +36,10 @@ export class FeedbackListComponent {
     backdrop : 'static',
     keyboard: false,
       size: 'lg',
-      animation: true
+      animation: false
   });
     ref.componentInstance.ticket = ticket
+    ref.componentInstance.isOpen = true;
     ref.componentInstance.closeWindowEmitter.pipe(take(1)).subscribe(() => {
       this.getData(1, 5);
     })

@@ -33,6 +33,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
 
   @Input() ticket: FeedbackInterface;
   @Input() message : string;
+  @Input() isOpen : boolean = true;
 
   @Select(FeedbackState.isLoadingSelector) isLoading$: Observable<boolean>;
   isLoading: boolean = true;
@@ -44,6 +45,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   public messageDates: string[] = [];
   test: any[] = [];
 
+
   statuses = [
     'feedback.table.body.status.open',
     'feedback.table.body.status.in progress',
@@ -53,6 +55,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   myUser: User;
 
   constructor(private _activeModal: NgbActiveModal, private lsService: LocalStorageService, private store: Store, private cdr: ChangeDetectorRef) {
+    console.log(this.isOpen);
   }
 
   ngOnInit(): void {
@@ -72,8 +75,11 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   }
 
   public onClose(): void {
-    this._activeModal.close();
-    this.closeWindowEmitter.emit();
+    this.isOpen = false;
+    setTimeout(x => {
+      this._activeModal.close();
+      this.closeWindowEmitter.emit();
+    }, 500);
   }
 
   private startSignalRConnection(): void {

@@ -1,4 +1,8 @@
 .modal-window {
+    position: fixed;
+    top: 0;
+    right: -1000px;
+    width: 50%;
     border-radius: 10px;
     background: #17121f;
   &__header {
@@ -57,6 +61,14 @@
   }
 }
 
+.slideInElement {
+  animation: slideIn 1s ease forwards;
+}
+
+.slideOutElement {
+  animation: slideOut 1s ease forwards;
+}
+
 
 :host::ng-deep.p-dropdown-panel {
   background: #29193E;
@@ -77,4 +89,28 @@
 }
 :host::ng-deep.p-dropdown-item {
   color: white;
+}
+
+@keyframes slideIn {
+  0% {
+    right: -800px;
+    display: block;
+    opacity: 1;
+  }
+  100% {
+    right: 0;
+  }
+}
+
+// SlideOut анімація
+@keyframes slideOut {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: -1000px;
+    display: none;
+    opacity: 0;
+
+  }
 }
