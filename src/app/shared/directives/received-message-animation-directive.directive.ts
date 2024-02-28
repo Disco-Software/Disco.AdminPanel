@@ -5,7 +5,9 @@ import { Directive, ElementRef, Renderer2 } from '@angular/core';
 })
 export class ReceivedMessageAnimationDirectiveDirective {
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
+    this.addReceivedMessageClass();
+  }
 
   addReceivedMessageClass() {
     console.log(this.elementRef.nativeElement);
