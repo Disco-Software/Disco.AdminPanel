@@ -10,7 +10,6 @@ export class ReceivedMessageAnimationDirectiveDirective {
   }
 
   addReceivedMessageClass() {
-    console.log(this.elementRef.nativeElement);
     this.renderer.addClass(this.elementRef.nativeElement, 'received-message');
   }
 
