@@ -6,6 +6,7 @@ import {ImageCropperModule} from "ngx-image-cropper";
 import {InputComponent, SearchInputComponent} from "./components";
 import {CoreModule} from "@core";
 import {ClickOutsideDirective, ShowPasswordDirective} from './directives';
+import { ReceivedMessageAnimationDirectiveDirective } from './directives/received-message-animation-directive.directive';
 
 const COMPONENTS = [
   SearchInputComponent,
@@ -21,12 +22,13 @@ const MODULES = [
 ];
 
 const DIRECTIVES = [
+  ReceivedMessageAnimationDirectiveDirective,
   ShowPasswordDirective,
   ClickOutsideDirective
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS, ...DIRECTIVES],
+  declarations: [...COMPONENTS, ...DIRECTIVES, ReceivedMessageAnimationDirectiveDirective],
   imports: [...MODULES, CommonModule],
   exports: [...MODULES, ...COMPONENTS, ...DIRECTIVES],
 })

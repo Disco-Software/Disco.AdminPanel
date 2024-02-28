@@ -69,6 +69,9 @@
   animation: slideOut 1s ease forwards;
 }
 
+.received-message {
+  animation: receivedMessageAnimation 0.3s ease forwards;
+}
 
 :host::ng-deep.p-dropdown-panel {
   background: #29193E;
@@ -112,5 +115,16 @@
     display: none;
     opacity: 0;
 
+  }
+}
+
+@keyframes receivedMessageAnimation {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
