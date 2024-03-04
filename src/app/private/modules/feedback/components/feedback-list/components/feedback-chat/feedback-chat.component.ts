@@ -19,6 +19,7 @@ import {MessageRequestInterface} from 'src/app/core/models/ticket-chat/message-r
 import {environment} from "../../../../../../../../environments/environment";
 import {User} from "../../../../../../../core/models/account/change-email-response.model";
 import {InputComponent} from "@shared";
+import {MenuItem} from "primeng/api";
 
 @Component({
   selector: 'app-feedback-chat',
@@ -44,7 +45,28 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   public messages: any[] = [];
   public messageDates: string[] = [];
   test: any[] = [];
+  protected selectedContextMenuItem: any;
 
+  protected contextMenuItems: MenuItem[] = [
+    {
+      label: 'Edit',
+      icon: 'pi pi-pencil',
+      iconClass: 'text-white me-3',
+      command: (): void => {
+        // тут реалізувати едіт повідомлення
+        console.log(this.selectedContextMenuItem)
+      },
+    },
+    {
+      label: 'Delete',
+      icon: 'pi pi-trash',
+      iconClass: 'text-white me-3',
+      command: (): void => {
+        // тут реалізувати видалення повідомлення
+        console.log(this.selectedContextMenuItem)
+      },
+    },
+  ];
 
   statuses = [
     'feedback.table.body.status.open',
@@ -56,6 +78,10 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
 
   constructor(private _activeModal: NgbActiveModal, private lsService: LocalStorageService, private store: Store, private cdr: ChangeDetectorRef) {
     console.log(this.isOpen);
+  }
+
+  protected test2() {
+    console.log('close')
   }
 
   ngOnInit(): void {

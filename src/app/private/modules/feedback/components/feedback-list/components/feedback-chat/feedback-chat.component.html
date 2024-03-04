@@ -70,6 +70,12 @@
             <div style="color: #C26929" class="fs-5 fw-bolder" *ngIf="message.account.user.userName !== myUser">{{message.account.user.userName}}</div>
             <div class="ps-1">{{message.message}}</div>
             <span class="chat__message-date date">{{getTime(message.createdDate ?? message.created)}}</span>
+            <span class="chat__message-menu menu">
+              <i class="pi pi-ellipsis-v" style="font-size: 0.7rem" (click)="menu.toggle($event); selectedContextMenuItem = message"></i>
+              <p-menu #menu [model]="contextMenuItems" (onHide)="selectedContextMenuItem = null" [popup]="true"></p-menu>
+              <p-toast></p-toast>
+            </span>
+
           </div>
         </div>
       </ng-container>

@@ -60,17 +60,38 @@
       }
       bottom: 0;
     }
+    &-menu {
+      cursor: pointer;
+      opacity: 1;
+      position: absolute;
+      top: 0;
+      transition: all .2s;
+    }
     &-my {
       background: #349974;
       align-self: flex-end;
       .date {
-        right: 100%;
+        right: 89%;
+      }
+      .menu {
+        top: 1px;
+        right: 103%;
       }
     }
     &-companion {
       background: #271546 ;
       .date {
         left: 103%;
+      }
+      .menu {
+        left: 103%;
+        top: 1px;
+      }
+    }
+    &:hover {
+      .menu {
+        opacity: 1;
+        transition: all .2s;
       }
     }
   }
@@ -142,4 +163,26 @@
     transform: scale(1);
     opacity: 1;
   }
+}
+
+:host::ng-deep.p-menu-overlay {
+  left: 0 !important;
+  top: 0 !important;
+  width: fit-content !important;
+}
+:host::ng-deep.p-menu.p-menu-overlay {
+  background: #29193E;
+  border: 1px solid #1a1025;
+  color: white;
+}
+:host::ng-deep.p-menu .p-menuitem-link:not(.p-disabled):hover {
+  background: #130b1a;
+  color: white;
+}
+:host::ng-deep.p-menu .p-menuitem-link .p-menuitem-text  {
+  color: white;
+}
+
+:host::ng-deep.p-menu .p-menuitem-link:not(.p-disabled):hover .p-menuitem-text {
+  color: white !important;
 }
