@@ -45,6 +45,16 @@
       width: 20%;
       bottom: 0;
     }
+  .chat__message-more {
+    display: none;
+    opacity: 0;
+    transition: all 1s ease-in-out;
+  }
+  &:hover .chat__message-more {
+    display: block;
+    opacity: 1;
+    transition: all 1s ease-in-out;
+  }
     &-my {
       background: #349974;
       align-self: flex-end;

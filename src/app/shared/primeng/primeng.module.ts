@@ -15,6 +15,7 @@ import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { BadgeModule } from 'primeng/badge';
+import { ContextMenuModule } from 'primeng/contextmenu';
 
 
 const MODULES = [
@@ -31,7 +32,8 @@ const MODULES = [
   DialogModule,
   TableModule,
   TagModule,
-  BadgeModule
+  BadgeModule,
+  ContextMenuModule,
 ];
 
 const PROVIDERS = [MessageService];

@@ -12,3 +12,4 @@ export * from './app-config';
 export * from './account-password';
 export * from './request.interface';
 export * from './feedback';
+export * from './ticket-chat'
