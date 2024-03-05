@@ -4,51 +4,46 @@
   class="modal-window h-vh-100"
 >
   <div class="modal-window__header row g-0 py-3 px-4">
-<<<<<<< HEAD
-    <div class="d-flex justify-content-between align-items-center">
-      <span class="fs-5 d-flex align-items-center">
-        <ng-container *ngIf="ticket.owner.photo; else defaultPhoto">
-          <img
-            [src]="ticket.owner.photo"
-            style="width: 40px; border-radius: 360px"
-          />
-=======
-    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
-      <div class="fs-5 d-flex align-items-center justify-content-between mb-2 mb-sm-0 w-100 w-sm-auto">
+    <div
+      class="d-flex flex-column flex-sm-row justify-content-between align-items-center"
+    >
+      <div
+        class="fs-5 d-flex align-items-center justify-content-between mb-2 mb-sm-0 w-100 w-sm-auto"
+      >
         <span>
-                  <ng-container *ngIf="ticket.owner.photo else defaultPhoto">
-          <img [src]="ticket.owner.photo" style="width: 40px; border-radius: 360px"/>
->>>>>>> 638666b6cdd94c65605e17642a527f42c658f61f
-        </ng-container>
-        <ng-template #defaultPhoto>
-          <img
-            src="./assets/images/ic_user-default.png"
-            style="width: 40px; background-color: white; border-radius: 360px"
-          />
-        </ng-template>
+          <ng-container *ngIf="ticket.owner.photo; else defaultPhoto">
+            <img
+              [src]="ticket.owner.photo"
+              style="width: 40px; border-radius: 360px"
+            />
+          </ng-container>
+          <ng-template #defaultPhoto>
+            <img
+              src="./assets/images/ic_user-default.png"
+              style="width: 40px; background-color: white; border-radius: 360px"
+            />
+          </ng-template>
 
-        <span class="ms-2 vertical-align-middle">{{
-          ticket.owner.userName
-        }}</span>
+          <span class="ms-2 vertical-align-middle">{{
+            ticket.owner.userName
+          }}</span>
 
-<<<<<<< HEAD
-        <span class="ms-6 vertical-align-middle fs-4 fw-bold">{{
-          ticket.title
-        }}</span>
-      </span>
-      <div class="d-flex align-items-center">
-=======
-        <span class="ms-3 vertical-align-middle fs-5 fw-bold">{{ticket.title}}</span>
+          <span class="ms-3 vertical-align-middle fs-5 fw-bold">{{
+            ticket.title
+          }}</span>
         </span>
         <div class="d-block d-sm-none">
-          <button class="bg-transparent border-0 ms-4 cursor-pointer" (click)="onClose()">
-            <img [src]="'../../../../../../assets/images/ic_close.svg'"/>
-
+          <button
+            class="bg-transparent border-0 ms-4 cursor-pointer"
+            (click)="onClose()"
+          >
+            <img [src]="'../../../../../../assets/images/ic_close.svg'" />
           </button>
         </div>
       </div>
-      <div class="d-flex align-items-center w-100 w-sm-auto justify-content-between">
->>>>>>> 638666b6cdd94c65605e17642a527f42c658f61f
+      <div
+        class="d-flex align-items-center w-100 w-sm-auto justify-content-between"
+      >
         <p-dropdown
           [options]="statuses"
           [(ngModel)]="status"
@@ -77,16 +72,11 @@
           <span style="color: #3983cb" class="me-2">Jira</span>
           <i class="pi pi-external-link me-1" style="color: #3983cb"></i>
         </p-tag>
-<<<<<<< HEAD
         <button
-          class="bg-transparent border-0 ms-4 cursor-pointer"
+          class="d-none d-sm-block bg-transparent border-0 ms-4 cursor-pointer"
           (click)="onClose()"
         >
           <img [src]="'../../../../../../assets/images/ic_close.svg'" />
-=======
-        <button class="d-none d-sm-block bg-transparent border-0 ms-4 cursor-pointer" (click)="onClose()">
-          <img [src]="'../../../../../../assets/images/ic_close.svg'"/>
->>>>>>> 638666b6cdd94c65605e17642a527f42c658f61f
         </button>
       </div>
     </div>
