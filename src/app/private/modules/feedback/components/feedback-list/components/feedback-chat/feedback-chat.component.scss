@@ -1,8 +1,8 @@
 .modal-window {
-    position: fixed;
-    top: 0;
-    right: -1000px;
-    width: 50%;
+  position: fixed;
+  top: 0;
+  right: -1000px;
+  width: 50%;
   @media (max-width: 1200px) {
     width: 70%;
   }
@@ -12,8 +12,8 @@
   @media (max-width: 700px) {
     width: 100%;
   }
-    border-radius: 10px;
-    background: #17121f;
+  border-radius: 10px;
+  background: #17121f;
   &__header {
     background: #271546;
   }
@@ -60,27 +60,38 @@
       }
       bottom: 0;
     }
-  .chat__message-more {
-    display: none;
-    opacity: 0;
-    transition: all 1s ease-in-out;
-  }
-  &:hover .chat__message-more {
-    display: block;
-    opacity: 1;
-    transition: all 1s ease-in-out;
-  }
+    &-menu {
+      cursor: pointer;
+      opacity: 1;
+      position: absolute;
+      top: 0;
+      transition: all .2s;
+    }
     &-my {
       background: #349974;
       align-self: flex-end;
       .date {
-        right: 100%;
+        right: 89%;
+      }
+      .menu {
+        top: 1px;
+        right: 103%;
       }
     }
     &-companion {
       background: #271546 ;
       .date {
         left: 103%;
+      }
+      .menu {
+        left: 103%;
+        top: 1px;
+      }
+    }
+    &:hover {
+      .menu {
+        opacity: 1;
+        transition: all .2s;
       }
     }
   }
@@ -152,4 +163,26 @@
     transform: scale(1);
     opacity: 1;
   }
+}
+
+:host::ng-deep.p-menu-overlay {
+  left: 0 !important;
+  top: 0 !important;
+  width: fit-content !important;
+}
+:host::ng-deep.p-menu.p-menu-overlay {
+  background: #29193E;
+  border: 1px solid #1a1025;
+  color: white;
+}
+:host::ng-deep.p-menu .p-menuitem-link:not(.p-disabled):hover {
+  background: #130b1a;
+  color: white;
+}
+:host::ng-deep.p-menu .p-menuitem-link .p-menuitem-text  {
+  color: white;
+}
+
+:host::ng-deep.p-menu .p-menuitem-link:not(.p-disabled):hover .p-menuitem-text {
+  color: white !important;
 }

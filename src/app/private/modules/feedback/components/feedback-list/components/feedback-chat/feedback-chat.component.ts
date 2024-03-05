@@ -12,15 +12,14 @@ import {
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import * as signalR from '@microsoft/signalr';
 import {MessageHeaders} from '@microsoft/signalr';
-import {ContextMenuInterface, FeedbackInterface, FeedbackState, GetFeedbackMessagesAction, LocalStorageService} from "@core";
+import {FeedbackInterface, FeedbackState, GetFeedbackMessagesAction, LocalStorageService} from "@core";
 import {Select, Store} from "@ngxs/store";
 import {map, Observable, take} from "rxjs";
 import {MessageRequestInterface} from 'src/app/core/models/ticket-chat/message-request.interface';
 import {environment} from "../../../../../../../../environments/environment";
 import {User} from "../../../../../../../core/models/account/change-email-response.model";
 import {InputComponent} from "@shared";
-import { RemoveMessageRequestInterface } from 'src/app/core/models/ticket-chat/remove-message.request.interface';
-import { ContextMenu } from 'primeng/contextmenu';
+import {MenuItem} from "primeng/api";
 
 @Component({
   selector: 'app-feedback-chat',
@@ -30,7 +29,6 @@ import { ContextMenu } from 'primeng/contextmenu';
 export class FeedbackChatComponent implements OnInit, OnDestroy {
   @ViewChild('chatBlock') chatBlock: ElementRef;
   @ViewChild(InputComponent) inputComponent: InputComponent;
-  @ViewChild('messageItem') contextMenuButton!: ElementRef;
 
   @Output() closeWindowEmitter = new EventEmitter()
 
@@ -47,12 +45,28 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   public messages: any[] = [];
   public messageDates: string[] = [];
   test: any[] = [];
+  protected selectedContextMenuItem: any;
 
-  contextMenuItems : ContextMenuInterface[] = [
-    {name: 'Edit', icon: ''},
-    {name: 'Delete for all', icon: ''},
-    {name: 'Delete for me', icon: ''}
-  ]
+  protected contextMenuItems: MenuItem[] = [
+    {
+      label: 'Edit',
+      icon: 'pi pi-pencil',
+      iconClass: 'text-white me-3',
+      command: (): void => {
+        // тут реалізувати едіт повідомлення
+        console.log(this.selectedContextMenuItem)
+      },
+    },
+    {
+      label: 'Delete',
+      icon: 'pi pi-trash',
+      iconClass: 'text-white me-3',
+      command: (): void => {
+        // тут реалізувати видалення повідомлення
+        console.log(this.selectedContextMenuItem)
+      },
+    },
+  ];
 
   statuses = [
     'feedback.table.body.status.open',
@@ -64,6 +78,10 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
 
   constructor(private _activeModal: NgbActiveModal, private lsService: LocalStorageService, private store: Store, private cdr: ChangeDetectorRef) {
     console.log(this.isOpen);
+  }
+
+  protected test2() {
+    console.log('close')
   }
 
   ngOnInit(): void {
@@ -129,7 +147,6 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       .catch(err => null);
 
     this.subscribeMessages();
-    this.subscribeRemovingMessage();
 
     this.subscribeStatuses();
   }
@@ -157,12 +174,6 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
         this.scrollToBottom();
         this.isSendingMessage = false;
       });
-    });
-  }
-
-  subscribeRemovingMessage() {
-    this.hubConnection.on('remove', (messageId: number) => {
-      this.messages.splice(messageId, 1);
     });
   }
 
@@ -209,8 +220,6 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
     }
   }
 
-
-
   changeStatus(event: any): void {
     const status: any = {
       id: this.ticket.id,
@@ -222,21 +231,8 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
         console.log('successful status change')
       })
       .catch(err => null);
+
   }
-
-  deleteMessage(index: number) {
-    const req : RemoveMessageRequestInterface = {
-      id: index
-    };
-
-    this.hubConnection.invoke('delete-for-all', req.id).then((res) => {
-      this.messages.splice(req.id, 1);
-    })
-    .catch(x => {
-      return null;
-    })
-  }
-
   getTime(date: string): string {
     let hours = new Date(date).getHours();
     let minutes = new Date(date).getMinutes();
@@ -251,11 +247,6 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.hubConnection.stop();
-  }
-
-  onContextMenu(event: MouseEvent, contextMenu: ContextMenu, message: any) {
-    contextMenu.show(event);
-    event.preventDefault();
   }
 
 }

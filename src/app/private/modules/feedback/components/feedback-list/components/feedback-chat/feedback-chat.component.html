@@ -1,63 +1,41 @@
 <div
   [class.slideOutElement]="!isOpen"
   [class.slideInElement]="isOpen"
-  class="modal-window h-vh-100"
->
+  class="modal-window h-vh-100">
   <div class="modal-window__header row g-0 py-3 px-4">
-    <div
-      class="d-flex flex-column flex-sm-row justify-content-between align-items-center"
-    >
-      <div
-        class="fs-5 d-flex align-items-center justify-content-between mb-2 mb-sm-0 w-100 w-sm-auto"
-      >
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
+      <div class="fs-5 d-flex align-items-center justify-content-between mb-2 mb-sm-0 w-100 w-sm-auto">
         <span>
-          <ng-container *ngIf="ticket.owner.photo; else defaultPhoto">
-            <img
-              [src]="ticket.owner.photo"
-              style="width: 40px; border-radius: 360px"
-            />
-          </ng-container>
-          <ng-template #defaultPhoto>
-            <img
-              src="./assets/images/ic_user-default.png"
-              style="width: 40px; background-color: white; border-radius: 360px"
-            />
-          </ng-template>
+                  <ng-container *ngIf="ticket.owner.photo else defaultPhoto">
+          <img [src]="ticket.owner.photo" style="width: 40px; border-radius: 360px"/>
+        </ng-container>
+        <ng-template #defaultPhoto>
+          <img src="./assets/images/ic_user-default.png" style="width: 40px; background-color: white; border-radius: 360px"/>
+        </ng-template>
 
-          <span class="ms-2 vertical-align-middle">{{
-            ticket.owner.userName
-          }}</span>
+        <span class="ms-2 vertical-align-middle">{{ticket.owner.userName}}</span>
 
-          <span class="ms-3 vertical-align-middle fs-5 fw-bold">{{
-            ticket.title
-          }}</span>
+        <span class="ms-3 vertical-align-middle fs-5 fw-bold">{{ticket.title}}</span>
         </span>
         <div class="d-block d-sm-none">
-          <button
-            class="bg-transparent border-0 ms-4 cursor-pointer"
-            (click)="onClose()"
-          >
-            <img [src]="'../../../../../../assets/images/ic_close.svg'" />
+          <button class="bg-transparent border-0 ms-4 cursor-pointer" (click)="onClose()">
+            <img [src]="'../../../../../../assets/images/ic_close.svg'"/>
+
           </button>
         </div>
       </div>
-      <div
-        class="d-flex align-items-center w-100 w-sm-auto justify-content-between"
-      >
+      <div class="d-flex align-items-center w-100 w-sm-auto justify-content-between">
         <p-dropdown
           [options]="statuses"
           [(ngModel)]="status"
           [style]="{
-            border: 'none',
-            'font-size': '16px',
-            background: status.includes('open')
-              ? 'rgba(255, 255, 255, 0.10)'
-              : status.includes('in progress')
-              ? '#3983CB'
-              : status.includes('closed')
-              ? '#349974'
-              : ''
-          }"
+          'border': 'none',
+          'font-size': '16px',
+          'background':
+            status.includes('open') ? 'rgba(255, 255, 255, 0.10)' :
+            status.includes('in progress') ? '#3983CB' :
+            status.includes('closed') ? '#349974' : ''
+            }"
           (onChange)="changeStatus($event)"
         >
           <ng-template pTemplate="selectedItem">
@@ -67,81 +45,50 @@
             <span style="color: white">{{ status | translate }}</span>
           </ng-template>
         </p-dropdown>
-        <p-tag class="ms-3 cursor-pointer" [style]="{ background: 'white' }">
-          <img src="./assets/images/jira.jpg" class="me-1" />
-          <span style="color: #3983cb" class="me-2">Jira</span>
-          <i class="pi pi-external-link me-1" style="color: #3983cb"></i>
+        <p-tag class="ms-3 cursor-pointer" [style]="{ 'background': 'white'}">
+          <img src="./assets/images/jira.jpg"  class="me-1"/>
+          <span style="color: #3983CB;" class="me-2" >Jira</span>
+          <i class="pi pi-external-link me-1" style="color: #3983CB;"></i>
         </p-tag>
-        <button
-          class="d-none d-sm-block bg-transparent border-0 ms-4 cursor-pointer"
-          (click)="onClose()"
-        >
-          <img [src]="'../../../../../../assets/images/ic_close.svg'" />
+        <button class="d-none d-sm-block bg-transparent border-0 ms-4 cursor-pointer" (click)="onClose()">
+          <img [src]="'../../../../../../assets/images/ic_close.svg'"/>
         </button>
       </div>
     </div>
   </div>
   <div class="row g-0 chat-container">
-    <div
-      #chatBlock
-      class="chat py-4 px-2 d-flex flex-column align-items-center"
-      style="overflow: auto"
-      *ngIf="!isLoading; else spinner"
-    >
-      <ng-container *ngFor="let messageData of messageDates; let last = last">
-        <div class="chat__date py-2 px-3 mb-3">
-          {{ messageData | date : "mediumDate" }}
-        </div>
+    <div #chatBlock class="chat py-4 px-2 d-flex flex-column align-items-center" style="overflow: auto;" *ngIf="!isLoading else spinner">
+      <ng-container
+        *ngFor="let messageData of messageDates; let last = last">
+        <div class="chat__date py-2 px-3 mb-3 ">{{messageData | date : 'mediumDate'}}</div>
         <div class="d-flex flex-column w-100" [class.mb-4]="!last">
           <div
-            #messageItem
-            class="chat__message d-flex flex-row justify-content-between"
-            [ngClass]="
-              message.account.user.userName === myUser
-                ? 'chat__message-my'
-                : 'chat__message-companion'
-            "
+            class="chat__message"
+            [ngClass]="message.account.user.userName === myUser ? 'chat__message-my': 'chat__message-companion'"
             appReceivedMessageAnimationDirective
-            *ngFor="let message of filterMessagesByDate(messageData)"
-          >
-            <div class="d-flex flex-column">
-              <div
-                style="color: #c26929"
-                class="fs-5 fw-bolder"
-                *ngIf="message.account.user.userName !== myUser"
-              >
-                {{ message.account.user.userName }}
-              </div>
-              <div class="ps-1">{{ message.message }}</div>
-            </div>
-            <!-- <button #contextMenuButton (mouseenter)="onContextMenu($event, menu, message)"  class="chat__message-more more bg-transparent border-0">
-              <i class="pi pi-ellipsis-v" style="font-size: 1rem"></i>
-            </button> -->
-            <span class="chat__message-date date">{{
-              getTime(message.createdDate ?? message.created)
-            }}</span>
+            *ngFor="let message of filterMessagesByDate(messageData)">
+            <div style="color: #C26929" class="fs-5 fw-bolder" *ngIf="message.account.user.userName !== myUser">{{message.account.user.userName}}</div>
+            <div class="ps-1">{{message.message}}</div>
+            <span class="chat__message-date date">{{getTime(message.createdDate ?? message.created)}}</span>
+            <span class="chat__message-menu menu">
+              <i class="pi pi-ellipsis-v" style="font-size: 0.7rem" (click)="menu.toggle($event); selectedContextMenuItem = message"></i>
+              <p-menu #menu [model]="contextMenuItems" (onHide)="selectedContextMenuItem = null" [popup]="true"></p-menu>
+              <p-toast></p-toast>
+            </span>
+
           </div>
         </div>
-        <p-contextMenu
-          [model]="contextMenuItems"
-          [autoZIndex]="true"
-          [target]="message"
-        >
-        </p-contextMenu>
       </ng-container>
       <app-input
         [isLoading]="isSendingMessage"
         (onInput)="sendMessage($event)"
-        (onSend)="sendMessage($event)"
-        class="position-absolute"
-        style="width: 97%; bottom: 10px"
-      ></app-input>
+        (onSend)="sendMessage($event)" class="position-absolute" style="width: 97%; bottom: 10px"></app-input>
     </div>
   </div>
 </div>
 
 <ng-template #spinner>
   <div style="top: 50%; left: 50%" class="position-absolute">
-    <img width="100" src="../../../../../assets/gifs/gif_public.gif" />
+    <img width="100" src="../../../../../assets/gifs/gif_public.gif">
   </div>
 </ng-template>
