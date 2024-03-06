@@ -61,10 +61,11 @@
       <ng-container
         *ngFor="let messageData of messageDates; let last = last">
         <div class="chat__date py-2 px-3 mb-3 ">{{messageData | date : 'mediumDate'}}</div>
-        <div class="d-flex flex-column w-100" [class.mb-4]="!last">
+        <div class="d-flex flex-column w-100" [class.mb-4]="!last" [class.mb-3]="last">
           <div
             class="chat__message"
             [ngClass]="message.account.user.userName === myUser ? 'chat__message-my': 'chat__message-companion'"
+            [ngStyle]="{'z-index': selectedContextMenuItem && selectedContextMenuItem.id !== message.id ? '-1' : '1' }"
             appReceivedMessageAnimationDirective
             *ngFor="let message of filterMessagesByDate(messageData)">
             <div style="color: #C26929" class="fs-5 fw-bolder" *ngIf="message.account.user.userName !== myUser">{{message.account.user.userName}}</div>
