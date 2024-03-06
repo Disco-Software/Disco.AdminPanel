@@ -52,9 +52,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       label: 'Edit',
       icon: 'pi pi-pencil',
       iconClass: 'text-white me-3',
-      command: (): void => {
-        // тут реалізувати едіт повідомлення
-        console.log(this.selectedContextMenuItem)
+      command: (id: number): void => {
       },
     },
     {
@@ -62,8 +60,20 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       icon: 'pi pi-trash',
       iconClass: 'text-white me-3',
       command: (): void => {
-        // тут реалізувати видалення повідомлення
-        console.log(this.selectedContextMenuItem)
+        const req = {
+          id: this.selectedContextMenuItem.id
+        };
+        console.log(`message id: ${this.selectedContextMenuItem.id}`)
+        this.hubConnection.invoke('delete-for-all', req.id).then(() => {
+          const index: number = this.messages.findIndex(x => x.Id === req.id);
+          console.log(index);
+          this.messages = [
+            ...this.messages,
+            this.messages.splice(index)
+          ];
+
+          console.log(this.messages);
+        });
       },
     },
   ];
@@ -147,6 +157,10 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       .catch(err => null);
 
     this.subscribeMessages();
+
+    this.hubConnection.on('remove', (id: number) => {
+      this.messages = this.messages.splice(id);
+    })
 
     this.subscribeStatuses();
   }
