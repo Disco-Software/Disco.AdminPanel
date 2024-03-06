@@ -60,19 +60,18 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       icon: 'pi pi-trash',
       iconClass: 'text-white me-3',
       command: (): void => {
-        const req = {
-          id: this.selectedContextMenuItem.id
-        };
-        console.log(`message id: ${this.selectedContextMenuItem.id}`)
-        this.hubConnection.invoke('delete-for-all', req.id).then(() => {
-          const index: number = this.messages.findIndex(x => x.Id === req.id);
-          console.log(index);
-          this.messages = [
-            ...this.messages,
-            this.messages.splice(index)
-          ];
-
-          console.log(this.messages);
+        console.log(this.selectedContextMenuItem)
+        this.hubConnection.invoke('delete-for-all', this.selectedContextMenuItem.id).then((): void => {
+          console.log('it happened');
+          console.log(this.messages)
+          // const index: number = this.messages.findIndex(x => x.Id === req.id);
+          // console.log(index);
+          // this.messages = [
+          //   ...this.messages,
+          //   this.messages.splice(index)
+          // ];
+          //
+          // console.log(this.messages);
         });
       },
     },
@@ -158,11 +157,9 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
 
     this.subscribeMessages();
 
-    this.hubConnection.on('remove', (id: number) => {
-      this.messages = this.messages.splice(id);
-    })
-
     this.subscribeStatuses();
+
+    this.subscribeRemoveMessages();
   }
 
   getAllMessages(req: any): void {
@@ -197,6 +194,13 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
         return statusItem.includes(status.toLowerCase())
       });
     });
+  }
+
+  subscribeRemoveMessages(): void {
+    this.hubConnection.on('remove', (id: number): void => {
+      this.messages = this.messages.filter(message=>message.id !== id);
+      this.generateMapDates();
+    })
   }
 
   generateMapDates(): void {

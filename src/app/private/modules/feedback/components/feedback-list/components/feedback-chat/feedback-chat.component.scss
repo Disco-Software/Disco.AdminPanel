@@ -77,6 +77,11 @@
         top: 1px;
         right: 103%;
       }
+      //:host::ng-deep.p-menu-overlay {
+      //  left: -100px !important;
+      //  top: 0 !important;
+      //  width: fit-content !important;
+      //}
     }
     &-companion {
       background: #271546 ;
@@ -87,6 +92,11 @@
         left: 103%;
         top: 1px;
       }
+      //:host::ng-deep.p-menu-overlay {
+      //  left: 0 !important;
+      //  top: 0 !important;
+      //  width: fit-content !important;
+      //}
     }
     &:hover {
       .menu {
