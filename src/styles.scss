@@ -945,3 +945,14 @@ template {
 .invalid{
   border-color: red !important;
 }
+
+::-webkit-scrollbar {
+  width: 6px !important;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background-color: darkgray;
+  opacity: 0.5;
+}
