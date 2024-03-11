@@ -39,7 +39,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   @Select(FeedbackState.isLoadingSelector) isLoading$: Observable<boolean>;
   isLoading: boolean = true;
   isSendingMessage = false;
-
+  isEdit : boolean = false;
 
   private hubConnection: signalR.HubConnection | undefined;
   public messages: any[] = [];
@@ -53,6 +53,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       icon: 'pi pi-pencil',
       iconClass: 'text-white me-3',
       command: (id: number): void => {
+        this.isEdit = true
       },
     },
     {
@@ -60,10 +61,11 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       icon: 'pi pi-trash',
       iconClass: 'text-white me-3',
       command: (): void => {
-        console.log(this.selectedContextMenuItem)
         this.hubConnection.invoke('delete-for-all', this.selectedContextMenuItem.id).then((): void => {
-          console.log('it happened');
-          console.log(this.messages)
+          this.isRemoving = true;
+          setTimeout(x => {
+            this.isRemoving = false;
+          }, 1000);
           // const index: number = this.messages.findIndex(x => x.Id === req.id);
           // console.log(index);
           // this.messages = [
@@ -84,9 +86,11 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   ];
   status: string;
   myUser: User;
+  isRemoving: boolean = false;
 
   constructor(private _activeModal: NgbActiveModal, private lsService: LocalStorageService, private store: Store, private cdr: ChangeDetectorRef) {
     console.log(this.isOpen);
+    console.log(this.isRemoving)
   }
 
   protected test2() {
@@ -198,8 +202,12 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
 
   subscribeRemoveMessages(): void {
     this.hubConnection.on('remove', (id: number): void => {
-      this.messages = this.messages.filter(message=>message.id !== id);
-      this.generateMapDates();
+      this.isRemoving = true;
+      setTimeout(x => {
+        this.messages = this.messages.filter(message=>message.id !== id);
+        this.generateMapDates();
+        this.isRemoving = false;
+      }, 1000);
     })
   }
 

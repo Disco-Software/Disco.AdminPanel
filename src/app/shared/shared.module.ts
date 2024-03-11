@@ -7,6 +7,7 @@ import {InputComponent, SearchInputComponent} from "./components";
 import {CoreModule} from "@core";
 import {ClickOutsideDirective, ShowPasswordDirective} from './directives';
 import { ReceivedMessageAnimationDirectiveDirective } from './directives/received-message-animation-directive.directive';
+import { RemovedMessageAnimationDirective } from './directives/removed-message-animation.directive';
 
 const COMPONENTS = [
   SearchInputComponent,
@@ -23,12 +24,13 @@ const MODULES = [
 
 const DIRECTIVES = [
   ReceivedMessageAnimationDirectiveDirective,
+  RemovedMessageAnimationDirective,
   ShowPasswordDirective,
   ClickOutsideDirective
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS, ...DIRECTIVES, ReceivedMessageAnimationDirectiveDirective],
+  declarations: [...COMPONENTS, ...DIRECTIVES, ReceivedMessageAnimationDirectiveDirective, RemovedMessageAnimationDirective],
   imports: [...MODULES, CommonModule],
   exports: [...MODULES, ...COMPONENTS, ...DIRECTIVES],
 })

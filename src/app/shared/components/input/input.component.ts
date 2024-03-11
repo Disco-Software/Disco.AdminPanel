@@ -9,13 +9,19 @@ export class InputComponent {
   @ViewChild('inputElement') inputElement: any;
   @Output() onInput = new EventEmitter<string>();
   @Output() onSend = new EventEmitter<string>();
+  @Output() onEdit = new EventEmitter<string>();
 
   @Input() isLoading: boolean;
+  @Input() isEdit: boolean;
 
   public search : string;
 
   public onSendButtonClick() {
     this.onSend.emit(this.search);
+  }
+
+  public onEditButtonClick() {
+    this.onEdit.emit(this.search)
   }
 
   public clearMessageString() {

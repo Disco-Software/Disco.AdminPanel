@@ -107,6 +107,35 @@
   }
 }
 
+.update-message {
+  position: relative;
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: .7px var(--main-color);
+  background-image: linear-gradient(var(--main-color), var(--main-color));
+  background-repeat: no-repeat;
+  -moz-background-clip: text;
+  -webkit-background-clip: text;
+  background-position: -33rem 0;
+  -moz-animation: homeBgAnimation 6s linear infinite;
+  -o-animation: homeBgAnimation 6s linear infinite;
+  -webkit-animation: homeBgAnimation 6s linear infinite;
+  animation: homeBgAnimation 6s linear infinite;
+  animation-delay: 2s;
+  &::before {
+    content: '';
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border-right: 2px solid white;
+    z-index: -1;
+    animation: cursorBgAnimation 3s ease;
+    animation-delay: .2s;
+  }
+}
+
 .slideInElement {
   animation: slideIn 1s ease forwards;
 }
@@ -117,6 +146,10 @@
 
 .received-message {
   animation: receivedMessageAnimation 0.3s ease forwards;
+}
+
+.remove-message {
+  animation: deleteAnimation 0.5s ease forwards;
 }
 
 :host::ng-deep.p-dropdown-panel {
@@ -174,6 +207,17 @@
     opacity: 1;
   }
 }
+@keyframes deleteAnimation {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
 
 :host::ng-deep.p-menu-overlay {
   left: 0 !important;
@@ -197,3 +241,22 @@
   color: white !important;
 }
 
+@keyframes cursorBgAnimation {
+  0%,
+  10%,
+  100% {
+      width: 0;
+  }
+
+  65%,
+  78%,
+  85% {
+      width: 100%;
+      opacity: 1;
+  }
+
+  75%,
+  81% {
+      opacity: 0;
+  }
+}

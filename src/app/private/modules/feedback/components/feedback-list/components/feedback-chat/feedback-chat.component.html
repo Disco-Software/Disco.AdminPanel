@@ -65,6 +65,7 @@
           <div
             class="chat__message"
             [ngClass]="message.account.user.userName === myUser ? 'chat__message-my': 'chat__message-companion'"
+            [class.remove-message]="isRemoving ? 'remove-message' : ''"
             [ngStyle]="{'z-index': selectedContextMenuItem && selectedContextMenuItem.id !== message.id ? '-1' : '1' }"
             appReceivedMessageAnimationDirective
             *ngFor="let message of filterMessagesByDate(messageData)">
@@ -81,6 +82,7 @@
         </div>
       </ng-container>
       <app-input
+        [isEdit]="!isEdit"
         [isLoading]="isSendingMessage"
         (onInput)="sendMessage($event)"
         (onSend)="sendMessage($event)" class="position-absolute" style="width: 97%; bottom: 10px"></app-input>
