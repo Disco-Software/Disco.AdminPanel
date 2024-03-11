@@ -65,7 +65,7 @@
           <div
             class="chat__message"
             [ngClass]="message.account.user.userName === myUser ? 'chat__message-my': 'chat__message-companion'"
-            [class.remove-message]="isRemoving ? 'remove-message' : ''"
+            [class.remove-message]="message?.isRemoving ? 'remove-message' : ''"
             [ngStyle]="{'z-index': selectedContextMenuItem && selectedContextMenuItem.id !== message.id ? '-1' : '1' }"
             appReceivedMessageAnimationDirective
             *ngFor="let message of filterMessagesByDate(messageData)">

@@ -62,18 +62,27 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       iconClass: 'text-white me-3',
       command: (): void => {
         this.hubConnection.invoke('delete-for-all', this.selectedContextMenuItem.id).then((): void => {
-          this.isRemoving = true;
-          setTimeout(x => {
-            this.isRemoving = false;
+
+          this.messages = this.messages.map(message => {
+            if (message.id === this.selectedContextMenuItem.id) {
+                return {
+                    ...message,
+                    isRemoving: true
+                };
+            }
+          });
+          console.log(this.messages)
+          setTimeout(() => {
+            this.messages = this.messages.map(message => {
+              if (message.id === this.selectedContextMenuItem.id) {
+                  return {
+                      ...message,
+                      isRemoving: false
+                  };
+              }
+            })
+            console.log(this.messages)
           }, 1000);
-          // const index: number = this.messages.findIndex(x => x.Id === req.id);
-          // console.log(index);
-          // this.messages = [
-          //   ...this.messages,
-          //   this.messages.splice(index)
-          // ];
-          //
-          // console.log(this.messages);
         });
       },
     },
