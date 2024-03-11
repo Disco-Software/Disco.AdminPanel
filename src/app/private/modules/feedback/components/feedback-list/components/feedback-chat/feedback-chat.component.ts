@@ -53,7 +53,6 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       icon: 'pi pi-pencil',
       iconClass: 'text-white me-3',
       command: (id: number): void => {
-        console.log(this.selectedContextMenuItem)
         this.isEdit = true;
         this.selectedContextMenuItem = null;
       },
@@ -63,18 +62,16 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       icon: 'pi pi-trash',
       iconClass: 'text-white me-3',
       command: (): void => {
-        console.log(this.selectedContextMenuItem)
-
         this.hubConnection.invoke('delete-for-all', this.selectedContextMenuItem.id).then((): void => {
           if (this.selectedContextMenuItem) {
           this.messages = this.messages.map(message => {
             if (message.id === this.selectedContextMenuItem.id) {
               return {
                 ...message,
-                isRemoving: true
+                isRemoving: true,
               };
             } else {
-              return message
+              return message;
             }
           });
             setTimeout((): void => {
