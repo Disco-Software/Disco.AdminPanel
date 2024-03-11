@@ -53,7 +53,9 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       icon: 'pi pi-pencil',
       iconClass: 'text-white me-3',
       command: (id: number): void => {
-        this.isEdit = true
+        console.log(this.selectedContextMenuItem)
+        this.isEdit = true;
+        this.selectedContextMenuItem = null;
       },
     },
     {
@@ -61,28 +63,35 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       icon: 'pi pi-trash',
       iconClass: 'text-white me-3',
       command: (): void => {
-        this.hubConnection.invoke('delete-for-all', this.selectedContextMenuItem.id).then((): void => {
+        console.log(this.selectedContextMenuItem)
 
+        this.hubConnection.invoke('delete-for-all', this.selectedContextMenuItem.id).then((): void => {
+          if (this.selectedContextMenuItem) {
           this.messages = this.messages.map(message => {
             if (message.id === this.selectedContextMenuItem.id) {
-                return {
-                    ...message,
-                    isRemoving: true
-                };
+              return {
+                ...message,
+                isRemoving: true
+              };
+            } else {
+              return message
             }
           });
-          console.log(this.messages)
-          setTimeout(() => {
+            setTimeout((): void => {
             this.messages = this.messages.map(message => {
               if (message.id === this.selectedContextMenuItem.id) {
-                  return {
-                      ...message,
-                      isRemoving: false
-                  };
+                return {
+                  ...message,
+                  isRemoving: false
+                };
+              } else {
+                return message
               }
             })
-            console.log(this.messages)
+              this.selectedContextMenuItem = null;
           }, 1000);
+          }
+
         });
       },
     },
@@ -98,8 +107,6 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   isRemoving: boolean = false;
 
   constructor(private _activeModal: NgbActiveModal, private lsService: LocalStorageService, private store: Store, private cdr: ChangeDetectorRef) {
-    console.log(this.isOpen);
-    console.log(this.isRemoving)
   }
 
   protected test2() {
@@ -284,4 +291,5 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
     this.hubConnection.stop();
   }
 
+  protected readonly setTimeout = setTimeout;
 }
