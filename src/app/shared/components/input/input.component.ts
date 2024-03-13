@@ -1,37 +1,36 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss']
 })
-export class InputComponent {
+export class InputComponent implements OnChanges {
   @ViewChild('inputElement') inputElement: any;
   @Output() onInput = new EventEmitter<string>();
   @Output() onSend = new EventEmitter<string>();
-  @Output() onEdit = new EventEmitter<string>();
+  @Output() onEdit = new EventEmitter<any>();
+  @Output() onCloseEdit = new EventEmitter();
 
   @Input() isLoading: boolean;
-  @Input() isEdit: boolean;
-  @Input() editableMessage : any;
+  @Input() editableMessage: any;
 
   public search : string;
 
+
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.isEdit === true) {
+    if (this.editableMessage) {
       this.search = this.editableMessage.message;
-    }
-    else {
-      this.search = '';
     }
   }
 
   public onSendButtonClick() {
-    this.onSend.emit(this.search);
-  }
+    if (!this.editableMessage) {
+      this.onSend.emit(this.search);
+    } else {
+      this.onEdit.emit({...this.editableMessage, message: this.search});
+    }
 
-  public onEditButtonClick() {
-    this.onEdit.emit(this.search)
   }
 
   public clearMessageString() {
@@ -40,9 +39,5 @@ export class InputComponent {
 
   public focusInput(): void {
     this.inputElement.nativeElement.focus();
-  }
-
-  public closeEdit() {
-    this.isEdit = !this.isEdit;
   }
 }

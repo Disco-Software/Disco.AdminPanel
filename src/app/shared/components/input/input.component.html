@@ -1,20 +1,19 @@
 <div style="background-color: #281547; z-index: 999;" class="search search-container d-flex justify-content-center align-items-center flex-row position-relative h-100 cursor-pointer">
   <div class="position-absolute w-100"
-    [class.slideUp]="!isEdit"
-    [class.slideDown]="isEdit"
-    style="
-      top: 0;
+       *ngIf="editableMessage"
+       style="
+      top: -48px;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
     ">
-    <div style="border-left: 2px solid gray; background: #271546;" class="d-flex flex-column justify-content-around align-items-start ps-3">
-        <div class=" d-flex justify-content-between w-100">
-          <strong>Editable message</strong>
-          <button (click)="isEdit === false" class="border-0 bg-transparent">
-            <img style="width: 15px; height: 15px;" src="../../../../assets/images/ic_close.svg">
-          </button>
-        </div>
-        <span [(ngModel)]="search" style="font-style: italic;"></span>
+    <div style="border-left: 2px solid grey; background: #271546;" class="d-flex justify-content-between ps-3">
+      <div class="d-flex flex-column align-items-start">
+        <strong>Editable text</strong>
+        <span style="font-style: italic;">{{editableMessage.message}}</span>
+      </div>
+      <button (click)="onCloseEdit.emit(); search = ''" class="border-0 bg-transparent">
+        <img style="width: 15px; height: 15px;" src="../../../../assets/images/ic_close.svg">
+      </button>
     </div>
   </div>
   <div style="background-color: #33204f;" class=" search-wrapper wrapper w-100 position-relative">
@@ -32,7 +31,8 @@
       <img width="40" src="../../../../../assets/gifs/gif_public.gif">
     </div>
     <button *ngIf="!isLoading" (click)="onSendButtonClick()" class=" border-0 bg-transparent">
-      <img src='./assets/images/send.png' class="position-absolute" style="right: 10px; top: 11px;">
+      <img *ngIf="!editableMessage" src='./assets/images/send.png' class="position-absolute cursor-pointer" style="right: 7px; top: 13px;">
+      <i *ngIf="editableMessage" class="pi pi-check position-absolute cursor-pointer" style="right: 8px; top: 17px; font-size: 1.2rem"></i>
     </button>
   </div>
 </div>

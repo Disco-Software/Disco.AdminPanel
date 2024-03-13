@@ -39,6 +39,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   @Select(FeedbackState.isLoadingSelector) isLoading$: Observable<boolean>;
   isLoading: boolean = true;
   isSendingMessage = false;
+  editableMessage: any;
   isEdit : boolean = false;
   Edited : boolean = false;
 
@@ -54,37 +55,8 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       icon: 'pi pi-pencil',
       iconClass: 'text-white me-3',
       command: (id: number): void => {
-        this.isEdit = true;
-        // this.hubConnection.invoke('update', (id: number, message: string) => {
-        //   this.isEdit = true;
-        //   if(this.selectedContextMenuItem) {
-        //     this.messages.map(message => {
-        //       if(message.id === this.selectedContextMenuItem.id) {
-        //         return {
-        //           ...message,
-        //           Edited: true
-        //         }
-        //       }
-        //       else {
-        //         return message;
-        //       }
-        //     })
-
-        //     setTimeout((): void => {
-        //       this.messages = this.messages.map(message => {
-        //         if (message.id === this.selectedContextMenuItem.id) {
-        //           return {
-        //             ...message,
-        //             message
-        //           };
-        //         } else {
-        //           return message
-        //         }
-        //       })
-        //         this.selectedContextMenuItem = null;
-        //     }, 1000);
-        //   }
-       // })
+        this.editableMessage = this.selectedContextMenuItem;
+        this.selectedContextMenuItem = null;
       },
     },
     {
@@ -207,6 +179,8 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
     this.subscribeStatuses();
 
     this.subscribeRemoveMessages();
+
+    this.subscribeUpdate();
   }
 
   getAllMessages(req: any): void {
@@ -237,14 +211,20 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
 
   subscribeUpdate() : void {
     this.hubConnection.on('update', (id: number, message: string) => {
-      const editableIndex = this.messages.findIndex(x => x.id === id);
-      if(editableIndex !== -1) {
-        this.messages = [
-          ...this.messages.slice(0, editableIndex),
-          message,
-          ...this.messages.slice(editableIndex + 1)
-        ];
-      }
+      console.log('on update')
+      console.log(id, message)
+      // const editableIndex = this.messages.findIndex(x => x.id === id);
+      // if(editableIndex !== -1) {
+      //   this.messages = [
+      //     ...this.messages.slice(0, editableIndex),
+      //     message,
+      //     ...this.messages.slice(editableIndex + 1)
+      //   ];
+      // }
+      setTimeout((): void => {
+        this.scrollToBottom();
+        this.isSendingMessage = false;
+      });
     })
   }
 
@@ -302,6 +282,19 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
     }
   }
 
+  protected editMessage(search: any): void {
+    this.isSendingMessage = true;
+    this.hubConnection.invoke('update', search.id, search.message).then(res => {
+      console.log('res update', res)
+      this.inputComponent.clearMessageString();
+
+      setTimeout((): void => {
+        this.inputComponent.focusInput();
+      })
+    })
+  }
+
+
   changeStatus(event: any): void {
     const status: any = {
       id: this.ticket.id,
@@ -330,6 +323,4 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.hubConnection.stop();
   }
-
-  protected readonly setTimeout = setTimeout;
 }
