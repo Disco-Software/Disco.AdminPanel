@@ -108,9 +108,6 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   constructor(private _activeModal: NgbActiveModal, private lsService: LocalStorageService, private store: Store, private cdr: ChangeDetectorRef) {
   }
 
-  protected test2() {
-    console.log('close')
-  }
 
   ngOnInit(): void {
     this.myUser = this.lsService.getItem('user').userName;
@@ -210,21 +207,15 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   }
 
   subscribeUpdate() : void {
-    this.hubConnection.on('update', (id: number, message: string) => {
-      console.log('on update')
-      console.log(id, message)
-      // const editableIndex = this.messages.findIndex(x => x.id === id);
-      // if(editableIndex !== -1) {
-      //   this.messages = [
-      //     ...this.messages.slice(0, editableIndex),
-      //     message,
-      //     ...this.messages.slice(editableIndex + 1)
-      //   ];
-      // }
-      setTimeout((): void => {
-        this.scrollToBottom();
-        this.isSendingMessage = false;
-      });
+    this.hubConnection.on('update', (message: any) => {
+      const editableIndex = this.messages.findIndex(x => x.id === message.id);
+      if(editableIndex !== -1) {
+        this.messages = [
+          ...this.messages.slice(0, editableIndex),
+          message,
+          ...this.messages.slice(editableIndex + 1)
+        ];
+      }
     })
   }
 
@@ -272,6 +263,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
 
       this.hubConnection?.invoke('send', chatMessage.message, chatMessage.ticketName, chatMessage.ticketId)
         .then((res) => {
+          this.isSendingMessage = false;
           this.inputComponent.clearMessageString();
 
           setTimeout((): void => {
@@ -285,7 +277,8 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   protected editMessage(search: any): void {
     this.isSendingMessage = true;
     this.hubConnection.invoke('update', search.id, search.message).then(res => {
-      console.log('res update', res)
+      this.editableMessage = null;
+      this.isSendingMessage = false;
       this.inputComponent.clearMessageString();
 
       setTimeout((): void => {

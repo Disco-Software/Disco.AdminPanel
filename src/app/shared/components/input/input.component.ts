@@ -21,6 +21,9 @@ export class InputComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.editableMessage) {
       this.search = this.editableMessage.message;
+      setTimeout((): void => {
+        this.focusInput();
+      })
     }
   }
 
