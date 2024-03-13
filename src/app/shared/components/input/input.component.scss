@@ -14,3 +14,38 @@
     }
   }
 }
+
+.slideUp {
+  animation: slideUp .5s forwards;
+}
+
+.slideDown {
+  animation: slideDown .5s forwards;
+}
+
+@keyframes slideUp {
+  from {
+    display: block;
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-48px);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    display: block;
+    opacity: 1;
+    transform: translateY(-48);
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 0;
+    display: none;
+  }
+}

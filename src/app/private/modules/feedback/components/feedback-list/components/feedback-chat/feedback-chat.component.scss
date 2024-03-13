@@ -47,6 +47,12 @@
     border-radius: 20px;
     color: white;
     border: 1px solid var(--Stroke-Bubble, rgba(35, 35, 35, 0.02));
+    &-fadeIn {
+      animation: fadeIn .5s ease-in-out forwards;
+    }
+    &-fadeOut {
+      animation: fadeOut .5s ease-in-out forwards; // Анімація зникнення
+    }
     &-date {
       position: absolute;
       @media(max-width: 700px) {
@@ -104,35 +110,6 @@
         transition: all .2s;
       }
     }
-  }
-}
-
-.update-message {
-  position: relative;
-  font-size: 3.2rem;
-  font-weight: 700;
-  color: transparent;
-  -webkit-text-stroke: .7px var(--main-color);
-  background-image: linear-gradient(var(--main-color), var(--main-color));
-  background-repeat: no-repeat;
-  -moz-background-clip: text;
-  -webkit-background-clip: text;
-  background-position: -33rem 0;
-  -moz-animation: homeBgAnimation 6s linear infinite;
-  -o-animation: homeBgAnimation 6s linear infinite;
-  -webkit-animation: homeBgAnimation 6s linear infinite;
-  animation: homeBgAnimation 6s linear infinite;
-  animation-delay: 2s;
-  &::before {
-    content: '';
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    border-right: 2px solid white;
-    z-index: -1;
-    animation: cursorBgAnimation 3s ease;
-    animation-delay: .2s;
   }
 }
 
@@ -241,22 +218,25 @@
   color: white !important;
 }
 
-@keyframes cursorBgAnimation {
-  0%,
-  10%,
-  100% {
-      width: 0;
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
   }
-
-  65%,
-  78%,
-  85% {
-      width: 100%;
-      opacity: 1;
-  }
-
-  75%,
-  81% {
-      opacity: 0;
+  to {
+    opacity: 0;
+    transform: translateX(-20px); // Зсув вліво при зникненні
   }
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px); // Зсув зправа при появі
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+

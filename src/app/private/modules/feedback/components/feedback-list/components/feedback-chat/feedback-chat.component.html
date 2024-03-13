@@ -81,11 +81,23 @@
           </div>
         </div>
       </ng-container>
-      <app-input
+
+      <ng-container *ngIf="isEdit; else elseTemplate">
+        <app-input
+        [isLoading]="isSendingMessage"
+        (onInput)="sendMessage($event)"
+        (onSend)="sendMessage($event)" class="position-absolute" style="width: 97%; bottom: 10px"></app-input>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <app-input
+        [editableMessage]="selectedContextMenuItem"
         [isEdit]="!isEdit"
         [isLoading]="isSendingMessage"
         (onInput)="sendMessage($event)"
         (onSend)="sendMessage($event)" class="position-absolute" style="width: 97%; bottom: 10px"></app-input>
+      </ng-template>
+
+
     </div>
   </div>
 </div>

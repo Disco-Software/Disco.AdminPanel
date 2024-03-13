@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-input',
@@ -13,8 +13,18 @@ export class InputComponent {
 
   @Input() isLoading: boolean;
   @Input() isEdit: boolean;
+  @Input() editableMessage : any;
 
   public search : string;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.isEdit === true) {
+      this.search = this.editableMessage.message;
+    }
+    else {
+      this.search = '';
+    }
+  }
 
   public onSendButtonClick() {
     this.onSend.emit(this.search);
@@ -30,5 +40,9 @@ export class InputComponent {
 
   public focusInput(): void {
     this.inputElement.nativeElement.focus();
+  }
+
+  public closeEdit() {
+    this.isEdit = !this.isEdit;
   }
 }

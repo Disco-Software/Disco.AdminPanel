@@ -1,14 +1,20 @@
 <div style="background-color: #281547; z-index: 999;" class="search search-container d-flex justify-content-center align-items-center flex-row position-relative h-100 cursor-pointer">
   <div class="position-absolute w-100"
-    *ngIf="!isEdit"
+    [class.slideUp]="!isEdit"
+    [class.slideDown]="isEdit"
     style="
-      top: -48px;
+      top: 0;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
     ">
     <div style="border-left: 2px solid gray; background: #271546;" class="d-flex flex-column justify-content-around align-items-start ps-3">
-        <strong>Editable text</strong>
-        <span style="font-style: italic;">Hello world</span>
+        <div class=" d-flex justify-content-between w-100">
+          <strong>Editable message</strong>
+          <button (click)="isEdit === false" class="border-0 bg-transparent">
+            <img style="width: 15px; height: 15px;" src="../../../../assets/images/ic_close.svg">
+          </button>
+        </div>
+        <span [(ngModel)]="search" style="font-style: italic;"></span>
     </div>
   </div>
   <div style="background-color: #33204f;" class=" search-wrapper wrapper w-100 position-relative">

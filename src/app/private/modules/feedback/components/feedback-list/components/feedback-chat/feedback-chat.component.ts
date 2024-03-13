@@ -40,6 +40,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   isSendingMessage = false;
   isEdit : boolean = false;
+  Edited : boolean = false;
 
   private hubConnection: signalR.HubConnection | undefined;
   public messages: any[] = [];
@@ -54,7 +55,36 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       iconClass: 'text-white me-3',
       command: (id: number): void => {
         this.isEdit = true;
-        this.selectedContextMenuItem = null;
+        // this.hubConnection.invoke('update', (id: number, message: string) => {
+        //   this.isEdit = true;
+        //   if(this.selectedContextMenuItem) {
+        //     this.messages.map(message => {
+        //       if(message.id === this.selectedContextMenuItem.id) {
+        //         return {
+        //           ...message,
+        //           Edited: true
+        //         }
+        //       }
+        //       else {
+        //         return message;
+        //       }
+        //     })
+
+        //     setTimeout((): void => {
+        //       this.messages = this.messages.map(message => {
+        //         if (message.id === this.selectedContextMenuItem.id) {
+        //           return {
+        //             ...message,
+        //             message
+        //           };
+        //         } else {
+        //           return message
+        //         }
+        //       })
+        //         this.selectedContextMenuItem = null;
+        //     }, 1000);
+        //   }
+       // })
       },
     },
     {
@@ -203,6 +233,19 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
         this.isSendingMessage = false;
       });
     });
+  }
+
+  subscribeUpdate() : void {
+    this.hubConnection.on('update', (id: number, message: string) => {
+      const editableIndex = this.messages.findIndex(x => x.id === id);
+      if(editableIndex !== -1) {
+        this.messages = [
+          ...this.messages.slice(0, editableIndex),
+          message,
+          ...this.messages.slice(editableIndex + 1)
+        ];
+      }
+    })
   }
 
   subscribeStatuses(): void {
