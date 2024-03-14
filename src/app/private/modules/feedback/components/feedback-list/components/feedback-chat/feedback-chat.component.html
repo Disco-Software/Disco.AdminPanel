@@ -74,7 +74,7 @@
             <span class="chat__message-date date">{{getTime(message.createdDate ?? message.created)}}</span>
             <span class="chat__message-menu menu">
               <i class="pi pi-ellipsis-v" style="font-size: 0.7rem" (click)="selectedContextMenuItem = message; menu.toggle($event); "></i>
-              <p-menu #menu [model]="contextMenuItems" [popup]="true"></p-menu>
+              <p-menu #menu (onHide)="selectedContextMenuItem = null" [model]="message.account.user.userName === myUser ? myContextMenuItems : componionContextMenuItems" [popup]="true"></p-menu>
               <p-toast></p-toast>
             </span>
 
