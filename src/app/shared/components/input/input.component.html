@@ -16,7 +16,10 @@
       </button>
     </div>
   </div>
-  <div style="background-color: #33204f;" class=" search-wrapper wrapper w-100 position-relative">
+  <div style="background-color: #271546;" class=" search-wrapper wrapper w-100 position-relative d-inline-flex flex-row justify-content-center align-items-center">
+    <button class="border-0 bg-transparent">
+       <i class=" pi pi-upload"></i>
+    </button>
     <input
       #inputElement
       [class.opacity-03]="isLoading"
@@ -31,7 +34,7 @@
       <img width="40" src="../../../../../assets/gifs/gif_public.gif">
     </div>
     <button *ngIf="!isLoading" (click)="onSendButtonClick()" class=" border-0 bg-transparent">
-      <img *ngIf="!editableMessage" src='./assets/images/send.png' class="position-absolute cursor-pointer" style="right: 7px; top: 13px;">
+      <img *ngIf="!editableMessage" src='./assets/images/ic_send.svg' class="position-absolute cursor-pointer" style="right: 7px; top: 13px;">
       <i *ngIf="editableMessage" class="pi pi-check position-absolute cursor-pointer" style="right: 8px; top: 17px; font-size: 1.2rem"></i>
     </button>
   </div>
