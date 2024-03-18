@@ -343,12 +343,14 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
     this.hubConnection
       .invoke('update', search.id, search.message)
       .then((res) => {
+        this.inputComponent.hasEdited = true;
         this.editableMessage = null;
         this.isSendingMessage = false;
         this.inputComponent.clearMessageString();
 
         setTimeout((): void => {
           this.inputComponent.focusInput();
+          this.inputComponent.hasEdited = false;
         });
       });
   }

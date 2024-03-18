@@ -1,9 +1,33 @@
+import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
+
+export const slideUpDownAnimation = trigger('slideUpDown', [
+  state('closed', style({
+    display: 'block',
+    opacity: '0',
+    transform: 'translateY(0)'
+  })),
+  state('opened', style({
+    opacity: '1',
+    transform: 'translateY(-48px)'
+  })),
+  transition('closed => opened', animate('.5s', keyframes([
+    style({ opacity: '0', transform: 'translateY(0)', offset: 0 }),
+    style({ opacity: '1', transform: 'translateY(-48px)', offset: 1 })
+  ]))),
+  transition('opened => closed', animate('.5s', keyframes([
+    style({ opacity: '1', transform: 'translateY(-48px)', offset: 0 }),
+    style({ opacity: '0', transform: 'translateY(0)', display: 'none', offset: 1 })
+  ])))
+]);
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss']
+  styleUrls: ['./input.component.scss'],
+  animations: [
+    slideUpDownAnimation
+  ]
 })
 export class InputComponent implements OnChanges {
   @ViewChild('inputElement') inputElement: any;
@@ -14,6 +38,8 @@ export class InputComponent implements OnChanges {
 
   @Input() isLoading: boolean;
   @Input() editableMessage: any;
+
+  hasEdited : boolean = false;
 
   public search : string;
 
@@ -31,9 +57,18 @@ export class InputComponent implements OnChanges {
     if (!this.editableMessage) {
       this.onSend.emit(this.search);
     } else {
+      this.hasEdited = true;
       this.onEdit.emit({...this.editableMessage, message: this.search});
+      setTimeout(() => {
+        this.hasEdited = false;
+      }, 500);
     }
 
+  }
+
+  public onCloseEditBar() {
+    this.hasEdited = false;
+    this.onCloseEdit.emit();
   }
 
   public clearMessageString() {
