@@ -3,7 +3,6 @@ import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewCh
 
 export const slideUpDownAnimation = trigger('slideUpDown', [
   state('closed', style({
-    display: 'block',
     opacity: '0',
     transform: 'translateY(0)'
   })),
@@ -17,7 +16,7 @@ export const slideUpDownAnimation = trigger('slideUpDown', [
   ]))),
   transition('opened => closed', animate('.5s', keyframes([
     style({ opacity: '1', transform: 'translateY(-48px)', offset: 0 }),
-    style({ opacity: '0', transform: 'translateY(0)', display: 'none', offset: 1 })
+    style({ opacity: '0', transform: 'translateY(0)', offset: 1 })
   ])))
 ]);
 
@@ -46,6 +45,7 @@ export class InputComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.editableMessage) {
+      this.hasEdited = true;
       this.search = this.editableMessage.message;
       setTimeout((): void => {
         this.focusInput();
@@ -57,10 +57,10 @@ export class InputComponent implements OnChanges {
     if (!this.editableMessage) {
       this.onSend.emit(this.search);
     } else {
-      this.hasEdited = true;
+
       this.onEdit.emit({...this.editableMessage, message: this.search});
       setTimeout(() => {
-        this.hasEdited = false;
+        // this.hasEdited = false;
       }, 500);
     }
 

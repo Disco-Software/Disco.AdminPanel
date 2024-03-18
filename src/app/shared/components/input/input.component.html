@@ -1,7 +1,6 @@
 <div style="background-color: #281547; z-index: 999;" class="search search-container d-flex justify-content-center align-items-center flex-row position-relative h-100 cursor-pointer">
   <div class="position-absolute w-100"
-    [@slideUpDown]="hasEdited"
-    *ngIf="editableMessage"
+    [@slideUpDown]="editableMessage ? 'opened' : 'closed'"
     style="
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
@@ -9,7 +8,7 @@
     <div style="border-left: 2px solid grey; background: #271546;" class="d-flex justify-content-between ps-3">
       <div class="d-flex flex-column align-items-start">
         <strong>Editable text</strong>
-        <span style="font-style: italic;">{{editableMessage.message}}</span>
+        <span style="font-style: italic;">{{editableMessage?.message}}</span>
       </div>
       <button (click)="onCloseEditBar(); search = ''" class="border-0 bg-transparent">
         <img style="width: 15px; height: 15px;" src="../../../../assets/images/ic_close.svg">

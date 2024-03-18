@@ -167,6 +167,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   }
 
   public scrollToBottom(): void {
+    console.log(this.chatBlock)
     const chatBlockElement = this.chatBlock.nativeElement;
     chatBlockElement.scrollTop = Math.max(
       chatBlockElement.scrollHeight,
