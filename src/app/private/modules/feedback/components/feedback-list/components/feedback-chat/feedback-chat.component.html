@@ -84,8 +84,10 @@
   <div class="row g-0 chat-container">
     <div
       #chatBlock
+      [scrollTop]="chatBlock.scrollHeight"
+      (scroll)="onScroll($event)"
       class="chat py-4 px-2 d-flex flex-column align-items-center"
-      style="overflow: auto"
+      style="overflow: auto;"
       *ngIf="!isLoading; else spinner"
     >
       <ng-container *ngFor="let messageData of messageDates; let last = last">

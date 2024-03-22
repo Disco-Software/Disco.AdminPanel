@@ -1,4 +1,6 @@
 import {
+  AfterContentChecked,
+  AfterViewChecked,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -31,7 +33,7 @@ import { MenuItem } from 'primeng/api';
   templateUrl: './feedback-chat.component.html',
   styleUrls: ['./feedback-chat.component.scss'],
 })
-export class FeedbackChatComponent implements OnInit, OnDestroy {
+export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDestroy {
   @ViewChild('chatBlock') chatBlock: ElementRef;
   @ViewChild(InputComponent) inputComponent: InputComponent;
 
@@ -48,6 +50,14 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   deletableMessage: any;
   isEdit: boolean = false;
   Edited: boolean = false;
+
+  pagination = {
+    currentPage: 1,
+    totalPages: 10,
+    itemsPerPage: 15 //todo news to be changed after finalizing
+  }
+  loading = false;
+  user: any;
 
   private hubConnection: signalR.HubConnection | undefined;
   public messages: any[] = [];
@@ -187,7 +197,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   }
 
   private startSignalRConnection(): void {
-    const user = this.lsService.getItem('user');
+    this.user = this.lsService.getItem('user');
     const accessToken = this.lsService.getString('accessToken');
 
     const headers: MessageHeaders = {
@@ -207,23 +217,24 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
 
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(
-        `${environment.server}/hub/ticket?ticketName=${this.ticket.name}&userName=${user.userName}`,
+        `${environment.server}/hub/ticket?ticketName=${this.ticket.name}&userName=${this.user.userName}`,
         httpConnectionOptions
       )
       .build();
 
-    this.hubConnection
-      .start()
+    this.hubConnection.start()
       .then(() => {
-        const req = {
-          groupId: this.ticket.id,
-          userId: user.id,
-          pageNumber: 1,
-          pageSize: 500,
-        };
-        this.getAllMessages(req);
+        this.getAllMessages().subscribe((res: any[]) => {
+          const messagesCopy = [...res];
+          this.messages = messagesCopy.reverse();
+          this.generateMapDates();
+          this.isLoading = false;
+          setTimeout(() => {
+            this.scrollToBottom();
+          });
+        });
       })
-      .catch((err) => null);
+      .catch(err => null);
 
     this.subscribeMessages();
 
@@ -234,21 +245,50 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
     this.subscribeUpdate();
   }
 
-  getAllMessages(req: any): void {
-    this.store
+  ngAfterContentChecked(): void {
+    this.cdr.detectChanges();
+  }
+
+  onScroll(event): void {
+    const startingScrollHeight = event.target.scrollHeight;
+      if (event.target.scrollTop === 0) {
+          if (!this.loading) {
+          this.pagination = {
+            ...this.pagination,
+            currentPage: this.pagination.currentPage + 1,
+          }
+          this.loading = true;
+          this.getAllMessages().pipe(take(1)).subscribe((res): void => {
+            const messagesCopy = [...res];
+            this.messages = [
+              ...messagesCopy.reverse(),
+              ...this.messages,
+            ];
+            this.generateMapDates();
+            this.loading = false;
+            setTimeout((): void => {
+              const newScrollHeight = this.chatBlock.nativeElement.scrollHeight;
+              this.chatBlock.nativeElement.scrollTo(0, newScrollHeight - startingScrollHeight);
+              this.cdr.detectChanges();
+            });
+          });
+        }
+      }
+  }
+
+  getAllMessages(): Observable<any> {
+    const req = {
+      groupId: this.ticket.id,
+      userId: this.user.id,
+      pageNumber: this.pagination.currentPage,
+      pageSize: this.pagination.itemsPerPage,
+    }
+    return this.store
       .dispatch(new GetFeedbackMessagesAction(req))
       .pipe(
         take(1),
         map((state) => state.FeedbackState.messages)
-      )
-      .subscribe((res) => {
-        this.messages = res;
-        this.generateMapDates();
-        this.isLoading = false;
-        setTimeout(() => {
-          this.scrollToBottom();
-        });
-      });
+      );
   }
 
   subscribeMessages(): void {
