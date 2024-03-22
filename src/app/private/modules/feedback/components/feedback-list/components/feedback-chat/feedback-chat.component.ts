@@ -45,6 +45,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   isSendingMessage = false;
   editableMessage: any;
+  deletableMessage: any;
   isEdit: boolean = false;
   Edited: boolean = false;
 
@@ -69,12 +70,14 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
       icon: 'pi pi-trash',
       iconClass: 'text-white me-3',
       command: (): void => {
+        this.deletableMessage = this.selectedContextMenuItem;
+        this.selectedContextMenuItem = null;
         this.hubConnection
-          .invoke('delete-for-all', this.selectedContextMenuItem.id)
+          .invoke('delete-for-all', this.deletableMessage.id)
           .then((): void => {
-            if (this.selectedContextMenuItem) {
+            if (this.deletableMessage) {
               this.messages = this.messages.map((message) => {
-                if (message.id === this.selectedContextMenuItem.id) {
+                if (message.id === this.deletableMessage.id) {
                   return {
                     ...message,
                     isRemoving: true,
@@ -85,7 +88,7 @@ export class FeedbackChatComponent implements OnInit, OnDestroy {
               });
               setTimeout((): void => {
                 this.messages = this.messages.map((message) => {
-                  if (message.id === this.selectedContextMenuItem.id) {
+                  if (message.id === this.deletableMessage.id) {
                     return {
                       ...message,
                       isRemoving: false,
