@@ -1,6 +1,5 @@
 import {
   AfterContentChecked,
-  AfterViewChecked,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -11,22 +10,23 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import * as signalR from '@microsoft/signalr';
-import { MessageHeaders } from '@microsoft/signalr';
+import {MessageHeaders} from '@microsoft/signalr';
 import {
   FeedbackInterface,
   FeedbackState,
   GetFeedbackMessagesAction,
+  GetFeedbackMessagesCountAction,
   LocalStorageService,
 } from '@core';
-import { Select, Store } from '@ngxs/store';
-import { map, Observable, take } from 'rxjs';
-import { MessageRequestInterface } from 'src/app/core/models/ticket-chat/message-request.interface';
-import { environment } from '../../../../../../../../environments/environment';
-import { User } from '../../../../../../../core/models/account/change-email-response.model';
-import { InputComponent } from '@shared';
-import { MenuItem } from 'primeng/api';
+import {Select, Store} from '@ngxs/store';
+import {map, Observable, switchMap, take} from 'rxjs';
+import {MessageRequestInterface} from 'src/app/core/models/ticket-chat/message-request.interface';
+import {environment} from '../../../../../../../../environments/environment';
+import {User} from '../../../../../../../core/models/account/change-email-response.model';
+import {InputComponent} from '@shared';
+import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'app-feedback-chat',
@@ -53,11 +53,11 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
 
   pagination = {
     currentPage: 1,
-    totalPages: 10,
-    itemsPerPage: 15 //todo news to be changed after finalizing
+    itemsPerPage: 50
   }
   loading = false;
   user: any;
+  private totalMessagesCount: number = 0;
 
   private hubConnection: signalR.HubConnection | undefined;
   public messages: any[] = [];
@@ -224,8 +224,9 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
 
     this.hubConnection.start()
       .then(() => {
-        this.getAllMessages().subscribe((res: any[]) => {
-          const messagesCopy = [...res];
+        this.getAllMessages().subscribe((res: any) => {
+          this.totalMessagesCount = res.total;
+          const messagesCopy = [...res.messages];
           this.messages = messagesCopy.reverse();
           this.generateMapDates();
           this.isLoading = false;
@@ -252,14 +253,15 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
   onScroll(event): void {
     const startingScrollHeight = event.target.scrollHeight;
       if (event.target.scrollTop === 0) {
-          if (!this.loading) {
+        if (!this.loading && this.totalMessagesCount !== this.messages.length) {
           this.pagination = {
             ...this.pagination,
             currentPage: this.pagination.currentPage + 1,
           }
           this.loading = true;
           this.getAllMessages().pipe(take(1)).subscribe((res): void => {
-            const messagesCopy = [...res];
+            this.totalMessagesCount = res.total;
+            const messagesCopy = [...res.messages];
             this.messages = [
               ...messagesCopy.reverse(),
               ...this.messages,
@@ -287,7 +289,18 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
       .dispatch(new GetFeedbackMessagesAction(req))
       .pipe(
         take(1),
-        map((state) => state.FeedbackState.messages)
+        map((state) => state.FeedbackState.messages),
+        switchMap((messagesResponse: any) => {
+          return this.store.dispatch(new GetFeedbackMessagesCountAction(this.ticket.id))
+            .pipe(take(1),
+              map((state) => {
+                return {
+                  messages: messagesResponse,
+                  total: state.FeedbackState.messagesCount
+                }
+
+              }))
+        })
       );
   }
 

@@ -23,4 +23,8 @@ export class FeedbackService {
   public getFeedbackMessages(payload: FeedbackMessagesRequestInterface, description: string): Observable<any> {
     return this._restService.requestWithoutLoader('GET', `admin/tickets/messages?groupId=${payload.groupId}&userId=${payload.userId}&pageNumber=${payload.pageNumber}&pageSize=${payload.pageSize}`);
   }
+
+  public getFeedbackMessagesCount(ticketId: number, description: string): Observable<any> {
+    return this._restService.requestWithoutLoader('GET', `admin/tickets/messages/count?ticketId=${ticketId}`);
+  }
 }

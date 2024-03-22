@@ -17,6 +17,12 @@ export class GetFeedbackMessagesAction {
   }
 }
 
+export class GetFeedbackMessagesCountAction {
+  static readonly type = '[Feedback] Get Feedback Messages Count';
+  constructor(public ticketId: number) {
+  }
+}
+
 export interface FeedbackMessagesRequestInterface extends RequestDataModel{
   groupId: number, userId: number
 }
