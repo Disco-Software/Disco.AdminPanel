@@ -14,6 +14,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import * as signalR from '@microsoft/signalr';
 import {MessageHeaders} from '@microsoft/signalr';
 import {
+  DateTimeService,
   FeedbackInterface,
   FeedbackState,
   GetFeedbackMessagesAction,
@@ -167,7 +168,8 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
     private _activeModal: NgbActiveModal,
     private lsService: LocalStorageService,
     private store: Store,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private dateTimeService: DateTimeService
   ) {}
 
   ngOnInit(): void {
@@ -228,6 +230,7 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
           this.totalMessagesCount = res.total;
           const messagesCopy = [...res.messages];
           this.messages = messagesCopy.reverse();
+          this.messages = this.convertMessagesTimezone(this.messages)
           this.generateMapDates();
           this.isLoading = false;
           setTimeout(() => {
@@ -244,6 +247,19 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
     this.subscribeRemoveMessages();
 
     this.subscribeUpdate();
+  }
+
+  convertMessagesTimezone(messages: any[]): any[]{
+    return messages.map((message)=>{
+      return {
+        ...message,
+        createdDate: this.convertUTCtoLocal(message.createdDate),
+      }
+    })
+  }
+
+  convertUTCtoLocal(utcDateTimeString: string) {
+    return this.dateTimeService.convertToLocaleDateTime(utcDateTimeString)
   }
 
   ngAfterContentChecked(): void {
@@ -263,7 +279,7 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
             this.totalMessagesCount = res.total;
             const messagesCopy = [...res.messages];
             this.messages = [
-              ...messagesCopy.reverse(),
+              ...this.convertMessagesTimezone(messagesCopy.reverse()),
               ...this.messages,
             ];
             this.generateMapDates();
@@ -306,7 +322,10 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
 
   subscribeMessages(): void {
     this.hubConnection.on('receive', (message: any) => {
-      this.messages = [...this.messages, message];
+      this.messages = [...this.messages, {
+        ...message,
+        createdDate: this.convertUTCtoLocal(message.created)
+      }];
       this.generateMapDates();
       setTimeout((): void => {
         this.scrollToBottom();
@@ -321,11 +340,15 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
       if (editableIndex !== -1) {
         this.messages = [
           ...this.messages.slice(0, editableIndex),
-          message,
+          {
+            ...message,
+            createdDate: this.convertUTCtoLocal(message.created)
+          },
           ...this.messages.slice(editableIndex + 1),
         ];
       }
     });
+    this.cdr.detectChanges();
   }
 
   subscribeStatuses(): void {
@@ -420,11 +443,11 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
     this.hubConnection
       ?.invoke('updateStatus', status.id, status.status)
       .then((res) => {
-        console.log('successful status change');
       })
       .catch((err) => null);
   }
   getTime(date: string): string {
+    date = date.split('.')[0];
     let hours = new Date(date).getHours();
     let minutes = new Date(date).getMinutes();
 
