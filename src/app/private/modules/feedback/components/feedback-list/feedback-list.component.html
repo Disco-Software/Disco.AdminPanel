@@ -12,6 +12,7 @@
 <div class="mt-4">
   <p-table
     class="d-none d-md-block"
+    [lazy]="true"
     [totalRecords]="totalCount$ | async"
     [tableStyle]="{ 'min-width': '50rem' }"
     styleClass="p-datatable-lg"

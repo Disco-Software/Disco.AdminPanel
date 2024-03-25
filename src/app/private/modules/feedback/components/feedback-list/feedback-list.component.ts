@@ -46,7 +46,11 @@ export class FeedbackListComponent {
   }
 
   public onPageChange($event): void {
-    this.getData($event.page + 1, 5);
+    if ($event.page) {
+      this.getData($event.page + 1, 5);
+    } else {
+      this.getData($event.first / $event.rows + 1, 5);
+    }
   }
 
   public getData(pageNumber: number, pageSize: number): void {
