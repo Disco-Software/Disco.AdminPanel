@@ -13,11 +13,11 @@ export class FeedbackService {
 
   public getAllFeedbacks(payload: RequestDataModel, isArchive: boolean, description : string): Observable<FeedbackInterface[]> {
     //TODO make dynamic
-    return this._restService.request('GET', `admin/tickets?pageNumber=${payload.pageNumber}&pageSize=${payload.pageSize}&statusType=Active`, description, payload);
+    return this._restService.request('GET', `admin/tickets?pageNumber=${payload.pageNumber}&pageSize=${payload.pageSize}&statusType=${isArchive ? 'Archived': 'Active'}`, description, payload);
   }
 
-  public getFeedbacksCount(description : string) : Observable<number>{
-    return this._restService.request('GET', 'admin/tickets/count', description);
+  public getFeedbacksCount(isArchive: boolean, description : string) : Observable<number>{
+    return this._restService.request('GET', `admin/tickets/count?isArchived=${isArchive}`, description);
   }
 
   public getFeedbackMessages(payload: FeedbackMessagesRequestInterface, description: string): Observable<any> {

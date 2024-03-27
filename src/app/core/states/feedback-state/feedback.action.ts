@@ -9,6 +9,8 @@ export class GetAllFeedbacks {
 
 export class GetFeedbacksCountAction {
   static readonly type = '[Feedback] Get Count';
+  constructor(public isArchive: boolean) {
+  }
 }
 
 export class GetFeedbackMessagesAction {

@@ -58,8 +58,9 @@ export class FeedbackState {
   @Action(GetFeedbacksCountAction)
   public getFeedbacksCount(
     {patchState}: StateContext<{ count: number }>,
+    {isArchive}: GetFeedbacksCountAction
   ) {
-    return this.feedbackService.getFeedbacksCount(GetAccountsCountAction.type)
+    return this.feedbackService.getFeedbacksCount(isArchive, GetAccountsCountAction.type)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           return EMPTY;

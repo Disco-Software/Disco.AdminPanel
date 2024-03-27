@@ -18,6 +18,6 @@ export class FeedbackResolver implements Resolve<boolean> {
         pageSize: 5,
       },
       false
-    ), new GetFeedbacksCountAction()])
+    ), new GetFeedbacksCountAction(false)])
   }
 }
