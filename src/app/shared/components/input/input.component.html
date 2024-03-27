@@ -19,8 +19,9 @@
     <button class="border-0 bg-transparent">
        <i class=" pi pi-upload"></i>
     </button>
-    <input
+    <textarea
       #inputElement
+      style="height: 51px"
       [class.opacity-03]="isLoading"
       [disabled]="isLoading"
       (keydown.enter)="onSendButtonClick()"
@@ -28,11 +29,11 @@
       placeholder="{{'feedback.chat.input.placeholder' | translate}}"
       class="search-input w-95 input bg-transparent border-2 p-3 cursor-pointer"
       type="text"
-    >
-    <div *ngIf="isLoading" style="height: 100%; right: 10px; top: 6px;" class="position-absolute">
+    ></textarea>
+    <div *ngIf="isLoading" style="height: 100%; width : 5%; right: 10px; top: 6px;" class="position-absolute">
       <img width="40" src="../../../../../assets/gifs/gif_public.gif">
     </div>
-    <button *ngIf="!isLoading" (click)="onSendButtonClick()" class=" border-0 bg-transparent">
+    <button *ngIf="!isLoading" (click)="onSendButtonClick()" class="border-0 bg-transparent" style="width: 5%">
       <img *ngIf="!editableMessage" src='./assets/images/ic_send.svg' class="position-absolute cursor-pointer" style="right: 7px; top: 13px;">
       <i *ngIf="editableMessage" class="pi pi-check position-absolute cursor-pointer" style="right: 8px; top: 17px; font-size: 1.2rem"></i>
     </button>

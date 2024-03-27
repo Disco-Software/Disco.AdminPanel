@@ -124,7 +124,7 @@
             >
               {{ message.account.user.userName }}
             </div>
-            <div class="ps-1">{{ message.message }}</div>
+            <div class="ps-1" style="white-space: pre-line;">{{ message.message }}</div>
             <span class="chat__message-date date">{{
               getTime(message.createdDate ?? message.created)
             }}</span>

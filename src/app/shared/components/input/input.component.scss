@@ -1,8 +1,9 @@
-input[type=text] {
+textarea {
   border: none;
   outline: none;
   padding: 0 10px;
   border-radius: 15px;
+  resize: none;
 }
 
 .slideUp {
