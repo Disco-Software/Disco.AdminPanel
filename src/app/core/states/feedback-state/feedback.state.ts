@@ -66,8 +66,6 @@ export class FeedbackState {
           return EMPTY;
         }),
         tap((response: number) => {
-          console.log(response)
-          console.log(ctx.getState().count)
           ctx.patchState({count: {
               isArchivedCount: isArchive ? response : ctx.getState().count.isArchivedCount,
               isActiveCount: !isArchive ? response : ctx.getState().count.isActiveCount
