@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngxs/store';
-import { RemoveAccountAction } from '../../../../../../../../core/states/accounts-state/remove.action';
+import {Component, Input, OnInit} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Store} from '@ngxs/store';
+import {GetAllAccountsAction, RemoveAccountAction} from '@core/states';
 import {switchMap} from "rxjs";
-import {GetAllAccountsAction} from "../../../../../../../../core/states/accounts-state/account.action";
-import { TranslateService } from '@ngx-translate/core';
-import { LanguageModel, LocalStorageService } from '@core';
+import {TranslateService} from '@ngx-translate/core';
+import {LocalStorageService} from "@core/services";
+import {LanguageModel} from "@core/models";
 
 @Component({
   selector: 'app-delete-user-modal-window',

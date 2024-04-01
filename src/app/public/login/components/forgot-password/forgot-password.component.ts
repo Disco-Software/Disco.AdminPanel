@@ -1,13 +1,14 @@
 import {Component} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Select, Store} from '@ngxs/store';
-import {ForgotPasswordAction, ForgotPasswordRequestModel, LoaderState} from '@core';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PasswordCodeModalComponent} from '../password-code-modal/password-code-modal.component';
 import {TranslateService} from '@ngx-translate/core';
 import {state, style, trigger} from '@angular/animations';
 import {catchError} from "rxjs/operators";
 import {Observable, throwError} from "rxjs";
+import {ForgotPasswordAction, LoaderState} from "@core/states";
+import {ForgotPasswordRequestModel} from "@core/models";
 
 @Component({
   selector: 'app-forgot-password',

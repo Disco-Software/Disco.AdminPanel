@@ -1,12 +1,12 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {LoaderState, RecoveryPasswordAction} from '@core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Select, Store} from '@ngxs/store';
 import {
   AccountPasswordResetPasswordRequestModel
 } from 'src/app/core/models/account-password/account-password-reset-request.model';
 import {Observable} from "rxjs";
+import {LoaderState, RecoveryPasswordAction} from "@core/states";
 
 @Component({
   selector: 'app-reset-password',

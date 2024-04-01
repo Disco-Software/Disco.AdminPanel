@@ -1,4 +1,4 @@
-import {LanguageModel} from "@core";
+import {LanguageModel} from "../language";
 
 export interface AppConfigStateInterface {
   selectedLanguage: LanguageModel

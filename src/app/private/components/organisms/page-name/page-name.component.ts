@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {PageModel} from "@core";
 import {Subject} from "rxjs/internal/Subject";
 import {NavigationEnd, Router} from "@angular/router";
 import {takeUntil} from "rxjs";
+import {PageModel} from "@core/models";
 
 @Component({
   selector: 'app-page-name',

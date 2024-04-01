@@ -4,8 +4,8 @@ import {MatIconModule} from '@angular/material/icon';
 
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import * as _components from './components';
-import {CoreModule} from '@core';
 import {SharedModule} from '@shared';
+import {CoreModule} from "../../../core";
 
 const COMPONENTS = [
   _components.DashboardComponent,

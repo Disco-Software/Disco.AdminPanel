@@ -2,13 +2,13 @@ import {Component} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Store} from '@ngxs/store';
-import {CreateAccountInterface} from '../../../../../../../../core/models/account/create-account.interface';
+import {CreateAccountInterface, LanguageModel} from '@core/models';
 import {SearchType} from '../../../../../../../../core/models/calendar';
 import {switchMap, take} from 'rxjs';
-import {CreateAccountAction, GetAllAccountsAction} from "../../../../../../../../core/states/accounts-state/account.action";
+import {CreateAccountAction, GetAllAccountsAction} from "@core/states";
 import { state, style, trigger } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
-import { LanguageModel, LocalStorageService } from '@core';
+import {LocalStorageService} from "@core/services";
 
 @Component({
   selector: 'app-create-user-modal-window',

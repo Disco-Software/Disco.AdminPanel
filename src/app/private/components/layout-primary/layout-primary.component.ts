@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Select} from '@ngxs/store';
-import {LoaderState} from '@core/states';
+import {AppConfigState, LoaderState} from '@core/states';
 import {Observable, Subject, takeUntil} from 'rxjs';
-import {AppConfigState, LanguageModel, PageModel} from "@core";
 import {TranslateService} from "@ngx-translate/core";
+import {LanguageModel, PageModel} from "@core/models";
 
 @Component({
   selector: 'app-layout-primary',

@@ -1,9 +1,11 @@
-import { ChangeEmailRequestDto } from "../../models/account/change-email-request.model";
-import { ChangePasswordRequestModel } from "../../models/account/change-password-request.mdoel";
-import { SearchAccountsRequestModel } from "../../models/account/search-accounts-requset.model";
-import { ChangeRoleRequestModel } from "../../models/account/change-role-request.model";
-import { RequestDataModel } from "../../models/request.interface";
-import {CreateAccountInterface} from "@core";
+import {ChangeEmailRequestDto} from "../../models/account/change-email-request.model";
+import {
+  ChangePasswordRequestModel,
+  ChangeRoleRequestModel,
+  CreateAccountInterface,
+  RequestDataModel
+} from "@core/models";
+import {SearchAccountsRequestModel} from "../../models/account/search-accounts-requset.model";
 
 export class GetAllAccountsAction{
 

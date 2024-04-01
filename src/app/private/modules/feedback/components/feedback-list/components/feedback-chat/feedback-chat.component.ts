@@ -13,14 +13,7 @@ import {
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import * as signalR from '@microsoft/signalr';
 import {MessageHeaders} from '@microsoft/signalr';
-import {
-  DateTimeService,
-  FeedbackInterface,
-  FeedbackState,
-  GetFeedbackMessagesAction,
-  GetFeedbackMessagesCountAction,
-  LocalStorageService,
-} from '@core';
+
 import {Select, Store} from '@ngxs/store';
 import {map, Observable, switchMap, take} from 'rxjs';
 import {MessageRequestInterface} from 'src/app/core/models/ticket-chat/message-request.interface';
@@ -28,6 +21,9 @@ import {environment} from '../../../../../../../../environments/environment';
 import {User} from '../../../../../../../core/models/account/change-email-response.model';
 import {InputComponent} from '@shared';
 import {MenuItem} from 'primeng/api';
+import {FeedbackInterface} from "@core/models";
+import {FeedbackState, GetFeedbackMessagesAction, GetFeedbackMessagesCountAction} from "@core/states";
+import {DateTimeService, LocalStorageService} from "@core/services";
 
 @Component({
   selector: 'app-feedback-chat',

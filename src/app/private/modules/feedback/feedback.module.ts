@@ -3,8 +3,8 @@ import {CommonModule} from '@angular/common';
 
 import {FeedbackRoutingModule} from './feedback-routing.module';
 import * as _components from './components';
-import {CoreModule} from "@core";
 import {SharedModule} from "@shared";
+import {CoreModule} from "../../../core";
 
 const COMPONENTS = [
   _components.FeedbackListComponent,

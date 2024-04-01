@@ -13,3 +13,5 @@ export * from './account-password';
 export * from './request.interface';
 export * from './feedback';
 export * from './ticket-chat'
+export * from './email';
+export * from './calendar';

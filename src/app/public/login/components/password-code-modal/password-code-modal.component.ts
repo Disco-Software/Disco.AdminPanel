@@ -1,19 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {LoaderState, RecoveryPasswordCodeAction} from '@core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, Input, OnInit} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Select, Store} from '@ngxs/store';
-import { ResetPasswordComponent } from '../reset-password/reset-password.component';
-import { TranslateService } from '@ngx-translate/core';
-import {Observable, Subject, take, throwError} from 'rxjs';
-import { state, style, trigger } from '@angular/animations';
-import { CodeInputComponent } from 'angular-code-input';
+import {ResetPasswordComponent} from '../reset-password/reset-password.component';
+import {Observable, take, throwError} from 'rxjs';
+import {state, style, trigger} from '@angular/animations';
 import {catchError} from "rxjs/operators";
+import {LoaderState, RecoveryPasswordCodeAction} from "@core/states";
 
 @Component({
   selector: 'app-password-code-modal',

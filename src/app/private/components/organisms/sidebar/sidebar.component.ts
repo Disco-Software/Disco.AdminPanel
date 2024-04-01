@@ -6,8 +6,8 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {LocalStorageService} from '@core/services';
 import {TranslateService} from '@ngx-translate/core';
 import {Select} from "@ngxs/store";
-import {FeedbackState} from "@core";
 import {Observable} from "rxjs";
+import {FeedbackState} from "@core/states";
 
 @Component({
   selector: 'app-sidebar',

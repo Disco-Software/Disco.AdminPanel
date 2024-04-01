@@ -3,9 +3,9 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AutoComplete} from "primeng/autocomplete";
 import {Select, Store} from "@ngxs/store";
-import {AccountsState, GetSelectedEmailsAction, SendingEmailAction} from '@core';
 import {Observable, Subject, take, takeUntil} from 'rxjs';
-import {EmailSendingRequestModel} from "../../../../../../../../core/models/email/email-sending-request.model";
+import {EmailSendingRequestModel} from "@core/models";
+import {AccountsState, GetSelectedEmailsAction, SendingEmailAction} from "@core/states";
 
 @Component({
   selector: 'app-send-email-modal-window',

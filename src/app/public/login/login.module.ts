@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '@shared';
-import { CoreModule } from '@core';
 import { CodeInputModule } from 'angular-code-input';
 
 import { LoginRoutingModule } from './login-routing.module';
 import * as _components from './components';
 import { PasswordCodeModalComponent } from './components/password-code-modal/password-code-modal.component';
+import {CoreModule} from "../../core";
 
 
 const COMPONENTS = [

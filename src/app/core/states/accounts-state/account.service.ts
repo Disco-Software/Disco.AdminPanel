@@ -1,9 +1,8 @@
 import {AccountModel} from '../../models/account/getaccounts.model';
 import {Injectable} from '@angular/core';
 import {RestService} from '@core/services';
-import {RequestDataModel} from '../../models/request.interface';
+import {CreateAccountInterface, RequestDataModel} from '@core/models';
 import {Observable} from 'rxjs';
-import {CreateAccountInterface} from "@core";
 import {CreateUserResponseModel} from "../../models/account/create-account-response.model";
 import {Account} from '../../models/account/account.model';
 import {ChangeEmailRequestDto} from '../../models/account/change-email-request.model';

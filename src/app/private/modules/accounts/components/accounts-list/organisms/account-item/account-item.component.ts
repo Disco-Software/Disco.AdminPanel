@@ -6,9 +6,10 @@ import {
     SendEmailModalWindowComponent,
     UserModalWindowComponent
 } from "../modal-windows";
-import { LanguageModel, LocalStorageService } from "@core";
 import { TranslateService } from "@ngx-translate/core";
 import {take} from "rxjs";
+import {LocalStorageService} from "@core/services";
+import {LanguageModel} from "@core/models";
 
 
 @Component({

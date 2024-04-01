@@ -6,7 +6,6 @@ import {NgxsRouterPluginModule} from '@ngxs/router-plugin';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SharedModule} from '@shared'
-import {AppConfigState, CoreModule} from '@core';
 import {HeaderInterceptor, LanguageHeaderInterceptor} from "@core/interceptors";
 
 import {environment} from '../environments/environment';
@@ -15,6 +14,8 @@ import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {CoreModule} from "./core";
+import {AppConfigState} from "@core/states";
 
 export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -49,6 +50,20 @@ const NGXS_MODULES = [
   NgxsRouterPluginModule.forRoot(),
 ];
 
+const PROVIDERS = [
+  TranslateService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HeaderInterceptor,
+    multi: true,
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LanguageHeaderInterceptor,
+    multi : true,
+  },
+]
+
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [
@@ -57,18 +72,6 @@ const NGXS_MODULES = [
     ...(!environment.production ? LOGGERS : []),
   ],
   bootstrap: [AppComponent],
-  providers: [
-    TranslateService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HeaderInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LanguageHeaderInterceptor,
-      multi : true,
-    },
-  ]
+  providers: [...PROVIDERS],
 })
 export class AppModule {}

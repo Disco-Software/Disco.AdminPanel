@@ -2,7 +2,7 @@ export interface ChangeEmailResponseModel {
   user: User;
 }
 
-export interface User {
+ export interface User {
   id: number;
   roleName: string;
   userName: string;
@@ -11,7 +11,7 @@ export interface User {
   created: string;
 }
 
-export interface Account {
+ interface Account {
   photo: string;
   cread: string;
 }

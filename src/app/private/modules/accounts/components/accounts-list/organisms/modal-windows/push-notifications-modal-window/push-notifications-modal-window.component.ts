@@ -4,10 +4,12 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Select, Store} from "@ngxs/store";
 import {AutoComplete} from "primeng/autocomplete";
 import { TranslateService } from '@ngx-translate/core';
-import {AccountsState, GetSearchedNamesAction, LanguageModel, LocalStorageService, SendNotificationAction} from '@core';
 import { Observable, take, takeUntil } from 'rxjs';
 import {Subject} from "rxjs/internal/Subject";
 import { NotificationRequestModel } from 'src/app/core/models/notification/notification-request.model';
+import {AccountsState, GetSearchedNamesAction, SendNotificationAction} from "@core/states";
+import {LocalStorageService} from "@core/services";
+import {LanguageModel} from "@core/models";
 
 @Component({
   selector: 'app-push-notifications-modal-window',

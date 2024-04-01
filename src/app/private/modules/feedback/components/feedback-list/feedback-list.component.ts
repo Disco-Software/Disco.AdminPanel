@@ -2,8 +2,9 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {FeedbackChatComponent} from "./components";
 import {Select, Store} from "@ngxs/store";
-import {FeedbackInterface, FeedbackState, GetAllFeedbacks, GetFeedbacksCountAction} from "@core";
 import {map, Observable, take} from "rxjs";
+import {FeedbackState, GetAllFeedbacks, GetFeedbacksCountAction} from "@core/states";
+import {FeedbackInterface} from "@core/models";
 
 @Component({
   selector: 'app-feedback-list',

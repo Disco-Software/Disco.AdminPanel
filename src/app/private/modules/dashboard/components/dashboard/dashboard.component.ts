@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DashboardStatisticCardModel, GraphSettings, LanguageModel} from '@core/models';
+import {DashboardStatisticCardModel, GraphSettings, LanguageModel, StatisticsModel} from '@core/models';
 import {Select} from '@ngxs/store';
-import {AppConfigState, StatisticsModel, StatisticsState} from '@core';
 import {Observable, takeUntil} from 'rxjs';
 import {Subject} from 'rxjs/internal/Subject';
+import {AppConfigState, StatisticsState} from "@core/states";
 
 @Component({
   selector: 'app-dashboard',

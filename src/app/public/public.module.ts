@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreModule } from '@core';
 import { SharedModule } from '@shared';
 
 import { PublicRoutingModule } from './public-routing.module';
+import {CoreModule} from "../core";
 
 const MODULES = [
   PublicRoutingModule,

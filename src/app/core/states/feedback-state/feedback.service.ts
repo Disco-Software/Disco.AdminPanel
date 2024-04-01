@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {RestService} from '@core/services';
 import {Observable} from 'rxjs';
-import {FeedbackInterface, FeedbackMessagesRequestInterface, RequestDataModel} from "@core";
 import {HttpClient} from "@angular/common/http";
+import {FeedbackInterface, RequestDataModel} from "@core/models";
+import {FeedbackMessagesRequestInterface} from "./feedback.action";
 
 @Injectable({
   providedIn: 'root'

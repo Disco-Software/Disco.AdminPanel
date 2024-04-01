@@ -2,9 +2,8 @@ import {Component, HostListener} from '@angular/core';
 import {LocalStorageService} from '@core/services';
 import {TranslateService} from "@ngx-translate/core";
 import {Select, Store} from "@ngxs/store";
-import {SetSelectedLanguageAction} from "./core/states/app-config-state/app-config.actions";
-import {AppConfigState} from "./core/states/app-config-state/app-config.state";
-import {LanguageModel} from "@core";
+import {AppConfigState} from "@core/states";
+import {LanguageModel} from "@core/models";
 import {Observable} from "rxjs";
 
 @Component({
@@ -13,15 +12,17 @@ import {Observable} from "rxjs";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  isSmallSizeToaster: boolean;
   @HostListener('window:resize', ['$event'])
-  getScreenSize(event?) {
-    this.isSmallSizeToaster = window.innerWidth <= 430
+  protected getScreenSize(): void {
+    this.isSmallSizeToaster = window.innerWidth <= 430;
   }
 
-  @Select(AppConfigState.selectedLanguageSelector) language$: Observable<LanguageModel>
-  private role: string = '';
+  @Select(AppConfigState.selectedLanguageSelector) language$: Observable<LanguageModel>;
+
+  protected isSmallSizeToaster: boolean;
+
+
+
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
@@ -51,7 +52,6 @@ export class AppComponent {
     this.localStorageService.removeItem('user');
 
     this.isLoggedIn = false;
-    this.role = '';
     this.showAdminBoard = false;
     this.showModeratorBoard = false;
   }

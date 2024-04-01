@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Store} from "@ngxs/store";
-import {GetAllFeedbacks, GetFeedbacksCountAction} from "@core";
+import {GetAllFeedbacks, GetFeedbacksCountAction} from "@core/states";
 
 @Injectable({
   providedIn: 'root'

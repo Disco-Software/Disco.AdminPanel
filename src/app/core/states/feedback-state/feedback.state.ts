@@ -8,8 +8,9 @@ import {
   GetFeedbackMessagesCountAction,
   GetFeedbacksCountAction
 } from "./feedback.action";
-import {FeedbackInterface, FeedbackStateInterface, GetAccountsCountAction} from "@core";
 import {HttpErrorResponse} from "@angular/common/http";
+import {FeedbackInterface, FeedbackStateInterface} from "@core/models";
+import {GetAccountsCountAction} from "../accounts-state";
 
 @State({
   name: "FeedbackState",

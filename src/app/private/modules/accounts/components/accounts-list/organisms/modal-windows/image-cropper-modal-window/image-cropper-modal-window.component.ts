@@ -3,7 +3,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {ImageCroppedEvent} from "ngx-image-cropper";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {Store} from "@ngxs/store";
-import {EditAccountPhotoAction} from "@core";
+import {EditAccountPhotoAction} from "@core/states";
 
 @Component({
   selector: 'app-image-cropper-modal-window',

@@ -2,8 +2,8 @@ import {Action, NgxsOnInit, Selector, State, StateContext,} from "@ngxs/store";
 import {Injectable} from "@angular/core";
 import {AppConfigStateInterface, LanguageModel} from "@core/models";
 import {SetSelectedLanguageAction} from "./app-config.actions";
-import {LocalStorageService} from "@core";
 import {TranslateService} from "@ngx-translate/core";
+import {LocalStorageService} from "@core/services";
 
 @State<AppConfigStateInterface>({
   name: "AppConfigState",

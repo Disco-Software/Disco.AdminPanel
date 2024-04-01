@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 
 import {PostRoutingModule} from './post-routing.module';
 import * as _components from './components';
-import {CoreModule} from "@core";
+import {CoreModule} from "../../../core";
 
 const COMPONENTS = [_components.PostsListComponent, _components.PostComponent];
 
