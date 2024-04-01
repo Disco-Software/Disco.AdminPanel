@@ -33,7 +33,7 @@ const DIRECTIVES = [
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS, ...DIRECTIVES, ReceivedMessageAnimationDirectiveDirective, RemovedMessageAnimationDirective],
+  declarations: [...COMPONENTS, ...DIRECTIVES],
   imports: [...MODULES, CommonModule],
   exports: [...MODULES, ...COMPONENTS, ...DIRECTIVES],
 })

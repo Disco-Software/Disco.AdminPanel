@@ -1,12 +1,11 @@
 import {Component} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Select, Store} from '@ngxs/store';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PasswordCodeModalComponent} from '../password-code-modal/password-code-modal.component';
-import {TranslateService} from '@ngx-translate/core';
 import {state, style, trigger} from '@angular/animations';
 import {catchError} from "rxjs/operators";
-import {Observable, throwError} from "rxjs";
+import {Observable, take, throwError} from "rxjs";
 import {ForgotPasswordAction, LoaderState} from "@core/states";
 import {ForgotPasswordRequestModel} from "@core/models";
 
@@ -31,12 +30,9 @@ import {ForgotPasswordRequestModel} from "@core/models";
 export class ForgotPasswordComponent {
   @Select(LoaderState.isLoadingSelector) loadingState$: Observable<boolean>;
 
-  public email : string;
-
-  public formGroup : FormGroup;
+  protected formGroup: FormGroup;
 
   constructor(
-    private _translate : TranslateService,
     private _store : Store,
     private _modalService: NgbModal) {}
 
@@ -46,34 +42,35 @@ export class ForgotPasswordComponent {
     });
   }
 
-  public onSubmit(){
-    const req : ForgotPasswordRequestModel = {
+  protected onSubmit(): void {
+    const req: ForgotPasswordRequestModel = {
       email : this.formGroup.value.email,
     }
 
     this._store.dispatch(new ForgotPasswordAction(req, navigator.language)).pipe(
+      take(1),
       catchError(err => {
-        return throwError(err);
+        return throwError(() => err);
       })
-    ).subscribe(() => {
-      const ref = this._modalService.open(PasswordCodeModalComponent, {
+    ).subscribe((): void => {
+      const ref: NgbModalRef = this._modalService.open(PasswordCodeModalComponent, {
         modalDialogClass: 'd-flex justify-content-center align-items-center h-100'
       });
       ref.componentInstance.email = req.email;
     });
   }
 
-  getFormControl(field): AbstractControl {
-    return this.formGroup.get(field)
+  private getFormControl(field: string): AbstractControl {
+    return this.formGroup.get(field);
   }
 
-  checkIsValid(field) {
-    return this.getFormControl(field).invalid && (this.getFormControl(field).dirty || this.getFormControl(field).touched)
+  protected checkIsValid(field: string): boolean {
+    return this.getFormControl(field).invalid && (this.getFormControl(field).dirty || this.getFormControl(field).touched);
   }
 
-  public onEnterSubmit(e: KeyboardEvent): void {
+  protected onEnterSubmit(e: KeyboardEvent): void {
     if (e.key === 'Enter') {
-      this.onSubmit()
+      this.onSubmit();
     }
   }
 }
