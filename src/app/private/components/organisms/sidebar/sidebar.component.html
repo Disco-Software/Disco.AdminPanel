@@ -22,7 +22,7 @@
               <mat-icon [svgIcon]="route.icon" color="#E6E0D2"></mat-icon>
               <span class="m-3 size-25">{{ route.title | translate }}</span>
             </div>
-            <p-badge *ngIf="route.isBadge" severity="danger" [value]="'2'"></p-badge>
+            <p-badge *ngIf="route.isBadge" severity="danger" [value]="(totalCount$ | async)?.isActiveCount.toString()"></p-badge>
           </li>
         </ul>
       </div>

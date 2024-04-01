@@ -14,7 +14,7 @@ export class FeedbackListComponent implements OnInit {
   @Select(FeedbackState.getAllFeedbacksSelector)
   allFeedbacks$: Observable<FeedbackInterface[]>;
 
-  @Select(FeedbackState.getFeedbacksCountSelector) totalCount$: Observable<number>;
+  @Select(FeedbackState.getFeedbacksCountSelector) totalCount$: Observable<any>;
 
   isArchived: boolean = false;
 
@@ -74,9 +74,9 @@ export class FeedbackListComponent implements OnInit {
       map((res)=>res.FeedbackState.count)
       ).subscribe((res)=>{
       if (this.isArchived) {
-        this.archivedCount = res;
+        this.archivedCount = res.isArchivedCount;
       } else {
-        this.activeCount = res;
+        this.activeCount = res.isActiveCount;
       }
       this.store.dispatch(new GetAllFeedbacks({pageNumber, pageSize}, this.isArchived)).pipe(take(1));
     });
@@ -84,7 +84,7 @@ export class FeedbackListComponent implements OnInit {
 
   public ngOnInit(): void {
     this.totalCount$.pipe(take(1)).subscribe(res=>{
-      this.activeCount = res;
+      this.activeCount = res.isActiveCount;
     })
   }
 }

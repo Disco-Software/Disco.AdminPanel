@@ -15,7 +15,7 @@ import {HttpErrorResponse} from "@angular/common/http";
   name: "FeedbackState",
   defaults: {
     allFeedbacks: [],
-    count: null,
+    count: {},
     messages: null,
     isLoading: true,
     messagesCount: 0
@@ -57,7 +57,7 @@ export class FeedbackState {
 
   @Action(GetFeedbacksCountAction)
   public getFeedbacksCount(
-    {patchState}: StateContext<{ count: number }>,
+    ctx: StateContext<{ count: any }>,
     {isArchive}: GetFeedbacksCountAction
   ) {
     return this.feedbackService.getFeedbacksCount(isArchive, GetAccountsCountAction.type)
@@ -66,7 +66,12 @@ export class FeedbackState {
           return EMPTY;
         }),
         tap((response: number) => {
-          patchState({count: response});
+          console.log(response)
+          console.log(ctx.getState().count)
+          ctx.patchState({count: {
+              isArchivedCount: isArchive ? response : ctx.getState().count.isArchivedCount,
+              isActiveCount: !isArchive ? response : ctx.getState().count.isActiveCount
+            }});
         }))
   }
 

@@ -9,7 +9,8 @@ import * as _resolvers from './resolvers';
 import {TranslateModule,} from '@ngx-translate/core';
 
 const RESOLVERS = [
-  _resolvers.FeedbackResolver
+  _resolvers.FeedbackResolver,
+  _resolvers.SidebarResolver,
 ]
 
 const SERVICES = [
