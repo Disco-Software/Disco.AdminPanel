@@ -1,16 +1,16 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {FeedbackChatComponent} from "./components";
 import {Select, Store} from "@ngxs/store";
 import {FeedbackInterface, FeedbackState, GetAllFeedbacks, GetFeedbacksCountAction} from "@core";
-import {Observable, switchMap, take, tap} from "rxjs";
+import {map, Observable, take} from "rxjs";
 
 @Component({
   selector: 'app-feedback-list',
   templateUrl: './feedback-list.component.html',
   styleUrls: ['./feedback-list.component.scss']
 })
-export class FeedbackListComponent {
+export class FeedbackListComponent implements OnInit {
   @Select(FeedbackState.getAllFeedbacksSelector)
   allFeedbacks$: Observable<FeedbackInterface[]>;
 
@@ -69,7 +69,10 @@ export class FeedbackListComponent {
     //     return this.store.dispatch(new GetAllFeedbacks({pageNumber, pageSize}, this.isArchived)).pipe(take(1));
     //   })
     // )
-    this.store.dispatch(new GetFeedbacksCountAction(this.isArchived)).pipe(take(1)).subscribe((res)=>{
+    this.store.dispatch(new GetFeedbacksCountAction(this.isArchived)).pipe(
+      take(1),
+      map((res)=>res.FeedbackState.count)
+      ).subscribe((res)=>{
       if (this.isArchived) {
         this.archivedCount = res;
       } else {
@@ -77,5 +80,11 @@ export class FeedbackListComponent {
       }
       this.store.dispatch(new GetAllFeedbacks({pageNumber, pageSize}, this.isArchived)).pipe(take(1));
     });
+  }
+
+  public ngOnInit(): void {
+    this.totalCount$.pipe(take(1)).subscribe(res=>{
+      this.activeCount = res;
+    })
   }
 }
