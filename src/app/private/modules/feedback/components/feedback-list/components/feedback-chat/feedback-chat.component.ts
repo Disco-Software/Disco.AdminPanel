@@ -14,7 +14,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import * as signalR from '@microsoft/signalr';
 import {MessageHeaders} from '@microsoft/signalr';
 
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {map, Observable, switchMap, take} from 'rxjs';
 import {MessageRequestInterface} from 'src/app/core/models/ticket-chat/message-request.interface';
 import {environment} from '../../../../../../../../environments/environment';
@@ -22,7 +22,7 @@ import {User} from '../../../../../../../core/models/account/change-email-respon
 import {InputComponent} from '@shared';
 import {MenuItem} from 'primeng/api';
 import {FeedbackInterface} from "@core/models";
-import {FeedbackState, GetFeedbackMessagesAction, GetFeedbackMessagesCountAction} from "@core/states";
+import {GetFeedbackMessagesAction, GetFeedbackMessagesCountAction} from "@core/states";
 import {DateTimeService, LocalStorageService} from "@core/services";
 
 @Component({
@@ -36,30 +36,26 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
 
   @Output() closeWindowEmitter = new EventEmitter();
 
-  @Input() ticket: FeedbackInterface;
-  @Input() message: string;
-  @Input() isOpen: boolean = true;
+  @Input() public ticket: FeedbackInterface;
+  @Input() public message: string;
+  @Input() public isOpen: boolean = true;
 
-  @Select(FeedbackState.isLoadingSelector) isLoading$: Observable<boolean>;
-  isLoading: boolean = true;
-  isSendingMessage = false;
-  editableMessage: any;
-  deletableMessage: any;
-  isEdit: boolean = false;
-  Edited: boolean = false;
+  protected isLoading: boolean = true;
+  protected isSendingMessage: boolean = false;
+  protected editableMessage: any;
+  private deletableMessage: any;
 
-  pagination = {
+  private pagination = {
     currentPage: 1,
     itemsPerPage: 50
   }
-  loading = false;
-  user: any;
+  private loading: boolean = false;
+  private user: any;
   private totalMessagesCount: number = 0;
 
   private hubConnection: signalR.HubConnection | undefined;
-  public messages: any[] = [];
-  public messageDates: string[] = [];
-  test: any[] = [];
+  private messages: any[] = [];
+  protected messageDates: string[] = [];
   protected selectedContextMenuItem: any;
 
   protected myContextMenuItems: MenuItem[] = [
@@ -67,7 +63,7 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
       label: 'Edit',
       icon: 'pi pi-pencil',
       iconClass: 'text-white me-3',
-      command: (id: number): void => {
+      command: (): void => {
         this.editableMessage = this.selectedContextMenuItem;
         this.selectedContextMenuItem = null;
       },
@@ -83,7 +79,7 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
           .invoke('delete-for-all', this.deletableMessage.id)
           .then((): void => {
             if (this.deletableMessage) {
-              this.messages = this.messages.map((message) => {
+              this.messages = this.messages.map((message): any => {
                 if (message.id === this.deletableMessage.id) {
                   return {
                     ...message,
@@ -112,7 +108,7 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
     },
   ];
 
-  protected componionContextMenuItems: MenuItem[] = [
+  protected companionContextMenuItems: MenuItem[] = [
     {
       label: 'Delete',
       icon: 'pi pi-trash',
@@ -221,15 +217,15 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
       .build();
 
     this.hubConnection.start()
-      .then(() => {
-        this.getAllMessages().subscribe((res: any) => {
+      .then((): void => {
+        this.getAllMessages().subscribe((res: any): void => {
           this.totalMessagesCount = res.total;
           const messagesCopy = [...res.messages];
           this.messages = messagesCopy.reverse();
           this.messages = this.convertMessagesTimezone(this.messages)
           this.generateMapDates();
           this.isLoading = false;
-          setTimeout(() => {
+          setTimeout((): void => {
             this.scrollToBottom();
           });
         });
@@ -245,7 +241,7 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
     this.subscribeUpdate();
   }
 
-  convertMessagesTimezone(messages: any[]): any[]{
+  private convertMessagesTimezone(messages: any[]): any[] {
     return messages.map((message)=>{
       return {
         ...message,
@@ -254,15 +250,15 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
     })
   }
 
-  convertUTCtoLocal(utcDateTimeString: string) {
+  private convertUTCtoLocal(utcDateTimeString: string): string {
     return this.dateTimeService.convertToLocaleDateTime(utcDateTimeString)
   }
 
-  ngAfterContentChecked(): void {
+  public ngAfterContentChecked(): void {
     this.cdr.detectChanges();
   }
 
-  onScroll(event): void {
+  protected onScroll(event): void {
     const startingScrollHeight = event.target.scrollHeight;
       if (event.target.scrollTop === 0) {
         if (!this.loading && this.totalMessagesCount !== this.messages.length) {
@@ -290,7 +286,7 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
       }
   }
 
-  getAllMessages(): Observable<any> {
+  private getAllMessages(): Observable<any> {
     const req = {
       groupId: this.ticket.id,
       userId: this.user.id,
@@ -310,14 +306,13 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
                   messages: messagesResponse,
                   total: state.FeedbackState.messagesCount
                 }
-
               }))
         })
       );
   }
 
-  subscribeMessages(): void {
-    this.hubConnection.on('receive', (message: any) => {
+  private subscribeMessages(): void {
+    this.hubConnection.on('receive', (message: any): void => {
       this.messages = [...this.messages, {
         ...message,
         createdDate: this.convertUTCtoLocal(message.created)
@@ -330,9 +325,9 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
     });
   }
 
-  subscribeUpdate(): void {
-    this.hubConnection.on('update', (message: any) => {
-      const editableIndex = this.messages.findIndex((x) => x.id === message.id);
+  private subscribeUpdate(): void {
+    this.hubConnection.on('update', (message: any): void => {
+      const editableIndex = this.messages.findIndex((x): boolean => x.id === message.id);
       if (editableIndex !== -1) {
         this.messages = [
           ...this.messages.slice(0, editableIndex),
@@ -347,37 +342,37 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
     this.cdr.detectChanges();
   }
 
-  subscribeStatuses(): void {
+  private subscribeStatuses(): void {
     this.hubConnection.on('changeStatus', (status: string): void => {
-      this.status = this.statuses.find((statusItem) => {
+      this.status = this.statuses.find((statusItem: string) => {
         return statusItem.includes(status.toLowerCase());
       });
     });
   }
 
-  subscribeRemoveMessages(): void {
+  private subscribeRemoveMessages(): void {
     this.hubConnection.on('remove', (id: number): void => {
       this.isRemoving = true;
-      setTimeout((x) => {
-        this.messages = this.messages.filter((message) => message.id !== id);
+      setTimeout((x): void => {
+        this.messages = this.messages.filter((message): boolean => message.id !== id);
         this.generateMapDates();
         this.isRemoving = false;
       }, 1000);
     });
   }
 
-  generateMapDates(): void {
+  private generateMapDates(): void {
     this.messageDates = this.messages.map((message) =>
       message.createdDate
         ? message.createdDate.split('T')[0]
         : message.created.split('T')[0]
     );
     this.messageDates = this.messageDates.filter(
-      (value, index) => this.messageDates.indexOf(value) === index
+      (value: string, index: number): boolean => this.messageDates.indexOf(value) === index
     );
   }
 
-  public filterMessagesByDate(date: string): any[] {
+  protected filterMessagesByDate(date: string): any[] {
     return this.messages.filter((message) =>
       message.createdDate
         ? message.createdDate?.includes(date)
@@ -385,7 +380,7 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
     );
   }
 
-  public sendMessage(search: string): void {
+  protected sendMessage(search: string): void {
     if (search) {
       this.isSendingMessage = true;
       const chatMessage: MessageRequestInterface = {
@@ -430,7 +425,7 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
       });
   }
 
-  changeStatus(event: any): void {
+  protected changeStatus(event: any): void {
     const status: any = {
       id: this.ticket.id,
       status: event.value.split('status.')[1],
@@ -438,16 +433,16 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
 
     this.hubConnection
       ?.invoke('updateStatus', status.id, status.status)
-      .then((res) => {
+      .then((res): void => {
       })
-      .catch((err) => null);
+      .catch((err): null => null);
   }
-  getTime(date: string): string {
+  protected getTime(date: string): string {
     date = date.split('.')[0];
-    let hours = new Date(date).getHours();
-    let minutes = new Date(date).getMinutes();
+    let hours: number = new Date(date).getHours();
+    let minutes: number = new Date(date).getMinutes();
 
-    let period = hours >= 12 ? 'pm' : 'am';
+    let period: string = hours >= 12 ? 'pm' : 'am';
 
     hours = hours % 12;
     hours = hours ? hours : 12; // Година 0 в 12-годинному форматі - 12 година
@@ -455,7 +450,7 @@ export class FeedbackChatComponent implements OnInit, AfterContentChecked, OnDes
     return hours + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + period;
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.hubConnection.stop();
   }
 }

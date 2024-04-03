@@ -13,43 +13,51 @@ import {FeedbackInterface} from "@core/models";
 })
 export class FeedbackListComponent implements OnInit {
   @Select(FeedbackState.getAllFeedbacksSelector)
-  allFeedbacks$: Observable<FeedbackInterface[]>;
+  protected allFeedbacks$: Observable<FeedbackInterface[]>;
 
-  @Select(FeedbackState.getFeedbacksCountSelector) totalCount$: Observable<any>;
+  @Select(FeedbackState.getFeedbacksCountSelector)
+  private totalCount$: Observable<any>;
 
-  isArchived: boolean = false;
+  protected isArchived: boolean = false;
 
-  archivedCount: number;
-  activeCount: number;
+  protected archivedCount: number;
+  protected activeCount: number;
 
-  isSmallPaginator: boolean;
+  protected isSmallPaginator: boolean;
+
+  protected isChatShown: boolean;
 
   @HostListener('window:resize', ['$event'])
-  getScreenSize(event?) {
-    this.isSmallPaginator = window.innerWidth <= 450
+  private getScreenSize(): void {
+    this.isSmallPaginator = window.innerWidth <= 450;
   }
-
-  isChatShown: boolean;
 
   constructor(private _modalService: NgbModal, private store: Store) {
     this.getScreenSize();
   }
-  open(ticket: FeedbackInterface) {
+
+  public ngOnInit(): void {
+    this.totalCount$.pipe(take(1)).subscribe(res => {
+      this.activeCount = res.isActiveCount;
+    })
+  }
+
+  protected open(ticket: FeedbackInterface): void {
     const ref: NgbModalRef =  this._modalService.open(FeedbackChatComponent, {
     modalDialogClass: 'h-100 w-100 m-0 position-absolute right-0',
     backdrop : 'static',
     keyboard: false,
       size: 'lg',
       animation: false
-  });
+    });
     ref.componentInstance.ticket = ticket
     ref.componentInstance.isOpen = true;
-    ref.componentInstance.closeWindowEmitter.pipe(take(1)).subscribe(() => {
+    ref.componentInstance.closeWindowEmitter.pipe(take(1)).subscribe((): void => {
       this.getData(1, 5);
     })
   }
 
-  public onPageChange($event): void {
+  protected onPageChange($event): void {
     if ($event.page) {
       this.getData($event.page + 1, 5);
     } else {
@@ -57,23 +65,11 @@ export class FeedbackListComponent implements OnInit {
     }
   }
 
-  public getData(pageNumber: number, pageSize: number): void {
-    //TODO
-    // this.store.dispatch(new GetFeedbacksCountAction(this.isArchived)).pipe(take(1), tap((res) => {
-    //     if (this.isArchived) {
-    //       this.archivedCount = res;
-    //     } else {
-    //       this.activeCount = res;
-    //     }
-    //   }),
-    //   switchMap((res) => {
-    //     return this.store.dispatch(new GetAllFeedbacks({pageNumber, pageSize}, this.isArchived)).pipe(take(1));
-    //   })
-    // )
+  protected getData(pageNumber: number, pageSize: number): void {
     this.store.dispatch(new GetFeedbacksCountAction(this.isArchived)).pipe(
       take(1),
-      map((res)=>res.FeedbackState.count)
-      ).subscribe((res)=>{
+      map((res) => res.FeedbackState.count),
+    ).subscribe((res): void => {
       if (this.isArchived) {
         this.archivedCount = res.isArchivedCount;
       } else {
@@ -81,11 +77,5 @@ export class FeedbackListComponent implements OnInit {
       }
       this.store.dispatch(new GetAllFeedbacks({pageNumber, pageSize}, this.isArchived)).pipe(take(1));
     });
-  }
-
-  public ngOnInit(): void {
-    this.totalCount$.pipe(take(1)).subscribe(res=>{
-      this.activeCount = res.isActiveCount;
-    })
   }
 }

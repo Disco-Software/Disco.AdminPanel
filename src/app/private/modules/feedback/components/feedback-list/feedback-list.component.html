@@ -1,9 +1,20 @@
-<div class="d-flex flex-column flex-md-row justify-content-between align-items center" [class.half-opacity-background]="isChatShown">
+<div
+  class="d-flex flex-column flex-md-row justify-content-between align-items center"
+  [class.half-opacity-background]="isChatShown"
+>
   <div class="d-flex align-items-center">
-    <button [ngClass]="isArchived ? 'rounded-button_gray' : 'rounded-button_orange'" class="rounded-button me-2 me-sm-4 w-50 w-md-auto px-0 px-md-4" (click)="isArchived = false; getData(1, 5)">
+    <button
+      [ngClass]="isArchived ? 'rounded-button_gray' : 'rounded-button_orange'"
+      class="rounded-button me-2 me-sm-4 w-50 w-md-auto px-0 px-md-4"
+      (click)="isArchived = false; getData(1, 5)"
+    >
       {{'feedback.buttons.inWork' | translate}} ({{activeCount}})
     </button>
-    <button [ngClass]="!isArchived ? 'rounded-button_gray' : 'rounded-button_orange'" class="rounded-button w-50 w-md-auto px-0 px-md-4" (click)="isArchived = true; getData(1, 5)">
+    <button
+      [ngClass]="!isArchived ? 'rounded-button_gray' : 'rounded-button_orange'"
+      class="rounded-button w-50 w-md-auto px-0 px-md-4"
+      (click)="isArchived = true; getData(1, 5)"
+    >
       {{'feedback.buttons.archiv' | translate}}
     </button>
   </div>
