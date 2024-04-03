@@ -2,7 +2,12 @@ import {Component} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CreateUserModalWindowComponent} from '../modal-windows';
 import {Store} from '@ngxs/store';
-import {GetAccountsCountAction, GetAccountsSearchResultAction, GetAllAccountsAction, SearchAccountsAction} from '@core/states';
+import {
+  GetAccountsCountAction,
+  GetAccountsSearchResultAction,
+  GetAllAccountsAction,
+  SearchAccountsAction
+} from '@core/states';
 
 @Component({
   selector: 'app-accounts-header',
@@ -15,14 +20,14 @@ export class AccountsHeaderComponent {
     private _modalService : NgbModal) {
     }
 
-  public createUser() : void {
+  protected createUser(): void {
     this._modalService.open(CreateUserModalWindowComponent, {
       modalDialogClass: 'd-flex justify-content-center align-items-center',
       centered: true
     });
   }
 
-  public onEnterButtonClick(searchString: string): void {
+  protected onEnterButtonClick(searchString: string): void {
     this.getData(searchString);
   }
 

@@ -1,10 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Select, Selector, Store} from '@ngxs/store';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {Select, Store} from '@ngxs/store';
 import {GetAccountsCountAction, GetAllAccountsAction} from 'src/app/core/states/accounts-state/account.action';
-import {take, map, Observable, takeUntil, Subject} from 'rxjs';
-import { AccountModel } from 'src/app/core/models/account/getaccounts.model';
-import {AccountsState} from "../../../../../core/states/accounts-state/account.state";
-import { HostListener } from "@angular/core";
+import {Observable, Subject, take, takeUntil} from 'rxjs';
+import {AccountModel} from 'src/app/core/models/account/getaccounts.model';
+import {AccountsState} from "@core/states";
 
 @Component({
   selector: 'app-accounts-list',
@@ -12,52 +11,52 @@ import { HostListener } from "@angular/core";
   styleUrls: ['./accounts-list.component.scss']
 })
 export class AccountsListComponent implements OnInit, OnDestroy {
-  @Select(AccountsState.getAllAccountsSelector) accounts$: Observable<AccountModel[]>
-  accounts : AccountModel[];
-  @Select(AccountsState.getAccountsCountSelector) totalCount$ : Observable<number>;
-  totalCount : number;
+  @Select(AccountsState.getAllAccountsSelector) private accounts$: Observable<AccountModel[]>
+  protected accounts: AccountModel[];
+  @Select(AccountsState.getAccountsCountSelector) private totalCount$: Observable<number>;
+  protected totalCount: number;
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  isSmallPaginator: boolean;
+  protected isSmallPaginator: boolean;
 
   @HostListener('window:resize', ['$event'])
-  getScreenSize(event?) {
-    this.isSmallPaginator = window.innerWidth <= 450
+  private getScreenSize(): void {
+    this.isSmallPaginator = window.innerWidth <= 450;
   }
 
   constructor(private _store : Store) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getScreenSize();
     this.getTotalCount();
-    this.totalCount$.pipe(takeUntil(this.destroy$)).subscribe(count => {
+    this.totalCount$.pipe(takeUntil(this.destroy$)).subscribe((count: number): void => {
       this.totalCount = count;
     })
 
     this.getData(1, 5);
-    this.accounts$.pipe(takeUntil(this.destroy$)).subscribe(res=>{
-      this.accounts = res
+    this.accounts$.pipe(takeUntil(this.destroy$)).subscribe((res: AccountModel[]): void => {
+      this.accounts = res;
     })
   }
 
-  public getData(pageNumber : number, pageSize : number) {
-    this._store.dispatch(new GetAllAccountsAction({ pageNumber, pageSize})).pipe(take(1))
+  private getData(pageNumber: number, pageSize: number): void {
+    this._store.dispatch(new GetAllAccountsAction({ pageNumber, pageSize})).pipe(take(1));
   }
 
-  public updatedItemData(event: any): void {
+  protected updatedItemData(): void {
     this.getData(1, 5);
   }
 
-  public getTotalCount(){
+  private getTotalCount(): void{
     this._store.dispatch(new GetAccountsCountAction()).pipe(take(1));
   }
 
-  public onPageChange($event) {
+  protected onPageChange($event): void {
     this.getData($event.page + 1, 5);
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
   }

@@ -9,7 +9,7 @@
         [photo]="account.photo"
         [email]="account.user?.email"
         [name]="account.user?.userName"
-        (updatedItemData)="updatedItemData($event)"
+        (updatedItemData)="updatedItemData()"
       ></app-account-item>
       <hr *ngIf="!last" />
     </div>

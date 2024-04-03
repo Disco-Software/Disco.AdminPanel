@@ -11,18 +11,45 @@
     </div>
   </div>
   <div class="d-none d-md-flex align-items-center justify-content-between w-sm-40 w-xl-60">
-    <button class="d-none d-xl-block button button_blue-hover mx-2" (click)="onSendEmail()">{{'account-item.emailNotification' | translate}}</button>
-    <button class="d-block d-xl-none button border-0 mx-2" (click)="onSendEmail()"><img src="./assets/images/mail.png" alt=""></button>
-    <button class="d-none d-xl-block button button_violet-hover x-2" (click)="onSendNotifications()">{{'account-item.pushNotificationButton' | translate}}</button>
-    <button class="d-block d-xl-none button border-0 mx-2" (click)="onSendNotifications()"><img
-      src="./assets/images/notification.png" alt=""></button>
-    <button class="d-none d-xl-block button button_orange mx-2" (click)="onDelete()">{{'account-item.deleteButton' | translate }}</button>
-    <button class="d-block d-xl-none button border-0 mx-2" (click)="onDelete()"><img
-      src="./assets/images/trash.png" alt=""></button>
+    <button
+      class="d-none d-xl-block button button_blue-hover mx-2"
+      (click)="onSendEmail()">
+        {{'account-item.emailNotification' | translate}}
+    </button>
+    <button
+      class="d-block d-xl-none button border-0 mx-2"
+      (click)="onSendEmail()">
+        <img src="./assets/images/mail.png" alt="">
+    </button>
+    <button
+      class="d-none d-xl-block button button_violet-hover x-2"
+      (click)="onSendNotifications()">
+        {{'account-item.pushNotificationButton' | translate}}
+    </button>
+    <button
+      class="d-block d-xl-none button border-0 mx-2"
+      (click)="onSendNotifications()"><img
+      src="./assets/images/notification.png"
+      alt=""
+    ></button>
+    <button
+      class="d-none d-xl-block button button_orange mx-2"
+      (click)="onDelete()">
+        {{'account-item.deleteButton' | translate }}
+    </button>
+    <button
+      class="d-block d-xl-none button border-0 mx-2"
+      (click)="onDelete()">
+        <img src="./assets/images/trash.png" alt="">
+    </button>
   </div>
   <div class="d-flex d-md-none align-items-center justify-content-between w-15">
     <p-menu #menu [model]="items" [popup]="true"></p-menu>
-    <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars" class="bg-transparent no-borders"></button>
+    <button
+      pButton
+      type="button"
+      (click)="menu.toggle($event)"
+      icon="pi pi-bars" class="bg-transparent no-borders"></button>
   </div>
   <div>
   </div>

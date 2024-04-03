@@ -1,4 +1,4 @@
-import {Component, ContentChild, TemplateRef, ViewChild} from '@angular/core';
+import {Component, ContentChild, TemplateRef} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -7,13 +7,14 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./modal-window-wrapper.component.scss']
 })
 export class ModalWindowWrapperComponent {
-  @ContentChild('title') title:TemplateRef<any>;
-  @ContentChild('body') body:TemplateRef<any>;
-  @ContentChild('buttons') buttons:TemplateRef<any>;
+  @ContentChild('title') title: TemplateRef<any>;
+  @ContentChild('body') body: TemplateRef<any>;
+  @ContentChild('buttons') buttons: TemplateRef<any>;
+
   constructor(private _modal: NgbActiveModal) {
   }
 
-  closeModal() {
+  protected closeModal(): void {
     this._modal.close();
   }
 }
